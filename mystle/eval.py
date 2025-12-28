@@ -10,6 +10,8 @@ model_path = "/root/fsas/models/LLaVA/llava-v1.6-vicuna-7b"
 
 prompt = "Suppose you are driving, and I'm providing you with six images captured by the car's front, front-left, front-right, back, back-left and back-right camera. First, generate a description of the driving scene which includes the key factors for driving planning, including the presence of obstacles and the positions and movements of vehicles and pedestrians and traffic lights. After description, please predict the behavior of ego vehicle, including exactly the driving direction(straight, turn left or turn right) and driving speed(slow, fast or normal)."
 
+# prompt = "Describe the image in detail."
+
 image_file = "https://llava-vl.github.io/static/images/view.jpg"
 
 

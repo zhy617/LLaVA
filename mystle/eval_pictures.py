@@ -1,0 +1,159 @@
+import os
+import json
+from llava.model.builder import load_pretrained_model
+from llava.mm_utils import get_model_name_from_path, tokenizer_image_token, process_images
+from llava.constants import IMAGE_TOKEN_INDEX, DEFAULT_IMAGE_TOKEN
+from llava.conversation import conv_templates
+from typing import Dict, List
+
+import warnings
+import torch
+from PIL import Image
+
+warnings.filterwarnings("ignore", message=".*copying from a non-meta parameter.*")
+
+def run_inference_for_sequence(args, tokenizer, model, image_processor, context_len, scene_id: str, key_frames_data: Dict, data_root_path: str):
+    """
+    对一个数据序列（一个场景的所有关键帧）进行连续推理
+    """
+    print(f"===== Processing Scene: {scene_id} =====")
+
+    # 获取并排序关键帧ID，以确保按顺序处理
+    # 注意：字典在Python 3.7+中保持插入顺序，但排序更保险
+    key_frame_ids: List[Dict] = sorted(key_frames_data.keys())
+
+    # 初始化对话，llava_v1支持多轮对话
+    conv = conv_templates[args.conv_mode].copy()
+    
+    for i, frame_id in enumerate(key_frame_ids):
+        print(f"--- Processing Key Frame: {frame_id} ---")
+        
+        frame_info: Dict[str, Dict] = key_frames_data[frame_id]
+        assert frame_info is not None, f"Frame info for {frame_id} is None"
+        image_paths_dict= frame_info.get("image_paths")
+
+        if not image_paths_dict:
+            print(f"Skipping {frame_id}, 'image_paths' not found.")
+            continue
+
+        # 1. 准备多张图片输入
+        image_files = [os.path.join(data_root_path, camera_view, os.path.basename(rel_path)) for camera_view, rel_path in image_paths_dict.items()]
+        
+        # 检查图片是否存在
+        if not all(os.path.exists(f) for f in image_files):
+            print(f"Skipping {frame_id}, not all images found.")
+            # 打印找不到的文件以供调试
+            for f in image_files:
+                if not os.path.exists(f):
+                    print(f"  File not found: {f}")
+            continue
+
+        try:
+            images = [Image.open(f).convert('RGB') for f in image_files]
+            image_tensor = process_images(images, image_processor, model.config)
+            image_tensor = image_tensor.to(model.device, dtype=torch.float16)
+        except Exception as e:
+            print(f"Error loading or processing images for {frame_id}: {e}")
+            continue
+
+       # 2. 准备prompt - 使用这个逻辑！
+        if i == 0:
+            # 初始帧：使用师兄给的详细prompt
+            prompt = f"{DEFAULT_IMAGE_TOKEN * len(images)}\n" + args.initial_prompt
+        else:
+            # 后续帧：使用简洁的指令，让模型基于历史和新图像进行更新
+            prompt = f"{DEFAULT_IMAGE_TOKEN * len(images)}\n" + "Based on the new images, update the prediction for the ego vehicle's behavior. Provide only the direction and speed."
+
+        # prompt = "Suppose you are driving, and I'm providing you with six images captured by the car's front, front-left, front-right, back, back-left and back-right camera. First, generate a description of the driving scene which includes the key factors for driving planning, including the presence of obstacles and the positions and movements of vehicles and pedestrians and traffic lights. After description, please predict the behavior of ego vehicle, including exactly the driving direction(straight, turn left or turn right) and driving speed(slow, fast or normal)."
+
+        conv.append_message(conv.roles[0], prompt)
+        conv.append_message(conv.roles[1], None)
+        prompt_for_model = conv.get_prompt()
+
+        # 3. 模型推理
+        input_ids = (
+            tokenizer_image_token(prompt_for_model, tokenizer, IMAGE_TOKEN_INDEX, return_tensors='pt')
+            .unsqueeze(0)
+            .to(model.device)
+        )
+        with torch.inference_mode():
+            output_ids = model.generate_with_mem_ppl_continue_gen(
+                input_ids,
+                images=image_tensor,
+                image_sizes=[img.size for img in images],
+                do_sample=True if args.temperature > 0 else False,
+                temperature=args.temperature,
+                top_p=args.top_p,
+                num_beams=args.num_beams,
+                max_new_tokens=args.max_new_tokens,
+                use_cache=True)
+
+        outputs = tokenizer.decode(output_ids[input_ids.shape[1]:]).strip()
+        
+        # 4. 更新对话历史
+        conv.messages[-1][-1] = outputs
+        
+        print(f"Model Output: {outputs}\n")
+
+
+def main():
+    # --- 用户需要配置的路径 ---
+    # 你的JSON标注文件路径
+    json_file_path = "/root/fsas/dataset/OpenDriveLab/DriveLM/v1_1_val_nus_q_only.json" 
+    # 你的数据根目录，用于拼接JSON中的相对图片路径
+    # 例如，如果图片路径是 "../nuscenes/samples/..."，而JSON文件在 ".../DriveLM/annotations/"
+    # 那么 data_root_path 应该是 ".../DriveLM/"
+    data_root_path = "/root/fsas/dataset/OpenDriveLab/DriveLM/val_data" # 请修改为你的 nuscenes 数据集所在的根目录
+    model_path = "/root/fsas/models/LLaVA/llava-v1.6-vicuna-7b"
+    model_name = get_model_name_from_path(model_path)
+
+    # 1. 加载模型 (一次性)
+    tokenizer, model, image_processor, context_len = load_pretrained_model(
+        model_path=model_path,
+        model_base=None,
+        model_name=model_name,
+        # load_4bit=True # 如果显存足够，可以设为False以获得更快速度
+    )
+
+    # 2. 定义参数
+    args = type('Args', (), {
+        "conv_mode": "llava_v1",
+        "temperature": 0,
+        "top_p": None,
+        "num_beams": 1,
+        "max_new_tokens": 512,
+        "initial_prompt": "Suppose you are driving, and I'm providing you with six images captured by the car's front, front-left, front-right, back, back-left and back-right camera. First, generate a description of the driving scene which includes the key factors for driving planning, including the presence of obstacles and the positions and movements of vehicles and pedestrians and traffic lights. After description, please predict the behavior of ego vehicle, including exactly the driving direction(straight, turn left or turn right) and driving speed(slow, fast or normal)."
+    })()
+
+    # 3. 加载JSON文件并对每个序列进行推理
+    try:
+        with open(json_file_path, 'r') as f:
+            all_data = json.load(f)
+    except FileNotFoundError:
+        print(f"Error: JSON file not found at {json_file_path}")
+        return
+    except json.JSONDecodeError:
+        print(f"Error: Could not decode JSON from {json_file_path}")
+        return
+
+    # 遍历JSON中的每个场景
+
+    scene_count = 0
+
+    for scene_id, scene_data in all_data.items():
+
+        if scene_count >= 3:
+            print("Reached the limit of 3 scenes. Stopping.")
+            break
+
+        scene_count += 1
+
+        key_frames = scene_data.get("key_frames")
+        if key_frames:
+            run_inference_for_sequence(args, tokenizer, model, image_processor, context_len, scene_id, key_frames, data_root_path)
+        else:
+            print(f"Skipping scene {scene_id}, no 'key_frames' found.")
+
+
+if __name__ == "__main__":
+    main()

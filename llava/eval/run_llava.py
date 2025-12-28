@@ -112,7 +112,7 @@ def eval_model(args):
     )
 
     with torch.inference_mode():
-        output_ids = model.generate(
+        output_ids = model.generate_with_mem_ppl_continue_gen(
             input_ids,
             images=images_tensor,
             image_sizes=image_sizes,

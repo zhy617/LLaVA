@@ -1236,7 +1236,7 @@ class LlamaModel(LlamaPreTrainedModel):
 
         self.gradient_checkpointing = False
 
-        self.max_length = 2048
+        self.max_length = 4096
         self.token_embeds = torch.zeros(1, self.max_length, config.hidden_size).cuda()
 
         # Initialize weights and apply final processing
@@ -1719,7 +1719,7 @@ class LlavaLlamaForCausalLM(LlamaForCausalLM, LlavaMetaForCausalLM):
         self.vocab_size = config.vocab_size
         self.lm_head = nn.Linear(config.hidden_size, config.vocab_size, bias=False)
 
-        self.max_length = 2048
+        self.max_length = 4096
         self.text_memory = [[]]
         self.token_embeds_memory = torch.empty(1, self.max_length, config.hidden_size).cuda()
         self.key_values_memory = [[torch.empty(1, config.num_attention_heads, self.max_length, config.hidden_size // config.num_attention_heads).cuda(), torch.empty(1, config.num_attention_heads, self.max_length, config.hidden_size // config.num_attention_heads).cuda()] for _ in range(32)] # print(output.past_key_values[0][0].size()) # layer, k/v; tensor(batch, head_num, length, head_dim)
