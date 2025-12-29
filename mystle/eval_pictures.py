@@ -10,6 +10,19 @@ import warnings
 import torch
 from PIL import Image
 
+# 关键修改：在所有其他导入之前，设置默认的 attention 实现
+from transformers.utils import is_flash_attn_2_available
+from transformers import LlamaConfig
+
+if is_flash_attn_2_available():
+    print("Flash Attention 2 is available. Setting it as default for Llama.")
+    # 通过修改 LlamaConfig 的默认值来启用 Flash Attention
+    # 这样所有后续加载的 Llama 模型都会尝试使用它
+    LlamaConfig.from_pretrained("dummy", attn_implementation="flash_attention_2")
+else:
+    print("Flash Attention 2 is not available.")
+
+
 warnings.filterwarnings("ignore", message=".*copying from a non-meta parameter.*")
 
 def run_inference_for_sequence(args, tokenizer, model, image_processor, context_len, scene_id: str, key_frames_data: Dict, data_root_path: str):
@@ -22,11 +35,15 @@ def run_inference_for_sequence(args, tokenizer, model, image_processor, context_
     # 注意：字典在Python 3.7+中保持插入顺序，但排序更保险
     key_frame_ids: List[Dict] = sorted(key_frames_data.keys())
 
-    # 初始化对话，llava_v1支持多轮对话
-    conv = conv_templates[args.conv_mode].copy()
+    
+
+    last_output = None
     
     for i, frame_id in enumerate(key_frame_ids):
         print(f"--- Processing Key Frame: {frame_id} ---")
+
+        # 在每次循环开始时，重新初始化对话，避免历史累积
+        conv = conv_templates[args.conv_mode].copy()
         
         frame_info: Dict[str, Dict] = key_frames_data[frame_id]
         assert frame_info is not None, f"Frame info for {frame_id} is None"
@@ -56,13 +73,7 @@ def run_inference_for_sequence(args, tokenizer, model, image_processor, context_
             print(f"Error loading or processing images for {frame_id}: {e}")
             continue
 
-       # 2. 准备prompt - 使用这个逻辑！
-        if i == 0:
-            # 初始帧：使用师兄给的详细prompt
-            prompt = f"{DEFAULT_IMAGE_TOKEN * len(images)}\n" + args.initial_prompt
-        else:
-            # 后续帧：使用简洁的指令，让模型基于历史和新图像进行更新
-            prompt = f"{DEFAULT_IMAGE_TOKEN * len(images)}\n" + "Based on the new images, update the prediction for the ego vehicle's behavior. Provide only the direction and speed."
+        prompt = f"{DEFAULT_IMAGE_TOKEN * len(images)}\n" + args.initial_prompt
 
         # prompt = "Suppose you are driving, and I'm providing you with six images captured by the car's front, front-left, front-right, back, back-left and back-right camera. First, generate a description of the driving scene which includes the key factors for driving planning, including the presence of obstacles and the positions and movements of vehicles and pedestrians and traffic lights. After description, please predict the behavior of ego vehicle, including exactly the driving direction(straight, turn left or turn right) and driving speed(slow, fast or normal)."
 
@@ -115,6 +126,12 @@ def main():
         # load_4bit=True # 如果显存足够，可以设为False以获得更快速度
     )
 
+    if hasattr(model, 'is_first_frame'):
+        model.is_first_frame = True
+    else:
+        # 如果模型没有这个属性，你可能需要添加它，或者师兄的代码有其他初始化方式
+        print("Warning: model does not have 'is_first_frame' attribute. The continuous generation logic might not work.")
+
     # 2. 定义参数
     args = type('Args', (), {
         "conv_mode": "llava_v1",
@@ -147,6 +164,10 @@ def main():
             break
 
         scene_count += 1
+
+        if hasattr(model, 'is_first_frame'):
+            print(f"Resetting model state for new scene: {scene_id}")
+            model.is_first_frame = True
 
         key_frames = scene_data.get("key_frames")
         if key_frames:

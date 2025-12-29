@@ -12,8 +12,7 @@ prompt = "Suppose you are driving, and I'm providing you with six images capture
 
 # prompt = "Describe the image in detail."
 
-image_file = "https://llava-vl.github.io/static/images/view.jpg"
-
+image_file = "/root/fsas/dataset/OpenDriveLab/DriveLM/val_data/CAM_FRONT/n008-2018-09-18-14-35-12-0400__CAM_FRONT__1537295999112404.jpg,/root/fsas/dataset/OpenDriveLab/DriveLM/val_data/CAM_FRONT_LEFT/n008-2018-09-18-14-35-12-0400__CAM_FRONT_LEFT__1537295999104799.jpg,/root/fsas/dataset/OpenDriveLab/DriveLM/val_data/CAM_FRONT_RIGHT/n008-2018-09-18-14-35-12-0400__CAM_FRONT_RIGHT__1537295999120482.jpg,/root/fsas/dataset/OpenDriveLab/DriveLM/val_data/CAM_BACK/n008-2018-09-18-14-35-12-0400__CAM_BACK__1537295999137558.jpg,/root/fsas/dataset/OpenDriveLab/DriveLM/val_data/CAM_BACK_LEFT/n008-2018-09-18-14-35-12-0400__CAM_BACK_LEFT__1537295999147405.jpg,/root/fsas/dataset/OpenDriveLab/DriveLM/val_data/CAM_BACK_RIGHT/n008-2018-09-18-14-35-12-0400__CAM_BACK_RIGHT__1537295999128113.jpg"
 
 args = type('Args', (), {
     "model_path": model_path,
