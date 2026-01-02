@@ -1,5 +1,19 @@
 import os
 import json
+
+os.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'
+
+# 关键：在所有其他导入之前，设置默认的 attention 实现
+from transformers.utils import is_flash_attn_2_available
+# 注意：这里我们直接修改 LlamaConfig 的 _attn_implementation 默认值
+# 这比 from_pretrained("dummy", ...) 的方法更直接
+if is_flash_attn_2_available():
+    print("Flash Attention 2 is available. Setting it as default for Llama.")
+    from transformers import LlamaConfig
+    LlamaConfig._attn_implementation = "flash_attention_2"
+else:
+    print("Flash Attention 2 is not available.")
+
 from llava.model.builder import load_pretrained_model
 from llava.mm_utils import get_model_name_from_path, tokenizer_image_token, process_images
 from llava.constants import IMAGE_TOKEN_INDEX, DEFAULT_IMAGE_TOKEN
@@ -9,18 +23,6 @@ from typing import Dict, List
 import warnings
 import torch
 from PIL import Image
-
-# 关键修改：在所有其他导入之前，设置默认的 attention 实现
-from transformers.utils import is_flash_attn_2_available
-from transformers import LlamaConfig
-
-if is_flash_attn_2_available():
-    print("Flash Attention 2 is available. Setting it as default for Llama.")
-    # 通过修改 LlamaConfig 的默认值来启用 Flash Attention
-    # 这样所有后续加载的 Llama 模型都会尝试使用它
-    LlamaConfig.from_pretrained("dummy", attn_implementation="flash_attention_2")
-else:
-    print("Flash Attention 2 is not available.")
 
 
 warnings.filterwarnings("ignore", message=".*copying from a non-meta parameter.*")
