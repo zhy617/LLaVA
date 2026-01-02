@@ -37,8 +37,6 @@ def run_inference_for_sequence(args, tokenizer, model, image_processor, context_
     # 注意：字典在Python 3.7+中保持插入顺序，但排序更保险
     key_frame_ids: List[Dict] = sorted(key_frames_data.keys())
 
-    
-
     last_output = None
     
     for i, frame_id in enumerate(key_frame_ids):
@@ -56,8 +54,23 @@ def run_inference_for_sequence(args, tokenizer, model, image_processor, context_
             continue
 
         # 1. 准备多张图片输入
-        image_files = [os.path.join(data_root_path, camera_view, os.path.basename(rel_path)) for camera_view, rel_path in image_paths_dict.items()]
+        # image_files = [os.path.join(data_root_path, camera_view, os.path.basename(rel_path)) for camera_view, rel_path in image_paths_dict.items()]
         
+        # 这里我们只使用前置摄像头的图片进行测试
+        image_files = []
+        front_camera_view = "CAM_FRONT"
+        if front_camera_view in image_paths_dict:
+            rel_path = image_paths_dict[front_camera_view]
+            image_files.append(os.path.join(data_root_path, front_camera_view, os.path.basename(rel_path)))
+            print(f"--- Info: Testing with a single image ({front_camera_view}) ---")
+        else:
+            # 如果找不到前置摄像头，就用任意第一张图作为备选
+            if image_paths_dict:
+                first_camera_view, rel_path = next(iter(image_paths_dict.items()))
+                image_files.append(os.path.join(data_root_path, first_camera_view, os.path.basename(rel_path)))
+                print(f"--- Info: CAM_FRONT not found. Testing with a single image (fallback: {first_camera_view}) ---")
+
+
         # 检查图片是否存在
         if not all(os.path.exists(f) for f in image_files):
             print(f"Skipping {frame_id}, not all images found.")
@@ -68,7 +81,7 @@ def run_inference_for_sequence(args, tokenizer, model, image_processor, context_
             continue
 
         try:
-            images = [Image.open(f).convert('RGB') for f in image_files]
+            images = [Image.open(f).convert('RGB').resize((800, 450)) for f in image_files]
             image_tensor = process_images(images, image_processor, model.config)
             image_tensor = image_tensor.to(model.device, dtype=torch.float16)
         except Exception as e:
@@ -76,6 +89,13 @@ def run_inference_for_sequence(args, tokenizer, model, image_processor, context_
             continue
 
         prompt = f"{DEFAULT_IMAGE_TOKEN * len(images)}\n" + args.initial_prompt
+
+        # if i == 0: # 或者 if model.is_first_frame:
+        #     # 第一帧：构建包含完整指令的 prompt
+        #     prompt = f"{DEFAULT_IMAGE_TOKEN * len(images)}\n" + args.initial_prompt
+        # else:
+        #     # 后续帧：只提供图片占位符，让模型自己利用记忆续写
+        #     prompt = f"{DEFAULT_IMAGE_TOKEN * len(images)}"
 
         # prompt = "Suppose you are driving, and I'm providing you with six images captured by the car's front, front-left, front-right, back, back-left and back-right camera. First, generate a description of the driving scene which includes the key factors for driving planning, including the presence of obstacles and the positions and movements of vehicles and pedestrians and traffic lights. After description, please predict the behavior of ego vehicle, including exactly the driving direction(straight, turn left or turn right) and driving speed(slow, fast or normal)."
 
@@ -89,6 +109,9 @@ def run_inference_for_sequence(args, tokenizer, model, image_processor, context_
             .unsqueeze(0)
             .to(model.device)
         )
+
+        split_id = tokenizer.encode('.', add_special_tokens=False)[0]
+
         with torch.inference_mode():
             output_ids = model.generate_with_mem_ppl_continue_gen(
                 input_ids,
@@ -97,11 +120,17 @@ def run_inference_for_sequence(args, tokenizer, model, image_processor, context_
                 do_sample=True if args.temperature > 0 else False,
                 temperature=args.temperature,
                 top_p=args.top_p,
+                split_id=split_id,
                 num_beams=args.num_beams,
                 max_new_tokens=args.max_new_tokens,
-                use_cache=True)
+                use_cache=True,
+                tokenizer=tokenizer,
+                eos_token_id=tokenizer.eos_token_id,
+            )
 
-        outputs = tokenizer.decode(output_ids[input_ids.shape[1]:]).strip()
+        generated_ids = output_ids[0]
+        outputs = tokenizer.decode(generated_ids, skip_special_tokens=True).strip()
+        # outputs = tokenizer.decode(output_ids[input_ids.shape[1]:]).strip()
         
         # 4. 更新对话历史
         conv.messages[-1][-1] = outputs
@@ -141,7 +170,8 @@ def main():
         "top_p": None,
         "num_beams": 1,
         "max_new_tokens": 512,
-        "initial_prompt": "Suppose you are driving, and I'm providing you with six images captured by the car's front, front-left, front-right, back, back-left and back-right camera. First, generate a description of the driving scene which includes the key factors for driving planning, including the presence of obstacles and the positions and movements of vehicles and pedestrians and traffic lights. After description, please predict the behavior of ego vehicle, including exactly the driving direction(straight, turn left or turn right) and driving speed(slow, fast or normal)."
+        # "initial_prompt": "Suppose you are driving, and I'm providing you with six images captured by the car's front, front-left, front-right, back, back-left and back-right camera. First, generate a description of the driving scene which includes the key factors for driving planning, including the presence of obstacles and the positions and movements of vehicles and pedestrians and traffic lights. After description, please predict the behavior of ego vehicle, including exactly the driving direction(straight, turn left or turn right) and driving speed(slow, fast or normal)."
+        "initial_prompt": "Suppose you are driving, and I'm providing you with image captured by the car's front cameras. Please generate a description of the driving scene including key factors for driving planning, such as obstacles, positions and movements of vehicles, pedestrians, and traffic lights.After the description, predict the behavior of the ego vehicle, including the driving direction (straight, turn left, or turn right) and driving speed (slow, fast, or normal).",
     })()
 
     # 3. 加载JSON文件并对每个序列进行推理

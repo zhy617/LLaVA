@@ -1236,7 +1236,7 @@ class LlamaModel(LlamaPreTrainedModel):
 
         self.gradient_checkpointing = False
 
-        self.max_length = 4096
+        self.max_length = 8192
         self.token_embeds = torch.zeros(1, self.max_length, config.hidden_size).cuda()
 
         # Initialize weights and apply final processing
@@ -1719,7 +1719,7 @@ class LlavaLlamaForCausalLM(LlamaForCausalLM, LlavaMetaForCausalLM):
         self.vocab_size = config.vocab_size
         self.lm_head = nn.Linear(config.hidden_size, config.vocab_size, bias=False)
 
-        self.max_length = 4096
+        self.max_length = 8192 
         self.text_memory = [[]]
         self.token_embeds_memory = torch.empty(1, self.max_length, config.hidden_size).cuda()
         self.key_values_memory = [[torch.empty(1, config.num_attention_heads, self.max_length, config.hidden_size // config.num_attention_heads).cuda(), torch.empty(1, config.num_attention_heads, self.max_length, config.hidden_size // config.num_attention_heads).cuda()] for _ in range(32)] # print(output.past_key_values[0][0].size()) # layer, k/v; tensor(batch, head_num, length, head_dim)
@@ -2184,6 +2184,7 @@ class LlavaLlamaForCausalLM(LlamaForCausalLM, LlavaMetaForCausalLM):
         image_sizes: Optional[torch.Tensor] = None,
         split_id: Optional[int] = None,
         eos_token_id: Optional[int] = None,
+        tokenizer: Optional[object] = None,
         **kwargs,
     ) -> Union[GenerateOutput, torch.LongTensor]:
         position_ids = kwargs.pop("position_ids", None)
@@ -2191,6 +2192,8 @@ class LlavaLlamaForCausalLM(LlamaForCausalLM, LlavaMetaForCausalLM):
         temperature = kwargs.pop("temperature", None)
         if "inputs_embeds" in kwargs:
             raise NotImplementedError("`inputs_embeds` is not supported")
+
+        input_last_token = inputs[0][-1].item()
 
         if images is not None:
             (
@@ -2222,7 +2225,7 @@ class LlavaLlamaForCausalLM(LlamaForCausalLM, LlavaMetaForCausalLM):
             inputs_embeds = torch.cat((inputs_embeds, self.token_embeds_memory[:, :len(self.text_memory[0]), :]), dim=1)
             
             prefill_output = super().forward(
-                input_ids=inputs,
+                input_ids=None,
                 attention_mask=attention_mask,
                 position_ids=position_ids,
                 inputs_embeds=inputs_embeds,
@@ -2237,7 +2240,9 @@ class LlavaLlamaForCausalLM(LlamaForCausalLM, LlavaMetaForCausalLM):
             # decode with memory
 
             drive_memory = self.text_memory[0]
-            split_position = [index for index, value in enumerate(drive_memory) if value == split_id]
+            if tokenizer is None:
+                raise ValueError("Tokenizer must be provided to use decode-based splitting.")
+            split_position = [index for index, token_id in enumerate(drive_memory) if '.' in tokenizer.decode([token_id])]
             split_position.insert(0, -1)
 
             # calculate ppl of every sub prompt
@@ -2271,7 +2276,7 @@ class LlavaLlamaForCausalLM(LlamaForCausalLM, LlavaMetaForCausalLM):
                     else:
                         consecutive_wrong = 0
                 
-                if  refresh == True:
+                if refresh == True:
                     break
 
                 if memory_useful == False:
@@ -2309,18 +2314,27 @@ class LlavaLlamaForCausalLM(LlamaForCausalLM, LlavaMetaForCausalLM):
             
             if all_memory_useful == False:
                 # generate until end
+                
+                # make sure current_sequences is not empty
+                # assert len(current_sequences[0]) > 0, "Current sequences is empty when continue generation."
 
                 if refresh == True:
                     total_length = image_len
                     current_input_ids_length = total_length
-                    inputs = torch.tensor([[current_sequences[0][-1]]]).cuda()
+                    if len(current_sequences[0]) > 0:
+                        inputs = torch.tensor([[current_sequences[0][-1]]]).cuda()
+                    else:
+                        inputs = torch.tensor([[input_last_token]]).cuda()
                     current_sequences = [[]]
                     generated_length = 0
                     
                 else:
                     total_length = inputs_embeds.size(1) - 1
                     current_input_ids_length = total_length
-                    inputs = torch.tensor([[current_sequences[0][-1]]]).cuda()
+                    if len(current_sequences[0]) > 0:
+                        inputs = torch.tensor([[current_sequences[0][-1]]]).cuda()
+                    else:
+                        inputs = torch.tensor([[input_last_token]]).cuda()
                     generated_length -= 1
 
                 first_gen = True
@@ -2347,9 +2361,14 @@ class LlavaLlamaForCausalLM(LlamaForCausalLM, LlavaMetaForCausalLM):
                     probabilities = torch.softmax(scaled_logits[:, -1, :], dim=-1)
                     token_index = torch.multinomial(probabilities, num_samples=1).item()
 
+                    # if tokenizer:
+                    #     # 使用 end='' 和 flush=True 可以在同一行连续打印，实时观察
+                    #     print(tokenizer.decode([token_index]), end=' ', flush=True)
+                        
+
                     if refresh == True:
                         # update
-                        self.threshold = min(self.threshold, probabilities[token_index])
+                        self.threshold = min(self.threshold, probabilities[0, token_index])
 
                     # print(token_index)
 
@@ -2391,6 +2410,20 @@ class LlavaLlamaForCausalLM(LlamaForCausalLM, LlavaMetaForCausalLM):
             self.is_first_frame = False
 
         self.text_memory = current_sequences.copy()
+
+        # flag = False
+        # for token in current_sequences[0]:
+        #     if token == split_id:
+        #         flag = True
+        #         break
+        
+        # current_str = ''
+        # for token in current_sequences[0]:
+        #     current_str += tokenizer.decode([token])
+        #     current_str += ' '
+        # print("Current generated sequence: ", current_str)
+
+        # assert flag == True, "There is no split_id in current generated sequence."
 
         for i in range(len(self.model.layers)):
             self.key_values_memory[i][0][:, :, :generated_length, :].copy_(self.current_past_key_values[i][0][:, :, self.input_ids_length : self.input_ids_length + generated_length, :])
