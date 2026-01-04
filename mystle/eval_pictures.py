@@ -53,22 +53,34 @@ def run_inference_for_sequence(args, tokenizer, model, image_processor, context_
             print(f"Skipping {frame_id}, 'image_paths' not found.")
             continue
 
-        # 1. 准备多张图片输入
-        # image_files = [os.path.join(data_root_path, camera_view, os.path.basename(rel_path)) for camera_view, rel_path in image_paths_dict.items()]
+        # 1. 准备多张图片输入，并确保顺序固定
+        # 定义一个固定的摄像头顺序，以保证 prompt 和 image_tensor 的顺序一致
+        camera_order = [
+            "CAM_FRONT", "CAM_FRONT_LEFT", "CAM_FRONT_RIGHT",
+            "CAM_BACK", "CAM_BACK_LEFT", "CAM_BACK_RIGHT"
+        ]
         
-        # 这里我们只使用前置摄像头的图片进行测试
         image_files = []
-        front_camera_view = "CAM_FRONT"
-        if front_camera_view in image_paths_dict:
-            rel_path = image_paths_dict[front_camera_view]
-            image_files.append(os.path.join(data_root_path, front_camera_view, os.path.basename(rel_path)))
-            print(f"--- Info: Testing with a single image ({front_camera_view}) ---")
-        else:
-            # 如果找不到前置摄像头，就用任意第一张图作为备选
-            if image_paths_dict:
-                first_camera_view, rel_path = next(iter(image_paths_dict.items()))
-                image_files.append(os.path.join(data_root_path, first_camera_view, os.path.basename(rel_path)))
-                print(f"--- Info: CAM_FRONT not found. Testing with a single image (fallback: {first_camera_view}) ---")
+        camera_names = []
+        for camera_view in camera_order:
+            if camera_view in image_paths_dict:
+                rel_path = image_paths_dict[camera_view]
+                image_files.append(os.path.join(data_root_path, camera_view, os.path.basename(rel_path)))
+                camera_names.append(camera_view)
+
+        # 这里我们只使用前置摄像头的图片进行测试
+        # image_files = []
+        # front_camera_view = "CAM_FRONT"
+        # if front_camera_view in image_paths_dict:
+        #     rel_path = image_paths_dict[front_camera_view]
+        #     image_files.append(os.path.join(data_root_path, front_camera_view, os.path.basename(rel_path)))
+        #     print(f"--- Info: Testing with a single image ({front_camera_view}) ---")
+        # else:
+        #     # 如果找不到前置摄像头，就用任意第一张图作为备选
+        #     if image_paths_dict:
+        #         first_camera_view, rel_path = next(iter(image_paths_dict.items()))
+        #         image_files.append(os.path.join(data_root_path, first_camera_view, os.path.basename(rel_path)))
+        #         print(f"--- Info: CAM_FRONT not found. Testing with a single image (fallback: {first_camera_view}) ---")
 
 
         # 检查图片是否存在
@@ -88,7 +100,11 @@ def run_inference_for_sequence(args, tokenizer, model, image_processor, context_
             print(f"Error loading or processing images for {frame_id}: {e}")
             continue
 
-        prompt = f"{DEFAULT_IMAGE_TOKEN * len(images)}\n" + args.initial_prompt
+        # 关键修改：构建带有摄像头方位信息的 prompt
+        image_prompt_parts = [f"- {name}: {DEFAULT_IMAGE_TOKEN}" for name in camera_names]
+        image_section = "The following images are provided from different camera angles:\n" + "\n".join(image_prompt_parts)
+        
+        prompt = f"{image_section}\n\n{args.initial_prompt}"
 
         # if i == 0: # 或者 if model.is_first_frame:
         #     # 第一帧：构建包含完整指令的 prompt
@@ -163,6 +179,8 @@ def main():
         # 如果模型没有这个属性，你可能需要添加它，或者师兄的代码有其他初始化方式
         print("Warning: model does not have 'is_first_frame' attribute. The continuous generation logic might not work.")
 
+    model.config.image_aspect_ratio = 'square'
+
     # 2. 定义参数
     args = type('Args', (), {
         "conv_mode": "llava_v1",
@@ -170,8 +188,17 @@ def main():
         "top_p": None,
         "num_beams": 1,
         "max_new_tokens": 512,
-        # "initial_prompt": "Suppose you are driving, and I'm providing you with six images captured by the car's front, front-left, front-right, back, back-left and back-right camera. First, generate a description of the driving scene which includes the key factors for driving planning, including the presence of obstacles and the positions and movements of vehicles and pedestrians and traffic lights. After description, please predict the behavior of ego vehicle, including exactly the driving direction(straight, turn left or turn right) and driving speed(slow, fast or normal)."
-        "initial_prompt": "Suppose you are driving, and I'm providing you with image captured by the car's front cameras. Please generate a description of the driving scene including key factors for driving planning, such as obstacles, positions and movements of vehicles, pedestrians, and traffic lights.After the description, predict the behavior of the ego vehicle, including the driving direction (straight, turn left, or turn right) and driving speed (slow, fast, or normal).",
+        "initial_prompt": "Suppose you are driving, and I'm providing you with six images captured by the car's front, front-left, front-right, back, back-left and back-right camera. First, generate a description of the driving scene which includes the key factors for driving planning, including the presence of obstacles and the positions and movements of vehicles and pedestrians and traffic lights. After description, please predict the behavior of ego vehicle, including exactly the driving direction(straight, turn left or turn right) and driving speed(slow, fast or normal)."
+#         "initial_prompt": """You are an expert driving assistant. Based on the provided camera images, provide a concise analysis in the following structured format. Do not deviate from this format.
+
+# ### Scene Description
+# - **Environment:** [Describe the road type, weather, and surroundings. e.g., "A wide, two-lane urban road on an overcast day, lined with trees and commercial buildings."]
+# - **Traffic State:** [Describe the overall traffic situation. e.g., "Light traffic with no immediate congestion."]
+
+# ### Ego Vehicle Behavior Prediction
+# - **Driving Direction:** [Choose one: straight, turn left, turn right]
+# - **Driving Speed:** [Choose one: slow, normal, fast]
+# """
     })()
 
     # 3. 加载JSON文件并对每个序列进行推理
