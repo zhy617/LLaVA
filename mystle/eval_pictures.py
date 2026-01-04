@@ -1,5 +1,6 @@
 import os
 import json
+import time
 
 os.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'
 
@@ -27,23 +28,43 @@ from PIL import Image
 
 warnings.filterwarnings("ignore", message=".*copying from a non-meta parameter.*")
 
-def run_inference_for_sequence(args, tokenizer, model, image_processor, context_len, scene_id: str, key_frames_data: Dict, data_root_path: str):
+def run_inference_for_sequence(
+    args, 
+    tokenizer, 
+    model, 
+    image_processor, 
+    context_len, 
+    scene_id: str, 
+    key_frames_data: Dict, 
+    data_root_path: str,
+    use_memory_idea: bool = False
+):
     """
     对一个数据序列（一个场景的所有关键帧）进行连续推理
     """
-    print(f"===== Processing Scene: {scene_id} =====")
+    print(f"===== Processing Scene: {scene_id} (Memory Idea: {use_memory_idea}) =====")
+
+    total_scene_time_start = time.time()
+    total_generated_tokens = 0
+    total_inference_time = 0
 
     # 获取并排序关键帧ID，以确保按顺序处理
     # 注意：字典在Python 3.7+中保持插入顺序，但排序更保险
     key_frame_ids: List[Dict] = sorted(key_frames_data.keys())
 
     last_output = None
+
+    # 3. 根据是否使用idea，决定conv对象的位置
     
     for i, frame_id in enumerate(key_frame_ids):
         print(f"--- Processing Key Frame: {frame_id} ---")
 
         # 在每次循环开始时，重新初始化对话，避免历史累积
         conv = conv_templates[args.conv_mode].copy()
+
+        if hasattr(model, 'is_first_frame'):
+            # 如果不使用idea，则每一帧都是“第一帧”
+            model.is_first_frame = not use_memory_idea or (i == 0)
         
         frame_info: Dict[str, Dict] = key_frames_data[frame_id]
         assert frame_info is not None, f"Frame info for {frame_id} is None"
@@ -128,6 +149,8 @@ def run_inference_for_sequence(args, tokenizer, model, image_processor, context_
 
         split_id = tokenizer.encode('.', add_special_tokens=False)[0]
 
+        inference_start_time = time.time()
+
         with torch.inference_mode():
             output_ids = model.generate_with_mem_ppl_continue_gen(
                 input_ids,
@@ -144,7 +167,17 @@ def run_inference_for_sequence(args, tokenizer, model, image_processor, context_
                 eos_token_id=tokenizer.eos_token_id,
             )
 
+        inference_end_time = time.time()
+
+        # 累加统计数据
+        frame_inference_time = inference_end_time - inference_start_time
+        total_inference_time += frame_inference_time
+
         generated_ids = output_ids[0]
+
+        num_generated_tokens = len(generated_ids)
+        total_generated_tokens += num_generated_tokens
+
         outputs = tokenizer.decode(generated_ids, skip_special_tokens=True).strip()
         # outputs = tokenizer.decode(output_ids[input_ids.shape[1]:]).strip()
         
@@ -152,6 +185,21 @@ def run_inference_for_sequence(args, tokenizer, model, image_processor, context_
         conv.messages[-1][-1] = outputs
         
         print(f"Model Output: {outputs}\n")
+
+        print(f"  - Inference time for this frame: {frame_inference_time:.2f}s")
+        if frame_inference_time > 0:
+            print(f"  - Tokens/sec for this frame: {num_generated_tokens / frame_inference_time:.2f}")
+        print("-" * 20)
+
+    total_scene_time = time.time() - total_scene_time_start
+    print(f"\n===== Scene {scene_id} Summary (Memory Idea: {use_memory_idea}) =====")
+    print(f"Total End-to-End Time: {total_scene_time:.2f}s")
+    print(f"Total Inference-Only Time: {total_inference_time:.2f}s")
+    print(f"Total Generated Tokens: {total_generated_tokens}")
+    if total_inference_time > 0:
+        avg_tokens_per_sec = total_generated_tokens / total_inference_time
+        print(f"Average Tokens/Second (Inference Only): {avg_tokens_per_sec:.2f}")
+    print("=" * 40 + "\n")
 
 
 def main():
@@ -189,16 +237,6 @@ def main():
         "num_beams": 1,
         "max_new_tokens": 512,
         "initial_prompt": "Suppose you are driving, and I'm providing you with six images captured by the car's front, front-left, front-right, back, back-left and back-right camera. First, generate a description of the driving scene which includes the key factors for driving planning, including the presence of obstacles and the positions and movements of vehicles and pedestrians and traffic lights. After description, please predict the behavior of ego vehicle, including exactly the driving direction(straight, turn left or turn right) and driving speed(slow, fast or normal)."
-#         "initial_prompt": """You are an expert driving assistant. Based on the provided camera images, provide a concise analysis in the following structured format. Do not deviate from this format.
-
-# ### Scene Description
-# - **Environment:** [Describe the road type, weather, and surroundings. e.g., "A wide, two-lane urban road on an overcast day, lined with trees and commercial buildings."]
-# - **Traffic State:** [Describe the overall traffic situation. e.g., "Light traffic with no immediate congestion."]
-
-# ### Ego Vehicle Behavior Prediction
-# - **Driving Direction:** [Choose one: straight, turn left, turn right]
-# - **Driving Speed:** [Choose one: slow, normal, fast]
-# """
     })()
 
     # 3. 加载JSON文件并对每个序列进行推理
@@ -215,24 +253,28 @@ def main():
     # 遍历JSON中的每个场景
 
     scene_count = 0
+    scenes_to_test = 3
 
     for scene_id, scene_data in all_data.items():
-
-        if scene_count >= 3:
-            print("Reached the limit of 3 scenes. Stopping.")
+        if scene_count >= scenes_to_test:
+            print(f"Reached the limit of {scenes_to_test} scenes. Stopping.")
             break
-
         scene_count += 1
 
-        if hasattr(model, 'is_first_frame'):
-            print(f"Resetting model state for new scene: {scene_id}")
-            model.is_first_frame = True
-
         key_frames = scene_data.get("key_frames")
-        if key_frames:
-            run_inference_for_sequence(args, tokenizer, model, image_processor, context_len, scene_id, key_frames, data_root_path)
-        else:
+        if not key_frames:
             print(f"Skipping scene {scene_id}, no 'key_frames' found.")
+            continue
+
+        # --- 模式一：不使用师兄的idea (逐帧独立推理) ---
+        if hasattr(model, 'is_first_frame'):
+            model.is_first_frame = True # 确保从干净的状态开始
+        run_inference_for_sequence(args, tokenizer, model, image_processor, context_len, scene_id, key_frames, data_root_path, use_memory_idea=False)
+
+        # --- 模式二：使用师兄的idea (连续生成) ---
+        if hasattr(model, 'is_first_frame'):
+            model.is_first_frame = True # 同样确保从干净的状态开始
+        run_inference_for_sequence(args, tokenizer, model, image_processor, context_len, scene_id, key_frames, data_root_path, use_memory_idea=True)
 
 
 if __name__ == "__main__":
