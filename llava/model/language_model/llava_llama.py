@@ -1728,6 +1728,7 @@ class LlavaLlamaForCausalLM(LlamaForCausalLM, LlavaMetaForCausalLM):
 
         self.threshold_table = torch.empty(self.vocab_size).cuda()
         self.threshold = 0
+        # self.threshold_log = math.log(self.threshold + 1e-10)
 
         self.is_first_frame = True
 
@@ -2312,6 +2313,8 @@ class LlavaLlamaForCausalLM(LlamaForCausalLM, LlavaMetaForCausalLM):
                     
                     inputs_embeds = torch.cat((inputs_embeds, text_encode), dim=1)
             
+            print(f"Reused {len(current_sequences[0])} tokens from the previous frame.")
+
             if all_memory_useful == False:
                 # generate until end
                 
@@ -2339,54 +2342,106 @@ class LlavaLlamaForCausalLM(LlamaForCausalLM, LlavaMetaForCausalLM):
 
                 first_gen = True
 
-                while True:
+                # while True:
                     
+                #     decode_output = super().forward(
+                #         input_ids=inputs,
+                #         attention_mask=attention_mask,
+                #         position_ids=position_ids,
+                #         inputs_embeds=None,
+                #         past_key_values=[[tensor[:, :, :total_length, :] for tensor in layer] for layer in self.current_past_key_values],
+                #         return_dict=True
+                #     )
+
+                #     # we don't use tempreture here, to avoid high ppl
+                #     scaled_logits = decode_output.logits 
+                #     # scaled_logits = decode_output.logits / temperature
+
+                #     # we don't want to stop too early
+                #     if total_length - current_input_ids_length < 5 :
+                #         scaled_logits[0][-1][eos_token_id] = -10
+
+                #     probabilities = torch.softmax(scaled_logits[:, -1, :], dim=-1)
+                #     token_index = torch.multinomial(probabilities, num_samples=1).item()
+
+                #     # if tokenizer:
+                #     #     # 使用 end='' 和 flush=True 可以在同一行连续打印，实时观察
+                #     #     print(tokenizer.decode([token_index]), end=' ', flush=True)
+                        
+
+                #     if refresh == True:
+                #         # update
+                #         self.threshold = min(self.threshold, probabilities[0, token_index])
+
+                #     # print(token_index)
+
+                #     if token_index == eos_token_id:
+                #         break
+                    
+                #     current_sequences[0].append(token_index)
+                    
+                #     for i in range(len(self.model.layers)):
+                #         self.current_past_key_values[i][0][:, :, self.input_ids_length + generated_length : self.input_ids_length + generated_length + 1, :].copy_(decode_output.past_key_values[i][0][:, :, total_length : total_length + 1, :])
+                #         self.current_past_key_values[i][1][:, :, self.input_ids_length + generated_length : self.input_ids_length + generated_length + 1, :].copy_(decode_output.past_key_values[i][1][:, :, total_length : total_length + 1, :])
+                
+                #     generated_length += 1
+                #     total_length += 1
+                    
+                #     inputs = torch.tensor([[token_index]]).cuda()
+
+                # inputs_embeds = torch.cat((inputs_embeds, self.model.token_embeds[:, current_input_ids_length : current_input_ids_length + generated_length, :]), dim=1)
+
+                while True:
+                    # 1. 显式切片：只取前 total_length 个 token 的 embedding
+                    # 这样能确保模型绝对看不到 total_length 之后的内容
+                    curr_step_embeds = inputs_embeds[:, :total_length, :]
+
+                    # 2. 强制全量计算，不传 past_key_values
                     decode_output = super().forward(
-                        input_ids=inputs,
-                        attention_mask=attention_mask,
-                        position_ids=position_ids,
-                        inputs_embeds=None,
-                        past_key_values=[[tensor[:, :, :total_length, :] for tensor in layer] for layer in self.current_past_key_values],
+                        input_ids=None,
+                        attention_mask=None,  # 自动生成 causal mask
+                        position_ids=None,    # 自动生成 0...N
+                        inputs_embeds=curr_step_embeds, # <--- 传入切片后的 embed
+                        past_key_values=None, # <--- 清空 KV，强制重算
+                        use_cache=False,      
                         return_dict=True
                     )
 
-                    # we don't use tempreture here, to avoid high ppl
-                    scaled_logits = decode_output.logits 
-                    # scaled_logits = decode_output.logits / temperature
-
-                    # we don't want to stop too early
-                    if total_length - current_input_ids_length < 5 :
-                        scaled_logits[0][-1][eos_token_id] = -10
+                    # 3. 采样逻辑 (取最后一个 token 的 logits)
+                    scaled_logits = decode_output.logits
+                    
+                    # 强制不让它太早结束
+                    if total_length - current_input_ids_length < 5:
+                         scaled_logits[0][-1][eos_token_id] = -10
 
                     probabilities = torch.softmax(scaled_logits[:, -1, :], dim=-1)
                     token_index = torch.multinomial(probabilities, num_samples=1).item()
 
-                    # if tokenizer:
-                    #     # 使用 end='' 和 flush=True 可以在同一行连续打印，实时观察
-                    #     print(tokenizer.decode([token_index]), end=' ', flush=True)
-                        
+                    # (可选) 实时打印
+                    if tokenizer:
+                        print(tokenizer.decode([token_index]), end=' ', flush=True)
 
                     if refresh == True:
-                        # update
                         self.threshold = min(self.threshold, probabilities[0, token_index])
-
-                    # print(token_index)
 
                     if token_index == eos_token_id:
                         break
                     
                     current_sequences[0].append(token_index)
                     
-                    for i in range(len(self.model.layers)):
-                        self.current_past_key_values[i][0][:, :, self.input_ids_length + generated_length : self.input_ids_length + generated_length + 1, :].copy_(decode_output.past_key_values[i][0][:, :, total_length : total_length + 1, :])
-                        self.current_past_key_values[i][1][:, :, self.input_ids_length + generated_length : self.input_ids_length + generated_length + 1, :].copy_(decode_output.past_key_values[i][1][:, :, total_length : total_length + 1, :])
-                
+                    # 4. 准备下一轮的 Embedding
+                    # 获取新生成的 token 的 embedding
+                    new_token_tensor = torch.tensor([[token_index]]).to(inputs_embeds.device)
+                    new_token_embed = self.get_model().embed_tokens(new_token_tensor)
+                    
+                    # 拼接到主 inputs_embeds 上 (注意：这里 append 之后，inputs_embeds 变长了)
+                    # 下一轮循环开头的切片会把这个新 token 包含进去
+                    # inputs_embeds = torch.cat((inputs_embeds, new_token_embed), dim=1)
+                    inputs_embeds = torch.cat((inputs_embeds[:, :total_length, :], new_token_embed), dim=1)
+                    
                     generated_length += 1
                     total_length += 1
-                    
-                    inputs = torch.tensor([[token_index]]).cuda()
                 
-                inputs_embeds = torch.cat((inputs_embeds, self.model.token_embeds[:, current_input_ids_length : current_input_ids_length + generated_length, :]), dim=1)
 
         else:
 

@@ -253,7 +253,7 @@ def main():
     # 遍历JSON中的每个场景
 
     scene_count = 0
-    scenes_to_test = 3
+    scenes_to_test = 5
 
     for scene_id, scene_data in all_data.items():
         if scene_count >= scenes_to_test:
@@ -269,7 +269,7 @@ def main():
         # --- 模式一：不使用师兄的idea (逐帧独立推理) ---
         if hasattr(model, 'is_first_frame'):
             model.is_first_frame = True # 确保从干净的状态开始
-        run_inference_for_sequence(args, tokenizer, model, image_processor, context_len, scene_id, key_frames, data_root_path, use_memory_idea=False)
+        # run_inference_for_sequence(args, tokenizer, model, image_processor, context_len, scene_id, key_frames, data_root_path, use_memory_idea=False)
 
         # --- 模式二：使用师兄的idea (连续生成) ---
         if hasattr(model, 'is_first_frame'):
