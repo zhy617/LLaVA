@@ -1726,8 +1726,11 @@ class LlavaLlamaForCausalLM(LlamaForCausalLM, LlavaMetaForCausalLM):
         self.current_past_key_values = [[torch.empty_like(self.key_values_memory[i][0]), torch.empty_like(self.key_values_memory[i][1])] for i in range(32)]
         self.input_ids_length = 0
 
-        self.threshold_table = torch.empty(self.vocab_size).cuda()
-        self.threshold = 0
+        # fix bug of threshold_table initilization
+        # self.threshold_table = torch.empty(self.vocab_size).cuda()
+        self.threshold_table = torch.ones(self.vocab_size).cuda()
+
+        self.threshold = 1.0
         # self.threshold_log = math.log(self.threshold + 1e-10)
 
         self.is_first_frame = True
@@ -2223,13 +2226,14 @@ class LlavaLlamaForCausalLM(LlamaForCausalLM, LlavaMetaForCausalLM):
 
             image_len = inputs_embeds.size(1)
             # handle prefill stage. 1. get image's KV cache; 2. test ppl and select memory
-            inputs_embeds = torch.cat((inputs_embeds, self.token_embeds_memory[:, :len(self.text_memory[0]), :]), dim=1)
+            # inputs_embeds = torch.cat((inputs_embeds, self.token_embeds_memory[:, :len(self.text_memory[0]), :]), dim=1)
+            memory_inputs_embeds = torch.cat((inputs_embeds, self.token_embeds_memory[:, :len(self.text_memory[0]), :]), dim=1)
             
             prefill_output = super().forward(
                 input_ids=None,
                 attention_mask=attention_mask,
                 position_ids=position_ids,
-                inputs_embeds=inputs_embeds,
+                inputs_embeds=memory_inputs_embeds,
                 output_attentions=True,
                 return_dict=True
             )
@@ -2250,6 +2254,9 @@ class LlavaLlamaForCausalLM(LlamaForCausalLM, LlavaMetaForCausalLM):
             log_probs = torch.nn.functional.log_softmax(prefill_output.logits[0, self.input_ids_length-1:self.input_ids_length+len(self.text_memory[0])-1, :], dim=-1)
             target_log_probs = log_probs.gather(dim=-1, index=torch.tensor(self.text_memory[0]).cuda().unsqueeze(-1)).squeeze(-1)
 
+            # all use probability to decide memory useful or not
+            current_probs = torch.exp(target_log_probs)
+
             # handle all memory first
             all_memory_useful = True
 
@@ -2260,8 +2267,15 @@ class LlavaLlamaForCausalLM(LlamaForCausalLM, LlavaMetaForCausalLM):
             for j in range(len(split_position)-1):
 
                 # if exists low ppl, then the sentence is wrong
-                print(target_log_probs[split_position[j]+1:split_position[j+1]+1].tolist())
-                ppl_list = target_log_probs[split_position[j]+1:split_position[j+1]+1].tolist()
+                # print(target_log_probs[split_position[j]+1:split_position[j+1]+1].tolist())
+                # ppl_list = target_log_probs[split_position[j]+1:split_position[j+1]+1].tolist()
+
+                # test length
+                print("segment start:", split_position[j]+1, " end:", split_position[j+1]+1, " len:", split_position[j+1]-split_position[j])
+                print("inputs_embeds size:", inputs_embeds.size(1))
+
+                ppl_list = current_probs[split_position[j]+1:split_position[j+1]+1].tolist()
+                print(ppl_list)
                 
                 # if torch.sum(target_log_probs[split_position[j]+1: split_position[j+1]+1] < -2).item() < 0.2 * (split_position[j+1] - split_position[j]):
                 
@@ -2294,7 +2308,7 @@ class LlavaLlamaForCausalLM(LlamaForCausalLM, LlavaMetaForCausalLM):
                         self.current_past_key_values[i][0][:, :, self.input_ids_length + generated_length + split_position[j] - split_position[j+1] : self.input_ids_length + generated_length, :].copy_(self.key_values_memory[i][0][:, :, split_position[j] + 1: split_position[j+1] + 1, :])
                         self.current_past_key_values[i][1][:, :, self.input_ids_length + generated_length + split_position[j] - split_position[j+1] : self.input_ids_length + generated_length, :].copy_(self.key_values_memory[i][1][:, :, split_position[j] + 1: split_position[j+1] + 1, :])
 
-                    text_encode = self.token_embeds_memory[:, split_position[j] + 1 : split_position[j+1] + wrong_id, :]
+                    text_encode = self.token_embeds_memory[:, split_position[j] + 1 : split_position[j] + wrong_id, :]
                     
                     inputs_embeds = torch.cat((inputs_embeds, text_encode), dim=1)
 
