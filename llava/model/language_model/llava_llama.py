@@ -2436,7 +2436,7 @@ class LlavaLlamaForCausalLM(LlamaForCausalLM, LlavaMetaForCausalLM):
                         print(tokenizer.decode([token_index]), end=' ', flush=True)
 
                     if refresh == True:
-                        self.threshold = min(self.threshold, probabilities[0, token_index])
+                        self.threshold = min(self.threshold, probabilities[0, token_index] / self.threshold_table[token_index])
 
                     if token_index == eos_token_id:
                         break
