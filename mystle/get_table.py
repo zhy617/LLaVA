@@ -100,6 +100,8 @@ def calibrate_threshold_table(
             
             input_ids = tokenizer_image_token(prompt_for_model, tokenizer, IMAGE_TOKEN_INDEX, return_tensors='pt').unsqueeze(0).to(model.device)
 
+            # print(input_ids.shape, image_tensor.shape)
+
             # --- 2. 运行生成并获取 Scores ---
             with torch.inference_mode():
                 # 关键：设置 output_scores=True 和 return_dict_in_generate=True
@@ -112,7 +114,7 @@ def calibrate_threshold_table(
                     max_new_tokens=args.max_new_tokens,
                     use_cache=True,
                     output_scores=True,           # <--- 必须开启
-                    # return_dict_in_generate=True  # <--- 必须开启
+                    return_dict_in_generate=True  # <--- 必须开启
                 )
 
             # --- 3. 计算概率 ---
@@ -125,7 +127,11 @@ def calibrate_threshold_table(
             log_probs = torch.nn.functional.log_softmax(stacked_scores, dim=-1)
             
             # 4. 提取生成的 token IDs (不包括输入的 prompt)
-            generated_token_ids = outputs.sequences[:, input_ids.shape[-1]:]
+            # print(outputs.sequences.shape, input_ids.shape)
+            # print("Generated sequence:", outputs.sequences)
+            # print("Generated words:", tokenizer.batch_decode(outputs.sequences))
+            num_generated_tokens = log_probs.shape[1]
+            generated_token_ids = outputs.sequences[:, -num_generated_tokens:]
             
             # 5. 使用 gather 从 log_probs 中精确地找到每个生成 token 对应的 log probability
             #    需要为 generated_token_ids 增加一个维度以匹配 log_probs 的维度
@@ -138,6 +144,7 @@ def calibrate_threshold_table(
             # --- 4. 收集数据 ---
             for token_id, prob in zip(generated_tokens.cpu().tolist(), probs.cpu().tolist()):
                 # 跳过特殊 token (如 pad, eos 等，视情况而定，一般建议保留 EOS)
+                # print("token:", token_id, tokenizer.convert_ids_to_tokens(token_id), prob)
                 token_prob_collector[token_id].append(prob)
 
     # --- 5. 计算阈值表 ---
@@ -164,6 +171,15 @@ def calibrate_threshold_table(
     
     # --- 6. 补全未见过的 Token (可选) ---
     # 如果希望 table 包含词表所有 token，可以用默认值填充
+
+    if threshold_table: # 确保表不为空
+    # 推荐使用中位数或低分位数，比平均值更稳健
+        default_threshold = float(np.percentile(list(threshold_table.values()), 5)) # 使用第5百分位数
+    else:
+        default_threshold = 0.001 # 如果一个token都没收集到，则使用一个固定的回退值
+
+    print(f"Default threshold for unseen tokens set to {default_threshold}")
+
     for idx in range(tokenizer.vocab_size):
         if idx not in threshold_table:
             threshold_table[idx] = default_threshold

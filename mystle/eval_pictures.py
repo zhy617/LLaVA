@@ -229,6 +229,18 @@ def main():
 
     model.config.image_aspect_ratio = 'square'
 
+    threshold_table_path = "threshold_table.json"
+    if os.path.exists(threshold_table_path):
+        print(f"Loading existing threshold table from {threshold_table_path}")
+        with open(threshold_table_path, 'r') as f:
+            threshold_table_json = json.load(f)
+        # from json to tensor
+        for k, v in threshold_table_json.items():
+            token_id = int(k)
+            if token_id < tokenizer.vocab_size:
+                model.threshold_table[token_id] = v
+
+
     # 2. 定义参数
     args = type('Args', (), {
         "conv_mode": "llava_v1",
