@@ -1,0 +1,266 @@
+/root/miniconda3/envs/llava/lib/python3.10/site-packages/torch/cuda/__init__.py:51: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml  # type: ignore[import]
+Flash Attention 2 is available. Setting it as default for Llama.
+[2026-02-01 08:29:30,363] [INFO] [real_accelerator.py:161:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+You are using a model of type llava to instantiate a model of type llava_llama. This is not supported for all configurations of models and can yield errors.
+/root/miniconda3/envs/llava/lib/python3.10/site-packages/huggingface_hub/file_download.py:942: FutureWarning: `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
+  warnings.warn(
+/root/miniconda3/envs/llava/lib/python3.10/site-packages/torch/_utils.py:831: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  return self.fget.__get__(instance, owner)()
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███▎      | 1/3 [00:03<00:07,  3.52s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:06<00:03,  3.39s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:10<00:00,  3.45s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:10<00:00,  3.45s/it]
+/root/miniconda3/envs/llava/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:397: UserWarning: `do_sample` is set to `False`. However, `top_p` is set to `None` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `top_p`.
+  warnings.warn(
+Loading existing threshold table from threshold_table.json
+===== Processing Scene: b789de07180846cc972118ee6d1fb027 (Memory Idea: False) =====
+--- Processing Key Frame: 02c431d3d810472d9307d91e77fe495f ---
+Model Output: The driving scene appears to be in a city area, possibly near an industrial or commercial area given the presence of a large building and a parking lot. The road is wet, suggesting recent rain, which could affect visibility and traction.
+
+Key factors for driving planning include:
+
+1. The presence of a large building on the right side of the road, which might limit visibility around the corner.
+2. A parking lot with several cars parked, which could be entering or exiting the lot, potentially causing traffic flow changes.
+3. A truck parked on the side of the road, which could be obstructing the view of oncoming traffic.
+4. A pedestrian crossing visible on the right side of the road, indicating the need to be cautious of pedestrians.
+5. A traffic light visible on the left side of the road, which could be controlling the flow of traffic.
+
+Predictions for ego vehicle behavior:
+
+1. The ego vehicle should approach the intersection with caution, as there might be oncoming traffic from the large building or the parking lot.
+2. The ego vehicle should be prepared to slow down or stop if necessary to yield to pedestrians crossing the road.
+3. The ego vehicle should be aware of the traffic light and follow the signal accordingly.
+4. The ego vehicle should be prepared to turn left or right, depending on the traffic flow and the presence of any obstacles or pedestrians.
+5. The ego vehicle should maintain a safe speed, considering the wet road conditions and the presence of other vehicles and pedestrians.
+
+  - Inference time for this frame: 8.91s
+  - Tokens/sec for this frame: 39.72
+--------------------
+--- Processing Key Frame: 13ade121714c46d6a028516ecb5bff60 ---
+Model Output: The driving scene appears to be a typical urban street with a mix of vehicles and pedestrians. The key factors for driving planning include:
+
+1. The presence of a large building on the right side of the road, which might obstruct the view of oncoming traffic or pedestrians.
+2. A white van parked on the right side of the road, which could be a potential obstacle if it's in the driver's path.
+3. A car parked on the left side of the road, which could also be an obstacle if the driver needs to maneuver around it.
+4. A pedestrian on the right side of the road, who might be crossing or walking along the sidewalk.
+5. A traffic light visible in the distance, which would control the flow of traffic at an intersection.
+
+Predicting the behavior of the ego vehicle:
+
+1. The ego vehicle is currently driving straight ahead, as indicated by the front camera's view.
+2. The ego vehicle is likely to continue driving straight ahead, as there are no immediate obstacles or pedestrians in its path.
+3. The ego vehicle's speed appears to be normal, as there are no indications of sudden braking or acceleration.
+
+Please note that these predictions are based on the available information from the images and do not take into account any additional context or information that might be relevant to the driving situation.
+
+  - Inference time for this frame: 7.64s
+  - Tokens/sec for this frame: 40.84
+--------------------
+--- Processing Key Frame: 39961df49391439fbca612a8efe1c531 ---
+Model Output: The driving scene appears to be in a city area, with a large building on the right side of the road. The road is wet, suggesting recent rain, which could affect visibility and traction. There is a red car parked on the side of the road, and a white car is approaching from the opposite direction. The white car is positioned in the right lane, and it seems to be moving at a normal speed.
+
+There are no pedestrians visible in the image, and no traffic lights are present. The back camera shows a clear view of the road ahead, with no obstacles or vehicles in sight. The front camera shows the white car in the right lane, and the back camera shows the red car parked on the side of the road.
+
+Given the information, the ego vehicle should proceed straight, maintaining a normal speed to ensure safe driving conditions. The wet road may require extra caution, so the driver should be prepared for potential slippery conditions and adjust their speed accordingly.
+
+  - Inference time for this frame: 5.37s
+  - Tokens/sec for this frame: 40.02
+--------------------
+--- Processing Key Frame: 690c4ddabc7845f48f4831ac73129154 ---
+Model Output: The driving scene appears to be in a parking lot adjacent to a large industrial building. The parking lot is mostly empty, with only a few vehicles parked. The vehicles are parked in a way that suggests they are not currently in use, and there are no pedestrians visible in the scene.
+
+The key factors for driving planning include:
+
+1. The presence of obstacles: There are no significant obstacles visible in the scene, such as parked cars or large objects.
+2. The positions and movements of vehicles and pedestrians: The vehicles are parked and stationary, and there are no pedestrians visible in the scene.
+3. Traffic lights: There are no traffic lights visible in the scene.
+
+Given the information provided, the ego vehicle should proceed straight, as there are no obstacles or pedestrians to navigate around. The driving speed should be normal, as there are no indications of a need for speed or sudden braking.
+
+Please note that this description is based on the information provided by the images and does not take into account any additional context or information that may not be visible in the images.
+
+  - Inference time for this frame: 6.19s
+  - Tokens/sec for this frame: 40.41
+--------------------
+--- Processing Key Frame: b0e6fd5561454b2789c853e5350557a8 ---
+Model Output: The driving scene appears to be in an industrial area with a large building on the right side. The road is wet, suggesting recent rain, and the sky is overcast, indicating it might be a cloudy day.
+
+Key factors for driving planning:
+- There are no pedestrians visible in the image.
+- There are no traffic lights visible in the image.
+- The vehicles in the scene include a white truck parked on the left side of the road, a red car parked on the right side of the road, and a white car in the foreground.
+- The white truck is parked and stationary.
+- The red car is parked and stationary.
+- The white car is in motion, driving towards the right side of the road.
+
+Predictions for ego vehicle:
+- The ego vehicle will continue to drive straight ahead.
+- The ego vehicle will maintain a normal speed, as there are no indications of needing to slow down or speed up.
+
+Please note that these predictions are based on the available information and do not take into account any additional context or information that might be relevant to the driving situation.
+
+  - Inference time for this frame: 6.21s
+  - Tokens/sec for this frame: 40.45
+--------------------
+--- Processing Key Frame: c4b8c55ceed44c7e95c36e61b8a99ffe ---
+Model Output: The driving scene appears to be in a city area, with a large building on the right side of the road. The road is wet, suggesting recent rain, and the sky is overcast, indicating it might be a cloudy day. There are no pedestrians visible in the scene.
+
+The key factors for driving planning include:
+
+1. The presence of a large building on the right side of the road, which could potentially obstruct the view of oncoming traffic.
+2. The wet road conditions, which might require extra caution to avoid hydroplaning.
+3. The overcast sky, which could indicate reduced visibility or the possibility of rain.
+
+Predicting the behavior of the ego vehicle:
+
+1. The ego vehicle is currently driving straight ahead.
+2. The ego vehicle should maintain a safe speed, considering the wet road conditions and the possibility of reduced visibility due to the overcast sky.
+3. The ego vehicle should be prepared for any sudden changes in traffic or pedestrian movements, given the large building on the right side of the road.
+
+Please note that these predictions are based on the available information and do not take into account any additional context or specific driving conditions that may not be visible in the provided images.
+
+  - Inference time for this frame: 6.64s
+  - Tokens/sec for this frame: 40.54
+--------------------
+
+===== Scene b789de07180846cc972118ee6d1fb027 Summary (Memory Idea: False) =====
+Total End-to-End Time: 42.74s
+Total Inference-Only Time: 40.95s
+Total Generated Tokens: 1651
+Average Tokens/Second (Inference Only): 40.31
+========================================
+
+===== Processing Scene: b789de07180846cc972118ee6d1fb027 (Memory Idea: True) =====
+--- Processing Key Frame: 02c431d3d810472d9307d91e77fe495f ---
+Model Output: The driving scene appears to be in a city area, possibly near an industrial or commercial area given the presence of a large building and a parking lot. The road is wet, suggesting recent rain, which could affect visibility and traction.
+
+Key factors for driving planning include:
+
+1. The presence of a large building on the right side of the road, which might limit visibility around the corner.
+2. A parking lot with several cars parked, which could be entering or exiting the lot, potentially causing traffic flow changes.
+3. A truck parked on the side of the road, which could be obstructing the view of oncoming traffic.
+4. A pedestrian crossing visible on the right side of the road, indicating the need to be cautious of pedestrians.
+5. A traffic light visible on the left side of the road, which could be controlling the flow of traffic.
+
+Predictions for ego vehicle behavior:
+
+1. The ego vehicle should approach the intersection with caution, as there might be oncoming traffic from the large building or the parking lot.
+2. The ego vehicle should be prepared to slow down or stop if necessary to yield to pedestrians crossing the road.
+3. The ego vehicle should be aware of the traffic light and follow the signal accordingly.
+4. The ego vehicle should be prepared to turn left or right, depending on the traffic flow and the presence of any obstacles or pedestrians.
+5. The ego vehicle should maintain a safe speed, considering the wet road conditions and the presence of other vehicles and pedestrians.
+
+  - Inference time for this frame: 8.65s
+  - Tokens/sec for this frame: 40.90
+--------------------
+--- Processing Key Frame: 13ade121714c46d6a028516ecb5bff60 ---
+[1.0187688366525283e-11, 1.4789979019269595e-08, 1.479607476539968e-06, 5.406463515100768e-06, 1.0274660233733357e-08, 1.5912604567347444e-07, 6.414574727386935e-06, 4.023590008728206e-06, 6.1589198594447225e-06, 2.03413928829832e-05, 1.1553598824320943e-06, 1.1012836012014304e-06, 6.899347681610379e-06, 1.115952841246326e-06, 3.725629767359351e-06, 1.1907482075912412e-05, 1.1081230013587628e-06, 1.981418336072238e-06, 3.4155564776483516e-07, 9.512045373583078e-09, 3.945068965549581e-05, 2.142982680197747e-09, 1.875312705124088e-06, 3.9988399294088595e-06, 6.079751983634196e-06, 7.113351330190198e-07, 1.4446978639170993e-05, 6.6627849264477845e-06, 1.8800919932004945e-08, 4.436168765664661e-09, 7.573628863610793e-06, 1.8677421564916585e-07]
+Reused 0 tokens from the previous frame.
+Model Output: The driving scene depicted in the six images shows a dry, windy day, with slightly visible traffic lights. The intersection is deserted except for the vehicles and construction equipment. In the front camera view, the ego vehicle is moving forward towards the intersection.
+
+There is no suspension of driver's organs or cargo or unbearable risk of the unusual. There is no dense fog, poisoned fog, greatly heavy traffic, or extremely strong wind. Occupants of other vehicles cannot predict this car's route precisely. Speed must be reduced probably to less than 40 miles per hour. Protective gear must be worn at car, truck, and construction vehicle speeds.
+
+To identify the behavior of the ego vehicle, consider that pedestrians aren't visible in these images, and traffic conditions are seemingly clear apart from the wind. The clearest feature is the position of the construction equipment, which is to the right and behind the ego vehicle. Therefore, the ego vehicle might turn right to follow the construction equipment without overtaking.
+
+The speed of the ego vehicle seems to be at a normal or slightly reduced pace as recommended by the health of all parties, including the vehicle itself.
+
+  - Inference time for this frame: 7.33s
+  - Tokens/sec for this frame: 35.63
+--------------------
+--- Processing Key Frame: 39961df49391439fbca612a8efe1c531 ---
+[0.6111374497413635, 0.8820734024047852, 0.9974395632743835, 0.05129867047071457, 0.6953893303871155, 0.7089197635650635, 0.8480744957923889, 0.17551057040691376, 0.8636801242828369, 0.2657049298286438, 0.8428584933280945, 0.0004493432061281055, 0.5523885488510132, 0.0008821914088912308, 0.9784647226333618, 0.9078119397163391, 0.06503939628601074, 0.5706958174705505, 0.0036268390249460936, 0.003518840065225959, 0.06496528536081314, 0.4830617904663086, 0.17729243636131287]
+[0.5840255618095398, 0.0008308070828206837, 0.35509318113327026, 0.006767590530216694, 0.9995682835578918, 0.15197508037090302, 0.9998912215232849, 0.27545303106307983, 0.05436298996210098, 0.15526388585567474, 0.0006403665174730122, 0.4771300256252289, 0.7207167744636536]
+[0.026464620605111122, 0.8982264399528503, 0.30713367462158203, 0.15257684886455536, 0.1429443061351776, 0.9668457508087158, 0.21254390478134155, 0.24738739430904388, 0.9973548650741577, 0.9742704629898071, 0.6732656955718994, 0.052212391048669815, 0.16694653034210205, 0.02750021032989025, 0.6980675458908081, 0.16378779709339142, 0.4995460510253906]
+[0.2567683458328247, 0.9992049336433411, 0.06887581944465637, 0.3708603084087372, 0.1291079968214035, 3.85603416361846e-05, 0.05607350543141365, 0.6512552499771118, 0.0004071508301422, 0.45590466260910034, 0.9999908804893494, 0.00018488304340280592, 0.9973453879356384, 0.13705182075500488, 0.0004098480276297778, 0.006009886972606182, 0.005590873770415783, 0.013363375328481197, 0.0878242701292038, 0.9485078454017639, 0.003320011543110013, 0.5545485615730286, 0.0196575615555048, 3.526008367771283e-05, 0.15172836184501648]
+[0.13120317459106445, 0.42894992232322693, 0.5090019106864929, 0.002258843742311001, 0.6238511800765991, 0.3708837628364563, 0.00012999815226066858, 0.010595391504466534, 0.20361246168613434, 0.891375720500946, 3.310051397420466e-05, 0.010678925551474094, 0.26323258876800537, 0.8088189363479614, 0.3270505964756012, 0.012496227398514748, 0.016139604151248932, 0.4904821813106537, 0.16992665827274323]
+[5.088931357022375e-05, 0.7552978992462158, 0.8478702902793884, 0.1954779177904129, 0.16819389164447784, 0.8759047985076904, 0.0013465487863868475, 0.0020875325426459312, 0.013941938988864422, 0.05934218689799309, 0.749219536781311, 0.9999381303787231, 0.006848036777228117, 0.004855656065046787, 0.5855844616889954]
+[0.0006920589949004352, 0.0006076526478864253, 0.7187322974205017, 0.08943209797143936, 0.00012112295371480286, 0.20242373645305634, 0.012414166703820229, 0.9684359431266785, 0.6775583624839783, 0.09160163253545761, 0.6739630699157715, 0.06853839010000229, 0.902761697769165, 0.9946786761283875, 0.3968343436717987]
+Reused 116 tokens from the previous frame.
+Model Output: The driving scene depicted in the six images shows a dry, windy day, with slightly visible traffic lights. The intersection is deserted except for the vehicles and construction equipment. In the front camera view, the ego vehicle is moving forward towards the intersection.
+
+There is no suspension of driver's organs or cargo or unbearable risk of the unusual. There is no dense fog, poisoned fog, greatly heavy traffic, or extremely strong wind. Occupants of other vehicles cannot predict this car's route precisely. Speed must be reduced time to the curve.
+
+Predicting the behavior of the ego vehicle, using the limited information from the front-left and front-right images, it appears to be currently in motion, going low to the ground. Straight without issue is recommended. The driver's attention must be alert for any sudden occurrence. However, speed reduction is not necessary due to the nearly empty road and clear visibility. It is probably already there.
+
+Pedestrians are not visible beyond the inside of a parked vehicle to the right. Cyclists are not possible given the nature of the day. With the unusual visibility, no traffic signals are severe that supplement speed management. No need to turn, only pay attention to the huge construction. No traffic signals are visible, which can disorient drivers when providing other values of motion.
+
+  - Inference time for this frame: 5.01s
+  - Tokens/sec for this frame: 57.51
+--------------------
+--- Processing Key Frame: 690c4ddabc7845f48f4831ac73129154 ---
+[0.6104636788368225, 0.876687228679657, 0.9976068735122681, 0.05534030869603157, 0.7051576375961304, 0.7217126488685608, 0.8392711281776428, 0.18129301071166992, 0.872424304485321, 0.25593483448028564, 0.7825334668159485, 0.0009393301443196833, 0.6036847829818726, 0.0013658703537657857, 0.9786484837532043, 0.891632080078125, 0.09860719740390778, 0.47652700543403625, 0.0024693028535693884, 0.0034511596895754337, 0.07828199118375778, 0.48896896839141846, 0.1819073110818863]
+[0.5658605098724365, 0.0010850854450836778, 0.3374585807323456, 0.007491582538932562, 0.999773383140564, 0.12140343338251114, 0.9998705387115479, 0.21175067126750946, 0.17134734988212585, 0.153704434633255, 0.004481530282646418, 0.3476429879665375, 0.6468894481658936]
+[0.02501838095486164, 0.8916930556297302, 0.28254434466362, 0.17600977420806885, 0.15830712020397186, 0.9610873460769653, 0.150781512260437, 0.2502516806125641, 0.998914897441864, 0.9782150983810425, 0.708973228931427, 0.06460976600646973, 0.17276886105537415, 0.02760220877826214, 0.6791375279426575, 0.17914168536663055, 0.522371232509613]
+[0.3266814649105072, 0.9992667436599731, 0.06613007187843323, 0.2964213490486145, 0.1017460823059082, 3.2450076105305925e-05, 0.05853965878486633, 0.6945245862007141, 0.0005011707544326782, 0.48227494955062866, 0.9999900460243225, 0.00017914440832100809, 0.9966427087783813, 0.13746072351932526, 0.00035951670724898577, 0.005138222593814135, 0.005307202693074942, 0.012713943608105183, 0.06959260255098343, 0.9477685689926147, 0.0033343869727104902, 0.5089384913444519, 0.019752226769924164, 3.348749305587262e-05, 0.15070708096027374]
+[0.12878693640232086, 0.41911959648132324, 0.4910772144794464, 0.002248861826956272, 0.6278653144836426, 0.400191992521286, 0.00013989885337650776, 0.01015158835798502, 0.22039800882339478, 0.8902345895767212, 3.22053165291436e-05, 0.007424645591527224, 0.26956215500831604, 0.8083299994468689, 0.33006051182746887, 0.012985032983124256, 0.01767219416797161, 0.5132972598075867, 0.18054017424583435]
+[5.014896669308655e-05, 0.7690962553024292, 0.8087040185928345, 0.2021358162164688, 0.16762731969356537, 0.8663845062255859, 0.0015869482886046171, 0.0022276698146015406, 0.0130492327734828, 0.05899105221033096, 0.7641445398330688, 0.9999419450759888, 0.006441702600568533, 0.005133500788360834, 0.6004955172538757]
+[0.0007655760855413973, 0.0006743519916199148, 0.7248259782791138, 0.10439147055149078, 5.047463218943449e-06, 0.4753057658672333, 0.004496261477470398, 0.0018488033674657345, 0.4407835602760315]
+Reused 116 tokens from the previous frame.
+Model Output: The driving scene depicted in the six images shows a dry, windy day, with slightly visible traffic lights. The intersection is deserted except for the vehicles and construction equipment. In the front camera view, the ego vehicle is moving forward towards the intersection.
+
+There is no suspension of driver's organs or cargo or unbearable risk of the unusual. There is no dense fog, poisoned fog, greatly heavy traffic, or extremely strong wind. Occupants of other vehicles cannot predict this car's route precisely. Speed must be reduced sufficiently safely to the point we've go gray. A decision must be made whether to turn left or right at the most. May need to get slightly ahead of construction vehicles to pass. Turn needs to go slow.
+
+  - Inference time for this frame: 1.64s
+  - Tokens/sec for this frame: 97.50
+--------------------
+--- Processing Key Frame: b0e6fd5561454b2789c853e5350557a8 ---
+[0.5989488959312439, 0.8963048458099365, 0.9972009658813477, 0.05133773013949394, 0.7179628610610962, 0.7119157314300537, 0.8438493013381958, 0.20017178356647491, 0.8750391602516174, 0.257841020822525, 0.8107552528381348, 0.000464178912807256, 0.48907020688056946, 0.0009658730123192072, 0.9851967096328735, 0.9095273613929749, 0.06405418366193771, 0.5372037887573242, 0.0032015410251915455, 0.003142551751807332, 0.05895638093352318, 0.3754333555698395, 0.193508580327034]
+[0.5650144219398499, 0.0006744353449903429, 0.3207738697528839, 0.005692928563803434, 0.999724268913269, 0.12662817537784576, 0.9998955726623535, 0.22871547937393188, 0.08394616842269897, 0.26018837094306946, 0.002836607163771987, 0.6689662933349609, 0.652531623840332]
+[0.025449609383940697, 0.8781099319458008, 0.35744622349739075, 0.16692838072776794, 0.15238533914089203, 0.9635064601898193, 0.1956089287996292, 0.30483126640319824, 0.9989004135131836, 0.9830467104911804, 0.7007628679275513, 0.08183810114860535, 0.1703205555677414, 0.026796462014317513, 0.7400118112564087, 0.17549388110637665, 0.4917328357696533]
+[0.2693009078502655, 0.9992906451225281, 0.07434450834989548, 0.3137299716472626, 0.14051494002342224, 4.0142400393961e-05, 0.06043541431427002, 0.6956881880760193, 0.0004860968329012394, 0.4648899435997009, 0.9999919533729553, 0.00021630835544783622, 0.9978405237197876, 0.14570412039756775, 0.0004194720822852105, 0.005284525919705629, 0.005570845678448677, 0.011897342279553413, 0.1556028127670288, 0.9494065642356873, 0.003709571436047554, 0.5355055332183838, 0.017979420721530914, 2.9977916710777208e-05, 0.15930049121379852]
+[0.1315007358789444, 0.4209578335285187, 0.5240136981010437, 0.0025048863608390093, 0.6437678933143616, 0.3888644576072693, 0.0001591508771525696, 0.009134399704635143, 0.2219354659318924, 0.8976280689239502, 3.20175604429096e-05, 0.007813382893800735, 0.268942654132843, 0.8079650402069092, 0.3338388502597809, 0.012758366763591766, 0.017282553017139435, 0.5317731499671936, 0.1849689483642578]
+[5.5000076827127486e-05, 0.7743136286735535, 0.8551984429359436, 0.18798741698265076, 0.21579471230506897, 0.8754573464393616, 0.0014720032922923565, 0.0018875912064686418, 0.012353062629699707, 0.05214109271764755, 0.7601524591445923, 0.9999440312385559, 0.005606004502624273, 0.005306364968419075, 0.5970298647880554]
+[0.0006880286382511258, 0.0005694147548638284, 0.7240659594535828, 0.09438811242580414, 0.00018488588102627546, 2.878000850614626e-05, 0.17294003069400787, 0.006027913652360439, 0.03230760991573334, 0.0023936054203659296, 0.14939233660697937, 0.22532732784748077, 5.0942580855917186e-05, 6.754297373845475e-06, 0.06857653707265854]
+[0.007321798708289862, 0.0015550211537629366, 0.09197214990854263, 0.896239161491394, 0.9188010096549988, 0.04020460695028305, 0.69844651222229, 0.20359773933887482, 0.5985791087150574, 0.4947516620159149, 0.6386386752128601, 0.08697409927845001, 0.7016709446907043, 0.000265748385572806, 0.024854814633727074]
+[1.9271650671726093e-05, 0.09143287688493729, 0.8464120626449585, 0.007749695330858231, 0.0045927842147648335, 0.050905991345644, 0.6609100699424744, 0.015002175234258175, 0.07429531961679459, 0.14687226712703705, 0.05114371329545975, 0.14377841353416443]
+[0.005300713237375021, 0.001706441049464047, 0.8240355849266052, 0.007150951772928238, 0.10898219048976898, 0.3460260033607483]
+Reused 160 tokens from the previous frame.
+Model Output: The driving scene depicted in the six images shows a dry, windy day, with slightly visible traffic lights. The intersection is deserted except for the vehicles and construction equipment. In the front camera view, the ego vehicle is moving forward towards the intersection.
+
+There is no suspension of driver's organs or cargo or unbearable risk of the unusual. There is no dense fog, poisoned fog, greatly heavy traffic, or extremely strong wind. Occupants of other vehicles cannot predict this car's route precisely. Speed must be reduced sufficiently safely to the point we've go gray. A decision must be made whether to turn left or right at the most. May need to get slightly ahead of construction vehicles to pass. Turn needs to go slow.
+
+  - Inference time for this frame: 0.47s
+  - Tokens/sec for this frame: 342.06
+--------------------
+--- Processing Key Frame: c4b8c55ceed44c7e95c36e61b8a99ffe ---
+[0.621893584728241, 0.8641244173049927, 0.9973234534263611, 0.06373010575771332, 0.7179719805717468, 0.7420756220817566, 0.8428391814231873, 0.1704329550266266, 0.8694941997528076, 0.28530043363571167, 0.834679901599884, 0.0010950935538858175, 0.4721897542476654, 0.001494714175350964, 0.9768456220626831, 0.8748292922973633, 0.06691281497478485, 0.5137855410575867, 0.0034078017342835665, 0.005699384957551956, 0.07506074756383896, 0.5184829235076904, 0.1952778398990631]
+[0.5878779888153076, 0.0007107245619408786, 0.3486025333404541, 0.010370150208473206, 0.9998258948326111, 0.10121399164199829, 0.9998717904090881, 0.2604396641254425, 0.11278454214334488, 0.13885535299777985, 0.002491550287231803, 0.5330226421356201, 0.6284964084625244]
+[0.020630646497011185, 0.8713957071304321, 0.3116892874240875, 0.15426957607269287, 0.12707118690013885, 0.9652655720710754, 0.17512716352939606, 0.2535713016986847, 0.9987467527389526, 0.9714822769165039, 0.717713475227356, 0.05422357842326164, 0.16645924746990204, 0.026483112946152687, 0.6492059826850891, 0.19478680193424225, 0.501880943775177]
+[0.29607200622558594, 0.9992266893386841, 0.07238610088825226, 0.2872193157672882, 0.15359094738960266, 2.9212518711574376e-05, 0.05350624769926071, 0.7114691734313965, 0.00047134864144027233, 0.4726438522338867, 0.9999885559082031, 0.00017691956600174308, 0.9975416660308838, 0.1587674468755722, 0.0003578249306883663, 0.005750106647610664, 0.0051404256373643875, 0.014014390297234058, 0.05540763959288597, 0.9459190368652344, 0.003272127825766802, 0.5205999612808228, 0.019063295796513557, 3.2558942621108145e-05, 0.14895661175251007]
+[0.13733188807964325, 0.41541463136672974, 0.5762496590614319, 0.002137274481356144, 0.6305820941925049, 0.3855246305465698, 0.00013220736582297832, 0.009005073457956314, 0.20903439819812775, 0.8938421010971069, 3.185969399055466e-05, 0.00746896443888545, 0.2545936703681946, 0.8118452429771423, 0.32924503087997437, 0.012085319496691227, 0.0174919031560421, 0.5149574875831604, 0.18825671076774597]
+[4.9168680561706424e-05, 0.741236686706543, 0.8298068046569824, 0.188001811504364, 0.1763099581003189, 0.8630415201187134, 0.0016664876602590084, 0.0023105910513550043, 0.012344783172011375, 0.05795855075120926, 0.7591071724891663, 0.9999367594718933, 0.006222214084118605, 0.004921996034681797, 0.5855570435523987]
+[0.0007094321772456169, 0.0006296238279901445, 0.7227204442024231, 0.09905926138162613, 0.0002236266154795885, 3.1242667319020256e-05, 0.16827000677585602, 0.005863670725375414, 0.0319577120244503, 0.002317116130143404, 0.14864487946033478, 0.2297656238079071, 4.718581840279512e-05, 6.813046184106497e-06, 0.06456942111253738]
+[0.007188274059444666, 0.0016538825584575534, 0.09488345682621002, 0.8977062702178955, 0.9174121022224426, 0.040654487907886505, 0.7041552662849426, 0.20042139291763306, 0.6031863689422607, 0.4952658712863922, 0.6472557783126831, 0.08914560824632645, 0.7038958668708801, 0.0002734925947152078, 0.022439999505877495]
+[1.890963176265359e-05, 0.08520861715078354, 0.8489263653755188, 0.007121433038264513, 0.005029413849115372, 0.051681600511074066, 0.6654598712921143, 0.017450440675020218, 0.06519372761249542, 0.13860297203063965, 0.048383526504039764, 0.14805792272090912]
+[0.005193737801164389, 0.0015516717685386539, 0.824649453163147, 0.007588920649141073, 0.1087789237499237, 0.35008704662323]
+Reused 160 tokens from the previous frame.
+Model Output: The driving scene depicted in the six images shows a dry, windy day, with slightly visible traffic lights. The intersection is deserted except for the vehicles and construction equipment. In the front camera view, the ego vehicle is moving forward towards the intersection.
+
+There is no suspension of driver's organs or cargo or unbearable risk of the unusual. There is no dense fog, poisoned fog, greatly heavy traffic, or extremely strong wind. Occupants of other vehicles cannot predict this car's route precisely. Speed must be reduced sufficiently safely to the point we've go gray. A decision must be made whether to turn left or right at the most. May need to get slightly ahead of construction vehicles to pass. Turn needs to go slow.
+
+  - Inference time for this frame: 0.47s
+  - Tokens/sec for this frame: 342.20
+--------------------
+
+===== Scene b789de07180846cc972118ee6d1fb027 Summary (Memory Idea: True) =====
+Total End-to-End Time: 25.01s
+Total Inference-Only Time: 23.56s
+Total Generated Tokens: 1383
+Average Tokens/Second (Inference Only): 58.69
+========================================
+
+Reached the limit of 1 scenes. Stopping.
+
+========================= FINAL SUMMARY =========================
+
+----- Statistics for 'use_memory_idea = False' -----
+Processed 1 scenes.
+Average End-to-End Time per Scene: 42.74s
+Average Inference-Only Time per Scene: 40.95s
+Average Tokens/Second (Inference Only, across all scenes): 40.31
+
+----- Statistics for 'use_memory_idea = True' -----
+Processed 1 scenes.
+Average End-to-End Time per Scene: 25.01s
+Average Inference-Only Time per Scene: 23.56s
+Average Tokens/Second (Inference Only, across all scenes): 58.69
+
+===================================================================

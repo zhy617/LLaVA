@@ -1,0 +1,817 @@
+/root/miniconda3/envs/llava/lib/python3.10/site-packages/torch/cuda/__init__.py:51: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml  # type: ignore[import]
+Flash Attention 2 is available. Setting it as default for Llama.
+[2026-01-04 08:25:12,327] [INFO] [real_accelerator.py:161:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+You are using a model of type llava to instantiate a model of type llava_llama. This is not supported for all configurations of models and can yield errors.
+/root/miniconda3/envs/llava/lib/python3.10/site-packages/huggingface_hub/file_download.py:942: FutureWarning: `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
+  warnings.warn(
+/root/miniconda3/envs/llava/lib/python3.10/site-packages/torch/_utils.py:831: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  return self.fget.__get__(instance, owner)()
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███▎      | 1/3 [00:14<00:29, 14.81s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:38<00:20, 20.07s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:52<00:00, 17.40s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:52<00:00, 17.60s/it]
+/root/miniconda3/envs/llava/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:397: UserWarning: `do_sample` is set to `False`. However, `top_p` is set to `None` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `top_p`.
+  warnings.warn(
+===== Processing Scene: b789de07180846cc972118ee6d1fb027 (Memory Idea: False) =====
+--- Processing Key Frame: 02c431d3d810472d9307d91e77fe495f ---
+Model Output: The driving scene appears to be in a city area, possibly near an industrial or commercial area given the presence of a large building and a parking lot. The road is wet, suggesting recent rain, which could affect visibility and traction.
+
+Key factors for driving planning include:
+
+1. The presence of a large building on the right side of the road, which might limit visibility around the corner.
+2. A parking lot with several cars parked, which could be entering or exiting the lot, potentially causing traffic flow changes.
+3. A truck parked on the side of the road, which could be obstructing the view of oncoming traffic.
+4. A pedestrian crossing visible on the right side of the road, indicating the need to be cautious of pedestrians.
+5. A traffic light visible on the left side of the road, which could be controlling the flow of traffic.
+
+Predictions for ego vehicle behavior:
+
+1. The ego vehicle should approach the intersection with caution, as there might be oncoming traffic from the large building or the parking lot.
+2. The ego vehicle should be prepared to slow down or stop if necessary to yield to pedestrians crossing the road.
+3. The ego vehicle should be aware of the traffic light and follow the signal accordingly.
+4. The ego vehicle should be prepared to turn left or right, depending on the traffic flow and the presence of any obstacles or pedestrians.
+5. The ego vehicle should maintain a safe speed, considering the wet road conditions and the presence of other vehicles and pedestrians.
+
+  - Inference time for this frame: 8.96s
+  - Tokens/sec for this frame: 39.52
+--------------------
+--- Processing Key Frame: 13ade121714c46d6a028516ecb5bff60 ---
+Model Output: The driving scene appears to be a typical urban street with a mix of vehicles and pedestrians. The key factors for driving planning include:
+
+1. The presence of a large building on the right side of the road, which might obstruct the view of oncoming traffic or pedestrians.
+2. A white van parked on the right side of the road, which could be a potential obstacle if it's in the driver's path.
+3. A car parked on the left side of the road, which could also be an obstacle if the driver needs to maneuver around it.
+4. A pedestrian on the right side of the road, who might be crossing or walking along the sidewalk.
+5. A traffic light visible in the distance, which would control the flow of traffic at an intersection.
+
+Predicting the behavior of the ego vehicle:
+
+1. The ego vehicle is currently driving straight ahead, as indicated by the front camera's view.
+2. The ego vehicle is likely to continue driving straight ahead, as there are no immediate obstacles or pedestrians in its path.
+3. The ego vehicle's speed appears to be normal, as there are no indications of sudden braking or acceleration.
+
+Please note that these predictions are based on the available information from the images and do not take into account any additional context or information that might be relevant to the driving situation.
+
+  - Inference time for this frame: 7.72s
+  - Tokens/sec for this frame: 40.42
+--------------------
+--- Processing Key Frame: 39961df49391439fbca612a8efe1c531 ---
+Model Output: The driving scene appears to be in a city area, with a large building on the right side of the road. The road is wet, suggesting recent rain, which could affect visibility and traction. There is a red car parked on the side of the road, and a white car is approaching from the opposite direction. The white car is positioned in the right lane, and it seems to be moving at a normal speed.
+
+There are no pedestrians visible in the image, and no traffic lights are present. The back camera shows a clear view of the road ahead, with no obstacles or vehicles in sight. The front camera shows the white car in the right lane, and the back camera shows the red car parked on the side of the road.
+
+Given the information, the ego vehicle should proceed straight, maintaining a normal speed to ensure safe driving conditions. The wet road may require extra caution, so the driver should be prepared for potential slippery conditions and adjust their speed accordingly.
+
+  - Inference time for this frame: 5.47s
+  - Tokens/sec for this frame: 39.27
+--------------------
+--- Processing Key Frame: 690c4ddabc7845f48f4831ac73129154 ---
+Model Output: The driving scene appears to be in a parking lot adjacent to a large industrial building. The parking lot is mostly empty, with only a few vehicles parked. The vehicles are parked in a way that suggests they are not currently in use, and there are no pedestrians visible in the scene.
+
+The key factors for driving planning include:
+
+1. The presence of obstacles: There are no significant obstacles visible in the scene, such as parked cars or large objects.
+2. The positions and movements of vehicles and pedestrians: The vehicles are parked and stationary, and there are no pedestrians visible in the scene.
+3. Traffic lights: There are no traffic lights visible in the scene.
+
+Given the information provided, the ego vehicle should proceed straight, as there are no obstacles or pedestrians to navigate around. The driving speed should be normal, as there are no indications of a need for speed or sudden braking.
+
+Please note that this description is based on the information provided by the images and does not take into account any additional context or information that may not be visible in the images.
+
+  - Inference time for this frame: 6.26s
+  - Tokens/sec for this frame: 39.93
+--------------------
+--- Processing Key Frame: b0e6fd5561454b2789c853e5350557a8 ---
+Model Output: The driving scene appears to be in an industrial area with a large building on the right side. The road is wet, suggesting recent rain, and the sky is overcast, indicating it might be a cloudy day.
+
+Key factors for driving planning:
+- There are no pedestrians visible in the image.
+- There are no traffic lights visible in the image.
+- The vehicles in the scene include a white truck parked on the left side of the road, a red car parked on the right side of the road, and a white car in the foreground.
+- The white truck is parked and stationary.
+- The red car is parked and stationary.
+- The white car is in motion, driving towards the right side of the road.
+
+Predictions for ego vehicle:
+- The ego vehicle will continue to drive straight ahead.
+- The ego vehicle will maintain a normal speed, as there are no indications of needing to slow down or speed up.
+
+Please note that these predictions are based on the available information and do not take into account any additional context or information that might be relevant to the driving situation.
+
+  - Inference time for this frame: 6.27s
+  - Tokens/sec for this frame: 40.01
+--------------------
+--- Processing Key Frame: c4b8c55ceed44c7e95c36e61b8a99ffe ---
+Model Output: The driving scene appears to be in a city area, with a large building on the right side of the road. The road is wet, suggesting recent rain, and the sky is overcast, indicating it might be a cloudy day. There are no pedestrians visible in the scene.
+
+The key factors for driving planning include:
+
+1. The presence of a large building on the right side of the road, which could potentially obstruct the view of oncoming traffic.
+2. The wet road conditions, which might require extra caution to avoid hydroplaning.
+3. The overcast sky, which could indicate reduced visibility or the possibility of rain.
+
+Predicting the behavior of the ego vehicle:
+
+1. The ego vehicle is currently driving straight ahead.
+2. The ego vehicle should maintain a safe speed, considering the wet road conditions and the possibility of reduced visibility due to the overcast sky.
+3. The ego vehicle should be prepared for any sudden changes in traffic or pedestrian movements, given the large building on the right side of the road.
+
+Please note that these predictions are based on the available information and do not take into account any additional context or specific driving conditions that may not be visible in the provided images.
+
+  - Inference time for this frame: 6.72s
+  - Tokens/sec for this frame: 40.04
+--------------------
+
+===== Scene b789de07180846cc972118ee6d1fb027 Summary (Memory Idea: False) =====
+Total End-to-End Time: 42.65s
+Total Inference-Only Time: 41.40s
+Total Generated Tokens: 1651
+Average Tokens/Second (Inference Only): 39.88
+========================================
+
+===== Processing Scene: b789de07180846cc972118ee6d1fb027 (Memory Idea: True) =====
+--- Processing Key Frame: 02c431d3d810472d9307d91e77fe495f ---
+Model Output: The driving scene appears to be in a city area, possibly near an industrial or commercial area given the presence of a large building and a parking lot. The road is wet, suggesting recent rain, which could affect visibility and traction.
+
+Key factors for driving planning include:
+
+1. The presence of a large building on the right side of the road, which might limit visibility around the corner.
+2. A parking lot with several cars parked, which could be entering or exiting the lot, potentially causing traffic flow changes.
+3. A truck parked on the side of the road, which could be obstructing the view of oncoming traffic.
+4. A pedestrian crossing visible on the right side of the road, indicating the need to be cautious of pedestrians.
+5. A traffic light visible on the left side of the road, which could be controlling the flow of traffic.
+
+Predictions for ego vehicle behavior:
+
+1. The ego vehicle should approach the intersection with caution, as there might be oncoming traffic from the large building or the parking lot.
+2. The ego vehicle should be prepared to slow down or stop if necessary to yield to pedestrians crossing the road.
+3. The ego vehicle should be aware of the traffic light and follow the signal accordingly.
+4. The ego vehicle should be prepared to turn left or right, depending on the traffic flow and the presence of any obstacles or pedestrians.
+5. The ego vehicle should maintain a safe speed, considering the wet road conditions and the presence of other vehicles and pedestrians.
+
+  - Inference time for this frame: 8.69s
+  - Tokens/sec for this frame: 40.73
+--------------------
+--- Processing Key Frame: 13ade121714c46d6a028516ecb5bff60 ---
+[-25.30984115600586, -18.029315948486328, -13.423733711242676, -12.127915382385254, -18.393585205078125, -15.653569221496582, -11.956937789916992, -12.423336029052734, -11.99760913848877, -10.802852630615234, -13.671098709106445, -13.719034194946289, -11.88408374786377, -13.705801963806152, -12.500274658203125, -11.338343620300293, -13.71284294128418, -13.131697654724121, -14.889755249023438, -18.470706939697266, -10.140459060668945, -19.96106719970703, -13.186735153198242, -12.429506301879883, -12.010546684265137, -14.156122207641602, -11.145025253295898, -11.918972969055176, -17.78936004638672, -19.233474731445312, -11.790838241577148, -15.493365287780762]
+Reused 0 tokens from the previous frame.
+Model Output: The scene suggests a bustling urban environment, likely in a large city due to the presence of multiple traffic lights and large buildings dominating the street view. These factors might warrant increased attention to traffic rules and careful driving. The predominant colors in the image are shades of brown, green, and gray, which likely correspond to the various construction materials and the sky.
+::
+
+Looking at the image with the front-left camera perspective, we can see that the visibility is good, allowing us to see not only the street ahead but also any immediate obstacles and pedestrians. From this viewpoint, it appears as though there are construction barriers on the side, indicating some active construction or sidewalk renovations that might be of interest for drivers. A white SUV is parked on the side of the road, which doesn't pose an immediate hazard but should be taken into account when planning a route, especially if the construction or parking issue affects your parking options.
+::
+
+Based on the observation from the front-left camera, the ego vehicle could proceed straight through the intersection, given that no pedestrians or other obstacles seem to be immediate threats. The traffic light appears to be green for straight-ahead movements. The speed might be fast, typically found in urban areas where drivers are used to high-speed driving.
+::
+
+  - Inference time for this frame: 8.16s
+  - Tokens/sec for this frame: 35.80
+--------------------
+--- Processing Key Frame: 39961df49391439fbca612a8efe1c531 ---
+[-12.843996047973633, -3.62825870513916, -13.495828628540039, -17.86887550354004, -9.520122528076172, -10.275226593017578, -15.622875213623047, -14.778820037841797, -16.711084365844727, -5.112773895263672, -11.601576805114746, -6.485139846801758, -8.778175354003906, -1.7557477951049805, -10.667074203491211, -0.5593624711036682, -15.978739738464355, -9.840546607971191, -7.969239711761475, -8.685352325439453, -12.598288536071777, -11.46119499206543, -6.897732734680176, -8.902019500732422, -5.093927383422852, -13.485370635986328, -2.5731306076049805, -14.693523406982422, -21.31831169128418, -17.957056045532227, -14.666372299194336, -2.6948957443237305, -0.607300877571106]
+Reused 0 tokens from the previous frame.
+Model Output: - CAM_FRONT: The front-facing camera captures a gray pole going up, possibly a stoplight. The ground is wet which implies recent rain or snow, therefore driving conditions are going to be slippery. A car is visible in the mirror on the left; it seems to be following horizontally. A white building is visible on the left.
+- CAM_BACK: The backfacing camera shows a red brick building on the right and another structure on the left, along with a pipeline or ductwork pass. Behind, there's a white wall, and traffic lights are visible in the distance.
+- CAM_FRONT_LEFT: The front-left perspective captures more of the curving road and vehicles coming around a turn. The building on the right, which is the closest, appears to have an opening, and there's a garage door close to it.
+- CAM_FRONT_RIGHT: The front-right camera images a car moving away in the right lane. The building on the left also appears to be red-bricked and a white car is visible in the background entering the parking area.
+- CAM_BACK_LEFT: The left-side rear camera sees a truck entering the parking lot on the right. The same white wall is visible here as in the CAM_BACK.
+- CAM_BACK_RIGHT: The right-side rear camera shows another garage with a white door and a building in the background with a white wall.
+
+Predictions: 
+- Driving Scenario: This scene appears to have thin traffic, with vehicles maintaining a safe distance from each other due to the wet road.
+- Ego Vehicle Behavior: As the road is wet, it's likely the driver has reduced the speed to account for the reduced traction and minimized braking distance. They should be cautious and avoid sudden braking to prevent skidding or sliding on the surfaces. The car at the lead vehicle may need to turn right to avoid the garage door to the left side of traffic.
+- Anticipated Lane Change: The driver will turn right, slowly.
+
+  - Inference time for this frame: 13.14s
+  - Tokens/sec for this frame: 36.15
+--------------------
+--- Processing Key Frame: 690c4ddabc7845f48f4831ac73129154 ---
+[-12.933144569396973, -13.888792037963867, -13.26465892791748, -14.752161979675293, -12.468188285827637, -9.217637062072754, -12.151638984680176, -14.851861953735352, -11.547367095947266, -6.666914463043213, -13.243436813354492, -13.986889839172363, -13.099750518798828, -13.278268814086914, -19.50792694091797, -12.7096529006958, -19.472238540649414, -19.316537857055664, -10.030396461486816, -9.466313362121582, -15.604019165039062, -8.193796157836914, -10.928510665893555, -9.687358856201172, -2.0349695682525635, -14.344490051269531, -14.909249305725098, -10.485084533691406]
+Reused 0 tokens from the previous frame.
+Model Output: The driving scene includes a large, industrial building looming and multiple cars parked around. From the available views, it seems to be a grey, cloudy day which might affect visibility. There appear to be no significant obstacles on the road, but the parked cars could potentially behave as obstacles as they might move or be maneuvered by someone beginning drive forward. There are no pedestrians reading from the various camera angles, nor signs of traffic lights are visible. The large structure might have some impact on driving due to the building casting a shadow.
+
+First, to describe the driving scene, upon entering the frame, the driver would see the industrial building ahead and likely find parking spaces to the left of the frame. Maneuvering this car to navigate to a parking spot would be indicated. The immediate surroundings show an empty parking lot with other cars parked, but these vehicles do not seem to pose any immediate driving hazards.
+
+Looking forward in the direction this car is traveling, there's an empty lane beside the parallel industrial parking lot. The road seems clear and straight, except for some other parking lots and buildings just beyond the visible range of the forward cameras. This indicates that the driving direction itself (straight) and the driving speed are requirements that could change based on the distance to any potential obstructions. Since there are no visible obstructions, the driver may be able to maintain a normal speed without any maneuvering provided they remain cognizant of any moving parked cars.
+
+For predicting the behavior, as of now, considering the available information, with no immediate hazards, the ego vehicle should be able to proceed at a standard driving speed without turning or stopping. The driver should stay vigilant for any changes in the conditions and be prepared for any moving parked cars as they might depart from their positions.
+
+  - Inference time for this frame: 11.04s
+  - Tokens/sec for this frame: 36.23
+--------------------
+--- Processing Key Frame: b0e6fd5561454b2789c853e5350557a8 ---
+[-0.5137361884117126, -6.635523796081543, -1.9906915426254272, -18.033618927001953, -11.268686294555664, -6.523015022277832, -11.255695343017578, -0.8595261573791504, -6.704749584197998, -9.59409236907959, -20.69709014892578, -18.019784927368164, -13.161649703979492, -7.274558067321777, -3.3902668952941895, -16.00574493408203, -16.82032012939453, -3.3573172092437744]
+Reused 0 tokens from the previous frame.
+Model Output: Underground garage with steel beams supporting a large hall; Brand signage on the roof says Fregexxx. A large crane with latticed boom is looming on the other side of the poilicé steel fence. Trucks are seen doing construction work within the compound. Several cars are visible, parked and in transit. The rain has made the surface of the road slick and wet.
+
+  - Inference time for this frame: 2.83s
+  - Tokens/sec for this frame: 31.48
+--------------------
+--- Processing Key Frame: c4b8c55ceed44c7e95c36e61b8a99ffe ---
+[-7.615577220916748, -10.358672142028809, -10.864531517028809, -15.214774131774902, -19.520187377929688, -12.374917030334473, -6.622885227203369, -18.29099464416504, -24.0819149017334, -9.01575756072998, -3.960050582885742, -10.249018669128418, -12.491320610046387, -18.44388771057129, -6.665472030639648, -12.568578720092773, -1.465650200843811, -10.452189445495605, -4.689180850982666, -15.421194076538086, -13.21189022064209, -18.39671516418457, -11.658599853515625, -1.8732516765594482]
+Reused 0 tokens from the previous frame.
+Model Output: camerasoftwarefail:"Camera not available, please try reloading the conversation if it's the first time you've sent the images.":camera: Camera not available, please try reloading the conversation if it's the first time you've sent the images.
+
+Camera synchronization failed, please reload the conversation if this is the first attempt.
+
+  - Inference time for this frame: 2.41s
+  - Tokens/sec for this frame: 31.14
+--------------------
+
+===== Scene b789de07180846cc972118ee6d1fb027 Summary (Memory Idea: True) =====
+Total End-to-End Time: 47.44s
+Total Inference-Only Time: 46.27s
+Total Generated Tokens: 1685
+Average Tokens/Second (Inference Only): 36.42
+========================================
+
+===== Processing Scene: 41fde20fedcd4d22ab26811688612870 (Memory Idea: False) =====
+--- Processing Key Frame: 23e7d17b256348638af3b2739b80a5ca ---
+Model Output: The driving scene appears to be on a two-lane road with a clear view of the road ahead. There are no visible obstacles, such as parked cars or pedestrians, in the immediate vicinity. The traffic lights are not visible in the images provided.
+
+The ego vehicle is currently on the right side of the road, moving in the same direction as the traffic flow. The road ahead seems to be clear, and there are no other vehicles or pedestrians visible in the images.
+
+Given the absence of obstacles and the clear view of the road ahead, the ego vehicle should continue driving straight at its current speed. The driving speed appears to be normal, and there is no need to slow down or change direction.
+
+  - Inference time for this frame: 4.11s
+  - Tokens/sec for this frame: 38.66
+--------------------
+--- Processing Key Frame: 2c1f8867c60b44f09ee37b5df1d1ad24 ---
+Model Output: The driving scene appears to be in a suburban area with a mix of residential and commercial buildings. The road is lined with trees and there are sidewalks on both sides. The sky is overcast, suggesting it might be a cool or cloudy day.
+
+Key factors for driving planning include:
+
+1. The presence of a bus in the middle lane, which is turning right.
+2. A car in the right lane, which is also turning right.
+3. A bicycle parked on the sidewalk, indicating a bike-friendly area.
+4. A pedestrian walking on the sidewalk, suggesting a pedestrian-friendly area.
+5. A traffic light ahead, which is currently not visible in the image.
+
+Predictions for ego vehicle behavior:
+
+1. The ego vehicle should slow down and prepare to turn right, following the bus and the car in front of it.
+2. The ego vehicle should maintain a safe distance from the bus and the car in front of it, as they are turning right.
+3. The ego vehicle should be prepared to stop if necessary, as there is a pedestrian on the sidewalk.
+4. The ego vehicle should be cautious of the bicycle parked on the sidewalk, as it may be obstructing the view of pedestrians or other vehicles.
+5. The ego vehicle should be aware of the traffic light ahead and adjust its speed accordingly.
+
+Please note that these predictions are based on the visible elements in the images and do not take into account any additional context or information that might be relevant to the driving situation.
+
+  - Inference time for this frame: 8.84s
+  - Tokens/sec for this frame: 40.74
+--------------------
+--- Processing Key Frame: 4de7963785f34de7afb9e5aae3ce6f9f ---
+Model Output: The driving scene appears to be a quiet, residential area with a clear road ahead. There are no visible obstacles, such as parked cars or pedestrians, in the immediate vicinity. The traffic lights are not visible in the images provided.
+
+The ego vehicle is currently driving straight ahead, as indicated by the position of the front camera. The back camera shows the road is clear behind the ego vehicle, and there are no other vehicles or pedestrians visible in the immediate vicinity. The speed of the ego vehicle appears to be normal, as there are no indications of sudden braking or acceleration.
+
+Given the absence of any immediate hazards or obstacles, the ego vehicle should continue driving straight ahead at a normal speed.
+
+  - Inference time for this frame: 4.21s
+  - Tokens/sec for this frame: 38.92
+--------------------
+--- Processing Key Frame: a32eb5c0d8514895af2af5889c1f5199 ---
+Model Output: The driving scene appears to be on a two-lane road with a clear view of the road ahead. There are no visible obstacles, such as parked cars or pedestrians, in the immediate vicinity. The traffic lights are not visible in the images provided.
+
+The ego vehicle is currently on the right side of the road, moving in the direction of the front-right camera. The road ahead seems to be clear, and there are no other vehicles or pedestrians visible in the images.
+
+Given the absence of obstacles and the clear view of the road ahead, the ego vehicle should continue driving straight at its current speed. The driver should remain vigilant for any potential changes in the road conditions or the actions of other drivers.
+
+  - Inference time for this frame: 4.17s
+  - Tokens/sec for this frame: 38.88
+--------------------
+
+===== Scene 41fde20fedcd4d22ab26811688612870 Summary (Memory Idea: False) =====
+Total End-to-End Time: 22.13s
+Total Inference-Only Time: 21.33s
+Total Generated Tokens: 845
+Average Tokens/Second (Inference Only): 39.62
+========================================
+
+===== Processing Scene: 41fde20fedcd4d22ab26811688612870 (Memory Idea: True) =====
+--- Processing Key Frame: 23e7d17b256348638af3b2739b80a5ca ---
+Model Output: The driving scene appears to be on a two-lane road with a clear view of the road ahead. There are no visible obstacles, such as parked cars or pedestrians, in the immediate vicinity. The traffic lights are not visible in the images provided.
+
+The ego vehicle is currently on the right side of the road, moving in the same direction as the traffic flow. The road ahead seems to be clear, and there are no other vehicles or pedestrians visible in the images.
+
+Given the absence of obstacles and the clear view of the road ahead, the ego vehicle should continue driving straight at its current speed. The driving speed appears to be normal, and there is no need to slow down or change direction.
+
+  - Inference time for this frame: 4.10s
+  - Tokens/sec for this frame: 38.81
+--------------------
+--- Processing Key Frame: 2c1f8867c60b44f09ee37b5df1d1ad24 ---
+[-25.35348129272461, -17.661697387695312, -13.611353874206543, -12.19803237915039, -18.98187255859375, -15.65546703338623, -12.934636116027832, -13.473777770996094, -11.146389961242676, -17.664247512817383, -19.14716339111328, -18.44294548034668, -12.319669723510742, -12.082721710205078, -11.051321029663086, -9.66707992553711, -12.069890022277832, -13.044856071472168, -10.497852325439453, -13.044150352478027, -10.08773422241211, -16.444225311279297]
+Reused 0 tokens from the previous frame.
+Model Output: In this driving scene, multiple factors must be considered for planning. The highway is clear, and from the perspective of the car, no pedestrians or vehicles are visible on the highway. Movement of vehicles and traffic lights are not discernible from this angle. The trees on the side of the road are bare, suggesting no obstacles related to them will be encountered. The buildings and fences indicate that this might be a rural side road with property or local facilities.
+
+Prediction of Ego Vehicle: For driving planning, one would anticipate the continued driving on the highway with no interruptions or turns required. There is no visible traffic light or alteration in the driving vision. As no immediate obstacles or changes in driving conditions are apparent, the ego vehicle's trajectory and speed should remain consistent with the one-dimensional straight path on the highway. Given the conditions observed and lack of any specific signals or requirement for dynamic changes, there is no need to change direction or speed significantly. Therefore, the vehicle will likely maintain its current path at a predictable speed.
+
+  - Inference time for this frame: 6.35s
+  - Tokens/sec for this frame: 35.41
+--------------------
+--- Processing Key Frame: 4de7963785f34de7afb9e5aae3ce6f9f ---
+[-2.000406503677368, -10.617100715637207, -7.659214019775391, -1.580185890197754, -13.18683910369873, -13.12336254119873, -11.599113464355469, -14.639326095581055, -9.898163795471191, -11.297157287597656, -14.152414321899414, -11.524039268493652, -13.974054336547852]
+Reused 0 tokens from the previous frame.
+Model Output: :::
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+  - Inference time for this frame: 25.21s
+  - Tokens/sec for this frame: 35.62
+--------------------
+--- Processing Key Frame: a32eb5c0d8514895af2af5889c1f5199 ---
+Reused 0 tokens from the previous frame.
+Model Output: 
+
+  - Inference time for this frame: 0.54s
+  - Tokens/sec for this frame: 0.00
+--------------------
+
+===== Scene 41fde20fedcd4d22ab26811688612870 Summary (Memory Idea: True) =====
+Total End-to-End Time: 36.99s
+Total Inference-Only Time: 36.20s
+Total Generated Tokens: 1282
+Average Tokens/Second (Inference Only): 35.42
+========================================
+
+===== Processing Scene: 1aa633b683174280b243e0a9a7ad9171 (Memory Idea: False) =====
+--- Processing Key Frame: 0791e7e86b98473795eeffe238d6c13b ---
+Model Output: The driving scene appears to be a quiet, suburban street with a clear view of the road ahead. There are no visible obstacles, such as parked cars or pedestrians, that would require immediate attention. The traffic lights are not visible in the images provided.
+
+The ego vehicle is currently moving straight ahead, as indicated by the front camera's view. There are no other vehicles or pedestrians visible in the immediate vicinity, suggesting that the ego vehicle has the road to itself.
+
+Given the absence of any immediate hazards or obstacles, the ego vehicle can continue driving at a normal speed without any need to slow down or change direction. The road ahead appears to be clear and open, allowing for a smooth and uninterrupted journey.
+
+  - Inference time for this frame: 4.26s
+  - Tokens/sec for this frame: 38.97
+--------------------
+--- Processing Key Frame: a82c0acb18dd4c3a99731b7a06a63fb7 ---
+Model Output: The driving scene appears to be on a suburban street with a mix of residential and commercial buildings. The road is lined with trees and there are sidewalks on both sides. The sky is overcast, suggesting it might be a cool or cloudy day.
+
+Key factors for driving planning include:
+
+1. The presence of a black car in the front-left image, which is the ego vehicle.
+2. A pedestrian crossing the street in the back-left image, indicating a need to be cautious and prepared to stop.
+3. A white car in the back-right image, which is moving in the opposite direction of the ego vehicle.
+4. A traffic light in the back-right image, which is currently not visible in the image.
+5. A construction zone with orange cones in the back-right image, indicating a need to slow down and be cautious.
+6. A car parked on the side of the road in the back-right image, which might be a potential obstacle to navigate around.
+
+Predicting the behavior of the ego vehicle:
+
+1. The ego vehicle is currently stopped at a red traffic light, as indicated by the back-right image.
+2. The ego vehicle will proceed forward when the traffic light turns green, which is not visible in the current image.
+3. The ego vehicle will turn right at the intersection, as indicated by the back-left image.
+4. The ego vehicle will maintain a normal speed, as there are no indications of heavy traffic or pedestrians requiring sudden stops.
+
+Please note that these predictions are based on the available information and do not take into account any unseen obstacles or changes in the environment.
+
+  - Inference time for this frame: 9.23s
+  - Tokens/sec for this frame: 40.86
+--------------------
+--- Processing Key Frame: c0ac3dc491e7414184f44c2b32d24ad8 ---
+Model Output: The driving scene appears to be on a wide, tree-lined street with a clear view of the road ahead. There are no visible obstacles, such as parked cars or pedestrians, in the immediate vicinity. The traffic lights are not visible in the images provided.
+
+The ego vehicle is currently moving straight ahead, with no indication of needing to turn left or right. The speed of the ego vehicle appears to be normal, as there are no indications of slowing down or speeding up.
+
+Please note that this description is based solely on the information provided by the images and does not take into account any additional context or information that may be relevant to the driving situation.
+
+  - Inference time for this frame: 3.87s
+  - Tokens/sec for this frame: 38.72
+--------------------
+--- Processing Key Frame: d21bdffbca9f4edaa4bf4f54fffa6f4b ---
+Model Output: The driving scene appears to be a quiet, residential street with a clear view of the road ahead. There are no immediate obstacles visible in the images provided. The road is lined with trees and buildings, suggesting a suburban or urban setting.
+
+In the front-left image, there is a car parked on the side of the road, which is not moving. The back-left image shows a car parked further down the road, also not moving. The back-right image shows a car parked on the opposite side of the road, also stationary.
+
+There are no pedestrians visible in the images, and no traffic lights are visible. The back-right image shows a fire hydrant on the sidewalk, which is a stationary object.
+
+Given the absence of any immediate obstacles or moving vehicles, the ego vehicle can proceed straight without any issues. The driving speed should be normal, as there are no signs of heavy traffic or sudden changes in road conditions.
+
+  - Inference time for this frame: 5.33s
+  - Tokens/sec for this frame: 39.77
+--------------------
+--- Processing Key Frame: e42c40288fba48e993507ce35215a7d5 ---
+Model Output: The driving scene appears to be on a wide, tree-lined street with a clear view of the road ahead. There are no immediate obstacles visible in the images provided. The traffic lights are not clearly visible in the images, so their status is unknown.
+
+There are no pedestrians or other vehicles in the immediate vicinity of the car. The car itself is positioned on the right side of the road, and it appears to be stationary, possibly waiting for a pedestrian to cross or for the traffic light to change.
+
+Given the lack of obstacles and the absence of other vehicles or pedestrians, the ego vehicle should proceed straight ahead. The driving speed should be normal, as there is no indication of an urgent need to slow down or speed up.
+
+Please note that this description is based on the visible information in the images provided and does not take into account any potential hazards or traffic conditions that may not be visible in the images.
+
+  - Inference time for this frame: 5.26s
+  - Tokens/sec for this frame: 39.76
+--------------------
+
+===== Scene 1aa633b683174280b243e0a9a7ad9171 Summary (Memory Idea: False) =====
+Total End-to-End Time: 28.93s
+Total Inference-Only Time: 27.95s
+Total Generated Tokens: 1114
+Average Tokens/Second (Inference Only): 39.86
+========================================
+
+===== Processing Scene: 1aa633b683174280b243e0a9a7ad9171 (Memory Idea: True) =====
+--- Processing Key Frame: 0791e7e86b98473795eeffe238d6c13b ---
+Model Output: The driving scene appears to be a quiet, suburban street with a clear view of the road ahead. There are no visible obstacles, such as parked cars or pedestrians, that would require immediate attention. The traffic lights are not visible in the images provided.
+
+The ego vehicle is currently moving straight ahead, as indicated by the front camera's view. There are no other vehicles or pedestrians visible in the immediate vicinity, suggesting that the ego vehicle has the road to itself.
+
+Given the absence of any immediate hazards or obstacles, the ego vehicle can continue driving at a normal speed without any need to slow down or change direction. The road ahead appears to be clear and open, allowing for a smooth and uninterrupted journey.
+
+  - Inference time for this frame: 4.26s
+  - Tokens/sec for this frame: 38.95
+--------------------
+--- Processing Key Frame: a82c0acb18dd4c3a99731b7a06a63fb7 ---
+[-25.301490783691406, -18.01423454284668, -13.94705581665039, -12.374042510986328, -19.02350616455078, -15.85364818572998, -13.163225173950195, -10.984304428100586, -11.946616172790527, -13.757916450500488, -21.590911865234375, -13.021655082702637, -11.832022666931152, -12.428523063659668, -11.157796859741211, -10.253239631652832, -12.226268768310547, -12.986066818237305, -11.66401481628418, -13.641497611999512, -9.979500770568848, -16.76763916015625]
+Reused 0 tokens from the previous frame.
+Model Output: **Driving Scene Description:**
+
+In the image captured by the car's front camera following reference image A, we can see the road is relatively clear with some potential obstacles and limited presence of vehicles and pedestrians. The vehicle is currently heading towards the destination which appears to be visible in the photo. A few trees or a line of them can be seen to the side, and there might be a slight curve ahead that the driver should be aware of.
+
+In addition, there are traffic lights in the image reflecting normal traffic flow with lights glowing accordingly. The current condition of the trip indicates that we are not at a terminal or a station.
+
+: **Predicted Ego Vehicle Behavior:**
+
+The key factor for driving planning is the identification of road signs and directional indications which are not clearly visible in this image. Additionally, there is data missing from other cameras which would inform turn directions for driving planning. Without those, I'm unable to provide a detailed description of obstacles and movements of vehicles and pedestrians. However, it is safe to assume that the vehicle should continue its current straight path and speed, as the traffic conditions appear normal and no indications of sudden stops would be given within the view.
+
+Please note that the above is a general prediction and should be used with caution since driving involves personal responsibility and cannot be solely determined by image analysis.
+
+  - Inference time for this frame: 8.34s
+  - Tokens/sec for this frame: 35.99
+--------------------
+--- Processing Key Frame: c0ac3dc491e7414184f44c2b32d24ad8 ---
+[-8.0415620803833, -4.5744948387146, -14.685992240905762, -13.968892097473145, -20.687532424926758, -18.79979705810547, -17.63214111328125, -4.118903160095215, -0.7290683388710022, -6.741074562072754, -0.0799328088760376, -4.180874347686768, -19.66753387451172, -9.48489761352539, -4.826696395874023, -11.353687286376953, -10.929134368896484, -8.55508804321289, -14.963976860046387, -17.407222747802734, -17.8125, -5.750807762145996, -16.50908088684082, -19.124231338500977, -7.294007301330566, -4.905206680297852, -1.4274606704711914, -8.603006362915039, -11.00107479095459, -0.5783181190490723, -11.977378845214844, -9.70084285736084, -11.767274856567383, -11.168190956115723, -2.038520574569702, -12.632245063781738, -14.887873649597168, -9.874817848205566, -4.0561370849609375, -20.46150779724121, -25.497299194335938, -11.797585487365723, -6.186840057373047, -11.224153518676758, -13.133099555969238, -13.109016418457031, -14.235501289367676, -21.96874237060547, -19.054691314697266, -16.50830841064453, -25.08203125]
+Reused 0 tokens from the previous frame.
+Model Output: The driving scene depicts a clear day with ample visibility. There is a uniform, uniformed building on the side of the road, likely an apartment complex, and there are trees lining the street. At the opening of the street, there is a straight stretch and a right turn of roadwork while the vehicles seem to be navigating this temporary change in the usual flow of traffic. The vehicles on the right-hand side of the road appear to be following the normal rules and right of way, indicating a proper traffic flow. There are no visible pedestrians or abnormal obstacles. There are no traffic lights visible in the field of view. The direction and speed of the ego vehicle should remain as usual with no unusual interruptions due to the observed road changes and no visible obstructions. Ego vehicle's speed at this moment should be that of a regular road speed, but abide by local traffic regulations and adjust based on visibility and road conditions.
+
+  - Inference time for this frame: 5.77s
+  - Tokens/sec for this frame: 35.21
+--------------------
+--- Processing Key Frame: d21bdffbca9f4edaa4bf4f54fffa6f4b ---
+[-0.4061529338359833, -6.893857002258301, -1.8485301733016968, -13.839921951293945, -18.823623657226562, -16.569503784179688, -11.953153610229492, -9.575177192687988, -5.8995161056518555, -11.321589469909668, -16.9923038482666, -18.09080696105957, -21.418296813964844, -14.472902297973633]
+Reused 0 tokens from the previous frame.
+Model Output: The driving scene depicted by the car's front camera shows a quiet suburban street on a cloudy day. In the scene, an oncoming car is visible at the bottom of the road, moving towards the ego vehicle from the direction of the left side of the image. The ego vehicle, however, has a clear sight of the road ahead as no obstacles are immediately visible.
+
+The other traffic lights are not visible from this position in the front camera frame. There are no pedestrians on the sidewalk, and the normal roadway condition is observed. The road is lined with lush green shrubs, trees, and buildings.
+
+The ego vehicle should continue on its right path, guided by the oncoming car's movements. It should maintain a safe speed and distance based on the normal conditions observed on the street.
+
+  - Inference time for this frame: 5.18s
+  - Tokens/sec for this frame: 34.95
+--------------------
+--- Processing Key Frame: e42c40288fba48e993507ce35215a7d5 ---
+[-13.043758392333984, -0.9875757694244385, -2.752034902572632, -7.307995796203613, -2.378098726272583, -14.019783020019531, -19.241918563842773, -20.579139709472656, -11.490757942199707, -9.66652774810791, -14.778547286987305, -17.057817459106445, -18.8828125, -2.4107859134674072, -13.406206130981445, -12.31231689453125, -12.1133394241333, -5.1178460121154785, -11.439574241638184, -17.281728744506836, -13.386512756347656, -10.900880813598633, -8.963220596313477, -17.79092788696289, -10.486674308776855, -13.542774200439453]
+Reused 0 tokens from the previous frame.
+Model Output: Description of the driving scene:
+- The road seems to be an urban or suburban street with a mix of light traffic.
+- There are a few pedestrians visible, walking along the sidewalks, and at intersections.
+- A truck and car sharing a road, indicating both are driving in the correct lane.
+- The street appears clear, and no significant obstacles blocking the path are visible.
+- Traffic lights are not clearly visible in the provided images.
+
+Prediction of ego vehicle behavior:
+As I don't have the complete view of the intersection or a clear indication of the truck's intentions, I won't be able to provide the exact driving direction. However, considering the lack of significant obstacles or needs for immediate reaction, the ego vehicle should likely maintain a safe distance from the truck and continue to follow traffic rules.
+
+Remember that traffic laws and right of way at this point may vary depending on the region. If the truck were to turn, the ego vehicle should yield or, if determined clear, continue straight or merge into the right lane in succession, reducing speed as necessary for a safe maneuver. Adjustments for speed should be made based on the traffic condition and any potential merging or changing lanes.
+
+Since the environment is seemingly clear, and both vehicles are currently maintaining the correct lanes, the behavior of the ego vehicle should prudently follow the rules to ensure the safety of all road users.
+
+  - Inference time for this frame: 8.95s
+  - Tokens/sec for this frame: 36.11
+--------------------
+
+===== Scene 1aa633b683174280b243e0a9a7ad9171 Summary (Memory Idea: True) =====
+Total End-to-End Time: 33.50s
+Total Inference-Only Time: 32.49s
+Total Generated Tokens: 1173
+Average Tokens/Second (Inference Only): 36.10
+========================================
+
+===== Processing Scene: 2abb3f3517c64446a5768df5665da49d (Memory Idea: False) =====
+--- Processing Key Frame: 3c5fe22946dc4d12954375abc464d6b1 ---
+Model Output: The driving scene appears to be in a city environment, with a clear sky overhead. The road is lined with buildings on both sides, and there are multiple lanes in each direction. The traffic is moderate, with a few cars visible in the lanes ahead.
+
+Key factors for driving planning include:
+
+1. The presence of obstacles: There are no visible obstacles in the immediate vicinity of the car.
+2. The positions and movements of vehicles and pedestrians: The vehicles are moving in a straight line, and there are no pedestrians visible in the immediate vicinity.
+3. Traffic lights: There are no traffic lights visible in the images provided.
+
+Predicting the behavior of the ego vehicle:
+
+Given the absence of obstacles and the absence of any immediate need to change lanes or make turns, the ego vehicle should continue driving straight at a normal speed. The absence of traffic lights also suggests that the ego vehicle should proceed with caution, as there may be traffic signals ahead that are not visible in the images. The ego vehicle should maintain a safe distance from other vehicles and be prepared to react to any changes in traffic conditions.
+
+  - Inference time for this frame: 6.34s
+  - Tokens/sec for this frame: 40.22
+--------------------
+--- Processing Key Frame: 3ee6b750a56946279f5ad605fd643204 ---
+Model Output: The driving scene appears to be in a city environment with a mix of commercial and residential buildings. The road is lined with parked cars on both sides, and there are a few vehicles in motion, including a truck and a car. The presence of pedestrians and traffic lights suggests that this is an urban area with active traffic.
+
+The key factors for driving planning include:
+
+1. The presence of a large truck in the right lane, which might require extra caution when changing lanes or overtaking.
+2. A car in the left lane that is turning left, which could affect the ego vehicle's driving direction and speed.
+3. A car in the right lane that is turning right, which might require the ego vehicle to slow down or change lanes to avoid a collision.
+4. A pedestrian crossing the road in the middle lane, which requires the ego vehicle to be cautious and prepared to stop if necessary.
+5. A traffic light in the distance, which indicates that the ego vehicle should be prepared to stop or slow down as needed.
+
+Predicting the behavior of the ego vehicle:
+
+1. The ego vehicle should maintain a safe distance from the truck and other vehicles, especially when changing lanes or overtaking.
+2. The ego vehicle should be prepared to slow down or stop when approaching the pedestrian crossing, depending on the pedestrian's actions.
+3. The ego vehicle should be prepared to stop or slow down when approaching the traffic light, depending on the light's color.
+4. The ego vehicle should be prepared to change lanes or slow down when the car in the right lane turns left, ensuring a safe distance is maintained.
+5. The ego vehicle should maintain a safe speed, considering the presence of pedestrians and other vehicles, and adjusting for any potential obstacles or changes in traffic conditions.
+
+  - Inference time for this frame: 10.28s
+  - Tokens/sec for this frame: 40.96
+--------------------
+--- Processing Key Frame: 5b29d1a2b0e646368622dee5e8fa5108 ---
+Model Output: The driving scene appears to be in a city setting with a mix of vehicles and pedestrians. The key factors for driving planning include:
+
+1. The presence of multiple vehicles, including cars and a truck, which are stopped or moving at a slow pace.
+2. A pedestrian walking on the sidewalk, possibly crossing the street.
+3. Traffic lights, which are not clearly visible in the images provided.
+4. A fire hydrant on the sidewalk.
+5. Buildings in the background, indicating an urban environment.
+
+Given the image data, the ego vehicle should proceed with caution, as there are pedestrians and other vehicles in the vicinity. The ego vehicle should be prepared to yield to pedestrians and other vehicles as needed. The presence of the fire hydrant indicates that the ego vehicle should be cautious not to obstruct access to it.
+
+Predicting the behavior of the ego vehicle, it should proceed with caution, maintaining a safe distance from other vehicles and pedestrians. The ego vehicle should be prepared to yield to pedestrians and other vehicles as needed. The ego vehicle should also be prepared to stop if necessary to avoid any obstacles or to give way to other vehicles. The ego vehicle should drive at a safe speed, considering the presence of pedestrians and other vehicles in the area.
+
+  - Inference time for this frame: 7.47s
+  - Tokens/sec for this frame: 40.56
+--------------------
+--- Processing Key Frame: 89c9d0c82a794d39911b3bfb3491b1bc ---
+Model Output: The driving scene appears to be in a city setting with a clear sky. The road is lined with parked cars on the right side, and there are buildings visible in the background. The traffic light is not visible in the images provided.
+
+The key factors for driving planning include:
+
+1. The presence of obstacles: There are no visible obstacles in the images provided.
+2. The positions and movements of vehicles and pedestrians:
+   - The ego vehicle is in the center of the road, moving forward.
+   - There are no pedestrians visible in the images.
+   - The vehicles on the road include the ego vehicle and several parked cars on the right side.
+
+Predicting the behavior of the ego vehicle:
+
+1. Driving direction: The ego vehicle is moving straight ahead.
+2. Driving speed: The ego vehicle is moving at a normal speed.
+
+Please note that this description is based on the information provided by the images and does not include any additional context or details that might be relevant to the driving situation.
+
+  - Inference time for this frame: 5.91s
+  - Tokens/sec for this frame: 40.12
+--------------------
+--- Processing Key Frame: a3da8976af104ae7a48a186c610a229a ---
+Model Output: The driving scene appears to be in a busy urban area with a mix of vehicles and pedestrians. The key factors for driving planning include:
+
+1. The presence of a large white truck in the right lane, which is turning right.
+2. A black sedan in the left lane, which is moving straight ahead.
+3. A white van in the left lane, which is moving straight ahead.
+4. A pedestrian walking on the sidewalk, who appears to be crossing the street.
+5. A traffic light with a green signal, indicating that vehicles can proceed through the intersection.
+6. A red van in the right lane, which is stopped, possibly waiting for the pedestrian to cross.
+
+Given these factors, the ego vehicle should proceed straight ahead, maintaining a safe distance from the truck and van in the right lane. The pedestrian crossing the street should be observed for any sudden movements, and the traffic light should be obeyed. The ego vehicle should maintain a safe speed, considering the presence of pedestrians and other vehicles in the area.
+
+  - Inference time for this frame: 5.98s
+  - Tokens/sec for this frame: 40.11
+--------------------
+
+===== Scene 2abb3f3517c64446a5768df5665da49d Summary (Memory Idea: False) =====
+Total End-to-End Time: 38.45s
+Total Inference-Only Time: 35.98s
+Total Generated Tokens: 1456
+Average Tokens/Second (Inference Only): 40.47
+========================================
+
+===== Processing Scene: 2abb3f3517c64446a5768df5665da49d (Memory Idea: True) =====
+--- Processing Key Frame: 3c5fe22946dc4d12954375abc464d6b1 ---
+Model Output: The driving scene appears to be in a city environment, with a clear sky overhead. The road is lined with buildings on both sides, and there are multiple lanes in each direction. The traffic is moderate, with a few cars visible in the lanes ahead.
+
+Key factors for driving planning include:
+
+1. The presence of obstacles: There are no visible obstacles in the immediate vicinity of the car.
+2. The positions and movements of vehicles and pedestrians: The vehicles are moving in a straight line, and there are no pedestrians visible in the immediate vicinity.
+3. Traffic lights: There are no traffic lights visible in the images provided.
+
+Predicting the behavior of the ego vehicle:
+
+Given the absence of obstacles and the absence of any immediate need to change lanes or make turns, the ego vehicle should continue driving straight at a normal speed. The absence of traffic lights also suggests that the ego vehicle should proceed with caution, as there may be traffic signals ahead that are not visible in the images. The ego vehicle should maintain a safe distance from other vehicles and be prepared to react to any changes in traffic conditions.
+
+  - Inference time for this frame: 6.34s
+  - Tokens/sec for this frame: 40.23
+--------------------
+--- Processing Key Frame: 3ee6b750a56946279f5ad605fd643204 ---
+[-25.401342391967773, -17.92504119873047, -13.579924583435059, -12.131938934326172, -18.89066505432129, -15.654255867004395, -13.077155113220215, -12.678328514099121, -12.497941017150879, -9.731721878051758, -16.717864990234375, -13.996158599853516, -13.779751777648926, -12.354784965515137, -9.430557250976562, -13.430290222167969, -13.450301170349121, -16.15508460998535]
+Reused 0 tokens from the previous frame.
+Model Output: Some time later:
+
+Driving Scene
+
+In the presented image, the driving scene appears to be a city street with a clear view in all directions. The top-down view shows a strip of road adjacent to a paved lot or road closed to vehicles, marked by orange cones. The central part of the image features a bulky grey building, possibly an airport or a large industrial facility, hinted by the available parking lots.
+
+
+Prediction of EGO Vehicle Behavior
+Based on the image, the driving direction appears to be straight ahead, with no visible obstacles or traffic lights in our path. The vehicles in the image are moving in the same direction, and there is a turning point ahead, which does not require any immediate actions from the ego vehicle.
+
+BEHAVIOR:
+The ego vehicle should continue straight due to no obstacles in the immediate driving path, given there is a straight road ahead and no indications of needing to turn or slow down. The vehicle speed should appear to be unaffected or only slightly increased by the presence of other vehicles, indicating a normal driving speed when the final signal is sent.
+
+  - Inference time for this frame: 7.01s
+  - Tokens/sec for this frame: 35.64
+--------------------
+--- Processing Key Frame: 5b29d1a2b0e646368622dee5e8fa5108 ---
+[-13.036442756652832, -12.708364486694336, -18.701204299926758, -12.335165977478027, -9.34028434753418, -4.129658222198486, -0.02856259234249592, -4.88204288482666, -13.94318962097168, -12.233373641967773, -20.293180465698242, -18.118547439575195, -11.78357982635498, -4.698339462280273, -5.855371475219727, -17.01970100402832, -16.602802276611328, -1.0493532419204712, -9.050541877746582, -9.370587348937988, -7.179629325866699, -1.9353591203689575, -11.656537055969238, -10.92148208618164, -10.85715103149414, -10.186878204345703, -9.04414176940918, -5.566176414489746, -7.547275066375732, -11.041093826293945, -4.204811096191406, -5.5387749671936035, -12.132925033569336, -7.453190803527832, -8.917757034301758, -13.384077072143555]
+Reused 0 tokens from the previous frame.
+Model Output: : Driving scene:
+:
+: Obstacles:
+:
+:
+:
+:
+: Vehicles and Pedestrians:
+: 1. A white car positioned near a silver Bentley vehicle in the left lane.
+: 2. A blue pickup truck in the right lane.
+: 3. A Coca-Cola truck on side the road.
+: 4. Two men walking next to the truck on the sidewalk.
+: 5. A red fire hydrant by the side of the street.
+: 6. A yellow pedestrian crossing light on a pole between two paths of the street, showing a white figure, indicating it's the time for vehicles to stop to allow pedestrians to pass.
+: Traffic Lights:
+:
+: Prediction of ego vehicle behavior:
+: I am an AI and do not act as a driver. However, given the details of the scene:
+: 1. The front and front-left camera images show a clear lane ahead. The back-left image shows a Coca-Cola truck parked to the right. The front and front-right cameras show no other vehicles in the immediate lane ahead. It is safe to proceed with straight movement. Meanwhile, the blue pickup truck is on the outside lane beside the Coca-Cola truck. The back-right picture appears to show no immediate obstacles to the right, but the Coca-Cola truck would be in the rearview mirror.
+: 2. The side mirror images confirm no immediate hazards on the right side of the road.
+: 3. The back body camera image shows the same side mirrors, concluding no immediate hazards on the left side of the road.
+
+Based on these observations and the information provided, the ego vehicle should move out from the left lane, adjusting to traffic and pedestrians at the intersection. A safe speed would likely be between 0-75 or progressionively adjustable based on the availability of clear lane ahead, considering the presence/stopped cars besides the Coca-Cola truck'stight angle, reflecting light shows no one's blocking angle, both pedestrians. wide angle, wider angle, the light colors, traffic light colors, pedestrians, wider, pulling up to what color, receding, traffic light colors, yellow traffic light colors, pulling up to yellow colour, clear traffic light colors, pulling up, gray traffic light colors, pulling up to white cone traffic light colors, red traffic light colors, red traffic light colors, solid traffic light, red traffic light, signaling to red traffic light, red traffic light, green and red traffic light, green and red traffic light, red traffic light, solid green and red traffic light grid and red traffic light, and red traffic light, green and red traffic light colors, and solid and red traffic light, red traffic light colors, and solid traffic light and red traffic light colors, solid color and red traffic light, green, red traffic light, solid traffic light, red and red traffic light, solid and green light, solid colors, red traffic light, red traffic light, red and red hydro-red traffic light, green and red light, solid traffic light, solid red traffic light, red speed clear traffic light, and red traffic light, green, traffic light,
+-sol traffic light, traffic light, red traffic pictures, red light:green and red traffic light, red and clear orange traffic light, red traffic light, red light, green light circuit, red and red vehicle camera Fra-light traffic light, red traffic light, and red neighborhood, red and green, orange traffic light, red, green plasma, red and red traffic light and traffic light, green space traffic light, red traffic light, red light, red and stop traffic and red light, solid traffic light, with a deep, red traffic light, oval traffic, red sign
+o customer, stop with red stop traffic light, red light, red stop, taking light traffic light, red traffic light, taking about stop, red traffic light, red traffic light colored sky, red and green light, red traffic light,sol, circle, and red, green car, red, green and red green and red and red, red traffic and green light, green, red and red traffic light, red, yellow, green, and red light, green and red and magenta, red traffic signal, orange, solid traffic, red
+
+  - Inference time for this frame: 26.66s
+  - Tokens/sec for this frame: 36.34
+--------------------
+--- Processing Key Frame: 89c9d0c82a794d39911b3bfb3491b1bc ---
+[-12.981430053710938, -8.980009078979492, -10.498897552490234, -14.742765426635742, -11.574165344238281, -18.016132354736328, -6.261055946350098, -4.220572471618652, -8.528661727905273, -1.1602979898452759, -11.55124282836914, -11.198149681091309, -15.737791061401367, -14.114935874938965, -15.655372619628906, -6.447573184967041, -11.92341423034668, -3.8451788425445557, -12.221518516540527, -4.4070048332214355, -10.934382438659668, -3.4255051612854004, -10.542840957641602, -4.019445419311523, -10.599411964416504, -10.195089340209961, -16.10031509399414, -12.609395980834961, -13.747382164001465, -15.951787948608398, -18.881755828857422, -13.734808921813965, -15.549345970153809, -17.179691314697266, -6.8400959968566895, -12.344269752502441, -11.768148422241211, -12.870803833007812, -17.04100799560547]
+Reused 0 tokens from the previous frame.
+Model Output: I understand the given images do not describe a complete scene from an on-board camera, and that this is a question that requires the use of my own logic to infer actions from the provided stills.
+
+Description:
+The driving scene takes place on a wide, open street with clear visibility. The presence of a car on the left side of the image indicates that the vehicle is in a traffic lane moving towards the right. There is also a truck visible straight ahead, suggesting that there may be a stop-start situation due to the length of the truck requiring additional pause time if it were to make a right turn on red.
+
+There are no pedestrians, cyclists, or other animals visible in the scene, which is typical for such wide open streets in more residential or low-traffic areas during daytime.
+
+There are no traffic lights visible. All traffic appears to be flowing in this direction, with no vehicles entering from the left. 
+
+Predicted ego vehicle behavior:
+Since there are no immediate obstacles or hazards, the ego vehicle will continue to travel down the road, depending on road conditions and traffic flow. If the truck were to change its path or stop unexpectedly, the ego vehicle will likely remain steady and maintain a cautious driving speed.
+
+Additionally, without clear sightlines to opposing lanes and without any discernible changing road markings or signage, the driving direction (straight or turn) is predicted with certainty.
+
+Driving speed would depend on road and weather conditions, but given the open road and general low traffic, it's likely that the vehicle's speed will be moderate to ensure safe following distances and adapt to any sudden changes in speed or traffic.
+
+  - Inference time for this frame: 10.37s
+  - Tokens/sec for this frame: 35.96
+--------------------
+--- Processing Key Frame: a3da8976af104ae7a48a186c610a229a ---
+[-5.406834602355957, -14.334321975708008, -11.349066734313965, -10.402491569519043, -2.838805913925171, -13.659147262573242, -9.617870330810547, -10.300901412963867, -11.671069145202637, -6.6993818283081055, -3.182929515838623, -11.345585823059082, -11.833255767822266, -9.734171867370605, -11.181280136108398, -1.3992573022842407, -11.974159240722656, -8.522122383117676, -4.185735702514648, -10.664438247680664, -4.258509635925293, -4.018365383148193, -10.84750747680664, -12.999820709228516, -14.433438301086426, -9.994364738464355, -7.978046417236328, -7.87865686416626, -12.48973274230957, -11.016302108764648, -9.49487018585205, -8.227157592773438, -9.979764938354492, -10.549363136291504, -15.828093528747559, -3.2746810913085938, -5.471175193786621, -7.06401252746582, -5.65703010559082, -13.271293640136719, -7.161141395568848]
+Reused 0 tokens from the previous frame.
+Model Output: Three pedestrians are crossing the street. In the rearview, there are two energy drink/water bottles on the road and a city bus approaching the intersection. Pedestrians are walking slowly towards the van. The van is parked at a street corner and preparing to make a left turn onto an empty road leading to a different street. The street is made of asphalt and appears to have very low traffic. The scene suggests that the driver should take extra caution when turning. It may require a slow speed since pedestrians are crossing and the vehicle is in an urban area.
+
+  - Inference time for this frame: 3.73s
+  - Tokens/sec for this frame: 33.51
+--------------------
+
+===== Scene 2abb3f3517c64446a5768df5665da49d Summary (Memory Idea: True) =====
+Total End-to-End Time: 55.10s
+Total Inference-Only Time: 54.12s
+Total Generated Tokens: 1972
+Average Tokens/Second (Inference Only): 36.44
+========================================
+
+===== Processing Scene: e8099a6136804f3bb9b38ff94d98eb64 (Memory Idea: False) =====
+--- Processing Key Frame: 50f1c83c63ec40fcae6615e8a6a19a23 ---
+Model Output: The driving scene appears to be at night, with the street illuminated by streetlights. The road is relatively clear, with no visible obstacles or pedestrians. There are no traffic lights in the immediate vicinity, suggesting that the car is in a less regulated area or that the traffic lights are not visible in the captured images.
+
+The car's front camera shows the vehicle in motion, with the headlights on, indicating that the car is driving at a moderate speed. The front-left and front-right cameras show the car's side profile, with the vehicle's headlights illuminating the road ahead. The back camera shows the car's rear view, with the taillights visible. The back-left and back-right cameras show the car's side profile, with the taillights and side mirrors visible.
+
+Given the image data, the ego vehicle is driving straight ahead, as there are no visible obstacles or turns that would require a change in direction. The driving speed appears to be moderate, as the car's headlights are on and the vehicle is not making any sudden maneuvers. The car's position on the road suggests that it is in the center lane, and there are no other vehicles or pedestrians visible in the captured images.
+
+  - Inference time for this frame: 7.11s
+  - Tokens/sec for this frame: 40.37
+--------------------
+--- Processing Key Frame: 72cf72aa387f47c68347d9a108e698f3 ---
+Model Output: The driving scene appears to be at night, with the street illuminated by streetlights and the headlights of the vehicles. The road is relatively clear, with no visible obstacles or pedestrians in the immediate vicinity. There are no traffic lights visible in the images provided.
+
+The ego vehicle is captured in the front-left camera image, indicating that it is currently driving on the left side of the road. The vehicle is moving at a moderate speed, as suggested by the blurred appearance of the image, which indicates motion.
+
+Given the absence of any immediate obstacles or pedestrians, and the lack of traffic lights, the ego vehicle should continue driving straight ahead. The speed of the vehicle appears to be moderate, as it is not moving at a fast pace, nor is it moving at a slow speed. The driver should maintain this speed and direction until the next turn or change in road conditions.
+
+  - Inference time for this frame: 5.07s
+  - Tokens/sec for this frame: 39.64
+--------------------
+--- Processing Key Frame: baf74406530343b3938586c496916614 ---
+Model Output: The driving scene appears to be at night, with the road illuminated by streetlights. The road is relatively clear with no visible obstacles, and there are no pedestrians or traffic lights in the immediate vicinity. The car's front camera shows the road ahead, which is straight and clear. The front-left camera shows the left side of the road, which is also clear. The front-right camera shows the right side of the road, which is clear. The back camera shows the rear of the car, indicating that the vehicle is in motion. The back-left camera shows the left side of the road, which is clear. The back-right camera shows the right side of the road, which is clear.
+
+Given the visibility and the lack of obstacles, the ego vehicle should continue driving straight at a normal speed. The driver should remain vigilant for any potential hazards that may not be immediately visible due to the darkness.
+
+  - Inference time for this frame: 5.14s
+  - Tokens/sec for this frame: 39.69
+--------------------
+--- Processing Key Frame: d1d38dddb8174acf9cb776ec6c941024 ---
+Model Output: The driving scene appears to be at night, with the street illuminated by streetlights and the headlights of the vehicles. The road is wet, suggesting recent rain, which could affect traction and visibility.
+
+Key factors for driving planning include:
+
+1. The presence of obstacles: There are no visible obstacles in the immediate vicinity of the vehicle.
+2. The positions and movements of vehicles and pedestrians: The image shows a car in the front-right lane, which is moving forward. There are no pedestrians or other vehicles visible in the immediate vicinity.
+3. Traffic lights: There are no traffic lights visible in the image.
+
+Predicting the behavior of the ego vehicle:
+
+Given the image, the ego vehicle should continue driving straight ahead at a normal speed. There are no indications of a need to turn left or right, and no obstacles or pedestrians are present that would require a change in direction or speed. The wet road conditions should be taken into account, but the vehicle's headlights and the streetlights should provide adequate illumination for safe driving.
+
+  - Inference time for this frame: 6.31s
+  - Tokens/sec for this frame: 39.93
+--------------------
+
+===== Scene e8099a6136804f3bb9b38ff94d98eb64 Summary (Memory Idea: False) =====
+Total End-to-End Time: 25.79s
+Total Inference-Only Time: 23.63s
+Total Generated Tokens: 944
+Average Tokens/Second (Inference Only): 39.95
+========================================
+
+===== Processing Scene: e8099a6136804f3bb9b38ff94d98eb64 (Memory Idea: True) =====
+--- Processing Key Frame: 50f1c83c63ec40fcae6615e8a6a19a23 ---
+Model Output: The driving scene appears to be at night, with the street illuminated by streetlights. The road is relatively clear, with no visible obstacles or pedestrians. There are no traffic lights in the immediate vicinity, suggesting that the car is in a less regulated area or that the traffic lights are not visible in the captured images.
+
+The car's front camera shows the vehicle in motion, with the headlights on, indicating that the car is driving at a moderate speed. The front-left and front-right cameras show the car's side profile, with the vehicle's headlights illuminating the road ahead. The back camera shows the car's rear view, with the taillights visible. The back-left and back-right cameras show the car's side profile, with the taillights and side mirrors visible.
+
+Given the image data, the ego vehicle is driving straight ahead, as there are no visible obstacles or turns that would require a change in direction. The driving speed appears to be moderate, as the car's headlights are on and the vehicle is not making any sudden maneuvers. The car's position on the road suggests that it is in the center lane, and there are no other vehicles or pedestrians visible in the captured images.
+
+  - Inference time for this frame: 7.15s
+  - Tokens/sec for this frame: 40.15
+--------------------
+--- Processing Key Frame: 72cf72aa387f47c68347d9a108e698f3 ---
+[-25.30562400817871, -17.65519905090332, -14.041390419006348, -13.217957496643066, -18.919721603393555, -15.737298965454102, -12.3920316696167, -13.692391395568848, -15.113460540771484, -13.69611930847168, -12.650212287902832, -11.150993347167969, -8.033736228942871, -20.883319854736328, -17.132905960083008, -21.366180419921875, -13.103429794311523, -15.6559476852417, -19.008319854736328, -17.106197357177734, -17.372827529907227]
+Reused 0 tokens from the previous frame.
+Model Output: The driving scene at night appears to be low visibility with limited lighting, likely due to the darkness and a lack of streetlights. The key factors for driving planning include the following:
+
+- There are no pedestrians visible in the scene.
+- The traffic lights are only partially visible, with one stoplight showing, but it is out of focus and without clear indication of the current stage (stop, go, caution).
+- The other traffic lights are not visible within the frame.
+- Ego vehicle is present on the roadway, seemingly without other vehicles or stationary objects directly in front, to the left, or to its right.
+
+Given the driving environment with limited vision and lack of traffic activity, the ego vehicle should approach with caution at a reduced speed. It should remain in its current lane, maintain its current direction, and continuously scan the road for any unexpected obstacles or changes in traffic rules. Due to the low visibility, taking extra precautions like slowing down or using low-beam headlights might also be recommended to ensure that the ego vehicle is not overtaking any oncoming traffic that might not be visible.
+
+  - Inference time for this frame: 7.07s
+  - Tokens/sec for this frame: 35.63
+--------------------
+--- Processing Key Frame: baf74406530343b3938586c496916614 ---
+[-13.460639953613281, -1.1778898239135742, -2.7079505920410156, -7.105865478515625, -2.3470137119293213, -13.021628379821777, -9.814994812011719, -15.64728832244873, -11.358426094055176, -11.258753776550293, -16.336912155151367, -11.608391761779785, -10.520502090454102, -11.272159576416016, -4.546704292297363, -14.086740493774414, -4.2527313232421875, -9.985827445983887, -5.686360836029053, -7.840962886810303, -10.078385353088379, -1.5757789611816406, -13.107580184936523, -10.62860107421875, -2.080728054046631, -14.035138130187988, -13.063532829284668, -14.93398666381836, -16.43699836730957, -8.42822551727295]
+Reused 0 tokens from the previous frame.
+Model Output: The driving scene reveals a moderately dark road at night with street lights providing illumination, with the headlights of the car in the images identified from the front-left position leading the way. Two vehicles are visible in the image; one primary vehicle where the viewpoint is; it appears that the brakes are not applied, suggesting a forward planning to progress at a regular speed with descriptions consistent from image to image indicating that the main direction of travel is straight ahead but there may be slight turns, but only slightly.
+Second car is following closely from the back-left camera, indicating a car tailing the ego vehicle (up to a safe distance), and given its proximity, a controlled speed is crucial for ego vehicle to ensure no sudden braking behaviour.
+Further back, car lights on from the back-right and the rearmost car at the back have their lights on, visible but minimal illumination is seen given the dark surroundings.
+
+Predictions & Advice: Continue #1, adhering to current speed and direction, and adjust when it is safe to change lanes due to the close proximity of other vehicles. The ego vehicle should maintain a speed that can stop adequately for pedestrians crossing if any are near, and consider checking blind spots before any turns.
+
+Additional: Obey all traffic signals if they can be spotted in the next available image. Also, exercise caution with unseen pedestrians, test any obstacles for the presence of any, and heed any city or area-specific driving regulations during nighttime hours.
+
+  - Inference time for this frame: 9.50s
+  - Tokens/sec for this frame: 36.22
+--------------------
+--- Processing Key Frame: d1d38dddb8174acf9cb776ec6c941024 ---
+[-0.3059300184249878, -6.560664176940918, -1.913123607635498, -18.290939331054688, -18.67683982849121, -20.003963470458984, -8.490165710449219, -18.966415405273438, -20.873859405517578, -11.5421781539917, -8.466340065002441, -7.683623313903809, -14.008434295654297, -15.396852493286133, -6.407168388366699, -17.299341201782227, -0.8179022073745728, -20.037979125976562, -15.68776798248291, -19.3515682220459, -10.723489761352539, -5.235402584075928, -5.439010143280029, -14.868241310119629, -12.711845397949219, -5.241418838500977, -10.705926895141602, -7.097048282623291, -9.057413101196289, -7.256424427032471, -13.646072387695312, -16.389577865600586, -7.64346981048584, -7.831176280975342, -2.7133278846740723, -14.153644561767578, -11.345693588256836, -20.31032943725586, -13.850329399108887, -8.140546798706055, -11.823905944824219, -11.652856826782227]
+Reused 0 tokens from the previous frame.
+Model Output: Driving Scene:
+
+1. In the front view, the road ahead appears to be clear with no traffic or significant obstacles, and the vehicle is moving at a normal speed.
+2. In the front-left view, there seems to be a pedestrian on the sidewalk, though their sprite may not be clearly visible.
+3. In the front-right view, a tree and some street lights are visible, which could potentially be a distraction due to the distance.
+4. The back view shows a clear road ahead with no visible obstacles, and there is a breaking car visible in the lane ahead.
+5. The back-left view shows a house with a lit area that might be the window, indicating a residence in the area.
+6. The back-right view captures a street sign for Victoria Park.
+
+Recommendations:
+  - To ensure safety and maintain a smooth driving experience, the ego vehicle should continue at its current speed and maintain the forward driving direction.
+  - As there may be stopping or turning traffic ahead, the ego vehicle should be prepared to adjust its speed and driving direction accordingly.
+  - The visible pedestrian should be observed for further road safety, keeping a sufficient distance and being prepared for a sudden movement if necessary.
+  - The breaking car in the front view indicates the potential for sudden braking or a turn. Pay close attention and adjust speed or distance as needed for clear overtaking or stopping.
+  - Secure adequate signaling and maintain a safe distance from the breaking car.
+  - The lit area from the house in the back view may be reflecting a window or other light source. Be aware of this light reflection to avoid any possible interference with the vehicle's camera vision.
+
+  - Inference time for this frame: 10.39s
+  - Tokens/sec for this frame: 36.28
+--------------------
+
+===== Scene e8099a6136804f3bb9b38ff94d98eb64 Summary (Memory Idea: True) =====
+Total End-to-End Time: 34.91s
+Total Inference-Only Time: 34.11s
+Total Generated Tokens: 1260
+Average Tokens/Second (Inference Only): 36.94
+========================================
+
+Reached the limit of 5 scenes. Stopping.

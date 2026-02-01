@@ -201,6 +201,8 @@ def run_inference_for_sequence(
         print(f"Average Tokens/Second (Inference Only): {avg_tokens_per_sec:.2f}")
     print("=" * 40 + "\n")
 
+    return total_scene_time, total_inference_time, total_generated_tokens
+
 
 def main():
     # --- 用户需要配置的路径 ---
@@ -265,7 +267,12 @@ def main():
     # 遍历JSON中的每个场景
 
     scene_count = 0
-    scenes_to_test = 5
+    scenes_to_test = 10000
+
+    total_stats = {
+        False: {"scenes": 0, "total_time": 0.0, "total_inference_time": 0.0, "total_tokens": 0},
+        True: {"scenes": 0, "total_time": 0.0, "total_inference_time": 0.0, "total_tokens": 0},
+    }
 
     for scene_id, scene_data in all_data.items():
         if scene_count >= scenes_to_test:
@@ -281,12 +288,43 @@ def main():
         # --- 模式一：不使用师兄的idea (逐帧独立推理) ---
         if hasattr(model, 'is_first_frame'):
             model.is_first_frame = True # 确保从干净的状态开始
-        # run_inference_for_sequence(args, tokenizer, model, image_processor, context_len, scene_id, key_frames, data_root_path, use_memory_idea=False)
+        scene_time, inference_time, generated_tokens = run_inference_for_sequence(args, tokenizer, model, image_processor, context_len, scene_id, key_frames, data_root_path, use_memory_idea=False)
+        total_stats[False]["scenes"] += 1
+        total_stats[False]["total_time"] += scene_time
+        total_stats[False]["total_inference_time"] += inference_time
+        total_stats[False]["total_tokens"] += generated_tokens
 
         # --- 模式二：使用师兄的idea (连续生成) ---
         if hasattr(model, 'is_first_frame'):
             model.is_first_frame = True # 同样确保从干净的状态开始
-        run_inference_for_sequence(args, tokenizer, model, image_processor, context_len, scene_id, key_frames, data_root_path, use_memory_idea=True)
+        scene_time, inference_time, generated_tokens = run_inference_for_sequence(args, tokenizer, model, image_processor, context_len, scene_id, key_frames, data_root_path, use_memory_idea=True)
+        total_stats[True]["scenes"] += 1
+        total_stats[True]["total_time"] += scene_time
+        total_stats[True]["total_inference_time"] += inference_time
+        total_stats[True]["total_tokens"] += generated_tokens
+    
+    print("\n" + "="*25 + " FINAL SUMMARY " + "="*25)
+    
+    for use_idea, stats in total_stats.items():
+        num_scenes = stats["scenes"]
+        if num_scenes == 0:
+            continue
+
+        avg_time = stats["total_time"] / num_scenes
+        avg_inference_time = stats["total_inference_time"] / num_scenes
+        
+        if stats["total_inference_time"] > 0:
+            avg_tps = stats["total_tokens"] / stats["total_inference_time"]
+        else:
+            avg_tps = 0
+
+        print(f"\n----- Statistics for 'use_memory_idea = {use_idea}' -----")
+        print(f"Processed {num_scenes} scenes.")
+        print(f"Average End-to-End Time per Scene: {avg_time:.2f}s")
+        print(f"Average Inference-Only Time per Scene: {avg_inference_time:.2f}s")
+        print(f"Average Tokens/Second (Inference Only, across all scenes): {avg_tps:.2f}")
+
+    print("\n" + "="*67)
 
 
 if __name__ == "__main__":

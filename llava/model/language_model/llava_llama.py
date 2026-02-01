@@ -2250,7 +2250,7 @@ class LlavaLlamaForCausalLM(LlamaForCausalLM, LlavaMetaForCausalLM):
                 raise ValueError("Tokenizer must be provided to use decode-based splitting.")
             split_position = [index for index, token_id in enumerate(drive_memory) if '.' in tokenizer.decode([token_id])]
             split_position.insert(0, -1)
-            print("Split positions:", split_position)
+            # print("Split positions:", split_position)
 
             # calculate ppl of every sub prompt
             log_probs = torch.nn.functional.log_softmax(prefill_output.logits[0, self.input_ids_length-1:self.input_ids_length+len(self.text_memory[0])-1, :], dim=-1)
@@ -2273,11 +2273,11 @@ class LlavaLlamaForCausalLM(LlamaForCausalLM, LlavaMetaForCausalLM):
                 # ppl_list = target_log_probs[split_position[j]+1:split_position[j+1]+1].tolist()
 
                 # test length
-                print("segment start:", split_position[j]+1, " end:", split_position[j+1]+1, " len:", split_position[j+1]-split_position[j])
-                print("inputs_embeds size:", inputs_embeds.size(1))
+                # print("segment start:", split_position[j]+1, " end:", split_position[j+1]+1, " len:", split_position[j+1]-split_position[j])
+                # print("inputs_embeds size:", inputs_embeds.size(1))
 
                 ppl_list = current_probs[split_position[j]+1:split_position[j+1]+1].tolist()
-                print(ppl_list)
+                # print(ppl_list)
                 
                 # if torch.sum(target_log_probs[split_position[j]+1: split_position[j+1]+1] < -2).item() < 0.2 * (split_position[j+1] - split_position[j]):
                 
@@ -2303,39 +2303,39 @@ class LlavaLlamaForCausalLM(LlamaForCausalLM, LlavaMetaForCausalLM):
                             break
 
                     # extend mem to wrong token
-                    print("generated_length:", generated_length)
+                    # print("generated_length:", generated_length)
                     if wrong_id != 0:
                         current_sequences[0].extend(self.text_memory[0][split_position[j] + 1 : split_position[j] + wrong_id + 1])
                     generated_length = len(current_sequences[0])
-                    print("generated_length after extend:", generated_length)
+                    # print("generated_length after extend:", generated_length)
                     
                     for i in range(len(self.model.layers)):
                         self.current_past_key_values[i][0][:, :, self.input_ids_length + generated_length + split_position[j] - split_position[j+1] : self.input_ids_length + generated_length, :].copy_(self.key_values_memory[i][0][:, :, split_position[j] + 1: split_position[j+1] + 1, :])
                         self.current_past_key_values[i][1][:, :, self.input_ids_length + generated_length + split_position[j] - split_position[j+1] : self.input_ids_length + generated_length, :].copy_(self.key_values_memory[i][1][:, :, split_position[j] + 1: split_position[j+1] + 1, :])
 
                     # if wrong_id > 0:
-                    print("j, split_position[j], wrong_id:", j, split_position[j], wrong_id)
+                    # print("j, split_position[j], wrong_id:", j, split_position[j], wrong_id)
                     if wrong_id != 0:
                         text_encode = self.token_embeds_memory[:, split_position[j] + 1 : split_position[j] + wrong_id + 1, :]
-                        print("fuck text_encode size:", text_encode.size(1))
+                        # print("fuck text_encode size:", text_encode.size(1))
                         inputs_embeds = torch.cat((inputs_embeds, text_encode), dim=1)
 
                     break
 
                 if memory_useful == True:
                     # extend mem to output_ids
-                    print("generated_length:", generated_length)
+                    # print("generated_length:", generated_length)
                     current_sequences[0].extend(self.text_memory[0][split_position[j] + 1 : split_position[j+1] + 1])
                     generated_length = len(current_sequences[0])
-                    print("generated_length after extend:", generated_length)
+                    # print("generated_length after extend:", generated_length)
                     
                     for i in range(len(self.model.layers)):
                         self.current_past_key_values[i][0][:, :, self.input_ids_length + generated_length + split_position[j] - split_position[j+1] : self.input_ids_length + generated_length, :].copy_(self.key_values_memory[i][0][:, :, split_position[j] + 1: split_position[j+1] + 1, :])
                         self.current_past_key_values[i][1][:, :, self.input_ids_length + generated_length + split_position[j] - split_position[j+1] : self.input_ids_length + generated_length, :].copy_(self.key_values_memory[i][1][:, :, split_position[j] + 1: split_position[j+1] + 1, :])
 
                     text_encode = self.token_embeds_memory[:, split_position[j] + 1 : split_position[j+1] + 1, :]
-                    print("j, split_position[j+1]:", j, split_position[j+1])
-                    print("text_encode size:", text_encode.size(1))
+                    # print("j, split_position[j+1]:", j, split_position[j+1])
+                    # print("text_encode size:", text_encode.size(1))
                     inputs_embeds = torch.cat((inputs_embeds, text_encode), dim=1)
             
             print(f"Reused {len(current_sequences[0])} tokens from the previous frame.")
@@ -2348,14 +2348,14 @@ class LlavaLlamaForCausalLM(LlamaForCausalLM, LlavaMetaForCausalLM):
 
                 if refresh == True:
                     total_length = image_len - 1 # fix bug here
-                    print("Total length reset to image_len - 1:", total_length)
+                    # print("Total length reset to image_len - 1:", total_length)
                     current_input_ids_length = total_length
                     if len(current_sequences[0]) > 0:
                         inputs = torch.tensor([[current_sequences[0][-1]]]).cuda()
                     else:
                         inputs = torch.tensor([[input_last_token]]).cuda()
                     current_sequences = [[]]
-                    generated_length = -1
+                    generated_length = 0
                     
                 else:
                     total_length = inputs_embeds.size(1) - 1
@@ -2364,15 +2364,15 @@ class LlavaLlamaForCausalLM(LlamaForCausalLM, LlavaMetaForCausalLM):
                         inputs = torch.tensor([[current_sequences[0][-1]]]).cuda()
                     else:
                         inputs = torch.tensor([[input_last_token]]).cuda()
-                    generated_length -= 1
+                    # generated_length -= 1
 
                 first_gen = True
                 
-                print("refresh:", refresh)
-                print("input_embeds size:", inputs_embeds.size(1))
-                print("total_length:", total_length)
-                print("current_input_ids_length:", current_input_ids_length)
-                print("img_len:", image_len)
+                # print("refresh:", refresh)
+                # print("input_embeds size:", inputs_embeds.size(1))
+                # print("total_length:", total_length)
+                # print("current_input_ids_length:", current_input_ids_length)
+                # print("img_len:", image_len)
                 while True:
                     # fix position_ids bug
                     my_position_ids = torch.tensor([[total_length]], device = inputs.device)   
@@ -2415,15 +2415,16 @@ class LlavaLlamaForCausalLM(LlamaForCausalLM, LlavaMetaForCausalLM):
                     current_sequences[0].append(token_index)
                     
                     for i in range(len(self.model.layers)):
-                        self.current_past_key_values[i][0][:, :, self.input_ids_length + generated_length : self.input_ids_length + generated_length + 1, :].copy_(decode_output.past_key_values[i][0][:, :, total_length : total_length + 1, :])
-                        self.current_past_key_values[i][1][:, :, self.input_ids_length + generated_length : self.input_ids_length + generated_length + 1, :].copy_(decode_output.past_key_values[i][1][:, :, total_length : total_length + 1, :])
-                
+                        # self.current_past_key_values[i][0][:, :, self.input_ids_length + generated_length : self.input_ids_length + generated_length + 1, :].copy_(decode_output.past_key_values[i][0][:, :, total_length : total_length + 1, :])
+                        # self.current_past_key_values[i][1][:, :, self.input_ids_length + generated_length : self.input_ids_length + generated_length + 1, :].copy_(decode_output.past_key_values[i][1][:, :, total_length : total_length + 1, :])
+                        self.current_past_key_values[i][0][:, :, total_length : total_length + 1, :].copy_(decode_output.past_key_values[i][0][:, :, total_length : total_length + 1, :])
+                        self.current_past_key_values[i][1][:, :, total_length : total_length + 1, :].copy_(decode_output.past_key_values[i][1][:, :, total_length : total_length + 1, :])
                     generated_length += 1
                     total_length += 1
                     
                     inputs = torch.tensor([[token_index]]).cuda()
 
-                inputs_embeds = torch.cat((inputs_embeds, self.model.token_embeds[:, current_input_ids_length : current_input_ids_length + generated_length, :]), dim=1)
+                # inputs_embeds = torch.cat((inputs_embeds, self.model.token_embeds[:, current_input_ids_length : current_input_ids_length + generated_length, :]), dim=1)
 
 
                 # total_length += 1
@@ -2493,11 +2494,12 @@ class LlavaLlamaForCausalLM(LlamaForCausalLM, LlavaMetaForCausalLM):
             )
 
             current_sequences[0].extend(output.sequences[0])
-            generated_length = len(current_sequences[0]) - 2 # last token don't have kv cache
+            # print("Generated words:", tokenizer.decode(output.sequences[0]))
+            generated_length = len(current_sequences[0]) # last token don't have kv cache
 
             for i in range(len(self.model.layers)):
-                self.current_past_key_values[i][0][:, :, self.input_ids_length : self.input_ids_length + generated_length, :].copy_(output.past_key_values[i][0][:, :, self.input_ids_length : self.input_ids_length + generated_length, :])
-                self.current_past_key_values[i][1][:, :, self.input_ids_length : self.input_ids_length + generated_length, :].copy_(output.past_key_values[i][1][:, :, self.input_ids_length : self.input_ids_length + generated_length, :])
+                self.current_past_key_values[i][0][:, :, self.input_ids_length : self.input_ids_length + generated_length - 2, :].copy_(output.past_key_values[i][0][:, :, self.input_ids_length : self.input_ids_length + generated_length - 2, :])
+                self.current_past_key_values[i][1][:, :, self.input_ids_length : self.input_ids_length + generated_length - 2, :].copy_(output.past_key_values[i][1][:, :, self.input_ids_length : self.input_ids_length + generated_length - 2, :])
                 
             self.is_first_frame = False
 
@@ -2518,8 +2520,8 @@ class LlavaLlamaForCausalLM(LlamaForCausalLM, LlavaMetaForCausalLM):
         # assert flag == True, "There is no split_id in current generated sequence."
 
         for i in range(len(self.model.layers)):
-            self.key_values_memory[i][0][:, :, :generated_length, :].copy_(self.current_past_key_values[i][0][:, :, self.input_ids_length : self.input_ids_length + generated_length, :])
-            self.key_values_memory[i][1][:, :, :generated_length, :].copy_(self.current_past_key_values[i][1][:, :, self.input_ids_length : self.input_ids_length + generated_length, :])
+            self.key_values_memory[i][0][:, :, :generated_length - 1, :].copy_(self.current_past_key_values[i][0][:, :, self.input_ids_length : self.input_ids_length + generated_length - 1, :])
+            self.key_values_memory[i][1][:, :, :generated_length - 1, :].copy_(self.current_past_key_values[i][1][:, :, self.input_ids_length : self.input_ids_length + generated_length - 1, :])
             
         self.token_embeds_memory[:, :generated_length, :].copy_(self.model.token_embeds[:, self.input_ids_length : self.input_ids_length + generated_length, :])
 

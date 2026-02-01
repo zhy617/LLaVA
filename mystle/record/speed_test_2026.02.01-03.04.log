@@ -1,0 +1,896 @@
+/root/miniconda3/envs/llava/lib/python3.10/site-packages/torch/cuda/__init__.py:51: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml  # type: ignore[import]
+Flash Attention 2 is available. Setting it as default for Llama.
+[2026-02-01 03:04:33,583] [INFO] [real_accelerator.py:161:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+You are using a model of type llava to instantiate a model of type llava_llama. This is not supported for all configurations of models and can yield errors.
+/root/miniconda3/envs/llava/lib/python3.10/site-packages/huggingface_hub/file_download.py:942: FutureWarning: `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
+  warnings.warn(
+/root/miniconda3/envs/llava/lib/python3.10/site-packages/torch/_utils.py:831: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  return self.fget.__get__(instance, owner)()
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███▎      | 1/3 [00:01<00:03,  1.65s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:03<00:01,  1.63s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:04<00:00,  1.50s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:04<00:00,  1.54s/it]
+/root/miniconda3/envs/llava/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:397: UserWarning: `do_sample` is set to `False`. However, `top_p` is set to `None` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `top_p`.
+  warnings.warn(
+Loading existing threshold table from threshold_table.json
+===== Processing Scene: b789de07180846cc972118ee6d1fb027 (Memory Idea: False) =====
+--- Processing Key Frame: 02c431d3d810472d9307d91e77fe495f ---
+Model Output: The driving scene appears to be in a city area, possibly near an industrial or commercial area given the presence of a large building and a parking lot. The road is wet, suggesting recent rain, which could affect visibility and traction.
+
+Key factors for driving planning include:
+
+1. The presence of a large building on the right side of the road, which might limit visibility around the corner.
+2. A parking lot with several cars parked, which could be entering or exiting the lot, potentially causing traffic flow changes.
+3. A truck parked on the side of the road, which could be obstructing the view of oncoming traffic.
+4. A pedestrian crossing visible on the right side of the road, indicating the need to be cautious of pedestrians.
+5. A traffic light visible on the left side of the road, which could be controlling the flow of traffic.
+
+Predictions for ego vehicle behavior:
+
+1. The ego vehicle should approach the intersection with caution, as there might be oncoming traffic from the large building or the parking lot.
+2. The ego vehicle should be prepared to slow down or stop if necessary to yield to pedestrians crossing the road.
+3. The ego vehicle should be aware of the traffic light and follow the signal accordingly.
+4. The ego vehicle should be prepared to turn left or right, depending on the traffic flow and the presence of any obstacles or pedestrians.
+5. The ego vehicle should maintain a safe speed, considering the wet road conditions and the presence of other vehicles and pedestrians.
+
+  - Inference time for this frame: 8.91s
+  - Tokens/sec for this frame: 39.74
+--------------------
+--- Processing Key Frame: 13ade121714c46d6a028516ecb5bff60 ---
+Model Output: The driving scene appears to be a typical urban street with a mix of vehicles and pedestrians. The key factors for driving planning include:
+
+1. The presence of a large building on the right side of the road, which might obstruct the view of oncoming traffic or pedestrians.
+2. A white van parked on the right side of the road, which could be a potential obstacle if it's in the driver's path.
+3. A car parked on the left side of the road, which could also be an obstacle if the driver needs to maneuver around it.
+4. A pedestrian on the right side of the road, who might be crossing or walking along the sidewalk.
+5. A traffic light visible in the distance, which would control the flow of traffic at an intersection.
+
+Predicting the behavior of the ego vehicle:
+
+1. The ego vehicle is currently driving straight ahead, as indicated by the front camera's view.
+2. The ego vehicle is likely to continue driving straight ahead, as there are no immediate obstacles or pedestrians in its path.
+3. The ego vehicle's speed appears to be normal, as there are no indications of sudden braking or acceleration.
+
+Please note that these predictions are based on the available information from the images and do not take into account any additional context or information that might be relevant to the driving situation.
+
+  - Inference time for this frame: 7.68s
+  - Tokens/sec for this frame: 40.63
+--------------------
+--- Processing Key Frame: 39961df49391439fbca612a8efe1c531 ---
+Model Output: The driving scene appears to be in a city area, with a large building on the right side of the road. The road is wet, suggesting recent rain, which could affect visibility and traction. There is a red car parked on the side of the road, and a white car is approaching from the opposite direction. The white car is positioned in the right lane, and it seems to be moving at a normal speed.
+
+There are no pedestrians visible in the image, and no traffic lights are present. The back camera shows a clear view of the road ahead, with no obstacles or vehicles in sight. The front camera shows the white car in the right lane, and the back camera shows the red car parked on the side of the road.
+
+Given the information, the ego vehicle should proceed straight, maintaining a normal speed to ensure safe driving conditions. The wet road may require extra caution, so the driver should be prepared for potential slippery conditions and adjust their speed accordingly.
+
+  - Inference time for this frame: 5.37s
+  - Tokens/sec for this frame: 40.05
+--------------------
+--- Processing Key Frame: 690c4ddabc7845f48f4831ac73129154 ---
+Model Output: The driving scene appears to be in a parking lot adjacent to a large industrial building. The parking lot is mostly empty, with only a few vehicles parked. The vehicles are parked in a way that suggests they are not currently in use, and there are no pedestrians visible in the scene.
+
+The key factors for driving planning include:
+
+1. The presence of obstacles: There are no significant obstacles visible in the scene, such as parked cars or large objects.
+2. The positions and movements of vehicles and pedestrians: The vehicles are parked and stationary, and there are no pedestrians visible in the scene.
+3. Traffic lights: There are no traffic lights visible in the scene.
+
+Given the information provided, the ego vehicle should proceed straight, as there are no obstacles or pedestrians to navigate around. The driving speed should be normal, as there are no indications of a need for speed or sudden braking.
+
+Please note that this description is based on the information provided by the images and does not take into account any additional context or information that may not be visible in the images.
+
+  - Inference time for this frame: 6.20s
+  - Tokens/sec for this frame: 40.34
+--------------------
+--- Processing Key Frame: b0e6fd5561454b2789c853e5350557a8 ---
+Model Output: The driving scene appears to be in an industrial area with a large building on the right side. The road is wet, suggesting recent rain, and the sky is overcast, indicating it might be a cloudy day.
+
+Key factors for driving planning:
+- There are no pedestrians visible in the image.
+- There are no traffic lights visible in the image.
+- The vehicles in the scene include a white truck parked on the left side of the road, a red car parked on the right side of the road, and a white car in the foreground.
+- The white truck is parked and stationary.
+- The red car is parked and stationary.
+- The white car is in motion, driving towards the right side of the road.
+
+Predictions for ego vehicle:
+- The ego vehicle will continue to drive straight ahead.
+- The ego vehicle will maintain a normal speed, as there are no indications of needing to slow down or speed up.
+
+Please note that these predictions are based on the available information and do not take into account any additional context or information that might be relevant to the driving situation.
+
+  - Inference time for this frame: 6.23s
+  - Tokens/sec for this frame: 40.28
+--------------------
+--- Processing Key Frame: c4b8c55ceed44c7e95c36e61b8a99ffe ---
+Model Output: The driving scene appears to be in a city area, with a large building on the right side of the road. The road is wet, suggesting recent rain, and the sky is overcast, indicating it might be a cloudy day. There are no pedestrians visible in the scene.
+
+The key factors for driving planning include:
+
+1. The presence of a large building on the right side of the road, which could potentially obstruct the view of oncoming traffic.
+2. The wet road conditions, which might require extra caution to avoid hydroplaning.
+3. The overcast sky, which could indicate reduced visibility or the possibility of rain.
+
+Predicting the behavior of the ego vehicle:
+
+1. The ego vehicle is currently driving straight ahead.
+2. The ego vehicle should maintain a safe speed, considering the wet road conditions and the possibility of reduced visibility due to the overcast sky.
+3. The ego vehicle should be prepared for any sudden changes in traffic or pedestrian movements, given the large building on the right side of the road.
+
+Please note that these predictions are based on the available information and do not take into account any additional context or specific driving conditions that may not be visible in the provided images.
+
+  - Inference time for this frame: 6.63s
+  - Tokens/sec for this frame: 40.55
+--------------------
+
+===== Scene b789de07180846cc972118ee6d1fb027 Summary (Memory Idea: False) =====
+Total End-to-End Time: 42.37s
+Total Inference-Only Time: 41.02s
+Total Generated Tokens: 1651
+Average Tokens/Second (Inference Only): 40.25
+========================================
+
+===== Processing Scene: b789de07180846cc972118ee6d1fb027 (Memory Idea: True) =====
+--- Processing Key Frame: 02c431d3d810472d9307d91e77fe495f ---
+Model Output: The driving scene appears to be in a city area, possibly near an industrial or commercial area given the presence of a large building and a parking lot. The road is wet, suggesting recent rain, which could affect visibility and traction.
+
+Key factors for driving planning include:
+
+1. The presence of a large building on the right side of the road, which might limit visibility around the corner.
+2. A parking lot with several cars parked, which could be entering or exiting the lot, potentially causing traffic flow changes.
+3. A truck parked on the side of the road, which could be obstructing the view of oncoming traffic.
+4. A pedestrian crossing visible on the right side of the road, indicating the need to be cautious of pedestrians.
+5. A traffic light visible on the left side of the road, which could be controlling the flow of traffic.
+
+Predictions for ego vehicle behavior:
+
+1. The ego vehicle should approach the intersection with caution, as there might be oncoming traffic from the large building or the parking lot.
+2. The ego vehicle should be prepared to slow down or stop if necessary to yield to pedestrians crossing the road.
+3. The ego vehicle should be aware of the traffic light and follow the signal accordingly.
+4. The ego vehicle should be prepared to turn left or right, depending on the traffic flow and the presence of any obstacles or pedestrians.
+5. The ego vehicle should maintain a safe speed, considering the wet road conditions and the presence of other vehicles and pedestrians.
+
+  - Inference time for this frame: 8.65s
+  - Tokens/sec for this frame: 40.94
+--------------------
+--- Processing Key Frame: 13ade121714c46d6a028516ecb5bff60 ---
+[1.0187688366525283e-11, 1.4789979019269595e-08, 1.479607476539968e-06, 5.406463515100768e-06, 1.0274660233733357e-08, 1.5912604567347444e-07, 6.414574727386935e-06, 4.023590008728206e-06, 6.1589198594447225e-06, 2.03413928829832e-05, 1.1553598824320943e-06, 1.1012836012014304e-06, 6.899347681610379e-06, 1.115952841246326e-06, 3.725629767359351e-06, 1.1907482075912412e-05, 1.1081230013587628e-06, 1.981418336072238e-06, 3.4155564776483516e-07, 9.512045373583078e-09, 3.945068965549581e-05, 2.142982680197747e-09, 1.875312705124088e-06, 3.9988399294088595e-06, 6.079751983634196e-06, 7.113351330190198e-07, 1.4446978639170993e-05, 6.6627849264477845e-06, 1.8800919932004945e-08, 4.436168765664661e-09, 7.573628863610793e-06, 1.8677421564916585e-07]
+Reused 0 tokens from the previous frame.
+Model Output: In the image, I see a typical city street setting. The key factors for driving planning include the presence of vehicles, obstacles, and pedestrians.
+
+1. Vehicles: In the image, two cars are visible. One car appears to be stopped or in stationary mode, while the other car is in motion, captured in the act of passing by the stop car, indicating a maneuver.
+
+2. Pedestrians: There are no visible pedestrians present on the sidewalk or in the roadway.
+
+3. Traffic lights: There are no visible traffic lights in this image, which might suggest the photo was taken from a point before or after a traffic signal.
+
+4. Obstacles: There seem to be no significant obstacles in the immediate foreground that require attention. However, there is a large, signless structure behind the open garage door, which could be an obstruction since it is unclear whether it is an approaching vehicle, pedestrian, or parked car.
+
+The ego vehicle's behavior would be based on the driving conditions and the intentions of the other vehicles. Given that the car in motion seems to be overtaking the stationary car, the driving direction of the ego vehicle would be to turn right and continue driving at an appropriate speed, which could be fast or normal, depending on the road and traffic conditions.
+
+  - Inference time for this frame: 8.26s
+  - Tokens/sec for this frame: 35.85
+--------------------
+--- Processing Key Frame: 39961df49391439fbca612a8efe1c531 ---
+[0.13011868298053741, 0.9012865424156189, 0.19962795078754425, 0.5171982645988464, 0.07974530756473541, 0.5314443707466125, 0.8318513631820679, 0.007242562714964151, 0.17904266715049744, 0.7011009454727173, 0.03635668754577637, 0.5769423246383667]
+[0.5499134659767151, 0.09522643685340881, 0.9577826261520386, 0.9215196371078491, 0.9959266185760498, 0.972793459892273, 0.8129503726959229, 0.33423516154289246, 0.7571622133255005, 0.9994204044342041, 0.08514588326215744, 0.6735496520996094, 0.060113802552223206, 0.9999529123306274, 0.9264025092124939, 0.5549383163452148, 0.38273173570632935, 0.9999927878379822, 0.9934504628181458, 1.0, 0.5801959037780762]
+[0.18161995708942413, 0.9963752627372742, 0.2242220938205719, 0.9989410638809204]
+[0.6042846441268921, 0.999974250793457, 0.9541638493537903, 0.9510945677757263, 0.03249608352780342, 0.9540727138519287, 0.27233657240867615, 0.9832115769386292, 0.006734911352396011, 0.0832938402891159, 0.8764651417732239, 0.8296781182289124, 0.5733504295349121]
+[0.4817064106464386, 0.23225292563438416, 0.10330036282539368, 0.9830282926559448, 0.9975168704986572, 0.05402699112892151, 0.11829780042171478, 0.03263453394174576, 0.004825217183679342, 0.9975358247756958, 0.19262799620628357, 0.6250349283218384, 0.27592727541923523, 0.9379521012306213, 0.9603478312492371, 0.5976641178131104, 0.5529371500015259, 0.2509181499481201, 0.9219768643379211, 0.7450785636901855, 0.0057818954810500145, 0.35648345947265625, 0.5702739953994751, 0.03241892158985138, 0.99906986951828, 0.01701814867556095, 0.4281498193740845, 0.4748118221759796, 0.013401279225945473, 0.29004406929016113, 0.05855143815279007, 0.22340275347232819, 0.25078749656677246, 0.01655278354883194, 0.997279942035675, 0.9995654225349426, 0.06383014470338821]
+[0.7552046775817871, 0.8080793023109436, 0.9964740872383118, 0.9999898076057434]
+[0.008023926056921482, 0.99992436170578, 0.9815083146095276, 1.0, 0.9287950992584229, 0.8070630431175232, 0.7344108819961548, 0.8568713068962097, 0.26850682497024536, 0.9970805644989014, 0.9999986886978149, 0.9996151328086853, 0.9999871253967285, 0.0004037658800370991, 0.06907901912927628, 0.9490780830383301, 0.6075324416160583, 0.621890127658844, 0.4494556486606598, 0.42583394050598145, 0.9485632181167603, 0.18058933317661285, 0.4518921673297882, 0.5349489450454712]
+[0.9427459836006165, 0.9996046423912048, 0.9985370635986328, 0.9999895691871643]
+[0.36809518933296204, 0.9999184012413025, 0.523281455039978, 0.9595069289207458, 0.5483487844467163, 0.6185933947563171, 0.6451478600502014, 0.10371366888284683, 0.9981847405433655, 0.9932745099067688, 0.8658402562141418, 0.1868399977684021, 0.5592122077941895, 0.23084621131420135, 0.4717843234539032, 0.09946546703577042, 0.4358128309249878, 0.15716293454170227, 0.2013387382030487, 0.8637502789497375, 0.9689866304397583, 0.07818499952554703, 0.6063805222511292, 0.0427079014480114, 0.03973960876464844, 0.2605586349964142, 0.805075466632843, 0.40766018629074097, 0.7599894404411316, 0.3753523528575897, 0.5100438594818115]
+[0.9654118418693542, 0.9999517202377319, 0.4104312062263489, 0.9999539852142334]
+[0.9375758171081543, 0.9905325770378113, 0.9979295134544373, 0.9839697480201721, 0.39782389998435974, 0.019182948395609856, 0.9991967082023621, 0.9999265074729919, 0.783464789390564, 0.5931709408760071, 0.9651648998260498, 0.9999769926071167, 0.31677907705307007, 0.813877522945404, 0.46899670362472534, 0.016708623617887497, 0.9988497495651245, 0.08624415844678879, 0.05469707399606705, 0.4123079478740692, 0.5499774813652039]
+[0.2893010973930359, 0.9999844431877136, 0.14534422755241394, 0.6648802757263184, 0.94974684715271, 0.2889051139354706, 0.06837558001279831, 0.0009286070708185434, 0.15714600682258606, 0.06586850434541702, 0.005897417664527893, 0.9020254015922546, 4.385778811411001e-05, 0.06888622045516968, 0.9983856678009033, 0.6770341992378235, 0.4514622390270233, 0.9115658402442932, 0.6151534914970398, 0.6513826847076416, 0.40094655752182007, 0.6958637833595276, 0.023327220231294632, 0.00048445205902680755, 0.6848855018615723, 0.2936457395553589, 0.12713681161403656, 0.10137102007865906, 0.8331336975097656, 0.7405861616134644, 0.1266789734363556, 0.001900846022181213, 0.7956084609031677, 0.10159976035356522, 0.14042800664901733, 0.9994137287139893, 0.7581635117530823, 0.9428805112838745, 0.9887039065361023, 0.00954962708055973, 0.9988837838172913, 0.20235398411750793, 0.7482384443283081]
+[0.9175422787666321, 0.9999669790267944, 0.018795011565089226, 0.3289105296134949, 0.9996418356895447, 0.9918836355209351, 0.21598424017429352, 0.9999993443489075, 0.6322631239891052, 0.14721113443374634, 0.3840866684913635, 0.04466988891363144, 0.9950433373451233, 0.6827090382575989, 0.0381866991519928, 0.10321512818336487, 0.5098270177841187, 0.4994429051876068, 0.019560925662517548, 0.7049528956413269, 0.9634182453155518, 0.4973064959049225, 0.6608413457870483, 0.4192635416984558, 0.40490102767944336]
+[0.22342273592948914, 0.4146498143672943, 0.7589685916900635, 0.2228614240884781, 0.543827474117279, 0.30695641040802, 0.03912070766091347, 0.9733254909515381, 0.9357212781906128, 0.10283548384904861, 0.9974161386489868, 0.999792754650116, 0.7011061310768127, 0.27681031823158264, 0.9992066025733948, 0.8983383774757385, 0.8867837190628052, 0.5621179342269897, 0.042798515409231186, 0.886059045791626, 0.050017453730106354, 0.979637086391449, 0.983773946762085, 0.9999470710754395, 0.9740972518920898, 0.5394409894943237, 0.6277109980583191, 0.35580316185951233, 0.2090236246585846, 0.7276554107666016, 0.12528163194656372, 0.07973257452249527, 0.30362755060195923, 0.36971837282180786, 0.07085981220006943, 0.9121611714363098, 0.9828543066978455, 0.3764911890029907, 0.20630905032157898, 0.14209948480129242, 0.7166057825088501, 0.19641317427158356, 0.4424935579299927, 0.627663254737854, 0.5757965445518494, 0.9080594182014465, 0.9985796213150024, 0.7566609382629395, 0.4426264464855194, 0.08711779862642288, 0.8786863684654236, 0.9792272448539734, 0.8516634106636047]
+Reused 296 tokens from the previous frame.
+Model Output: In the image, I see a typical city street setting. The key factors for driving planning include the presence of vehicles, obstacles, and pedestrians.
+
+1. Vehicles: In the image, two cars are visible. One car appears to be stopped or in stationary mode, while the other car is in motion, captured in the act of passing by the stop car, indicating a maneuver.
+
+2. Pedestrians: There are no visible pedestrians present on the sidewalk or in the roadway.
+
+3. Traffic lights: There are no visible traffic lights in this image, which might suggest the photo was taken from a point before or after a traffic signal.
+
+4. Obstacles: There seem to be no significant obstacles in the immediate foreground that require attention. However, there is a large, signless structure behind the open garage door, which could be an obstruction since it is unclear whether it is an approaching vehicle, pedestrian, or parked car.
+
+The ego vehicle's behavior would be based on the driving conditions and the intentions of the other vehicles. Given that the car in motion seems to be overtaking the stationary car, the driving direction of the ego vehicle would be to turn right and continue driving at an appropriate speed, which could be fast or normal, depending on the road and traffic conditions.
+
+  - Inference time for this frame: 0.48s
+  - Tokens/sec for this frame: 612.10
+--------------------
+--- Processing Key Frame: 690c4ddabc7845f48f4831ac73129154 ---
+[0.11117369681596756, 0.8987535834312439, 0.20348620414733887, 0.542948305606842, 0.07910021394491196, 0.5498696565628052, 0.8116088509559631, 0.014832173474133015, 0.1088356077671051, 0.706954300403595, 0.0444045215845108, 0.5746050477027893]
+[0.5149274468421936, 0.08996134251356125, 0.9610353112220764, 0.9151297211647034, 0.9955167770385742, 0.9706866145133972, 0.8031463027000427, 0.31971919536590576, 0.7867056727409363, 0.9993733763694763, 0.15647348761558533, 0.7078505158424377, 0.06516733020544052, 0.999925434589386, 0.9071819186210632, 0.5981723070144653, 0.2635065019130707, 0.9999900460243225, 0.9918660521507263, 1.0, 0.5719766616821289]
+[0.1625099629163742, 0.9968063831329346, 0.21207062900066376, 0.9990419149398804]
+[0.6983602643013, 0.9999829530715942, 0.9776351451873779, 0.9332664012908936, 0.03014153242111206, 0.9704425930976868, 0.29959991574287415, 0.9858527183532715, 0.00891263410449028, 0.7102351784706116, 0.8311890363693237, 0.7046912908554077, 0.40228769183158875]
+[0.6319913864135742, 0.32650110125541687, 0.11745575815439224, 0.980991780757904, 0.9982132911682129, 0.051724549382925034, 0.1312403380870819, 0.026802482083439827, 0.005966536235064268, 0.9976522922515869, 0.18877744674682617, 0.6711808443069458, 0.38297566771507263, 0.9600140452384949, 0.9596629738807678, 0.5732149481773376, 0.6006379723548889, 0.21120356023311615, 0.9203095436096191, 0.7375257015228271, 0.006102229468524456, 0.38041746616363525, 0.5695300102233887, 0.034062713384628296, 0.9990206360816956, 0.029119620099663734, 0.4349600374698639, 0.4330112040042877, 0.008542533032596111, 0.4824554920196533, 0.0483069084584713, 0.22942236065864563, 0.2627424895763397, 0.014356079511344433, 0.9972432851791382, 0.9995996356010437, 0.06968996673822403]
+[0.6978464722633362, 0.7996849417686462, 0.9971397519111633, 0.9999904632568359]
+[0.010426569730043411, 0.999934196472168, 0.9803571105003357, 0.9999998807907104, 0.9239563941955566, 0.803207516670227, 0.7358139157295227, 0.8460136651992798, 0.28787627816200256, 0.996661901473999, 0.9999986886978149, 0.9996753334999084, 0.9999922513961792, 0.00046000193106010556, 0.06813172996044159, 0.9525102972984314, 0.5593212246894836, 0.5994425415992737, 0.42045554518699646, 0.43199074268341064, 0.9528193473815918, 0.1900654435157776, 0.43838199973106384, 0.5855776071548462]
+[0.9478912949562073, 0.9997113943099976, 0.9987900257110596, 0.9999898672103882]
+[0.3173372149467468, 0.9999189972877502, 0.5390383005142212, 0.9564104676246643, 0.5490974187850952, 0.5864560604095459, 0.6148201823234558, 0.10047522187232971, 0.9981688261032104, 0.9933539628982544, 0.8668718338012695, 0.20453554391860962, 0.5448154807090759, 0.2277102768421173, 0.47801852226257324, 0.09772840887308121, 0.418131560087204, 0.15343241393566132, 0.22659578919410706, 0.8648901581764221, 0.9703527688980103, 0.09071513265371323, 0.6238208413124084, 0.04329412803053856, 0.03552801534533501, 0.2343345582485199, 0.7916172742843628, 0.4211428463459015, 0.7537820339202881, 0.36712077260017395, 0.5413796901702881]
+[0.9648596048355103, 0.9999467134475708, 0.4398077726364136, 0.9999610185623169]
+[0.9408059120178223, 0.9906700849533081, 0.9981735944747925, 0.9828668236732483, 0.3954927623271942, 0.021794363856315613, 0.9992091655731201, 0.9999228715896606, 0.6597639918327332, 0.5941506624221802, 0.9662776589393616, 0.9999774694442749, 0.3257575035095215, 0.8340824246406555, 0.4219956696033478, 0.021549362689256668, 0.9987253546714783, 0.09467984735965729, 0.05170558765530586, 0.39799270033836365, 0.5312599539756775]
+[0.3494817018508911, 0.9999852180480957, 0.16033270955085754, 0.5177810788154602, 0.9300734996795654, 0.14884063601493835, 0.05553048476576805, 0.00021880680287722498, 0.1178082600235939, 0.06584594398736954, 0.004499793518334627, 0.9185687303543091, 5.7401346566621214e-05, 0.1601441502571106, 0.9963905215263367, 0.6046751737594604, 0.45955702662467957, 0.908445417881012, 0.620479166507721, 0.6543372869491577, 0.39309170842170715, 0.6361847519874573, 0.0259537510573864, 0.00046192738227546215, 0.6791964173316956, 0.2714448571205139, 0.12774987518787384, 0.10261104255914688, 0.8445706367492676, 0.7560186386108398, 0.13417616486549377, 0.0019587574061006308, 0.7522506713867188, 0.10452249646186829, 0.12527935206890106, 0.9994658827781677, 0.7695727944374084, 0.9408325552940369, 0.9891936779022217, 0.011193445883691311, 0.9992805123329163, 0.2226693034172058, 0.7521954774856567]
+[0.9209610223770142, 0.9999642372131348, 0.018832694739103317, 0.31048309803009033, 0.9996906518936157, 0.9943395256996155, 0.2200518250465393, 0.9999995231628418, 0.6226028203964233, 0.16881628334522247, 0.3720933198928833, 0.046498242765665054, 0.995250403881073, 0.6832406520843506, 0.040323276072740555, 0.12459319829940796, 0.48764950037002563, 0.501446008682251, 0.018266569823026657, 0.6859272122383118, 0.9667790532112122, 0.5078141689300537, 0.6322687864303589, 0.459940105676651, 0.3374697268009186]
+[0.2280607521533966, 0.40340057015419006, 0.7100275754928589, 0.26176437735557556, 0.5332866311073303, 0.29907432198524475, 0.03673041611909866, 0.9759031534194946, 0.9343956708908081, 0.11615689843893051, 0.9975873231887817, 0.9998264312744141, 0.709394097328186, 0.26347631216049194, 0.9991858601570129, 0.9170778393745422, 0.8982155323028564, 0.6090366244316101, 0.03285424783825874, 0.8812507390975952, 0.0486111156642437, 0.9802092909812927, 0.9858109951019287, 0.9999470710754395, 0.9782781004905701, 0.5444927215576172, 0.6193249821662903, 0.3415254056453705, 0.20685958862304688, 0.7254437804222107, 0.12002025544643402, 0.08574952930212021, 0.2971566915512085, 0.3565065860748291, 0.07362621277570724, 0.9213935732841492, 0.9842527508735657, 0.37731343507766724, 0.18539400398731232, 0.14861880242824554, 0.704633891582489, 0.2013101428747177, 0.4295406937599182, 0.6190611720085144, 0.5744781494140625, 0.9052831530570984, 0.9985975623130798, 0.758224368095398, 0.44558611512184143, 0.08229023963212967, 0.8653482794761658, 0.9785951972007751, 0.8489444851875305]
+Reused 296 tokens from the previous frame.
+Model Output: In the image, I see a typical city street setting. The key factors for driving planning include the presence of vehicles, obstacles, and pedestrians.
+
+1. Vehicles: In the image, two cars are visible. One car appears to be stopped or in stationary mode, while the other car is in motion, captured in the act of passing by the stop car, indicating a maneuver.
+
+2. Pedestrians: There are no visible pedestrians present on the sidewalk or in the roadway.
+
+3. Traffic lights: There are no visible traffic lights in this image, which might suggest the photo was taken from a point before or after a traffic signal.
+
+4. Obstacles: There seem to be no significant obstacles in the immediate foreground that require attention. However, there is a large, signless structure behind the open garage door, which could be an obstruction since it is unclear whether it is an approaching vehicle, pedestrian, or parked car.
+
+The ego vehicle's behavior would be based on the driving conditions and the intentions of the other vehicles. Given that the car in motion seems to be overtaking the stationary car, the driving direction of the ego vehicle would be to turn right and continue driving at an appropriate speed, which could be fast or normal, depending on the road and traffic conditions.
+
+  - Inference time for this frame: 0.49s
+  - Tokens/sec for this frame: 607.76
+--------------------
+--- Processing Key Frame: b0e6fd5561454b2789c853e5350557a8 ---
+[0.10907670110464096, 0.8924142718315125, 0.18317396938800812, 0.5368552207946777, 0.09404730051755905, 0.5158903002738953, 0.8252220749855042, 0.002858109073713422, 0.09608783572912216, 0.5853791832923889, 0.03987913951277733, 0.5283947587013245]
+[0.5184903144836426, 0.0897151529788971, 0.959617555141449, 0.9231269955635071, 0.9958608746528625, 0.9732561707496643, 0.8112356066703796, 0.3397938907146454, 0.8104279637336731, 0.9995481371879578, 0.10164447128772736, 0.654134213924408, 0.0507776141166687, 0.9999472498893738, 0.9118024706840515, 0.5992322564125061, 0.28781595826148987, 0.9999922513961792, 0.9931416511535645, 1.0, 0.5992612838745117]
+[0.16898299753665924, 0.9968113303184509, 0.2106173038482666, 0.9989904761314392]
+[0.6616456508636475, 0.9999828338623047, 0.9743561148643494, 0.9407034516334534, 0.034100160002708435, 0.9447413682937622, 0.28254029154777527, 0.9808224439620972, 0.006732265464961529, 0.3858090341091156, 0.7960450053215027, 0.8421072363853455, 0.4240128993988037]
+[0.6073365807533264, 0.28437721729278564, 0.10856473445892334, 0.9782587289810181, 0.9980456829071045, 0.039765968918800354, 0.13344192504882812, 0.02792840078473091, 0.005249956157058477, 0.9976204037666321, 0.191744863986969, 0.6937921643257141, 0.3901132345199585, 0.9553253650665283, 0.9625440835952759, 0.6262299418449402, 0.5931565761566162, 0.289122074842453, 0.944961428642273, 0.7555406093597412, 0.004075756762176752, 0.3873063325881958, 0.5990862250328064, 0.03108864277601242, 0.9990354776382446, 0.014325123280286789, 0.4035264849662781, 0.4670725464820862, 0.008536770939826965, 0.48394426703453064, 0.04945121333003044, 0.2269979566335678, 0.27500951290130615, 0.015008793212473392, 0.997104287147522, 0.9995739459991455, 0.07287105172872543]
+[0.6864440441131592, 0.7441365718841553, 0.9962588548660278, 0.9999895691871643]
+[0.009953801520168781, 0.9999397397041321, 0.9831352233886719, 1.0, 0.9294598698616028, 0.7985661625862122, 0.7339041829109192, 0.7949956655502319, 0.28057464957237244, 0.9968600273132324, 0.9999988079071045, 0.9996494054794312, 0.9999845027923584, 0.0003900667652487755, 0.06381380558013916, 0.9510153532028198, 0.5284419655799866, 0.6202496886253357, 0.3957570493221283, 0.42545247077941895, 0.9488881230354309, 0.21664343774318695, 0.4248584806919098, 0.5618305206298828]
+Reused 104 tokens from the previous frame.
+Model Output: In the image, I see a typical city street setting. The key factors for driving planning include the presence of vehicles, obstacles, and pedestrians.
+
+1. Vehicles: In the image, two cars are visible. One car appears to be stopped or in stationary mode, while the other car is in motion, captured in the act of passing by the stop car, indicating a maneuver.
+
+2. Pedestrians: There are no visible pedestrians their behalf.
+
+2. Obstacles: A black truck is blocking the view to the right side of the road. Other than that, the road appears clean and free of major obstructions.
+
+3. Traffic lights: There are traffic lights present, with the most visible one showing a red light.
+
+As for the driving scene, based on the image, the ego vehicle on the right side seems to be in its proper lane. While I cannot provide exact positions for other vehicles or pedestrians, I can make some predictions:
+
+- Based on the stopping car and the fact that the ego vehicle is in its proper lane, I would predict that the turn right signal on the ego vehicle should be operator viewable.
+  - The driving direction should be straight, provided no pedestrian or vehicle is obstructing the right turn.
+  - The vehicle is moving at a normal speed, given the current road conditions and the stopped traffic.
+
+Please note that actual road conditions and interactions with other road users could differ from this prediction, especially due to the distance between the vehicles and the possibility of the driver's or other road user's actions.
+
+  - Inference time for this frame: 7.12s
+  - Tokens/sec for this frame: 50.02
+--------------------
+--- Processing Key Frame: c4b8c55ceed44c7e95c36e61b8a99ffe ---
+[0.12438653409481049, 0.8969687819480896, 0.24439725279808044, 0.5503771305084229, 0.0686977356672287, 0.5771021246910095, 0.8689817786216736, 0.008615254424512386, 0.19270934164524078, 0.7983304262161255, 0.03194086253643036, 0.5562590956687927]
+[0.5066502690315247, 0.0768844485282898, 0.9578192234039307, 0.9282581806182861, 0.9956423044204712, 0.9697349667549133, 0.8090426325798035, 0.3260484039783478, 0.7846071720123291, 0.9994707703590393, 0.07846450060606003, 0.6954838633537292, 0.039268575608730316, 0.9999244213104248, 0.8997410535812378, 0.5447340607643127, 0.31954026222229004, 0.9999919533729553, 0.9919894337654114, 1.0, 0.572533905506134]
+[0.12749497592449188, 0.9965924024581909, 0.20764130353927612, 0.9990363121032715]
+[0.6119943857192993, 0.9999806880950928, 0.9660183191299438, 0.9410692453384399, 0.020984699949622154, 0.9531652331352234, 0.3442499041557312, 0.9795302152633667, 0.011955108493566513, 0.7706828117370605, 0.8418478965759277, 0.6832932829856873, 0.4234897494316101]
+[0.5415705442428589, 0.2616926431655884, 0.09743247926235199, 0.9780444502830505, 0.9979260563850403, 0.046404700726270676, 0.1093798354268074, 0.02617473714053631, 0.005252390168607235, 0.9977198243141174, 0.20738594233989716, 0.6449063420295715, 0.37072888016700745, 0.9685564041137695, 0.9538120627403259, 0.5864351987838745, 0.5958656072616577, 0.19628308713436127, 0.9083771109580994, 0.7480153441429138, 0.006403552368283272, 0.3706264793872833, 0.5990854501724243, 0.03553012013435364, 0.9992207288742065, 0.03481829911470413, 0.48109686374664307, 0.4973890483379364, 0.009334607981145382, 0.49564409255981445, 0.04749734699726105, 0.2337372601032257, 0.26426446437835693, 0.015000199899077415, 0.9973047375679016, 0.999599277973175, 0.07146621495485306]
+[0.7939983010292053, 0.7552411556243896, 0.997053861618042, 0.9999889731407166]
+[0.011805165559053421, 0.9999344348907471, 0.9774491190910339, 1.0, 0.9386101961135864, 0.8026118874549866, 0.7257825136184692, 0.7927098870277405, 0.2854941189289093, 0.997130811214447, 0.9999986886978149, 0.9996539354324341, 0.9999842643737793, 1.04343186535516e-07, 1.2645528840948828e-05, 0.9947755932807922, 0.3418327867984772]
+Reused 104 tokens from the previous frame.
+Model Output: In the image, I see a typical city street setting. The key factors for driving planning include the presence of vehicles, obstacles, and pedestrians.
+
+1. Vehicles: In the image, two cars are visible. One car appears to be stopped or in stationary mode, while the other car is in motion, captured in the act of passing by the stop car, indicating a maneuver.
+
+2. Pedestrians: There are no visible pedestrians.
+
+2. Obstacles: There is a tall building to the right and a smaller building to the left, which may obstruct the driver's view and certainly affects parking or maneuvering options. The tall building has a sort of storefront area, which can sometimes be misleading about the entry to the premises. A parking light is also visible.
+
+3. Traffic lights: I don't see any visible traffic signals to guide the driving behavior.
+
+Based on this information, I'll predict the behavior of the car without knowing the specific model and capabilities of this car:
+
+* Driving Scenario: Given that it is a city street, the approach would be to proceed cautiously, knowing that other cars might be pulling in or out of parking spots, and people might be entering and exiting the buildings.
+* Steering Behavior: I would predict that the driver will maintain a sense of caution and of speed depending on the road conditions.
+* Driving Speed: The vehicle will likely travel at a moderate speed, perhaps decelerating closer to the stop point to allow the car to pass safely.
+
+Please note that these predictions are made based on the visual information available and do not account for the capabilities and sensors of the car.
+
+  - Inference time for this frame: 7.81s
+  - Tokens/sec for this frame: 48.92
+--------------------
+
+===== Scene b789de07180846cc972118ee6d1fb027 Summary (Memory Idea: True) =====
+Total End-to-End Time: 34.16s
+Total Inference-Only Time: 32.80s
+Total Generated Tokens: 1980
+Average Tokens/Second (Inference Only): 60.37
+========================================
+
+===== Processing Scene: 41fde20fedcd4d22ab26811688612870 (Memory Idea: False) =====
+--- Processing Key Frame: 23e7d17b256348638af3b2739b80a5ca ---
+Model Output: The driving scene appears to be on a two-lane road with a clear view of the road ahead. There are no visible obstacles, such as parked cars or pedestrians, in the immediate vicinity. The traffic lights are not visible in the images provided.
+
+The ego vehicle is currently on the right side of the road, moving in the same direction as the traffic flow. The road ahead seems to be clear, and there are no other vehicles or pedestrians visible in the images.
+
+Given the absence of obstacles and the clear view of the road ahead, the ego vehicle should continue driving straight at its current speed. The driving speed appears to be normal, and there is no need to slow down or change direction.
+
+  - Inference time for this frame: 4.06s
+  - Tokens/sec for this frame: 39.12
+--------------------
+--- Processing Key Frame: 2c1f8867c60b44f09ee37b5df1d1ad24 ---
+Model Output: The driving scene appears to be in a suburban area with a mix of residential and commercial buildings. The road is lined with trees and there are sidewalks on both sides. The sky is overcast, suggesting it might be a cool or cloudy day.
+
+Key factors for driving planning include:
+
+1. The presence of a bus in the middle lane, which is turning right.
+2. A car in the right lane, which is also turning right.
+3. A bicycle parked on the sidewalk, indicating a bike-friendly area.
+4. A pedestrian walking on the sidewalk, suggesting a pedestrian-friendly area.
+5. A traffic light ahead, which is currently not visible in the images.
+
+Predictions for ego vehicle behavior:
+
+1. The ego vehicle should slow down and prepare to turn right, following the bus and the car in front of it.
+2. The ego vehicle should maintain a safe distance from the bus and the car in front of it, as they are turning right.
+3. The ego vehicle should be prepared to stop if necessary, as there is a pedestrian on the sidewalk.
+4. The ego vehicle should be cautious of the bicycle parked on the sidewalk, as it may be obstructing the view of pedestrians or other vehicles.
+5. The ego vehicle should be aware of the traffic light ahead and adjust its speed accordingly.
+
+Please note that these predictions are based on the available information and do not take into account any additional context or the driver's intentions.
+
+  - Inference time for this frame: 8.65s
+  - Tokens/sec for this frame: 40.94
+--------------------
+--- Processing Key Frame: 4de7963785f34de7afb9e5aae3ce6f9f ---
+Model Output: The driving scene appears to be a quiet, residential area with a clear road ahead. There are no visible obstacles, such as parked cars or pedestrians, in the immediate vicinity. The traffic lights are not visible in the images provided.
+
+The ego vehicle is currently driving straight ahead, as indicated by the position of the front camera. The back camera shows the road is clear behind the ego vehicle, and the side mirrors indicate no vehicles are approaching from the sides. The speed of the ego vehicle appears to be normal, as there are no indications of sudden braking or acceleration.
+
+Given the absence of any immediate hazards or obstacles, the ego vehicle should continue driving straight ahead at a normal speed.
+
+  - Inference time for this frame: 4.09s
+  - Tokens/sec for this frame: 39.12
+--------------------
+--- Processing Key Frame: a32eb5c0d8514895af2af5889c1f5199 ---
+Model Output: The driving scene appears to be on a two-lane road with a clear view of the road ahead. There are no visible obstacles, such as parked cars or pedestrians, in the immediate vicinity. The traffic lights are not visible in the images provided.
+
+The ego vehicle is currently on the right side of the road, moving in the direction of the front-right camera. The road ahead seems to be clear, and there are no other vehicles or pedestrians visible in the images.
+
+Given the absence of obstacles and the clear view of the road ahead, the ego vehicle should continue driving straight at its current speed. The driver should remain vigilant for any potential changes in the road conditions or the actions of other drivers.
+
+  - Inference time for this frame: 4.12s
+  - Tokens/sec for this frame: 39.30
+--------------------
+
+===== Scene 41fde20fedcd4d22ab26811688612870 Summary (Memory Idea: False) =====
+Total End-to-End Time: 21.85s
+Total Inference-Only Time: 20.92s
+Total Generated Tokens: 835
+Average Tokens/Second (Inference Only): 39.91
+========================================
+
+===== Processing Scene: 41fde20fedcd4d22ab26811688612870 (Memory Idea: True) =====
+--- Processing Key Frame: 23e7d17b256348638af3b2739b80a5ca ---
+Model Output: The driving scene appears to be on a two-lane road with a clear view of the road ahead. There are no visible obstacles, such as parked cars or pedestrians, in the immediate vicinity. The traffic lights are not visible in the images provided.
+
+The ego vehicle is currently on the right side of the road, moving in the same direction as the traffic flow. The road ahead seems to be clear, and there are no other vehicles or pedestrians visible in the images.
+
+Given the absence of obstacles and the clear view of the road ahead, the ego vehicle should continue driving straight at its current speed. The driving speed appears to be normal, and there is no need to slow down or change direction.
+
+  - Inference time for this frame: 4.09s
+  - Tokens/sec for this frame: 38.90
+--------------------
+--- Processing Key Frame: 2c1f8867c60b44f09ee37b5df1d1ad24 ---
+[9.721975828547169e-12, 2.1330498256588726e-08, 1.2169201681899722e-06, 5.066817266197177e-06, 5.70549385514596e-09, 1.5759407290261152e-07, 2.399819777565426e-06, 1.4062397895031609e-06, 1.4379639651451726e-05, 2.1473741895761123e-08, 4.824544763692984e-09, 9.855689597770834e-09, 4.45992600361933e-06, 5.674836756952573e-06, 1.577185685164295e-05, 6.335241050692275e-05, 5.750344371335814e-06, 2.161200882255798e-06, 2.754122942860704e-05, 2.16269972952432e-06, 4.126341445953585e-05, 7.274802982237816e-08]
+Reused 0 tokens from the previous frame.
+Model Output: The driving scene presents a quiet residential street with minimal traffic. There are trees along the road, suggesting a suburban area. Some pedestrians can be seen near the buildings, acting as unseen traffic lights, indicating the need for attentiveness and cautious driving.
+
+No obstacles stand out in the immediate vicinity. The trees run along the road on both sides, providing a sense of shelter and nature. Traffic lights appear to be non-existent in this area. A car is visible ahead, indicating that either it should slow down or pass the stop line if this image was taken from the front camera of the vehicle with other cars visible in the background, giving a sense of a less congested place.
+
+Predicting ego vehicle's behavior: since the traffic is light, there are no immediate obstacles or hazards within the captured view. The driver should maintain a moderate speed while navigating through the area and possibly adjust for localized traffic conditions. The large expanse suggests there is enough space to the sides to change lanes or make turns, especially since there is no measure of oncoming traffic or pedestrians within the horizontal span of the image. No traffic lights show up yet to enforce a change in direction or speed.
+
+  - Inference time for this frame: 7.44s
+  - Tokens/sec for this frame: 35.91
+--------------------
+--- Processing Key Frame: 4de7963785f34de7afb9e5aae3ce6f9f ---
+[0.6449677348136902, 0.8591417074203491, 0.9979020357131958, 0.0267183780670166, 0.8386825919151306, 0.1232982948422432, 0.12422925233840942, 0.9999982714653015, 0.523695170879364, 0.4344341456890106, 0.043399132788181305, 0.8739186525344849, 0.8029012084007263]
+[0.1879974901676178, 0.2934381067752838, 0.04150295630097389, 0.07261595875024796, 0.913009762763977, 0.12381540238857269, 0.5107187032699585, 0.14849014580249786, 0.7678074240684509, 0.7197776436805725, 0.9978036880493164, 0.18953318893909454, 0.7067431211471558]
+[0.0007667371537536383, 0.03453635796904564, 0.999980628490448, 0.878829300403595, 0.9999992847442627, 0.5273221135139465, 0.9989402294158936, 0.8130998611450195, 0.047229401767253876, 0.9234554171562195, 0.05938582494854927, 0.7577251195907593, 7.128169090719894e-05, 0.9543926119804382, 0.002949642715975642, 0.45379555225372314, 0.26106661558151245, 0.13919499516487122, 0.09116185456514359, 0.5334528684616089, 0.08451581746339798, 0.4334796965122223, 0.41484978795051575, 0.017343033105134964, 0.9996906518936157, 0.2875255346298218, 0.3018869459629059, 0.10175956785678864, 0.9998337030410767, 0.9992349147796631, 0.9212730526924133, 0.8622862696647644]
+[0.5898837447166443, 0.9993489384651184, 0.03371733799576759, 0.42907318472862244, 0.9982194900512695, 0.0020619865972548723, 0.9149351119995117, 0.5354543924331665, 0.8945761322975159, 0.5718339085578918, 0.4866114854812622, 0.9999926090240479, 0.1733304262161255]
+[0.5949446558952332, 0.0009878402343019843, 6.432472582673654e-05, 0.47015315294265747, 0.8478959202766418, 0.1433103233575821, 0.048682499676942825, 0.8501898646354675, 0.9865010380744934, 0.906568706035614, 0.22098249197006226, 0.8731033205986023, 0.10078404098749161, 0.9997335076332092, 0.008991627022624016, 0.4816695749759674, 0.03169526532292366, 0.8159536719322205]
+[0.017954755574464798, 0.9992107152938843, 0.7450258135795593, 0.012219250202178955, 0.7862130403518677, 0.9862101078033447, 0.05655839666724205, 0.9992533326148987, 0.5436455607414246, 0.9991634488105774, 0.25151386857032776, 0.4914502799510956, 0.30677586793899536, 0.24325206875801086]
+[0.008227669633924961, 0.06169940531253815, 0.7376253008842468, 0.4284282624721527, 0.26961955428123474, 0.642463743686676, 0.1535395085811615, 0.5140452980995178, 0.0019240635447204113, 0.29551106691360474, 0.002362484810873866, 0.27288439869880676, 0.9721131920814514, 0.5159632563591003, 0.015091422013938427, 0.25815001130104065, 0.007268961053341627, 0.24267007410526276, 0.2257228046655655, 0.027317315340042114, 0.005570319481194019, 0.14808394014835358, 0.5097733736038208, 0.5671210885047913, 0.7354341149330139, 0.4064042866230011, 0.2928609848022461, 0.24738334119319916, 0.8705137372016907, 0.3272387981414795, 0.002380179474130273, 0.005984290037304163, 0.32108569145202637, 0.05637592077255249, 0.48812270164489746, 0.9516567587852478, 0.24063661694526672, 0.3205745220184326, 0.005935936700552702, 0.3035988509654999, 0.7081862688064575, 0.938592255115509, 0.10078033804893494, 0.042319055646657944, 0.259747713804245, 0.999974250793457, 0.9999969005584717, 0.0006496294518001378, 0.8350710868835449]
+[0.8850829005241394, 0.9999577403068542, 0.23557651042938232, 0.6957045197486877, 0.7488350868225098, 0.06657569855451584, 0.9998099207878113, 0.9917037487030029, 0.22095096111297607, 0.9999923706054688, 0.9879140257835388, 0.603257417678833, 0.0026432194281369448, 0.3428393602371216, 0.015193482860922813, 0.344913512468338, 0.4591687023639679, 0.4916645586490631, 0.030149444937705994, 0.06733033061027527, 0.800070583820343, 0.6903539299964905, 0.2259855419397354, 0.9998242855072021, 0.2620016038417816, 0.1026151031255722, 0.9999631643295288, 0.9942530989646912, 0.004543730989098549, 0.7600623369216919, 0.01982904225587845, 0.16312327980995178, 0.501744270324707]
+[0.4976361393928528, 0.022327927872538567, 0.7971532344818115, 0.14518894255161285, 0.7596608400344849, 0.11430799216032028, 0.9956971406936646, 0.920433759689331, 0.03556247800588608, 0.027064012363553047, 0.999916672706604, 0.1059049740433693, 0.6872962117195129, 0.16104741394519806, 0.023909224197268486, 0.007870526984333992, 0.09013571590185165, 0.11978504061698914, 0.010194956324994564, 0.01561629306524992, 0.33659297227859497, 0.45444023609161377, 0.5350921154022217]
+[0.3089931309223175, 0.0005243603955022991, 0.03482687845826149, 0.9854646325111389, 0.008292699232697487, 0.05113999545574188, 0.2717706561088562, 0.16750118136405945, 0.4694313406944275, 0.5870692729949951, 0.0003566335653886199, 0.09656842797994614, 0.19050860404968262, 0.056989721953868866, 0.8890103697776794, 0.9999908804893494, 0.5128151178359985, 0.28925907611846924, 0.6412283778190613, 0.13636934757232666, 0.013877754099667072, 0.13498641550540924, 0.22405223548412323, 0.23011857271194458, 0.551407516002655, 2.046275540124043e-06, 0.33670341968536377, 0.12784640491008759, 0.9812678694725037, 0.9410181641578674, 0.17584048211574554, 0.4327578544616699, 0.9994292855262756, 0.8079968094825745, 0.9999988079071045, 0.020396096631884575, 0.788383424282074, 4.06442595703993e-05, 0.04098343849182129, 0.7224340438842773, 0.8823582530021667, 0.37041184306144714, 0.8414638042449951]
+[0.004533250350505114, 0.015739688649773598, 0.4679968059062958, 0.0015515423147007823, 0.4234500825405121, 0.0004590220341924578, 0.01713966391980648, 0.002908595371991396, 0.9919143319129944, 0.20239025354385376, 0.07109032571315765, 0.6774216890335083, 0.6812055110931396, 0.3148745894432068, 0.8893328309059143, 0.653201699256897]
+Reused 267 tokens from the previous frame.
+Model Output: The driving scene presents a quiet residential street with minimal traffic. There are trees along the road, suggesting a suburban area. Some pedestrians can be seen near the buildings, acting as unseen traffic lights, indicating the need for attentiveness and cautious driving.
+
+No obstacles stand out in the immediate vicinity. The trees run along the road on both sides, providing a sense of shelter and nature. Traffic lights appear to be non-existent in this area. A car is visible ahead, indicating that either it should slow down or pass the stop line if this image was taken from the front camera of the vehicle with other cars visible in the background, giving a sense of a less congested place.
+
+Predicting ego vehicle's behavior: since the traffic is light, there are no immediate obstacles or hazards within the captured view. The driver should maintain a moderate speed while navigating through the area and possibly adjust for localized traffic conditions. The large expanse suggests there is enough space to the sides to change lanes or make turns, especially since there is no measure of oncoming traffic or pedestrians within the horizontal span of the image. No traffic lights show up yet to enforce a change in direction or speed.
+
+  - Inference time for this frame: 0.48s
+  - Tokens/sec for this frame: 560.69
+--------------------
+--- Processing Key Frame: a32eb5c0d8514895af2af5889c1f5199 ---
+[0.6462690830230713, 0.870067834854126, 0.9981339573860168, 0.024992235004901886, 0.8671513795852661, 0.07941971719264984, 0.10346770286560059, 0.9999985694885254, 0.4774518311023712, 0.40567049384117126, 0.0347045436501503, 0.8935118913650513, 0.8269856572151184]
+[0.19525864720344543, 0.36823463439941406, 0.08744876086711884, 0.05643849819898605, 0.8842234015464783, 0.13478316366672516, 0.5176218152046204, 0.14142821729183197, 0.7637346386909485, 0.7268926501274109, 0.9980348944664001, 0.1798432469367981, 0.66317218542099]
+[0.0009746077703312039, 0.034396201372146606, 0.9999840259552002, 0.9589681625366211, 0.9999990463256836, 0.5012498497962952, 0.9990885257720947, 0.81596839427948, 0.04517778381705284, 0.924153208732605, 0.06100260093808174, 0.7790008187294006, 8.999445708468556e-05, 0.9527952671051025, 0.0023761731572449207, 0.40723130106925964, 0.23199598491191864, 0.17120812833309174, 0.09430839121341705, 0.5409035086631775, 0.08251286298036575, 0.37587296962738037, 0.4224553108215332, 0.020466787740588188, 0.9996930360794067, 0.2626338303089142, 0.3086850345134735, 0.10348773747682571, 0.9998272061347961, 0.9992541074752808, 0.9236212968826294, 0.8722776174545288]
+[0.5850555300712585, 0.999378502368927, 0.0350194051861763, 0.4877675771713257, 0.9984927773475647, 0.0020603344310075045, 0.921295166015625, 0.5327505469322205, 0.9025235176086426, 0.6000914573669434, 0.4762583374977112, 0.9999921917915344, 0.1686839610338211]
+[0.5819923281669617, 0.0014219182776287198, 5.028977102483623e-05, 0.46841490268707275, 0.826026976108551, 0.15776768326759338, 0.04837273061275482, 0.869438111782074, 0.9859858751296997, 0.914616048336029, 0.20474380254745483, 0.864005982875824, 0.08517061918973923, 0.9997420907020569, 0.00858053658157587, 0.48456835746765137, 0.039279766380786896, 0.8258925080299377]
+[0.015450159087777138, 0.9990756511688232, 0.6725200414657593, 0.010790012776851654, 0.7953620553016663, 0.9865349531173706, 0.048846032470464706, 0.9992573857307434, 0.5855578184127808, 0.9992209672927856, 0.22388844192028046, 0.5225104093551636, 0.34136179089546204, 0.2354794293642044]
+[0.009049090556800365, 0.06090453639626503, 0.722355842590332, 0.489810049533844, 0.31211355328559875, 0.6467669606208801, 0.1709144562482834, 0.52573162317276, 0.001686585252173245, 0.28351283073425293, 0.0024984576739370823, 0.28367879986763, 0.9718087911605835, 0.5095920562744141, 0.014483848586678505, 0.26789531111717224, 0.007186978589743376, 0.20697131752967834, 0.24229958653450012, 0.026142220944166183, 0.005137450527399778, 0.17250823974609375, 0.5039122700691223, 0.5769332647323608, 0.7401669025421143, 0.44794559478759766, 0.30424317717552185, 0.2609323263168335, 0.8816349506378174, 0.3304280638694763, 0.002145308069884777, 0.005057372618466616, 0.34205830097198486, 0.07142980396747589, 0.5216068625450134, 0.9644219279289246, 0.24173682928085327, 0.3163831830024719, 0.005447537172585726, 0.30562466382980347, 0.7036181688308716, 0.938591718673706, 0.10511820763349533, 0.036359429359436035, 0.2758738398551941, 0.9999760389328003, 0.9999969005584717, 0.0007026286330074072, 0.8314041495323181]
+[0.8833886981010437, 0.9999620914459229, 0.24127429723739624, 0.6902298927307129, 0.726824164390564, 0.07053180783987045, 0.9998217225074768, 0.9928576946258545, 0.20043909549713135, 0.9999932646751404, 0.9900203943252563, 0.6074544191360474, 0.002677476266399026, 0.34909459948539734, 0.016490530222654343, 0.34212663769721985, 0.51134192943573, 0.4882647395133972, 0.029291365295648575, 0.06385022401809692, 0.800419270992279, 0.6903102397918701, 0.25540727376937866, 0.9998337030410767, 0.24782340228557587, 0.11672133952379227, 0.9999658465385437, 0.9949167966842651, 0.004138341639190912, 0.7625060677528381, 0.020788488909602165, 0.16955125331878662, 0.4854324460029602]
+[0.4941052794456482, 0.02369665540754795, 0.8108832836151123, 0.15710268914699554, 0.7648100852966309, 0.11191309243440628, 0.9953176379203796, 0.917844831943512, 0.03685096278786659, 0.02594085782766342, 0.9999134540557861, 0.11229698359966278, 0.7020636200904846, 0.1736207902431488, 0.024138906970620155, 0.007814008742570877, 0.09378986805677414, 0.12380054593086243, 0.011920441873371601, 0.012675583362579346, 0.329204797744751, 0.4761575162410736, 0.5359617471694946]
+[0.29840344190597534, 0.000497414090204984, 0.027763595804572105, 0.9837210774421692, 0.005392138846218586, 0.05426705628633499, 0.2531944811344147, 0.15935660898685455, 0.48847487568855286, 0.5903636813163757, 0.000414364505559206, 0.10826358199119568, 0.1901814490556717, 0.056352581828832626, 0.8848490715026855, 0.9999922513961792, 0.5047016739845276, 0.28807374835014343, 0.64119952917099, 0.13782425224781036, 0.01463121548295021, 0.1349841058254242, 0.22894251346588135, 0.22729650139808655, 0.5569522976875305, 2.0344759832369164e-06, 0.3430640697479248, 0.12648256123065948, 0.9819819927215576, 0.9428773522377014, 0.176166832447052, 0.4178925156593323, 0.9993919134140015, 0.793109118938446, 0.9999982714653015, 0.01912916637957096, 0.7910616993904114, 4.0343275031773373e-05, 0.03888489305973053, 0.7338270545005798, 0.8893512487411499, 0.3908855617046356, 0.8424104452133179]
+[0.00460107671096921, 0.014976601116359234, 0.45747584104537964, 0.0013626819709315896, 0.42289426922798157, 0.00044175598304718733, 0.016702545806765556, 0.002715913113206625, 0.9917991161346436, 0.2117561250925064, 0.07073012739419937, 0.6633419990539551, 0.6740299463272095, 0.31532570719718933, 0.8918764591217041, 0.6546363234519958]
+Reused 267 tokens from the previous frame.
+Model Output: The driving scene presents a quiet residential street with minimal traffic. There are trees along the road, suggesting a suburban area. Some pedestrians can be seen near the buildings, acting as unseen traffic lights, indicating the need for attentiveness and cautious driving.
+
+No obstacles stand out in the immediate vicinity. The trees run along the road on both sides, providing a sense of shelter and nature. Traffic lights appear to be non-existent in this area. A car is visible ahead, indicating that either it should slow down or pass the stop line if this image was taken from the front camera of the vehicle with other cars visible in the background, giving a sense of a less congested place.
+
+Predicting ego vehicle's behavior: since the traffic is light, there are no immediate obstacles or hazards within the captured view. The driver should maintain a moderate speed while navigating through the area and possibly adjust for localized traffic conditions. The large expanse suggests there is enough space to the sides to change lanes or make turns, especially since there is no measure of oncoming traffic or pedestrians within the horizontal span of the image. No traffic lights show up yet to enforce a change in direction or speed.
+
+  - Inference time for this frame: 0.48s
+  - Tokens/sec for this frame: 561.20
+--------------------
+
+===== Scene 41fde20fedcd4d22ab26811688612870 Summary (Memory Idea: True) =====
+Total End-to-End Time: 13.34s
+Total Inference-Only Time: 12.47s
+Total Generated Tokens: 960
+Average Tokens/Second (Inference Only): 76.96
+========================================
+
+===== Processing Scene: 1aa633b683174280b243e0a9a7ad9171 (Memory Idea: False) =====
+--- Processing Key Frame: 0791e7e86b98473795eeffe238d6c13b ---
+Model Output: The driving scene appears to be a quiet, suburban street with a clear view of the road ahead. There are no visible obstacles, such as parked cars or pedestrians, that would require immediate attention. The traffic lights are not visible in the images provided.
+
+The ego vehicle is currently moving straight ahead, as indicated by the front camera's view. There are no other vehicles or pedestrians visible in the immediate vicinity, suggesting that the ego vehicle has the road to itself.
+
+Given the absence of any immediate hazards or obstacles, the ego vehicle can continue driving at a normal speed without any need to slow down or change direction. The road ahead appears to be clear and open, allowing for a smooth and uninterrupted journey.
+
+  - Inference time for this frame: 4.25s
+  - Tokens/sec for this frame: 39.07
+--------------------
+--- Processing Key Frame: a82c0acb18dd4c3a99731b7a06a63fb7 ---
+Model Output: The driving scene appears to be on a suburban street with a mix of residential and commercial buildings. The road is lined with trees and there are sidewalks on both sides. The sky is overcast, suggesting it might be a cool or cloudy day.
+
+Key factors for driving planning include:
+
+1. The presence of a black car in the front-left image, which is the ego vehicle.
+2. A pedestrian crossing the street in the back-left image, indicating a need to be cautious and prepared to stop.
+3. A white car in the back-right image, which is moving in the opposite direction of the ego vehicle.
+4. A traffic light in the back-right image, which is currently not visible in the image.
+5. A construction zone with orange cones in the back-right image, indicating a need to slow down and be cautious.
+6. A car parked on the side of the road in the back-right image, which might be a potential obstacle to navigate around.
+
+Predicting the behavior of the ego vehicle:
+
+1. The ego vehicle is currently stopped at a red traffic light, as indicated by the back-right image.
+2. The ego vehicle will proceed forward when the traffic light turns green, which is not visible in the current image.
+3. The ego vehicle will turn right at the intersection, as indicated by the back-left image.
+4. The ego vehicle will maintain a normal speed, as there are no indications of heavy traffic or pedestrians requiring sudden stops.
+
+Please note that these predictions are based on the available information and do not take into account any unseen obstacles or changes in the environment.
+
+  - Inference time for this frame: 9.20s
+  - Tokens/sec for this frame: 41.00
+--------------------
+--- Processing Key Frame: c0ac3dc491e7414184f44c2b32d24ad8 ---
+Model Output: The driving scene appears to be on a wide, tree-lined street with a clear view of the road ahead. There are no visible obstacles, such as parked cars or pedestrians, in the immediate vicinity. The traffic lights are not visible in the images provided.
+
+The ego vehicle is currently moving straight ahead, with no indication of needing to turn left or right. The speed of the ego vehicle appears to be normal, as there are no indications of slowing down or speeding up.
+
+Please note that this description is based solely on the information provided by the images and does not take into account any additional context or information that may be relevant to the driving situation.
+
+  - Inference time for this frame: 3.86s
+  - Tokens/sec for this frame: 38.83
+--------------------
+--- Processing Key Frame: d21bdffbca9f4edaa4bf4f54fffa6f4b ---
+Model Output: The driving scene appears to be a quiet, residential street with a clear view of the road ahead. There are no immediate obstacles visible in the images provided. The road is lined with trees and buildings, suggesting a suburban or urban setting.
+
+In the front-left image, there is a car parked on the side of the road, which is not moving. In the back-left image, there is a car parked further down the road, also not moving. There are no other vehicles or pedestrians visible in the images.
+
+There are no traffic lights visible in the images provided.
+
+Given the absence of obstacles and the lack of movement from the vehicles, the ego vehicle can proceed straight without any issues. The driving speed appears to be normal, as there are no indications of a need for slowing down or speeding up.
+
+  - Inference time for this frame: 4.69s
+  - Tokens/sec for this frame: 39.44
+--------------------
+--- Processing Key Frame: e42c40288fba48e993507ce35215a7d5 ---
+Model Output: The driving scene appears to be on a wide, tree-lined street with a clear view of the road ahead. There are no immediate obstacles visible in the images provided. The traffic lights are not clearly visible in the images, so their status is unknown.
+
+There are no pedestrians or other vehicles in the immediate vicinity of the car. The car itself is positioned on the right side of the road, and it appears to be stationary, possibly waiting for a pedestrian to cross or for the traffic light to change.
+
+Given the lack of obstacles and the absence of other vehicles or pedestrians, the ego vehicle should proceed straight ahead. The driving speed should be normal, as there is no indication of an urgent need to slow down or speed up.
+
+Please note that this description is based on the visible information in the images provided and does not take into account any potential hazards or traffic conditions that may not be visible in the images.
+
+  - Inference time for this frame: 5.25s
+  - Tokens/sec for this frame: 39.80
+--------------------
+
+===== Scene 1aa633b683174280b243e0a9a7ad9171 Summary (Memory Idea: False) =====
+Total End-to-End Time: 28.34s
+Total Inference-Only Time: 27.25s
+Total Generated Tokens: 1087
+Average Tokens/Second (Inference Only): 39.89
+========================================
+
+===== Processing Scene: 1aa633b683174280b243e0a9a7ad9171 (Memory Idea: True) =====
+--- Processing Key Frame: 0791e7e86b98473795eeffe238d6c13b ---
+Model Output: The driving scene appears to be a quiet, suburban street with a clear view of the road ahead. There are no visible obstacles, such as parked cars or pedestrians, that would require immediate attention. The traffic lights are not visible in the images provided.
+
+The ego vehicle is currently moving straight ahead, as indicated by the front camera's view. There are no other vehicles or pedestrians visible in the immediate vicinity, suggesting that the ego vehicle has the road to itself.
+
+Given the absence of any immediate hazards or obstacles, the ego vehicle can continue driving at a normal speed without any need to slow down or change direction. The road ahead appears to be clear and open, allowing for a smooth and uninterrupted journey.
+
+  - Inference time for this frame: 4.23s
+  - Tokens/sec for this frame: 39.21
+--------------------
+--- Processing Key Frame: a82c0acb18dd4c3a99731b7a06a63fb7 ---
+[1.0266299095562648e-11, 1.5044882673009852e-08, 8.699200293449394e-07, 4.225345037411898e-06, 5.4726214671063644e-09, 1.3027768375195592e-07, 1.9197441361029632e-06, 1.6961883375188336e-05, 6.4657792790967505e-06, 1.047147520694125e-06, 4.1830253150187957e-10, 2.226451670139795e-06, 7.265664862643462e-06, 4.003365120297531e-06, 1.4197751625033561e-05, 3.553341230144724e-05, 4.93892048325506e-06, 2.2916806301509496e-06, 8.487718332617078e-06, 1.1993968200840754e-06, 4.598023588187061e-05, 5.243963130396878e-08]
+Reused 0 tokens from the previous frame.
+Model Output: The driving scene includes a black car depicted in the middle lane of a four-lane road, traveling from the back-left camera towards the back-right camera. In the immediate area, there are no obstacles, and no vehicles are parked or moving in the same direction as the ego vehicle. There are no pedestrians, cyclists, or other large or small animals visible in the immediate vicinity. Traffic lights are present, and they are showing a green signal to the ego vehicle. The ego vehicle should proceed to maintain speed and direction in accordance with traffic rules and green light clearance.
+
+  - Inference time for this frame: 3.88s
+  - Tokens/sec for this frame: 33.78
+--------------------
+--- Processing Key Frame: c0ac3dc491e7414184f44c2b32d24ad8 ---
+[0.6339693665504456, 0.8750482201576233, 0.998067319393158, 0.12444732338190079, 0.8129079937934875, 0.00042097389814443886, 0.4899198114871979, 2.2050744519219734e-05, 0.9962007403373718, 0.5825522541999817, 0.7209438681602478, 0.02190917171537876, 0.4704115092754364, 0.9999852180480957, 0.8634628057479858, 0.8720211982727051, 0.06637949496507645, 0.9991392493247986, 0.9925178289413452, 0.6682561039924622, 0.3473052978515625, 0.008842196315526962, 0.9999411106109619, 0.0945705771446228, 0.6390243172645569, 0.11100006103515625, 0.510816752910614, 0.5359726548194885, 0.5682821273803711, 0.2225600779056549, 0.9896349310874939, 0.2796432077884674, 0.9736959338188171, 0.9977661371231079, 0.9808481335639954, 0.9229187369346619]
+Reused 7 tokens from the previous frame.
+Model Output: The driving scene includes a black car on a slightly upward curve. The road appears to be in good condition, with well-maintained markings on both sides, suggesting a one-directional traffic system. There are no visible pedestrians or cyclists on the sidewalks.
+
+Traffic lights are not clearly visible in the images provided. One large white building with grey columns is partially visible, on the right side of the road behind the trees, possibly indicating an urban or commercial area. The environment suggests a clear and ground level visibility.
+
+Traffic is light, and no vehicles seem to be overtaking each other, or the black car in the image. However, no rain can be perceived from the road.
+
+In terms of traffic planning, the lack of visible pedestrians, cyclists, and neglect of traffic lights suggest that both drivers should remain vigilant and prepared to respond to any unforeseen situations, including adjusting for defensive driving to account for little or no braking distance due to low traffic speeds. Also, the driver should be prepared for other vehicles that might make sudden movements, especially while approaching or crossing the intersection.
+
+In terms of vehicle behavior, the driver of the black car would need to activate the turn signal and approach the curve at a suitable speed for the car's capabilities and the road conditions. Overall, the driver should be cautious and provide a smooth transition to the turn as they steer the car towards the curve. Furthermore, the driver could revise their speed, adjusting it slightly to ensure that it's within the safe driving speed range and appropriate to the visibility as well as mitigating the risk of skidding during the turn if the road is wet or slushy.
+
+  - Inference time for this frame: 10.03s
+  - Tokens/sec for this frame: 37.10
+--------------------
+--- Processing Key Frame: d21bdffbca9f4edaa4bf4f54fffa6f4b ---
+[0.666503369808197, 0.8688302040100098, 0.9981355667114258, 0.12376734614372253, 0.8220780491828918, 0.00017339573241770267, 0.4792886972427368, 0.1432974487543106, 0.6417964696884155, 0.0016405769856646657, 0.0003331025945954025, 0.9514159560203552, 0.013514176942408085, 0.005096180364489555]
+[0.5934083461761475, 0.2560279965400696, 0.27301734685897827, 0.9179932475090027, 0.9548662900924683, 0.11823708564043045, 0.34359797835350037, 0.9934224486351013, 0.30492040514945984, 0.48015096783638, 0.01860892027616501, 0.9963322877883911, 0.5296306014060974, 0.9998642802238464, 0.9999880194664001, 0.14845621585845947, 0.9990373849868774, 0.030892038717865944, 0.2798701226711273, 0.9297159910202026, 0.05099892616271973, 0.10734584182500839, 0.29800403118133545, 0.0034992597065865993, 0.9984590411186218, 0.0007550904992967844, 0.7604907751083374, 0.1772778183221817, 0.3362528383731842, 0.8315188884735107]
+[0.4312537610530853, 0.6934843063354492, 0.6793223023414612, 0.4796814024448395, 0.06143612787127495, 0.9999784827232361, 0.9954801797866821, 1.0, 0.5928942561149597, 0.3043072521686554, 0.9997702836990356, 0.24622371792793274, 0.9389752745628357, 0.15285968780517578, 0.3149275779724121, 1.0, 0.4345971643924713]
+[0.25962281227111816, 0.9987456202507019, 0.2816298007965088, 0.999935507774353, 0.9505559206008911, 0.8682602643966675, 0.5555539131164551, 0.1527780145406723, 0.952780544757843, 0.7246485352516174, 0.6731810569763184, 0.395631343126297, 0.5245882272720337, 0.519123911857605]
+[0.011523350141942501, 0.0019491142593324184, 0.1092735305428505, 0.8757439255714417, 0.34210917353630066, 0.0008552432991564274, 0.13911524415016174, 0.3572579026222229, 0.013304777443408966, 0.8059850335121155, 0.044835835695266724, 0.003703750902786851, 0.980645477771759, 0.5886340141296387, 0.8544361591339111, 0.7797906398773193, 0.9982221126556396, 0.49776506423950195, 0.0008528646430931985, 0.719641387462616, 0.0341690331697464, 0.16469697654247284, 0.03138086944818497, 0.6444130539894104, 0.2180882841348648, 0.6738010048866272, 0.07769909501075745, 0.30348333716392517, 0.9344232082366943, 0.9677289128303528]
+[0.19896389544010162, 0.03093862347304821, 0.34082624316215515, 0.6880961656570435, 0.01822158508002758, 0.06344970315694809, 6.621133934459067e-07, 0.10185267776250839, 0.01614074967801571, 0.21773716807365417]
+Reused 111 tokens from the previous frame.
+Model Output: The driving scene includes a black car on a slightly upward curve. The road appears to be in good condition, with well-maintained markings on both sides, suggesting a one-directional traffic system. There are no visible pedestrians or cyclists on the sidewalks.
+
+Traffic lights are not clearly visible in the images provided. One large white building with grey columns is partially visible, on the right side of the road behind the trees, possibly indicating an urban or commercial area. The environment suggests a clear and the required Lane Departure Warning system would likely detect the road lines and not a huge number of vehicles like a small car.
+
+  - Inference time for this frame: 1.15s
+  - Tokens/sec for this frame: 118.53
+--------------------
+--- Processing Key Frame: e42c40288fba48e993507ce35215a7d5 ---
+[0.6474677324295044, 0.8698380589485168, 0.9978718757629395, 0.11814776808023453, 0.79902184009552, 0.004400576930493116, 0.37162742018699646, 0.14688006043434143, 0.6065430045127869, 0.001500497106462717, 0.00030754259205423295, 0.9497707486152649, 0.007251111790537834, 0.00498270383104682]
+[0.5484105944633484, 0.2882322669029236, 0.34471479058265686, 0.9168406128883362, 0.9624898433685303, 0.13313564658164978, 0.2680843770503998, 0.9935986995697021, 0.31248876452445984, 0.4756183326244354, 0.013426621444523335, 0.9971713423728943, 0.5885788202285767, 0.9998972415924072, 0.9999908804893494, 0.12964032590389252, 0.9992839694023132, 0.023194078356027603, 0.3069418966770172, 0.9260554909706116, 0.03888917341828346, 0.13705474138259888, 0.31830811500549316, 0.0028976730536669493, 0.9984998106956482, 0.0008970295311883092, 0.7554477453231812, 0.20593060553073883, 0.3444322347640991, 0.8363928198814392]
+[0.45562395453453064, 0.7157745361328125, 0.7705891728401184, 0.43941476941108704, 0.16901250183582306, 0.9999874830245972, 0.9969883561134338, 0.9999998807907104, 0.6668490767478943, 0.5917102098464966, 0.9996728897094727, 0.19793085753917694, 0.9321200847625732, 0.14735279977321625, 0.3144471347332001, 1.0, 0.3835555613040924]
+[0.2438873052597046, 0.9987413287162781, 0.25135210156440735, 0.9999271035194397, 0.9469668865203857, 0.8920853137969971, 0.7854689359664917, 0.16223835945129395, 0.9461067914962769, 0.7240824699401855, 0.6981582045555115, 0.4266003966331482, 0.5292810797691345, 0.49638262391090393]
+[0.009262707084417343, 0.00396076450124383, 0.05714116245508194, 0.8590173125267029, 0.36591213941574097, 0.0010047226678580046, 0.09614452719688416, 0.29043564200401306, 0.012442221865057945, 0.8027886152267456, 0.04321710020303726, 0.0027524977922439575, 0.9823424816131592, 0.6100910305976868, 0.8513106107711792, 0.7525038719177246, 0.9981144666671753, 0.4722024202346802, 0.0008905658614821732, 0.725598931312561, 0.02898983471095562, 0.18213613331317902, 0.03330028057098389, 0.6515162587165833, 0.21686908602714539, 0.7427769303321838, 0.05265580490231514, 0.3736160099506378, 0.9398027658462524, 0.9667928814888]
+[0.17178639769554138, 0.021416837349534035, 0.40470823645591736, 0.6410096287727356, 0.02458212710916996, 0.06109321862459183, 1.0269963240716606e-05, 4.267636086296989e-06, 1.380479534418555e-05, 0.10608399659395218, 0.9981744289398193, 0.8993318676948547, 0.12072798609733582, 0.10771661251783371, 0.07377038151025772, 0.048617638647556305, 0.3390807509422302, 0.06467445194721222, 0.005101935472339392, 0.4242675006389618, 0.03225133195519447, 0.009194491431117058, 0.00024688965640962124, 0.11491483449935913, 0.9959378242492676, 0.06629790365695953, 0.00887318979948759, 0.12000623345375061, 0.0065677170641720295, 0.26647254824638367, 0.32657507061958313]
+Reused 136 tokens from the previous frame.
+Model Output: The driving scene includes a black car on a slightly upward curve. The road appears to be in good condition, with well-maintained markings on both sides, suggesting a one-directional traffic system. There are no visible pedestrians or cyclists on the sidewalks.
+
+Traffic lights are not clearly visible in the images provided. One large white building with grey columns is partially visible, on the right side of the road behind the trees, possibly indicating an urban or commercial area. The environment suggests a clear and the required Lane Departure Warning system would likely detect the road lines and not a huge number of vehicles like a small car.
+
+  - Inference time for this frame: 0.46s
+  - Tokens/sec for this frame: 297.41
+--------------------
+
+===== Scene 1aa633b683174280b243e0a9a7ad9171 Summary (Memory Idea: True) =====
+Total End-to-End Time: 20.90s
+Total Inference-Only Time: 19.74s
+Total Generated Tokens: 941
+Average Tokens/Second (Inference Only): 47.66
+========================================
+
+===== Processing Scene: 2abb3f3517c64446a5768df5665da49d (Memory Idea: False) =====
+--- Processing Key Frame: 3c5fe22946dc4d12954375abc464d6b1 ---
+Model Output: The driving scene appears to be in a city environment, with a clear sky overhead. The road is lined with buildings on both sides, and there are multiple lanes in each direction. The traffic is moderate, with a few cars visible in the lanes ahead.
+
+Key factors for driving planning include:
+
+1. The presence of obstacles: There are no visible obstacles in the immediate vicinity of the car.
+2. The positions and movements of vehicles and pedestrians: The vehicles are moving in a straight line, and there are no pedestrians visible in the immediate vicinity.
+3. Traffic lights: There are no traffic lights visible in the images provided.
+
+Predicting the behavior of the ego vehicle:
+
+Given the absence of obstacles and the absence of any immediate need to change lanes or make turns, the ego vehicle should continue driving straight at a normal speed. The absence of traffic lights also suggests that the ego vehicle should proceed with caution, as there may be traffic signals ahead that are not visible in the images. The ego vehicle should maintain a safe distance from other vehicles and be prepared to react to any changes in traffic conditions.
+
+  - Inference time for this frame: 6.31s
+  - Tokens/sec for this frame: 40.41
+--------------------
+--- Processing Key Frame: 3ee6b750a56946279f5ad605fd643204 ---
+Model Output: The driving scene appears to be in a city environment with a mix of commercial and residential buildings. The road is lined with parked cars on both sides, and there are a few vehicles in motion, including a truck and a car. The presence of pedestrians and traffic lights suggests that this is an urban area with active traffic.
+
+The key factors for driving planning include:
+
+1. The presence of a large truck in the right lane, which might require extra caution when changing lanes or overtaking.
+2. A car in the left lane that is turning left, which could affect the ego vehicle's driving direction and speed.
+3. A car in the right lane that is turning right, which might require the ego vehicle to slow down or change lanes to avoid a collision.
+4. A pedestrian crossing the road in the middle lane, which requires the ego vehicle to be cautious and prepared to stop if necessary.
+5. A traffic light in the distance, which indicates that the ego vehicle should be prepared to stop or slow down as needed.
+
+Predicting the behavior of the ego vehicle:
+
+1. The ego vehicle should maintain a safe distance from the truck and other vehicles, especially when changing lanes or overtaking.
+2. The ego vehicle should be prepared to slow down or stop when approaching the pedestrian crossing, depending on the pedestrian's actions.
+3. The ego vehicle should be prepared to stop or slow down when approaching the traffic light, depending on the light's color.
+4. The ego vehicle should be prepared to change lanes or slow down when the car in the right lane turns left, ensuring a safe distance is maintained.
+5. The ego vehicle should maintain a safe speed, considering the presence of pedestrians and other vehicles, and adjusting for any potential obstacles or changes in traffic conditions.
+
+  - Inference time for this frame: 10.31s
+  - Tokens/sec for this frame: 40.84
+--------------------
+--- Processing Key Frame: 5b29d1a2b0e646368622dee5e8fa5108 ---
+Model Output: The driving scene appears to be in a city setting with a mix of vehicles and pedestrians. The key factors for driving planning include:
+
+1. The presence of multiple vehicles, including cars and a truck, which are stopped or moving at a slow pace.
+2. A pedestrian walking on the sidewalk, possibly crossing the street.
+3. Traffic lights, which are not clearly visible in the images provided.
+4. A fire hydrant on the sidewalk.
+5. Buildings in the background, indicating an urban environment.
+
+Given the image data, the ego vehicle should proceed with caution, as there are pedestrians and other vehicles in the vicinity. The ego vehicle should be prepared to yield to pedestrians and other vehicles as needed. The presence of the fire hydrant indicates that the ego vehicle should be cautious not to obstruct access to it.
+
+Predicting the behavior of the ego vehicle, it should proceed with caution, maintaining a safe distance from other vehicles and pedestrians. The ego vehicle should be prepared to yield to pedestrians and other vehicles as needed. The ego vehicle should also be prepared to stop if necessary to avoid any obstacles or to give way to other vehicles. The ego vehicle should drive at a safe speed, considering the presence of pedestrians and other vehicles in the area.
+
+  - Inference time for this frame: 7.45s
+  - Tokens/sec for this frame: 40.65
+--------------------
+--- Processing Key Frame: 89c9d0c82a794d39911b3bfb3491b1bc ---
+Model Output: The driving scene appears to be in a city setting with a clear sky. The road is lined with parked cars on the right side, and there are buildings visible in the background. The traffic light is not visible in the images provided.
+
+The key factors for driving planning include:
+
+1. The presence of obstacles: There are no visible obstacles in the images provided.
+2. The positions and movements of vehicles and pedestrians:
+   - The ego vehicle is in the center of the road, moving forward.
+   - There are no pedestrians visible in the images.
+   - The vehicles on the road include the ego vehicle and several parked cars on the right side.
+
+Predicting the behavior of the ego vehicle:
+
+1. Driving direction: The ego vehicle is moving straight ahead.
+2. Driving speed: The ego vehicle is moving at a normal speed.
+
+Please note that this description is based on the information provided by the images and does not include any additional context or details that might be relevant to the driving situation.
+
+  - Inference time for this frame: 5.89s
+  - Tokens/sec for this frame: 40.26
+--------------------
+--- Processing Key Frame: a3da8976af104ae7a48a186c610a229a ---
+Model Output: The driving scene appears to be in a busy urban area with a mix of vehicles and pedestrians. The key factors for driving planning include:
+
+1. The presence of a large white truck in the right lane, which is turning right.
+2. A black sedan in the left lane, which is moving straight ahead.
+3. A white van in the left lane, which is moving straight ahead.
+4. A pedestrian walking on the sidewalk, who appears to be crossing the street.
+5. A traffic light with a green signal, indicating that vehicles can proceed through the intersection.
+6. A red van in the right lane, which is stopped, possibly waiting for the pedestrian to cross.
+
+Given these factors, the ego vehicle should proceed straight ahead, maintaining a safe distance from the truck and van in the right lane. The pedestrian crossing the street should be observed for any sudden movements, and the traffic light should be obeyed. The ego vehicle should maintain a safe speed, considering the presence of pedestrians and other vehicles in the area.
+
+  - Inference time for this frame: 5.95s
+  - Tokens/sec for this frame: 40.33
+--------------------
+
+===== Scene 2abb3f3517c64446a5768df5665da49d Summary (Memory Idea: False) =====
+Total End-to-End Time: 37.14s
+Total Inference-Only Time: 35.91s
+Total Generated Tokens: 1456
+Average Tokens/Second (Inference Only): 40.54
+========================================
+
+===== Processing Scene: 2abb3f3517c64446a5768df5665da49d (Memory Idea: True) =====
+--- Processing Key Frame: 3c5fe22946dc4d12954375abc464d6b1 ---
+Model Output: The driving scene appears to be in a city environment, with a clear sky overhead. The road is lined with buildings on both sides, and there are multiple lanes in each direction. The traffic is moderate, with a few cars visible in the lanes ahead.
+
+Key factors for driving planning include:
+
+1. The presence of obstacles: There are no visible obstacles in the immediate vicinity of the car.
+2. The positions and movements of vehicles and pedestrians: The vehicles are moving in a straight line, and there are no pedestrians visible in the immediate vicinity.
+3. Traffic lights: There are no traffic lights visible in the images provided.
+
+Predicting the behavior of the ego vehicle:
+
+Given the absence of obstacles and the absence of any immediate need to change lanes or make turns, the ego vehicle should continue driving straight at a normal speed. The absence of traffic lights also suggests that the ego vehicle should proceed with caution, as there may be traffic signals ahead that are not visible in the images. The ego vehicle should maintain a safe distance from other vehicles and be prepared to react to any changes in traffic conditions.
+
+  - Inference time for this frame: 6.32s
+  - Tokens/sec for this frame: 40.34
+--------------------
+--- Processing Key Frame: 3ee6b750a56946279f5ad605fd643204 ---
+[9.296879238673839e-12, 1.641547697772694e-08, 1.2656500985031016e-06, 5.384753876569448e-06, 6.250120421213978e-09, 1.590168210441334e-07, 2.0924915133946342e-06, 3.117969527011155e-06, 3.7343340864026686e-06, 5.936998059041798e-05, 5.4893821044288416e-08, 8.347291213794961e-07, 1.036405819831998e-06, 4.309084943088237e-06, 8.02344802650623e-05, 1.4699381836180692e-06, 1.4408157085199491e-06, 9.63686801469521e-08]
+Reused 0 tokens from the previous frame.
+Model Output: In the driving scene, the ego vehicle is in a left-turn lane with a car adjacent in the right-turn lane. Ahead, there's a red car stopping at a red traffic light. The street is pretty quiet, and there's a leasing company storefront visible. The sky is overcast, and the surrounding architecture appears to be sedate. From the sensor data, it seems there's ample space for maneuvering, suggesting careful attention to traffic flow and signal lights is crucial. In terms of optimal driving behavior, the ego vehicle should maintain its current speed and direction, since there's no immediate threat from other vehicles or pedestrians and all traffic lights below them are clear. However, it's important to be prepared to adjust if required as the traffic flow changes.
+
+  - Inference time for this frame: 4.98s
+  - Tokens/sec for this frame: 34.71
+--------------------
+--- Processing Key Frame: 5b29d1a2b0e646368622dee5e8fa5108 ---
+[0.13675457239151, 0.9033223390579224, 0.48390039801597595, 0.9961205124855042, 0.4721580743789673, 0.21058455109596252, 0.220745250582695, 0.9994341135025024, 0.9957051277160645, 0.7927359938621521, 0.042250171303749084, 0.3430827260017395, 0.032125141471624374, 0.36329856514930725, 0.5188331007957458, 0.6944055557250977, 0.9999997615814209, 0.04196939989924431, 0.3316383957862854, 0.025902971625328064, 0.013907690532505512, 0.04945816844701767, 0.7336665987968445, 0.6242165565490723, 0.3458184003829956, 0.9340789914131165, 0.9912203550338745, 1.0, 0.6059465408325195]
+[0.14598111808300018, 0.10646439343690872, 0.6299419403076172, 0.7598074078559875, 0.2202649563550949, 0.9999821186065674, 0.8342174291610718, 0.23153211176395416, 0.039675239473581314, 0.011522103101015091, 0.7569683790206909, 0.7992493510246277, 0.3600718677043915, 0.7304205298423767, 0.9927619695663452, 0.36063721776008606]
+[0.19433975219726562, 0.06140835955739021, 0.46855461597442627, 5.461001273943111e-05, 0.13451723754405975, 0.3491348922252655, 0.07350107282400131, 0.4085686504840851, 0.3151760399341583, 0.9998264312744141, 0.8043644428253174, 2.3110635083867237e-05, 0.06957642734050751, 0.08783511817455292, 0.00027202186174690723, 0.16718997061252594, 0.138769268989563, 0.29430603981018066]
+[0.20276054739952087, 0.19189563393592834, 0.8883004784584045, 0.24159546196460724, 0.9999830722808838, 0.7682856917381287, 0.5214606523513794, 0.410923033952713, 0.005222483538091183, 0.11256613582372665, 0.035006776452064514, 0.6049467921257019, 0.9356107711791992, 1.8456365751262638e-06, 0.9581482410430908, 0.3770257830619812]
+[0.008805200457572937, 0.8665055632591248, 0.0035039649810642004, 0.5791250467300415, 0.6767826080322266, 0.3148549199104309, 0.4568796455860138, 0.1882867068052292, 0.36891302466392517, 0.9992780089378357, 0.015186515636742115, 0.9998610615730286, 0.6956256031990051, 0.444551944732666, 0.09361246228218079, 0.9971896409988403, 0.9586635828018188, 0.9708125591278076, 0.36110031604766846, 0.010535601526498795, 0.004142932128161192, 0.04844428598880768, 0.8035937547683716, 0.3148771822452545, 0.030855661258101463, 0.6925190091133118, 0.06677927821874619, 0.055167946964502335, 0.19919449090957642, 0.03388189524412155, 0.9999158382415771, 0.5906023979187012]
+[0.004790359642356634, 0.8951584696769714, 0.9999912977218628, 9.96217131614685e-05, 0.791174054145813, 0.68440181016922, 0.931118369102478, 0.7748185396194458, 0.9244081974029541, 0.9998343586921692, 0.9788365960121155, 0.847179651260376, 0.05363237485289574, 0.20732246339321136, 0.791447103023529, 0.5008790493011475, 0.6346269845962524, 0.295239120721817, 0.5784714818000793, 0.01785932667553425, 0.3019832968711853, 0.28456732630729675, 0.9998764991760254, 0.739475429058075, 0.40738528966903687, 0.044864360243082047, 0.14587081968784332, 0.3688999116420746, 0.8031163811683655, 0.4977424740791321, 0.9269442558288574, 0.9999780654907227, 0.998649537563324, 0.9999997615814209, 0.03429028019309044, 0.014856820926070213, 0.41504451632499695, 0.6619790196418762, 1.7689231754047796e-05, 0.0013491350691765547, 0.8630688190460205, 0.051476091146469116, 0.8822906613349915]
+[0.05278867110610008, 0.9997679591178894, 0.15015898644924164, 0.5898041725158691, 0.9932950735092163, 0.48044759035110474, 0.9274975061416626, 0.2169320434331894, 0.3572615385055542, 0.26704439520835876, 0.07788051664829254, 0.080952487885952, 0.007734876126050949, 0.04500550776720047, 0.6659672856330872, 0.44051873683929443, 0.10444459319114685, 0.3184380531311035, 0.5068638920783997]
+Reused 173 tokens from the previous frame.
+Model Output: In the driving scene, the ego vehicle is in a left-turn lane with a car adjacent in the right-turn lane. Ahead, there's a red car stopping at a red traffic light. The street is pretty quiet, and there's a leasing company storefront visible. The sky is overcast, and the surrounding architecture appears to be sedate. From the sensor data, it seems there's ample space for maneuvering, suggesting careful attention to traffic flow and signal lights is crucial. In terms of optimal driving behavior, the ego vehicle should maintain its current speed and direction, since there's no immediate threat from other vehicles or pedestrians and all traffic lights below them are clear. However, it's important to be prepared to adjust if required as the traffic flow changes.
+
+  - Inference time for this frame: 0.46s
+  - Tokens/sec for this frame: 372.87
+--------------------
+--- Processing Key Frame: 89c9d0c82a794d39911b3bfb3491b1bc ---
+[0.12951868772506714, 0.9001322984695435, 0.5334942936897278, 0.9962651133537292, 0.4924291670322418, 0.24456167221069336, 0.2534811198711395, 0.9982718229293823, 0.9964113235473633, 0.7797822952270508, 0.037011295557022095, 0.28973129391670227, 0.033653322607278824, 0.4122716188430786, 0.38243040442466736, 0.6885338425636292, 0.9999997615814209, 0.040617045015096664, 0.42531099915504456, 0.01674695871770382, 0.01612168364226818, 0.04927491396665573, 0.7277206778526306, 0.5770124197006226, 0.39401841163635254, 0.9257991313934326, 0.9904240369796753, 1.0, 0.6599254012107849]
+[0.14029517769813538, 0.1928175836801529, 0.6444555521011353, 0.759712815284729, 0.21446700394153595, 0.999981701374054, 0.8188018798828125, 0.12371613085269928, 0.1489829123020172, 0.006774366833269596, 0.7539207339286804, 0.7908036112785339, 0.2892283797264099, 0.754036009311676, 0.9923987984657288, 0.3802677094936371]
+[0.2968378961086273, 0.05280407890677452, 0.4122829735279083, 3.811974966083653e-05, 0.09965255856513977, 0.3412033021450043, 0.10371396690607071, 0.42976173758506775, 0.2946959137916565, 0.9998215436935425, 0.7973195910453796, 0.002682942198589444, 0.9890775680541992, 0.9481901526451111, 0.0031444691121578217, 0.28808340430259705, 0.2286975383758545, 0.23151735961437225]
+[0.3590357005596161, 0.30384233593940735, 0.877805233001709, 0.22230125963687897, 0.999981164932251, 0.7715197205543518, 0.5113897919654846, 0.47198551893234253, 0.004757098387926817, 0.0731738731265068, 0.04967242851853371, 0.6619859337806702, 0.9222146272659302, 2.199952632508939e-06, 0.9602223038673401, 0.36941975355148315]
+[0.008020957931876183, 0.8525696992874146, 0.0040216511115431786, 0.6380527019500732, 0.6875293850898743, 0.2980028986930847, 0.47465696930885315, 0.18305526673793793, 0.3177662789821625, 0.999265730381012, 0.016065232455730438, 0.9998786449432373, 0.6647845506668091, 0.44387751817703247, 0.09389466047286987, 0.9971036911010742, 0.9598426818847656, 0.9697632193565369, 0.3612159490585327, 0.010642615146934986, 0.0041589150205254555, 0.05868273600935936, 0.8175354599952698, 0.339625746011734, 0.025411425158381462, 0.7100002765655518, 0.07298688590526581, 0.05661575123667717, 0.17706896364688873, 0.03185436502099037, 0.9999258518218994, 0.5730543732643127]
+[0.005229637958109379, 0.8924808502197266, 0.999990701675415, 8.28679621918127e-05, 0.798244297504425, 0.6781284809112549, 0.9313660264015198, 0.789795994758606, 0.925224244594574, 0.9998655319213867, 0.9811534285545349, 0.8460271954536438, 0.06660149246454239, 0.19022144377231598, 0.8007583022117615, 0.5308114290237427, 0.6422363519668579, 0.29799243807792664, 0.5842195153236389, 0.016172243282198906, 0.3108264207839966, 0.27641043066978455, 0.9998831748962402, 0.7395076751708984, 0.381196528673172, 0.04449327662587166, 0.13145068287849426, 0.3828360438346863, 0.7872244715690613, 0.54518061876297, 0.9292422533035278, 0.9999836683273315, 0.998965859413147, 0.9999996423721313, 0.03667120262980461, 0.013358762487769127, 0.41550421714782715, 0.6832539439201355, 1.9370192603673786e-05, 0.0012950632954016328, 0.8601735234260559, 0.05182461068034172, 0.8879711627960205]
+[0.05372164770960808, 0.9997738003730774, 0.14718692004680634, 0.5868719816207886, 0.993155837059021, 0.4759701192378998, 0.9253444671630859, 0.2225767970085144, 0.35218682885169983, 0.2520254850387573, 0.08467799425125122, 0.07970742881298065, 0.007468726485967636, 0.046616677194833755, 0.6867535710334778, 0.47584691643714905, 0.10437571257352829, 0.3377712666988373, 0.5044696927070618]
+Reused 173 tokens from the previous frame.
+Model Output: In the driving scene, the ego vehicle is in a left-turn lane with a car adjacent in the right-turn lane. Ahead, there's a red car stopping at a red traffic light. The street is pretty quiet, and there's a leasing company storefront visible. The sky is overcast, and the surrounding architecture appears to be sedate. From the sensor data, it seems there's ample space for maneuvering, suggesting careful attention to traffic flow and signal lights is crucial. In terms of optimal driving behavior, the ego vehicle should maintain its current speed and direction, since there's no immediate threat from other vehicles or pedestrians and all traffic lights below them are clear. However, it's important to be prepared to adjust if required as the traffic flow changes.
+
+  - Inference time for this frame: 0.46s
+  - Tokens/sec for this frame: 373.17
+--------------------
+--- Processing Key Frame: a3da8976af104ae7a48a186c610a229a ---
+[0.13954971730709076, 0.9186157584190369, 0.525438129901886, 0.9967382550239563, 0.5044606924057007, 0.23896197974681854, 0.3625015318393707, 0.9989594221115112, 0.9972259402275085, 0.7004008889198303, 0.01856820657849312, 0.35260894894599915, 0.02992699109017849, 0.3750568926334381, 0.4914422631263733, 0.6943895220756531, 0.9999997615814209, 0.03715016320347786, 0.3916548192501068, 0.011077766306698322, 0.007880757562816143, 0.04611969739198685, 0.7227697968482971, 0.6779575347900391, 0.3476330637931824, 0.9324303865432739, 0.9887426495552063, 1.0, 0.5957063436508179]
+[0.14632484316825867, 0.06850068271160126, 0.5818556547164917, 0.7710193395614624, 0.22229281067848206, 0.9999853372573853, 0.8208940029144287, 0.015835611149668694, 0.06683317571878433, 0.009056515991687775, 0.7436777949333191, 0.7501005530357361, 0.2493038773536682, 0.6878340840339661, 0.9914124608039856, 0.341608464717865]
+[0.1777515411376953, 0.050241969525814056, 0.5031351447105408, 4.766255369759165e-05, 0.12463486194610596, 0.3414645493030548, 0.08022443950176239, 0.410353422164917, 0.2838257849216461, 0.9998000264167786, 0.8103471994400024, 3.907896825694479e-05, 0.35488224029541016, 0.13139687478542328, 0.00040750353946350515, 0.1413082331418991, 0.16803842782974243, 0.24948488175868988]
+[0.19243834912776947, 0.19392704963684082, 0.8950967788696289, 0.18870432674884796, 0.9999879002571106, 0.7802956700325012, 0.4785780608654022, 0.4406938850879669, 0.002870724303647876, 0.06080581620335579, 0.04027802124619484, 0.5989404320716858, 0.9556714296340942, 2.0007237253594212e-06, 0.9561458826065063, 0.3578624725341797]
+[0.007507137954235077, 0.9003264307975769, 0.0037563692312687635, 0.6093994975090027, 0.6695640087127686, 0.32098039984703064, 0.46521076560020447, 0.19443468749523163, 0.34464603662490845, 0.9993543028831482, 0.02689613401889801, 0.9998958706855774, 0.7137748003005981, 0.45541682839393616, 0.08424701541662216, 0.9974173307418823, 0.9534711837768555, 0.9667431116104126, 0.3495091199874878, 0.010904185473918915, 0.0032555994112044573, 0.0468149334192276, 0.7951777577400208, 0.3350132703781128, 0.03141503036022186, 0.6934260129928589, 0.06904684752225876, 0.056457892060279846, 0.19509829580783844, 0.033627454191446304, 0.9999138712882996, 0.5772239565849304]
+[0.0048731546849012375, 0.907056987285614, 0.9999914169311523, 8.391006122110412e-05, 0.8023759722709656, 0.6874663829803467, 0.9333536028862, 0.777872622013092, 0.9372323751449585, 0.9997918605804443, 0.9843266606330872, 0.8357986211776733, 0.05723099783062935, 0.2084178924560547, 0.7990216612815857, 0.4712243974208832, 0.6389909386634827, 0.3213336765766144, 0.5715556740760803, 0.01787223294377327, 0.2937147617340088, 0.2740602493286133, 0.9998869895935059, 0.7482558488845825, 0.42560017108917236, 0.0474063940346241, 0.14387556910514832, 0.3617873191833496, 0.8090909719467163, 0.5049886107444763, 0.9326843619346619, 0.9999799728393555, 0.9987906813621521, 0.9999997615814209, 0.0342920683324337, 0.016366038471460342, 0.45949587225914, 0.6903073787689209, 2.0258361473679543e-05, 0.0014921121764928102, 0.8616172075271606, 0.05806680768728256, 0.8822936415672302]
+[0.05537346005439758, 0.9997845888137817, 0.15248116850852966, 0.5915489792823792, 0.9930925369262695, 0.48758620023727417, 0.9291945099830627, 0.21104860305786133, 0.3473416566848755, 0.27319806814193726, 0.08626570552587509, 0.08401614427566528, 0.008121959865093231, 0.0463322289288044, 0.678719162940979, 0.45646047592163086, 0.10326076298952103, 0.35018864274024963, 0.5096274614334106]
+Reused 173 tokens from the previous frame.
+Model Output: In the driving scene, the ego vehicle is in a left-turn lane with a car adjacent in the right-turn lane. Ahead, there's a red car stopping at a red traffic light. The street is pretty quiet, and there's a leasing company storefront visible. The sky is overcast, and the surrounding architecture appears to be sedate. From the sensor data, it seems there's ample space for maneuvering, suggesting careful attention to traffic flow and signal lights is crucial. In terms of optimal driving behavior, the ego vehicle should maintain its current speed and direction, since there's no immediate threat from other vehicles or pedestrians and all traffic lights below them are clear. However, it's important to be prepared to adjust if required as the traffic flow changes.
+
+  - Inference time for this frame: 0.47s
+  - Tokens/sec for this frame: 368.29
+--------------------
+
+===== Scene 2abb3f3517c64446a5768df5665da49d Summary (Memory Idea: True) =====
+Total End-to-End Time: 13.78s
+Total Inference-Only Time: 12.70s
+Total Generated Tokens: 947
+Average Tokens/Second (Inference Only): 74.55
+========================================
+
+===== Processing Scene: e8099a6136804f3bb9b38ff94d98eb64 (Memory Idea: False) =====
+--- Processing Key Frame: 50f1c83c63ec40fcae6615e8a6a19a23 ---
+Model Output: The driving scene appears to be at night, with the street illuminated by streetlights. The road is relatively clear, with no visible obstacles or pedestrians. There are no traffic lights in the immediate vicinity, suggesting that the car is in a less regulated area or that the traffic lights are not visible in the captured images.
+
+The car's front camera shows the vehicle in motion, with the headlights on, indicating that the car is driving at a moderate speed. The front-left and front-right cameras show the car's side profile, with the vehicle's headlights illuminating the road ahead. The back camera shows the car's rear view, with the taillights visible. The back-left and back-right cameras show the car's side profile, with the taillights and side mirrors visible.
+
+Given the image data, the ego vehicle is driving straight ahead, as there are no visible obstacles or turns that would require a change in direction. The driving speed appears to be moderate, as the car's headlights are on and the vehicle is not making any sudden maneuvers. The car's position on the road suggests that it is in the center lane, and there are no other vehicles or pedestrians visible in the captured images.
+
+  - Inference time for this frame: 7.06s
+  - Tokens/sec for this frame: 40.64
+--------------------
+--- Processing Key Frame: 72cf72aa387f47c68347d9a108e698f3 ---
+Model Output: The driving scene appears to be at night, with the street illuminated by streetlights and the headlights of the vehicles. The road is relatively clear, with no visible obstacles or pedestrians in the immediate vicinity. There are no traffic lights visible in the images provided.
+
+The ego vehicle is captured in the front-left camera image, indicating that it is currently driving on the left side of the road. The vehicle is moving at a moderate speed, as suggested by the blurred appearance of the image, which indicates motion.
+
+Given the absence of any immediate obstacles or pedestrians, and the lack of traffic lights, the ego vehicle should continue driving straight ahead. The speed of the vehicle appears to be moderate, as it is not moving at a fast pace, nor is it moving at a slow speed. The driver should maintain this speed and direction until the next turn or change in road conditions.
+
+  - Inference time for this frame: 5.05s
+  - Tokens/sec for this frame: 39.77
+--------------------
+--- Processing Key Frame: baf74406530343b3938586c496916614 ---
+Model Output: The driving scene appears to be at night, with the road illuminated by streetlights. The road is relatively clear with no visible obstacles, and there are no pedestrians or traffic lights in the immediate vicinity. The car's front camera shows the road ahead, which is straight and clear. The front-left camera shows the left side of the road, which is also clear. The front-right camera shows the right side of the road, which is clear. The back camera shows the rear of the car, indicating that the vehicle is in motion. The back-left camera shows the left side of the road, which is clear. The back-right camera shows the right side of the road, which is clear.
+
+Given the visibility and the lack of obstacles, the ego vehicle should continue driving straight at a normal speed. The driver should remain vigilant for any potential hazards that may not be immediately visible due to the darkness.
+
+  - Inference time for this frame: 5.12s
+  - Tokens/sec for this frame: 39.87
+--------------------
+--- Processing Key Frame: d1d38dddb8174acf9cb776ec6c941024 ---
+Model Output: The driving scene appears to be at night, with the street illuminated by streetlights and the headlights of the vehicles. The road is wet, suggesting recent rain, which could affect traction and visibility.
+
+Key factors for driving planning include:
+
+1. The presence of obstacles: There are no visible obstacles in the immediate vicinity of the vehicle.
+2. The positions and movements of vehicles and pedestrians: The image shows a car in the front-right lane, which is moving forward. There are no pedestrians or other vehicles visible in the immediate vicinity.
+3. Traffic lights: There are no traffic lights visible in the image.
+
+Predicting the behavior of the ego vehicle:
+
+Given the image, the ego vehicle should continue driving straight ahead at a normal speed. There are no indications of a need to turn left or right, and no obstacles or pedestrians are present that would require a change in direction or speed. The wet road conditions should be taken into account, but the vehicle's headlights and the streetlights should provide adequate illumination for safe driving.
+
+  - Inference time for this frame: 6.24s
+  - Tokens/sec for this frame: 40.38
+--------------------
+
+===== Scene e8099a6136804f3bb9b38ff94d98eb64 Summary (Memory Idea: False) =====
+Total End-to-End Time: 24.40s
+Total Inference-Only Time: 23.47s
+Total Generated Tokens: 944
+Average Tokens/Second (Inference Only): 40.21
+========================================
+
+===== Processing Scene: e8099a6136804f3bb9b38ff94d98eb64 (Memory Idea: True) =====
+--- Processing Key Frame: 50f1c83c63ec40fcae6615e8a6a19a23 ---
+Model Output: The driving scene appears to be at night, with the street illuminated by streetlights. The road is relatively clear, with no visible obstacles or pedestrians. There are no traffic lights in the immediate vicinity, suggesting that the car is in a less regulated area or that the traffic lights are not visible in the captured images.
+
+The car's front camera shows the vehicle in motion, with the headlights on, indicating that the car is driving at a moderate speed. The front-left and front-right cameras show the car's side profile, with the vehicle's headlights illuminating the road ahead. The back camera shows the car's rear view, with the taillights visible. The back-left and back-right cameras show the car's side profile, with the taillights and side mirrors visible.
+
+Given the image data, the ego vehicle is driving straight ahead, as there are no visible obstacles or turns that would require a change in direction. The driving speed appears to be moderate, as the car's headlights are on and the vehicle is not making any sudden maneuvers. The car's position on the road suggests that it is in the center lane, and there are no other vehicles or pedestrians visible in the captured images.
+
+  - Inference time for this frame: 7.07s
+  - Tokens/sec for this frame: 40.57
+--------------------
+--- Processing Key Frame: 72cf72aa387f47c68347d9a108e698f3 ---
+[1.0230742468475551e-11, 2.1500298430510156e-08, 7.97813925146329e-07, 1.817665634007426e-06, 6.071126712470232e-09, 1.4634500189458777e-07, 4.151538178120973e-06, 1.1310191894153832e-06, 2.7309107508699526e-07, 1.1268107300566044e-06, 3.2068792279460467e-06, 1.436101501894882e-05, 0.0003243341634515673, 8.520977812231934e-10, 3.624711908400968e-08, 5.257578261641527e-10, 2.038227876255405e-06, 1.5874802272719535e-07, 5.556375359816457e-09, 3.722827202068402e-08, 2.8515229288927912e-08]
+Reused 0 tokens from the previous frame.
+Model Output: The image depicts a night-time driving scene. The road appears to be mostly empty, with a single, dimly lit car visible ahead. There are no pedestrians or significant traffic signals visible. The left lane is illuminated by street lights, providing some visibility, while the right lane remains dark.
+
+The environment suggests a residential area or a road with houses, although the specific details and make of the vehicle types are not clear.
+
+With regard to ego vehicle behavior, given the absence of other cars and the darkness, driving speed would likely be reduced. The driver would likely notice the headlights of the vehicle ahead if the car is close enough to warrant attention. The choice to change lanes or make a maneuver would depend on the driver's situational awareness and the visibility in each lane. If the lane ahead is uneven or there are any indications of movement or changes in the approaching vehicle's behavior, the driver would likely take appropriate caution and adjust their driving accordingly.
+
+Please note that the above is a generic description based on the shared driving experience and would require actual traffic analytics to predict the specific behavior accurately.
+
+  - Inference time for this frame: 7.07s
+  - Tokens/sec for this frame: 35.64
+--------------------
+--- Processing Key Frame: baf74406530343b3938586c496916614 ---
+[0.7148807048797607, 0.05161583796143532, 0.19786687195301056, 0.998535692691803, 0.9999144077301025, 0.9751413464546204, 0.43820494413375854, 0.3164072632789612, 0.999761164188385, 0.34144774079322815, 0.8708817362785339, 0.17501360177993774]
+[0.6669170260429382, 0.43919238448143005, 0.37408530712127686, 0.7999410629272461, 0.9921653270721436, 0.027216369286179543, 0.6022799015045166, 0.612698495388031, 0.8592161536216736, 0.1791503131389618, 0.08083593845367432, 0.007145981770008802, 0.07965085655450821, 0.9852875471115112, 0.9396960735321045, 0.5356684923171997, 0.6224047541618347, 0.2585841715335846, 0.3066711723804474]
+[0.35503247380256653, 0.6805498003959656, 0.8435186147689819, 0.7527942657470703, 0.999994158744812, 0.9991570711135864, 0.9999998807907104, 0.8157088160514832, 0.020079433917999268, 0.11655695736408234, 0.10844503343105316, 0.4881139099597931, 0.17560811340808868]
+[0.7618061304092407, 0.017461592331528664, 0.1494995355606079, 0.9998680949211121, 0.24773633480072021, 0.03311260789632797, 0.9996297359466553, 0.999872624874115, 0.7527371048927307, 0.1338423490524292, 0.15588077902793884, 0.8597893118858337, 0.04491185396909714, 0.3475046157836914, 0.6609313488006592, 0.35946977138519287, 0.8557267189025879, 0.9937793612480164, 0.9308009743690491, 0.9116665124893188, 0.9999997615814209, 0.11720641702413559, 0.6361696720123291, 0.5562489032745361]
+[0.2932767868041992, 0.9990436434745789, 0.1643853485584259, 0.008640501648187637, 0.39830583333969116, 0.5604954957962036, 0.147742360830307, 0.9999988079071045, 0.709678590297699, 0.11185402423143387, 0.7534101009368896, 0.11674822121858597, 0.3238053023815155, 0.016733692958950996, 0.08409075438976288, 0.05427652597427368, 0.4743732213973999, 0.17975173890590668, 0.7474731206893921, 0.002476669382303953, 0.0013261858839541674, 0.6491658687591553, 0.8470158576965332, 0.08113136887550354, 0.0004940046346746385, 0.8898575901985168, 0.8540031909942627, 0.3293323814868927, 0.488363653421402]
+[0.21743376553058624, 0.9997459053993225, 0.010561570525169373, 0.0169396810233593, 0.9999536871910095, 0.12234321236610413, 0.9992708563804626, 0.9873320460319519, 0.7248095870018005, 0.7499299049377441, 0.1478637456893921, 0.9140088558197021, 0.046219777315855026, 0.999977707862854, 0.26438748836517334, 0.10798400640487671, 0.22202517092227936, 0.37986835837364197, 0.057766638696193695, 0.49462056159973145, 0.021144717931747437, 0.06182648614048958, 0.24403057992458344, 0.48530256748199463, 0.9285306334495544, 0.08615964651107788, 0.057883065193891525]
+[0.44996389746665955, 0.09635835140943527, 0.2945692241191864, 0.11847493797540665, 9.029345528688282e-05, 0.7230912446975708, 0.005954567808657885, 0.9902787208557129, 0.9288278818130493, 0.8105803728103638, 0.8730314373970032, 0.079322449862957, 0.8169928789138794, 0.002865758491680026, 0.07169129699468613, 0.19334076344966888, 0.35236045718193054, 0.04892083629965782, 0.9349623918533325, 0.5446078777313232, 0.08108578622341156, 0.9999642372131348, 0.37012478709220886, 0.8651988506317139]
+[0.3391527533531189, 0.002740219235420227, 0.2834160029888153, 0.019716111943125725, 0.9096385836601257, 0.9999938607215881, 0.3440784811973572, 0.27302929759025574, 0.6278735995292664, 0.04481456056237221, 0.9988164901733398, 0.9999226331710815, 0.7228380441665649, 0.5190688967704773, 0.9682681560516357, 0.7694132328033447, 0.17275021970272064, 0.9795644879341125, 0.9999992847442627, 0.04085996747016907, 0.9999903440475464, 0.9178386330604553, 0.9999927878379822, 0.9999996423721313, 0.6691502928733826, 0.4272552728652954, 0.018545275554060936, 0.038757242262363434, 0.04334678873419762, 0.856864333152771, 0.9999812841415405, 0.8599076867103577]
+[0.10019893944263458, 0.7543771862983704, 0.18430142104625702, 0.999204695224762, 0.49242323637008667, 0.6687937378883362, 0.0003218614438083023, 0.19610659778118134, 0.2811029851436615, 0.07967674732208252, 0.36846601963043213, 0.32332873344421387, 0.014943850226700306, 0.8286502361297607, 0.9435479044914246, 0.002688140142709017, 0.3638038635253906, 0.008027956821024418, 0.8356766700744629, 0.36013591289520264, 0.0008752972935326397, 0.5487213134765625, 0.7433763742446899, 0.999995231628418, 0.29643669724464417, 0.9696207642555237, 0.7591599822044373, 0.797200083732605, 0.3616712987422943, 0.15482404828071594, 0.03675868734717369, 0.16012457013130188, 0.1042737364768982, 0.9884853959083557, 0.16942133009433746, 0.1764717549085617, 0.45523738861083984, 0.4985332190990448, 0.8106642365455627, 0.9198384284973145]
+[0.4112532436847687, 0.9995157718658447, 0.039135247468948364, 0.9597196578979492, 0.9336060881614685, 0.16594788432121277, 0.18818551301956177, 0.10802953690290451, 0.7593421339988708, 0.11327780783176422, 0.4571986794471741, 0.570353627204895, 0.9651908874511719, 0.9530849456787109, 0.0002868739829864353, 0.010623803362250328, 0.011562660336494446, 0.6279553174972534, 0.01763508841395378, 0.350894033908844, 0.11861298233270645, 0.017024902626872063, 0.00043954659486189485, 0.9937313199043274, 0.22178983688354492, 0.15447397530078888, 0.3555578291416168, 0.15339171886444092, 0.6701579689979553, 0.07150822877883911, 0.9999996423721313, 0.9565227627754211]
+Reused 252 tokens from the previous frame.
+Model Output: The image depicts a night-time driving scene. The road appears to be mostly empty, with a single, dimly lit car visible ahead. There are no pedestrians or significant traffic signals visible. The left lane is illuminated by street lights, providing some visibility, while the right lane remains dark.
+
+The environment suggests a residential area or a road with houses, although the specific details and make of the vehicle types are not clear.
+
+With regard to ego vehicle behavior, given the absence of other cars and the darkness, driving speed would likely be reduced. The driver would likely notice the headlights of the vehicle ahead if the car is close enough to warrant attention. The choice to change lanes or make a maneuver would depend on the driver's situational awareness and the visibility in each lane. If the lane ahead is uneven or there are any indications of movement or changes in the approaching vehicle's behavior, the driver would likely take appropriate caution and adjust their driving accordingly.
+
+Please note that the above is a generic description based on the shared driving experience and would require actual traffic analytics to predict the specific behavior accurately.
+
+  - Inference time for this frame: 0.47s
+  - Tokens/sec for this frame: 530.59
+--------------------
+--- Processing Key Frame: d1d38dddb8174acf9cb776ec6c941024 ---
+[0.7364382147789001, 0.0336102694272995, 0.21377922594547272, 0.9986312985420227, 0.9999226331710815, 0.9672520160675049, 0.4403843283653259, 0.3095393180847168, 0.9997342228889465, 0.3440172076225281, 0.9090516567230225, 0.18855558335781097]
+[0.653632402420044, 0.3884967267513275, 0.3771555721759796, 0.7897148728370667, 0.9939489364624023, 0.03893285244703293, 0.6675102114677429, 0.625210702419281, 0.8599510788917542, 0.18834474682807922, 0.08828417956829071, 0.013152118772268295, 0.08618621528148651, 0.9818050265312195, 0.9377928972244263, 0.44393467903137207, 0.6058404445648193, 0.21338531374931335, 0.3256674110889435]
+[0.34164658188819885, 0.6523231267929077, 0.814453661441803, 0.7193022966384888, 0.9999939203262329, 0.9990288019180298, 1.0, 0.8170838356018066, 0.03103484958410263, 0.0977894514799118, 0.09824223071336746, 0.4629528820514679, 0.192678302526474]
+[0.7315503358840942, 0.010052981786429882, 0.17000596225261688, 0.9999203681945801, 0.24582043290138245, 0.023468030616641045, 0.9996488094329834, 0.9998535513877869, 0.7155256271362305, 0.2080898880958557, 0.1622491180896759, 0.8590506315231323, 0.037946444004774094, 0.30347082018852234, 0.6508615016937256, 0.3520607352256775, 0.866561770439148, 0.99350905418396, 0.9279412031173706, 0.9122467637062073, 0.9999995231628418, 0.11777977645397186, 0.6610761880874634, 0.5799558162689209]
+[0.31946226954460144, 0.9991099238395691, 0.22587089240550995, 0.008455906994640827, 0.35959237813949585, 0.5758028626441956, 0.30283311009407043, 0.9999986886978149, 0.7771095633506775, 0.0666283667087555, 0.6857964396476746, 0.0753355547785759, 0.29865434765815735, 0.04927578195929527, 0.11237545311450958, 0.028107183054089546, 0.5199910998344421, 0.17164209485054016, 0.7567805051803589, 0.003448662580922246, 0.0015257210470736027, 0.6771073341369629, 0.8594599962234497, 0.0985780730843544, 0.0003893678658641875, 0.8864892721176147, 0.8381452560424805, 0.3358457684516907, 0.4609731435775757]
+[0.20522688329219818, 0.999704122543335, 0.01082347147166729, 0.01752287521958351, 0.9999526143074036, 0.12107757478952408, 0.9992522597312927, 0.988078773021698, 0.7226992249488831, 0.7414657473564148, 0.14413270354270935, 0.9106030464172363, 0.0426395945250988, 0.999977707862854, 0.2975585162639618, 0.11100488156080246, 0.235600546002388, 0.4237629175186157, 0.0524849072098732, 0.5329135060310364, 0.02157963439822197, 0.06603348255157471, 0.2305164784193039, 0.4954051971435547, 0.9268053770065308, 0.09069889038801193, 0.06170814484357834]
+[0.4536329209804535, 0.10206732153892517, 0.2767940163612366, 0.11953900009393692, 0.00011165628529852256, 0.7158660292625427, 0.0038727493956685066, 0.9892773628234863, 0.9165644645690918, 0.7993611097335815, 0.8551667332649231, 0.07310307770967484, 0.8072295188903809, 0.0031101801432669163, 0.06714820116758347, 0.21968400478363037, 0.38428735733032227, 0.05108180642127991, 0.9325186610221863, 0.5452068448066711, 0.08419495075941086, 0.9999607801437378, 0.36548474431037903, 0.8674010634422302]
+[0.34010425209999084, 0.0030148637015372515, 0.28325262665748596, 0.02230059914290905, 0.9131819009780884, 0.9999945163726807, 0.36732906103134155, 0.26128220558166504, 0.6171795129776001, 0.04338347166776657, 0.9987463355064392, 0.9999192357063293, 0.7168281078338623, 0.5345447063446045, 0.9682028293609619, 0.7692250609397888, 0.17183926701545715, 0.9788756966590881, 0.9999991059303284, 0.03949504718184471, 0.9999892711639404, 0.9191749095916748, 0.9999926090240479, 0.9999997615814209, 0.6697167158126831, 0.4285452961921692, 0.017769793048501015, 0.03901439905166626, 0.043041929602622986, 0.868974506855011, 0.9999841451644897, 0.8628022074699402]
+[0.09781108796596527, 0.7620697021484375, 0.18381723761558533, 0.9993225336074829, 0.4872879087924957, 0.6667654514312744, 0.00032982774428091943, 0.1794458031654358, 0.22991463541984558, 0.07667172700166702, 0.3603043854236603, 0.3351104259490967, 0.016676070168614388, 0.8326317667961121, 0.9404973387718201, 0.0031110181007534266, 0.3527275323867798, 0.007892136462032795, 0.8314794301986694, 0.34732958674430847, 0.000942165672313422, 0.5509703755378723, 0.728935956954956, 0.9999951720237732, 0.29547539353370667, 0.9698657393455505, 0.768333375453949, 0.8037441968917847, 0.3486190140247345, 0.15807491540908813, 0.03673626482486725, 0.16217973828315735, 0.10240672528743744, 0.9890066385269165, 0.1693519502878189, 0.1723528653383255, 0.46301811933517456, 0.48648801445961, 0.801025390625, 0.9209717512130737]
+[0.43088430166244507, 0.9995224475860596, 0.035274699330329895, 0.9603511691093445, 0.9315580129623413, 0.17215922474861145, 0.18001464009284973, 0.107439324259758, 0.7583882808685303, 0.10894937813282013, 0.43998950719833374, 0.5627973079681396, 0.9680595993995667, 0.9526185989379883, 0.00039016277878545225, 0.01440852228552103, 0.014127633534371853, 0.6410945653915405, 0.016599448397755623, 0.3359763026237488, 0.12422581762075424, 0.016798825934529305, 0.0004364938649814576, 0.9940246343612671, 0.21924594044685364, 0.16744695603847504, 0.3564964830875397, 0.16083726286888123, 0.6699903607368469, 0.062048062682151794, 0.9999993443489075, 0.9547155499458313]
+Reused 252 tokens from the previous frame.
+Model Output: The image depicts a night-time driving scene. The road appears to be mostly empty, with a single, dimly lit car visible ahead. There are no pedestrians or significant traffic signals visible. The left lane is illuminated by street lights, providing some visibility, while the right lane remains dark.
+
+The environment suggests a residential area or a road with houses, although the specific details and make of the vehicle types are not clear.
+
+With regard to ego vehicle behavior, given the absence of other cars and the darkness, driving speed would likely be reduced. The driver would likely notice the headlights of the vehicle ahead if the car is close enough to warrant attention. The choice to change lanes or make a maneuver would depend on the driver's situational awareness and the visibility in each lane. If the lane ahead is uneven or there are any indications of movement or changes in the approaching vehicle's behavior, the driver would likely take appropriate caution and adjust their driving accordingly.
+
+Please note that the above is a generic description based on the shared driving experience and would require actual traffic analytics to predict the specific behavior accurately.
+
+  - Inference time for this frame: 0.48s
+  - Tokens/sec for this frame: 530.27
+--------------------
+
+===== Scene e8099a6136804f3bb9b38ff94d98eb64 Summary (Memory Idea: True) =====
+Total End-to-End Time: 15.96s
+Total Inference-Only Time: 15.09s
+Total Generated Tokens: 1043
+Average Tokens/Second (Inference Only): 69.10
+========================================
+
+Reached the limit of 5 scenes. Stopping.
