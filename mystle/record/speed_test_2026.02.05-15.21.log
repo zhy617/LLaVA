@@ -1,0 +1,363 @@
+/root/miniconda3/envs/llava/lib/python3.10/site-packages/torch/cuda/__init__.py:51: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml  # type: ignore[import]
+Flash Attention 2 is available. Setting it as default for Llama.
+[2026-02-05 15:21:52,418] [INFO] [real_accelerator.py:161:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+You are using a model of type llava to instantiate a model of type llava_llama. This is not supported for all configurations of models and can yield errors.
+/root/miniconda3/envs/llava/lib/python3.10/site-packages/huggingface_hub/file_download.py:942: FutureWarning: `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
+  warnings.warn(
+/root/miniconda3/envs/llava/lib/python3.10/site-packages/torch/_utils.py:831: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  return self.fget.__get__(instance, owner)()
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███▎      | 1/3 [00:01<00:03,  1.61s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:03<00:01,  1.49s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:04<00:00,  1.39s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:04<00:00,  1.43s/it]
+Loading existing threshold table from threshold_table.json
+
+>>> Start Processing Video Sequence: 04488604-f1028b71
+===== Processing Scene: 04488604-f1028b71 (Memory Idea: True) =====
+--- Processing Frame: 0.jpg (1/41) ---
+Model Output: The scene in the image shows a nighttime city street. Vision is limited due to the darkness, but the street lights suggest that it's night time. The vehicles on the street include a flatbed truck ahead of the ego vehicle and another car to its right. There is also another car behind the ego vehicle. There are traffic lights in the image, one in front of the ego vehicle and another traffic light to the right of the ego vehicle.
+
+Given these observations, the behavior of the ego vehicle is as follows:
+- Driving direction: The ego vehicle is moving straight ahead.
+- Driving speed: The ego vehicle is driving at a moderate speed.
+
+It's important to note that as a visual AI, I'm analyzing the image provided and not the actual driving conditions. The predictions are made based on the static visual information available and not considering the dynamic conditions like traffic signals, road conditions, and emergency vehicles that can affect driving decisions.
+
+  - Inference time for this frame: 4.43s
+  - Tokens/sec for this frame: 48.57
+--------------------
+--- Processing Frame: 1.jpg (2/41) ---
+PPL Check: Reusing 47 tokens out of 215.
+Model Output: The scene in the image shows a nighttime city street. Vision is limited due to the darkness, but the street lights suggest that it's night time. The vehicles on the street include a flatbed truck ahead of the yellow taxi, which is following it. There's another car ahead of the taxi as well. The taxi has a license plate that appears to start with the letters "NY," indicating it's likely in New York City, and there are a couple of stickers on the back window that are not fully readable. The lighting on the street is such that the vehicles have their headlights on, illuminating the road and the surroundings. There are no distinctive advertisements or signs that are clearly visible. The architecture of the buildings suggests a large city environment, and the presence of multiple types of vehicles, including a taxi, indicates a busy city street. The street lights provide sufficient illumination for vehicle safety but not enough to see the surroundings clearly.
+
+  - Inference time for this frame: 3.19s
+  - Tokens/sec for this frame: 66.52
+--------------------
+--- Processing Frame: 2.jpg (3/41) ---
+PPL Check: Reusing 175 tokens out of 212.
+Model Output: The scene in the image shows a nighttime city street. Vision is limited due to the darkness, but the street lights suggest that it's night time. The vehicles on the street include a flatbed truck ahead of the yellow taxi, which is following it. There's another car ahead of the taxi as well. The taxi has a license plate that appears to start with the letters "NY," indicating it's likely in New York City, and there are a couple of stickers on the back window that are not fully readable. The lighting on the street is such that the vehicles have their headlights on, illuminating the road and the surroundings. There are no distinctive advertisements or signs that are clearly visible. The architecture of the buildings suggests a large city environment, and the presence of multiple-story buildings indicates that this is an urban area.
+
+  - Inference time for this frame: 0.34s
+  - Tokens/sec for this frame: 554.44
+--------------------
+--- Processing Frame: 3.jpg (4/41) ---
+PPL Check: Reusing 12 tokens out of 186.
+Model Output: The scene in the image shows a nighttime city street. The cityscape is lit with multiple lights, including streetlights, building lights, and traffic lights. There are taxi cabs visible, indicating that the location is likely New York City, as these are iconic yellow cabs that are synonymous with New York City's taxi system. The street appears to be relatively empty with a few pedestrians, and there is a car with its headlights on, suggesting that it might be a rainy evening or that the driver is preparing to turn onto a different road. The photo is taken from the perspective of a vehicle, as indicated by the rear windshield and taillights visible in the foreground, which can be seen from inside the car.
+
+  - Inference time for this frame: 2.88s
+  - Tokens/sec for this frame: 56.21
+--------------------
+--- Processing Frame: 4.jpg (5/41) ---
+PPL Check: Reusing 162 tokens out of 162.
+Model Output: The scene in the image shows a nighttime city street. The cityscape is lit with multiple lights, including streetlights, building lights, and traffic lights. There are taxi cabs visible, indicating that the location is likely New York City, as these are iconic yellow cabs that are synonymous with New York City's taxi system. The street appears to be relatively empty with a few pedestrians, and there is a car with its headlights on, suggesting that it might be a rainy evening or that the driver is preparing to turn onto a different road. The photo is taken from the perspective of a vehicle, as indicated by the rear windshield and taillights visible in the foreground, which can be seen from inside the car.
+
+  - Inference time for this frame: 0.13s
+  - Tokens/sec for this frame: 1254.73
+--------------------
+--- Processing Frame: 5.jpg (6/41) ---
+PPL Check: Reusing 162 tokens out of 162.
+Model Output: The scene in the image shows a nighttime city street. The cityscape is lit with multiple lights, including streetlights, building lights, and traffic lights. There are taxi cabs visible, indicating that the location is likely New York City, as these are iconic yellow cabs that are synonymous with New York City's taxi system. The street appears to be relatively empty with a few pedestrians, and there is a car with its headlights on, suggesting that it might be a rainy evening or that the driver is preparing to turn onto a different road. The photo is taken from the perspective of a vehicle, as indicated by the rear windshield and taillights visible in the foreground, which can be seen from inside the car.
+
+  - Inference time for this frame: 0.13s
+  - Tokens/sec for this frame: 1269.19
+--------------------
+--- Processing Frame: 6.jpg (7/41) ---
+PPL Check: Reusing 144 tokens out of 162.
+Model Output: The scene in the image shows a nighttime city street. The cityscape is lit with multiple lights, including streetlights, building lights, and traffic lights. There are taxi cabs visible, indicating that the location is likely New York City, as these are iconic yellow cabs that are synonymous with New York City's taxi system. The street appears to be relatively empty with a few pedestrians, and there is a car with its headlights on, suggesting that it might be a rainy evening or that the driver is preparing to turn onto a different road. The photo is taken from the perspective of a vehicle, as indicated by the rear windshield and the glossy reflections that are common on car windshields, which are turned towards the car's headlights.
+
+  - Inference time for this frame: 0.65s
+  - Tokens/sec for this frame: 265.80
+--------------------
+--- Processing Frame: 7.jpg (8/41) ---
+PPL Check: Reusing 172 tokens out of 172.
+Model Output: The scene in the image shows a nighttime city street. The cityscape is lit with multiple lights, including streetlights, building lights, and traffic lights. There are taxi cabs visible, indicating that the location is likely New York City, as these are iconic yellow cabs that are synonymous with New York City's taxi system. The street appears to be relatively empty with a few pedestrians, and there is a car with its headlights on, suggesting that it might be a rainy evening or that the driver is preparing to turn onto a different road. The photo is taken from the perspective of a vehicle, as indicated by the rear windshield and the glossy reflections that are common on car windshields, which are turned towards the car's headlights.
+
+  - Inference time for this frame: 0.13s
+  - Tokens/sec for this frame: 1337.85
+--------------------
+--- Processing Frame: 8.jpg (9/41) ---
+PPL Check: Reusing 36 tokens out of 172.
+Model Output: The scene in the image shows a nighttime city street. The cityscape is lit with multiple lights, including streetlights, building lights, and traffic lights. There are several cars on the street, one of which is a taxi. It appears that the traffic is congested, with cars at a standstill as suggested by the orange traffic cones, which are often indicative of a temporary road blockage or road work ahead. There is a person in the street, who appears to be either directing traffic or possibly a construction worker based on their attire and the fact that they are wearing a high-visibility vest. The street is lined with buildings that and flags, indicating a commercial or residential area. The presence of a yellow sign, the glow of streetlights, and the crowded cityscape create the impression of a bustling urban environment during nighttime.
+
+  - Inference time for this frame: 2.90s
+  - Tokens/sec for this frame: 64.44
+--------------------
+--- Processing Frame: 9.jpg (10/41) ---
+PPL Check: Reusing 140 tokens out of 187.
+Model Output: The scene in the image shows a nighttime city street. The cityscape is lit with multiple lights, including streetlights, building lights, and traffic lights. There are several cars on the street, one of which is a taxi. It appears that the traffic is congested, with cars at a standstill as suggested by the orange traffic cones, which are often indicative of a temporary road blockage or road work ahead. There is a person in the street, who appears to be either directing traffic or possibly a construction worker based on their attire and the fact that they are wearing a high-visibility vest. The street is lined with buildings that seem to be apartment buildings in an urban area. The night time is evident with clear visibility of the lights creating an urban nighttime environment.
+
+  - Inference time for this frame: 0.66s
+  - Tokens/sec for this frame: 254.46
+--------------------
+--- Processing Frame: 10.jpg (11/41) ---
+PPL Check: Reusing 169 tokens out of 169.
+Model Output: The scene in the image shows a nighttime city street. The cityscape is lit with multiple lights, including streetlights, building lights, and traffic lights. There are several cars on the street, one of which is a taxi. It appears that the traffic is congested, with cars at a standstill as suggested by the orange traffic cones, which are often indicative of a temporary road blockage or road work ahead. There is a person in the street, who appears to be either directing traffic or possibly a construction worker based on their attire and the fact that they are wearing a high-visibility vest. The street is lined with buildings that seem to be apartment buildings in an urban area. The night time is evident with clear visibility of the lights creating an urban nighttime environment.
+
+  - Inference time for this frame: 0.13s
+  - Tokens/sec for this frame: 1314.19
+--------------------
+--- Processing Frame: 11.jpg (12/41) ---
+PPL Check: Reusing 169 tokens out of 169.
+Model Output: The scene in the image shows a nighttime city street. The cityscape is lit with multiple lights, including streetlights, building lights, and traffic lights. There are several cars on the street, one of which is a taxi. It appears that the traffic is congested, with cars at a standstill as suggested by the orange traffic cones, which are often indicative of a temporary road blockage or road work ahead. There is a person in the street, who appears to be either directing traffic or possibly a construction worker based on their attire and the fact that they are wearing a high-visibility vest. The street is lined with buildings that seem to be apartment buildings in an urban area. The night time is evident with clear visibility of the lights creating an urban nighttime environment.
+
+  - Inference time for this frame: 0.13s
+  - Tokens/sec for this frame: 1319.87
+--------------------
+--- Processing Frame: 12.jpg (13/41) ---
+PPL Check: Reusing 47 tokens out of 169.
+Model Output: The scene in the image shows a nighttime city street. The cityscape is lit with multiple lights, including streetlights, building lights, and traffic lights. There are several cars on the street, one of which is a large, red semi-truck with its lights on. The semi-truck is a vintage model, suggesting that the image might be capturing a moment from earlier in the 20th century. The cab of the truck has the distinctive design characteristic of such vehicles, with a rounded front and a curved roofline. The reflection of the truck's lights can be seen on the wet street, indicating recent rain or snow. There are parked cars on the sides of the street, and the pavement shows some wear and tear, which is common in urban areas, especially in older historic districts. The architecture of the buildings flanking the street hints at a style that may reflect a historical period. The style of the architecture, along with the truck's old-fashioned design, contributes to the overall sense of the image, which captures the contrast and interaction between modern transportation and its surroundings in the past.
+
+  - Inference time for this frame: 3.84s
+  - Tokens/sec for this frame: 64.65
+--------------------
+--- Processing Frame: 13.jpg (14/41) ---
+PPL Check: Reusing 66 tokens out of 248.
+Model Output: The scene in the image shows a nighttime city street. The cityscape is lit with multiple lights, including streetlights, building lights, and traffic lights. There are several cars on the street, one of which is a large, red semi-truck with its lights on. The semi-truck is a prominent feature due to its size and color. The road appears to be busy with traffic. The perspective of the photo suggests it might be taken from the front seat of a car on the street. There's some indications of crisscrossing lines, which could be the fabric of the seat from the point of view of the camera. The road has a yellow line dividing the lanes, which is common in many cities to indicate no parking.
+
+  - Inference time for this frame: 1.84s
+  - Tokens/sec for this frame: 86.49
+--------------------
+--- Processing Frame: 14.jpg (15/41) ---
+PPL Check: Reusing 159 tokens out of 159.
+Model Output: The scene in the image shows a nighttime city street. The cityscape is lit with multiple lights, including streetlights, building lights, and traffic lights. There are several cars on the street, one of which is a large, red semi-truck with its lights on. The semi-truck is a prominent feature due to its size and color. The road appears to be busy with traffic. The perspective of the photo suggests it might be taken from the front seat of a car on the street. There's some indications of crisscrossing lines, which could be the fabric of the seat from the point of view of the camera. The road has a yellow line dividing the lanes, which is common in many cities to indicate no parking. The side of the road shows a concrete building, and there is the reflections of the lights on the road and the pavement of the sidewalk.
+
+  - Inference time for this frame: 0.70s
+  - Tokens/sec for this frame: 270.47
+--------------------
+--- Processing Frame: 15.jpg (16/41) ---
+PPL Check: Reusing 190 tokens out of 190.
+Model Output: The scene in the image shows a nighttime city street. The cityscape is lit with multiple lights, including streetlights, building lights, and traffic lights. There are several cars on the street, one of which is a large, red semi-truck with its lights on. The semi-truck is a prominent feature due to its size and color. The road appears to be busy with traffic. The perspective of the photo suggests it might be taken from the front seat of a car on the street. There's some indications of crisscrossing lines, which could be the fabric of the seat from the point of view of the camera. The road has a yellow line dividing the lanes, which is common in many cities to indicate no parking. The side of the road shows a concrete building, and there is the reflections of the lights on the road and the pavement of the sidewalk.
+
+  - Inference time for this frame: 0.13s
+  - Tokens/sec for this frame: 1466.31
+--------------------
+--- Processing Frame: 16.jpg (17/41) ---
+PPL Check: Reusing 190 tokens out of 190.
+Model Output: The scene in the image shows a nighttime city street. The cityscape is lit with multiple lights, including streetlights, building lights, and traffic lights. There are several cars on the street, one of which is a large, red semi-truck with its lights on. The semi-truck is a prominent feature due to its size and color. The road appears to be busy with traffic. The perspective of the photo suggests it might be taken from the front seat of a car on the street. There's some indications of crisscrossing lines, which could be the fabric of the seat from the point of view of the camera. The road has a yellow line dividing the lanes, which is common in many cities to indicate no parking. The side of the road shows a concrete building, and there is the reflections of the lights on the road and the pavement of the sidewalk.
+
+  - Inference time for this frame: 0.13s
+  - Tokens/sec for this frame: 1467.09
+--------------------
+--- Processing Frame: 17.jpg (18/41) ---
+PPL Check: Reusing 50 tokens out of 190.
+Model Output: The scene in the image shows a nighttime city street. The cityscape is lit with multiple lights, including streetlights, building lights, and traffic lights. There are several cars on the street, one of which is a large, red-eye limo driving next to a truck. The time appears to be evening or night, as indicated by the twilight sky and the extended shadows. There are no people identifiable in the image apart from the cars, and the focus seems to be on traffic and urban transportation at night. The reflection in the image suggests it was taken from a vehicle's windshield.
+
+  - Inference time for this frame: 1.63s
+  - Tokens/sec for this frame: 80.98
+--------------------
+--- Processing Frame: 18.jpg (19/41) ---
+PPL Check: Reusing 51 tokens out of 132.
+Model Output: The scene in the image shows a nighttime city street. The cityscape is lit with multiple lights, including streetlights, building lights, and traffic lights. There are several cars on the street, one of which is a large, red-tailed taxi cab prominently positioned in the middle of the frame, illuminated by its headlights and taillights. The car appears to be in motion, perhaps driving away from the viewer's perspective. There is also a partially visible lane marker divider with red lights, suggesting that this might be a regulated section of the road.
+
+No people are visible in the image, and the surrounding area outside the frame shows what appears to be an urban environment, likely a busy, commercial or business district. There are no distinctive features or landmarks that can be confidently identified for specific geographical location due to the lack of more detail and context. The focus is primarily on the cars and their lights, creating a sense of movement and urban life.
+
+  - Inference time for this frame: 3.12s
+  - Tokens/sec for this frame: 68.21
+--------------------
+--- Processing Frame: 19.jpg (20/41) ---
+PPL Check: Reusing 213 tokens out of 213.
+Model Output: The scene in the image shows a nighttime city street. The cityscape is lit with multiple lights, including streetlights, building lights, and traffic lights. There are several cars on the street, one of which is a large, red-tailed taxi cab prominently positioned in the middle of the frame, illuminated by its headlights and taillights. The car appears to be in motion, perhaps driving away from the viewer's perspective. There is also a partially visible lane marker divider with red lights, suggesting that this might be a regulated section of the road.
+
+No people are visible in the image, and the surrounding area outside the frame shows what appears to be an urban environment, likely a busy, commercial or business district. There are no distinctive features or landmarks that can be confidently identified for specific geographical location due to the lack of more detail and context. The focus is primarily on the cars and their lights, creating a sense of movement and urban life.
+
+  - Inference time for this frame: 0.14s
+  - Tokens/sec for this frame: 1521.43
+--------------------
+--- Processing Frame: 20.jpg (21/41) ---
+PPL Check: Reusing 213 tokens out of 213.
+Model Output: The scene in the image shows a nighttime city street. The cityscape is lit with multiple lights, including streetlights, building lights, and traffic lights. There are several cars on the street, one of which is a large, red-tailed taxi cab prominently positioned in the middle of the frame, illuminated by its headlights and taillights. The car appears to be in motion, perhaps driving away from the viewer's perspective. There is also a partially visible lane marker divider with red lights, suggesting that this might be a regulated section of the road.
+
+No people are visible in the image, and the surrounding area outside the frame shows what appears to be an urban environment, likely a busy, commercial or business district. There are no distinctive features or landmarks that can be confidently identified for specific geographical location due to the lack of more detail and context. The focus is primarily on the cars and their lights, creating a sense of movement and urban life.
+
+  - Inference time for this frame: 0.13s
+  - Tokens/sec for this frame: 1609.57
+--------------------
+--- Processing Frame: 21.jpg (22/41) ---
+PPL Check: Reusing 213 tokens out of 213.
+Model Output: The scene in the image shows a nighttime city street. The cityscape is lit with multiple lights, including streetlights, building lights, and traffic lights. There are several cars on the street, one of which is a large, red-tailed taxi cab prominently positioned in the middle of the frame, illuminated by its headlights and taillights. The car appears to be in motion, perhaps driving away from the viewer's perspective. There is also a partially visible lane marker divider with red lights, suggesting that this might be a regulated section of the road.
+
+No people are visible in the image, and the surrounding area outside the frame shows what appears to be an urban environment, likely a busy, commercial or business district. There are no distinctive features or landmarks that can be confidently identified for specific geographical location due to the lack of more detail and context. The focus is primarily on the cars and their lights, creating a sense of movement and urban life.
+
+  - Inference time for this frame: 0.14s
+  - Tokens/sec for this frame: 1499.59
+--------------------
+--- Processing Frame: 22.jpg (23/41) ---
+PPL Check: Reusing 213 tokens out of 213.
+Model Output: The scene in the image shows a nighttime city street. The cityscape is lit with multiple lights, including streetlights, building lights, and traffic lights. There are several cars on the street, one of which is a large, red-tailed taxi cab prominently positioned in the middle of the frame, illuminated by its headlights and taillights. The car appears to be in motion, perhaps driving away from the viewer's perspective. There is also a partially visible lane marker divider with red lights, suggesting that this might be a regulated section of the road.
+
+No people are visible in the image, and the surrounding area outside the frame shows what appears to be an urban environment, likely a busy, commercial or business district. There are no distinctive features or landmarks that can be confidently identified for specific geographical location due to the lack of more detail and context. The focus is primarily on the cars and their lights, creating a sense of movement and urban life.
+
+  - Inference time for this frame: 0.13s
+  - Tokens/sec for this frame: 1631.35
+--------------------
+--- Processing Frame: 23.jpg (24/41) ---
+PPL Check: Reusing 213 tokens out of 213.
+Model Output: The scene in the image shows a nighttime city street. The cityscape is lit with multiple lights, including streetlights, building lights, and traffic lights. There are several cars on the street, one of which is a large, red-tailed taxi cab prominently positioned in the middle of the frame, illuminated by its headlights and taillights. The car appears to be in motion, perhaps driving away from the viewer's perspective. There is also a partially visible lane marker divider with red lights, suggesting that this might be a regulated section of the road.
+
+No people are visible in the image, and the surrounding area outside the frame shows what appears to be an urban environment, likely a busy, commercial or business district. There are no distinctive features or landmarks that can be confidently identified for specific geographical location due to the lack of more detail and context. The focus is primarily on the cars and their lights, creating a sense of movement and urban life.
+
+  - Inference time for this frame: 0.13s
+  - Tokens/sec for this frame: 1634.04
+--------------------
+--- Processing Frame: 24.jpg (25/41) ---
+PPL Check: Reusing 213 tokens out of 213.
+Model Output: The scene in the image shows a nighttime city street. The cityscape is lit with multiple lights, including streetlights, building lights, and traffic lights. There are several cars on the street, one of which is a large, red-tailed taxi cab prominently positioned in the middle of the frame, illuminated by its headlights and taillights. The car appears to be in motion, perhaps driving away from the viewer's perspective. There is also a partially visible lane marker divider with red lights, suggesting that this might be a regulated section of the road.
+
+No people are visible in the image, and the surrounding area outside the frame shows what appears to be an urban environment, likely a busy, commercial or business district. There are no distinctive features or landmarks that can be confidently identified for specific geographical location due to the lack of more detail and context. The focus is primarily on the cars and their lights, creating a sense of movement and urban life.
+
+  - Inference time for this frame: 0.13s
+  - Tokens/sec for this frame: 1633.32
+--------------------
+--- Processing Frame: 25.jpg (26/41) ---
+PPL Check: Reusing 213 tokens out of 213.
+Model Output: The scene in the image shows a nighttime city street. The cityscape is lit with multiple lights, including streetlights, building lights, and traffic lights. There are several cars on the street, one of which is a large, red-tailed taxi cab prominently positioned in the middle of the frame, illuminated by its headlights and taillights. The car appears to be in motion, perhaps driving away from the viewer's perspective. There is also a partially visible lane marker divider with red lights, suggesting that this might be a regulated section of the road.
+
+No people are visible in the image, and the surrounding area outside the frame shows what appears to be an urban environment, likely a busy, commercial or business district. There are no distinctive features or landmarks that can be confidently identified for specific geographical location due to the lack of more detail and context. The focus is primarily on the cars and their lights, creating a sense of movement and urban life.
+
+  - Inference time for this frame: 0.13s
+  - Tokens/sec for this frame: 1629.47
+--------------------
+--- Processing Frame: 26.jpg (27/41) ---
+PPL Check: Reusing 213 tokens out of 213.
+Model Output: The scene in the image shows a nighttime city street. The cityscape is lit with multiple lights, including streetlights, building lights, and traffic lights. There are several cars on the street, one of which is a large, red-tailed taxi cab prominently positioned in the middle of the frame, illuminated by its headlights and taillights. The car appears to be in motion, perhaps driving away from the viewer's perspective. There is also a partially visible lane marker divider with red lights, suggesting that this might be a regulated section of the road.
+
+No people are visible in the image, and the surrounding area outside the frame shows what appears to be an urban environment, likely a busy, commercial or business district. There are no distinctive features or landmarks that can be confidently identified for specific geographical location due to the lack of more detail and context. The focus is primarily on the cars and their lights, creating a sense of movement and urban life.
+
+  - Inference time for this frame: 0.13s
+  - Tokens/sec for this frame: 1631.79
+--------------------
+--- Processing Frame: 27.jpg (28/41) ---
+PPL Check: Reusing 213 tokens out of 213.
+Model Output: The scene in the image shows a nighttime city street. The cityscape is lit with multiple lights, including streetlights, building lights, and traffic lights. There are several cars on the street, one of which is a large, red-tailed taxi cab prominently positioned in the middle of the frame, illuminated by its headlights and taillights. The car appears to be in motion, perhaps driving away from the viewer's perspective. There is also a partially visible lane marker divider with red lights, suggesting that this might be a regulated section of the road.
+
+No people are visible in the image, and the surrounding area outside the frame shows what appears to be an urban environment, likely a busy, commercial or business district. There are no distinctive features or landmarks that can be confidently identified for specific geographical location due to the lack of more detail and context. The focus is primarily on the cars and their lights, creating a sense of movement and urban life.
+
+  - Inference time for this frame: 0.13s
+  - Tokens/sec for this frame: 1632.26
+--------------------
+--- Processing Frame: 28.jpg (29/41) ---
+PPL Check: Reusing 213 tokens out of 213.
+Model Output: The scene in the image shows a nighttime city street. The cityscape is lit with multiple lights, including streetlights, building lights, and traffic lights. There are several cars on the street, one of which is a large, red-tailed taxi cab prominently positioned in the middle of the frame, illuminated by its headlights and taillights. The car appears to be in motion, perhaps driving away from the viewer's perspective. There is also a partially visible lane marker divider with red lights, suggesting that this might be a regulated section of the road.
+
+No people are visible in the image, and the surrounding area outside the frame shows what appears to be an urban environment, likely a busy, commercial or business district. There are no distinctive features or landmarks that can be confidently identified for specific geographical location due to the lack of more detail and context. The focus is primarily on the cars and their lights, creating a sense of movement and urban life.
+
+  - Inference time for this frame: 0.13s
+  - Tokens/sec for this frame: 1630.99
+--------------------
+--- Processing Frame: 29.jpg (30/41) ---
+PPL Check: Reusing 213 tokens out of 213.
+Model Output: The scene in the image shows a nighttime city street. The cityscape is lit with multiple lights, including streetlights, building lights, and traffic lights. There are several cars on the street, one of which is a large, red-tailed taxi cab prominently positioned in the middle of the frame, illuminated by its headlights and taillights. The car appears to be in motion, perhaps driving away from the viewer's perspective. There is also a partially visible lane marker divider with red lights, suggesting that this might be a regulated section of the road.
+
+No people are visible in the image, and the surrounding area outside the frame shows what appears to be an urban environment, likely a busy, commercial or business district. There are no distinctive features or landmarks that can be confidently identified for specific geographical location due to the lack of more detail and context. The focus is primarily on the cars and their lights, creating a sense of movement and urban life.
+
+  - Inference time for this frame: 0.13s
+  - Tokens/sec for this frame: 1634.36
+--------------------
+--- Processing Frame: 30.jpg (31/41) ---
+PPL Check: Reusing 213 tokens out of 213.
+Model Output: The scene in the image shows a nighttime city street. The cityscape is lit with multiple lights, including streetlights, building lights, and traffic lights. There are several cars on the street, one of which is a large, red-tailed taxi cab prominently positioned in the middle of the frame, illuminated by its headlights and taillights. The car appears to be in motion, perhaps driving away from the viewer's perspective. There is also a partially visible lane marker divider with red lights, suggesting that this might be a regulated section of the road.
+
+No people are visible in the image, and the surrounding area outside the frame shows what appears to be an urban environment, likely a busy, commercial or business district. There are no distinctive features or landmarks that can be confidently identified for specific geographical location due to the lack of more detail and context. The focus is primarily on the cars and their lights, creating a sense of movement and urban life.
+
+  - Inference time for this frame: 0.13s
+  - Tokens/sec for this frame: 1632.28
+--------------------
+--- Processing Frame: 31.jpg (32/41) ---
+PPL Check: Reusing 213 tokens out of 213.
+Model Output: The scene in the image shows a nighttime city street. The cityscape is lit with multiple lights, including streetlights, building lights, and traffic lights. There are several cars on the street, one of which is a large, red-tailed taxi cab prominently positioned in the middle of the frame, illuminated by its headlights and taillights. The car appears to be in motion, perhaps driving away from the viewer's perspective. There is also a partially visible lane marker divider with red lights, suggesting that this might be a regulated section of the road.
+
+No people are visible in the image, and the surrounding area outside the frame shows what appears to be an urban environment, likely a busy, commercial or business district. There are no distinctive features or landmarks that can be confidently identified for specific geographical location due to the lack of more detail and context. The focus is primarily on the cars and their lights, creating a sense of movement and urban life.
+
+  - Inference time for this frame: 0.13s
+  - Tokens/sec for this frame: 1634.29
+--------------------
+--- Processing Frame: 32.jpg (33/41) ---
+PPL Check: Reusing 213 tokens out of 213.
+Model Output: The scene in the image shows a nighttime city street. The cityscape is lit with multiple lights, including streetlights, building lights, and traffic lights. There are several cars on the street, one of which is a large, red-tailed taxi cab prominently positioned in the middle of the frame, illuminated by its headlights and taillights. The car appears to be in motion, perhaps driving away from the viewer's perspective. There is also a partially visible lane marker divider with red lights, suggesting that this might be a regulated section of the road.
+
+No people are visible in the image, and the surrounding area outside the frame shows what appears to be an urban environment, likely a busy, commercial or business district. There are no distinctive features or landmarks that can be confidently identified for specific geographical location due to the lack of more detail and context. The focus is primarily on the cars and their lights, creating a sense of movement and urban life.
+
+  - Inference time for this frame: 0.13s
+  - Tokens/sec for this frame: 1635.13
+--------------------
+--- Processing Frame: 33.jpg (34/41) ---
+PPL Check: Reusing 213 tokens out of 213.
+Model Output: The scene in the image shows a nighttime city street. The cityscape is lit with multiple lights, including streetlights, building lights, and traffic lights. There are several cars on the street, one of which is a large, red-tailed taxi cab prominently positioned in the middle of the frame, illuminated by its headlights and taillights. The car appears to be in motion, perhaps driving away from the viewer's perspective. There is also a partially visible lane marker divider with red lights, suggesting that this might be a regulated section of the road.
+
+No people are visible in the image, and the surrounding area outside the frame shows what appears to be an urban environment, likely a busy, commercial or business district. There are no distinctive features or landmarks that can be confidently identified for specific geographical location due to the lack of more detail and context. The focus is primarily on the cars and their lights, creating a sense of movement and urban life.
+
+  - Inference time for this frame: 0.13s
+  - Tokens/sec for this frame: 1635.26
+--------------------
+--- Processing Frame: 34.jpg (35/41) ---
+PPL Check: Reusing 213 tokens out of 213.
+Model Output: The scene in the image shows a nighttime city street. The cityscape is lit with multiple lights, including streetlights, building lights, and traffic lights. There are several cars on the street, one of which is a large, red-tailed taxi cab prominently positioned in the middle of the frame, illuminated by its headlights and taillights. The car appears to be in motion, perhaps driving away from the viewer's perspective. There is also a partially visible lane marker divider with red lights, suggesting that this might be a regulated section of the road.
+
+No people are visible in the image, and the surrounding area outside the frame shows what appears to be an urban environment, likely a busy, commercial or business district. There are no distinctive features or landmarks that can be confidently identified for specific geographical location due to the lack of more detail and context. The focus is primarily on the cars and their lights, creating a sense of movement and urban life.
+
+  - Inference time for this frame: 0.13s
+  - Tokens/sec for this frame: 1635.33
+--------------------
+--- Processing Frame: 35.jpg (36/41) ---
+PPL Check: Reusing 213 tokens out of 213.
+Model Output: The scene in the image shows a nighttime city street. The cityscape is lit with multiple lights, including streetlights, building lights, and traffic lights. There are several cars on the street, one of which is a large, red-tailed taxi cab prominently positioned in the middle of the frame, illuminated by its headlights and taillights. The car appears to be in motion, perhaps driving away from the viewer's perspective. There is also a partially visible lane marker divider with red lights, suggesting that this might be a regulated section of the road.
+
+No people are visible in the image, and the surrounding area outside the frame shows what appears to be an urban environment, likely a busy, commercial or business district. There are no distinctive features or landmarks that can be confidently identified for specific geographical location due to the lack of more detail and context. The focus is primarily on the cars and their lights, creating a sense of movement and urban life.
+
+  - Inference time for this frame: 0.13s
+  - Tokens/sec for this frame: 1637.33
+--------------------
+--- Processing Frame: 36.jpg (37/41) ---
+PPL Check: Reusing 213 tokens out of 213.
+Model Output: The scene in the image shows a nighttime city street. The cityscape is lit with multiple lights, including streetlights, building lights, and traffic lights. There are several cars on the street, one of which is a large, red-tailed taxi cab prominently positioned in the middle of the frame, illuminated by its headlights and taillights. The car appears to be in motion, perhaps driving away from the viewer's perspective. There is also a partially visible lane marker divider with red lights, suggesting that this might be a regulated section of the road.
+
+No people are visible in the image, and the surrounding area outside the frame shows what appears to be an urban environment, likely a busy, commercial or business district. There are no distinctive features or landmarks that can be confidently identified for specific geographical location due to the lack of more detail and context. The focus is primarily on the cars and their lights, creating a sense of movement and urban life.
+
+  - Inference time for this frame: 0.13s
+  - Tokens/sec for this frame: 1635.56
+--------------------
+--- Processing Frame: 37.jpg (38/41) ---
+PPL Check: Reusing 104 tokens out of 213.
+Model Output: The scene in the image shows a nighttime city street. The cityscape is lit with multiple lights, including streetlights, building lights, and traffic lights. There are several cars on the street, one of which is a large, red-tailed taxi cab prominently positioned in the middle of the frame, illuminated by its headlights and taillights. The car appears to be in motion, perhaps driving away from the viewer's perspective. There is also a blue car with white emblems, possibly a rideshare vehicle, occupying a lane to the left of the taxi. In the background, there is a bus stop with white and red striped awnings, and pedestrians can be seen waiting for the bus. The architecture of the buildings indicates a modern city environment. The overall ambiance suggests the hustle and bustle of city life, even during the nighttime.
+
+  - Inference time for this frame: 1.88s
+  - Tokens/sec for this frame: 105.82
+--------------------
+--- Processing Frame: 38.jpg (39/41) ---
+PPL Check: Reusing 199 tokens out of 199.
+Model Output: The scene in the image shows a nighttime city street. The cityscape is lit with multiple lights, including streetlights, building lights, and traffic lights. There are several cars on the street, one of which is a large, red-tailed taxi cab prominently positioned in the middle of the frame, illuminated by its headlights and taillights. The car appears to be in motion, perhaps driving away from the viewer's perspective. There is also a blue car with white emblems, possibly a rideshare vehicle, occupying a lane to the left of the taxi. In the background, there is a bus stop with white and red striped awnings, and pedestrians can be seen waiting for the bus. The architecture of the buildings indicates a modern city environment. The overall ambiance suggests the hustle and bustle of city life, even during the nighttime.
+
+  - Inference time for this frame: 0.13s
+  - Tokens/sec for this frame: 1530.28
+--------------------
+--- Processing Frame: 39.jpg (40/41) ---
+PPL Check: Reusing 199 tokens out of 199.
+Model Output: The scene in the image shows a nighttime city street. The cityscape is lit with multiple lights, including streetlights, building lights, and traffic lights. There are several cars on the street, one of which is a large, red-tailed taxi cab prominently positioned in the middle of the frame, illuminated by its headlights and taillights. The car appears to be in motion, perhaps driving away from the viewer's perspective. There is also a blue car with white emblems, possibly a rideshare vehicle, occupying a lane to the left of the taxi. In the background, there is a bus stop with white and red striped awnings, and pedestrians can be seen waiting for the bus. The architecture of the buildings indicates a modern city environment. The overall ambiance suggests the hustle and bustle of city life, even during the nighttime.
+
+  - Inference time for this frame: 0.13s
+  - Tokens/sec for this frame: 1532.04
+--------------------
+--- Processing Frame: 40.jpg (41/41) ---
+PPL Check: Reusing 199 tokens out of 199.
+Model Output: The scene in the image shows a nighttime city street. The cityscape is lit with multiple lights, including streetlights, building lights, and traffic lights. There are several cars on the street, one of which is a large, red-tailed taxi cab prominently positioned in the middle of the frame, illuminated by its headlights and taillights. The car appears to be in motion, perhaps driving away from the viewer's perspective. There is also a blue car with white emblems, possibly a rideshare vehicle, occupying a lane to the left of the taxi. In the background, there is a bus stop with white and red striped awnings, and pedestrians can be seen waiting for the bus. The architecture of the buildings indicates a modern city environment. The overall ambiance suggests the hustle and bustle of city life, even during the nighttime.
+
+  - Inference time for this frame: 0.13s
+  - Tokens/sec for this frame: 1533.34
+--------------------
+
+===== Scene 04488604-f1028b71 Summary (Memory Idea: True) =====
+Total End-to-End Time: 33.01s
+Total Inference-Only Time: 31.72s
+Total Generated Tokens: 8089
+Average Tokens/Second (Inference Only): 255.04
+========================================
+
+Reached the limit of 1 scenes. Stopping.
+
+========================= FINAL SUMMARY =========================
+
+----- Statistics for 'use_memory_idea = True' -----
+Processed 1 scenes.
+Average End-to-End Time per Scene: 33.01s
+Average Inference-Only Time per Scene: 31.72s
+Average Tokens/Second (Inference Only, across all scenes): 255.04
+
+===================================================================

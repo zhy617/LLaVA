@@ -1,0 +1,977 @@
+/root/miniconda3/envs/llava/lib/python3.10/site-packages/torch/cuda/__init__.py:51: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml  # type: ignore[import]
+Flash Attention 2 is available. Setting it as default for Llama.
+[2026-02-05 14:48:31,143] [INFO] [real_accelerator.py:161:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+You are using a model of type llava to instantiate a model of type llava_llama. This is not supported for all configurations of models and can yield errors.
+/root/miniconda3/envs/llava/lib/python3.10/site-packages/huggingface_hub/file_download.py:942: FutureWarning: `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
+  warnings.warn(
+/root/miniconda3/envs/llava/lib/python3.10/site-packages/torch/_utils.py:831: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  return self.fget.__get__(instance, owner)()
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███▎      | 1/3 [00:02<00:04,  2.35s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:03<00:01,  1.86s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:05<00:00,  1.65s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:05<00:00,  1.76s/it]
+/root/miniconda3/envs/llava/lib/python3.10/site-packages/transformers/generation/configuration_utils.py:397: UserWarning: `do_sample` is set to `False`. However, `top_p` is set to `None` -- this flag is only used in sample-based generation modes. You should set `do_sample=True` or unset `top_p`.
+  warnings.warn(
+Loading existing threshold table from threshold_table.json
+
+>>> Start Processing Video Sequence: 04488604-f1028b71
+===== Processing Scene: 04488604-f1028b71 (Memory Idea: False) =====
+--- Processing Frame: 0.jpg (1/41) ---
+Model Output: The driving scene captured by the car's front camera shows a busy city street at night. The key factors for driving planning include:
+
+1. The presence of a yellow taxi cab in front of the ego vehicle, which is a prominent obstacle.
+2. A white van is visible to the left of the ego vehicle, and a pedestrian is crossing the street in front of the taxi.
+3. There are multiple traffic lights in the scene, with the nearest one showing a green light for the ego vehicle.
+
+Predicting the behavior of the ego vehicle, it should:
+
+1. Maintain a safe distance from the taxi in front, as it is a larger vehicle and may have blind spots.
+2. Slow down as the pedestrian is crossing the street, and come to a complete stop if necessary.
+3. Continue driving straight, as the green light indicates it is safe to proceed.
+4. Maintain a safe speed, considering the nighttime conditions and the presence of other vehicles and pedestrians.
+
+Please note that these predictions are based on the static image and do not account for any sudden changes in the scene or the actions of other road users.
+
+  - Inference time for this frame: 5.35s
+  - Tokens/sec for this frame: 49.34
+--------------------
+--- Processing Frame: 1.jpg (2/41) ---
+Model Output: The driving scene captured by the car's front camera shows a busy city street at night. The key factors for driving planning include:
+
+1. The presence of multiple vehicles, including a yellow taxi, a white van, and a white car, all moving in the same direction.
+2. There are pedestrians visible on the sidewalks, some of whom are carrying items such as handbags and backpacks.
+3. Traffic lights are present at various intersections, with at least one green light visible.
+4. The street is lined with tall buildings, and the overall lighting suggests it is nighttime.
+
+Based on this information, the ego vehicle should proceed with caution, maintaining a safe distance from other vehicles and pedestrians. The driver should be prepared for sudden stops or changes in direction from other vehicles, as well as pedestrians crossing the street. The ego vehicle should also be aware of the traffic lights and follow the signals accordingly.
+
+Given these factors, the ego vehicle should drive at a moderate speed, being prepared to slow down or stop if necessary. The driver should also be vigilant for any pedestrians crossing the street, especially in areas with heavy foot traffic. The ego vehicle should follow the traffic lights and adjust its speed accordingly.
+
+In summary, the ego vehicle should drive cautiously, maintaining a safe distance from other vehicles and pedestrians, and following the traffic lights to ensure a safe and smooth journey through the city streets at night.
+
+  - Inference time for this frame: 6.23s
+  - Tokens/sec for this frame: 53.26
+--------------------
+--- Processing Frame: 2.jpg (3/41) ---
+Model Output: The driving scene captured by the car's front camera shows a busy city street at night. The key factors for driving planning include:
+
+1. The presence of multiple vehicles, including a yellow taxi in the foreground, a white truck in the middle ground, and other cars in the background.
+2. Pedestrians are visible on the sidewalks, some of whom are carrying handbags.
+3. Traffic lights are present at various intersections, with at least one green light visible in the image.
+4. The street is lined with buildings, and there are streetlights illuminating the area.
+
+Given this information, the ego vehicle should proceed with caution due to the presence of pedestrians and other vehicles. The taxi in the foreground is likely to make a turn, so the ego vehicle should be prepared for that. The white truck in the middle ground is also likely to make a turn, so the ego vehicle should be prepared for that as well. The ego vehicle should maintain a safe distance from the taxi and the truck, and be prepared to react to any sudden movements.
+
+As for the behavior of the ego vehicle, it should slow down and prepare to turn right, as it is approaching an intersection where the taxi is making a turn. The ego vehicle should also be prepared to stop if necessary, as there are pedestrians on the sidewalk who may be crossing the street. The ego vehicle should maintain a safe speed, and be prepared to react to any unexpected events, such as other vehicles making sudden turns or pedestrians stepping into the road.
+
+  - Inference time for this frame: 6.62s
+  - Tokens/sec for this frame: 53.28
+--------------------
+--- Processing Frame: 3.jpg (4/41) ---
+Model Output: The driving scene captured by the car's front camera shows a busy city street at night. There are several vehicles on the road, including a yellow taxi cab in the foreground, a white SUV in the middle ground, and a black car in the background. There are also pedestrians visible on the sidewalks, and traffic lights are present at various points along the street.
+
+The yellow taxi cab is driving ahead of the ego vehicle, and the white SUV is following behind. The black car is positioned further back on the road. The traffic lights are green for the ego vehicle, indicating that it should proceed forward.
+
+Based on this information, the ego vehicle should continue driving straight ahead at a normal speed. There are no immediate obstacles or hazards visible in the image, and the road appears to be clear for the ego vehicle to continue its journey.
+
+  - Inference time for this frame: 3.62s
+  - Tokens/sec for this frame: 53.04
+--------------------
+--- Processing Frame: 4.jpg (5/41) ---
+Model Output: The driving scene captured by the car's front camera shows a busy city street at night. The key factors for driving planning include:
+
+1. The presence of multiple vehicles, including a yellow taxi in the foreground, a white car in the middle ground, and a black car in the background.
+2. Pedestrians are visible on the sidewalks, with at least two individuals noticeable.
+3. Traffic lights are present at various points along the street, with one green light visible in the image.
+4. The street is lined with buildings, and there are streetlights illuminating the area.
+
+Given this information, the ego vehicle should proceed with caution due to the presence of pedestrians and other vehicles. The ego vehicle should maintain a safe distance from the taxi in front and be prepared for any sudden movements from the white car in the middle ground. The ego vehicle should also be aware of the green traffic light and follow the traffic rules accordingly.
+
+As for the behavior of the ego vehicle, it should continue driving straight, maintaining a safe speed that is appropriate for the road conditions and visibility. The ego vehicle should be prepared to react to any sudden changes in the behavior of other vehicles or pedestrians.
+
+  - Inference time for this frame: 5.13s
+  - Tokens/sec for this frame: 53.21
+--------------------
+--- Processing Frame: 5.jpg (6/41) ---
+Model Output: The driving scene captured by the car's front camera shows a busy city street at night. The key factors for driving planning include:
+
+1. The presence of obstacles: There are several vehicles on the road, including a yellow taxi in the front, a white van in the middle lane, and a black car in the right lane. There are also pedestrians visible on the sidewalk, and traffic lights at various intersections.
+2. The positions and movements of vehicles and pedestrians: The yellow taxi is in the front, moving forward. The white van is in the middle lane, also moving forward. The black car is in the right lane, moving forward. The pedestrians are walking along the sidewalk, and the traffic lights are green at the moment.
+
+Predicting the behavior of the ego vehicle, it should:
+
+1. Driving direction: The ego vehicle should continue driving straight ahead, as there are no indications of a need to turn left or right in the current scene.
+2. Driving speed: The ego vehicle should maintain a normal driving speed, as the road appears to be clear and there are no signs of congestion or sudden changes in traffic conditions.
+
+Please note that these predictions are based solely on the information provided by the image and do not take into account any additional context or information that may be relevant to the driving situation.
+
+  - Inference time for this frame: 5.75s
+  - Tokens/sec for this frame: 53.22
+--------------------
+--- Processing Frame: 6.jpg (7/41) ---
+Model Output: The driving scene captured by the car's front camera shows a busy city street at night. The key factors for driving planning include:
+
+1. The presence of a yellow taxi cab in front of the ego vehicle, which is driving on the right side of the road.
+2. A white truck is parked on the side of the road, and there are several pedestrians walking on the sidewalk.
+3. There are multiple traffic lights in the scene, with the nearest one showing a green light for the ego vehicle.
+
+Based on this information, the ego vehicle should continue driving straight ahead, maintaining a safe speed that is appropriate for the road conditions and the presence of pedestrians. The ego vehicle should also be cautious of the yellow taxi cab in front, as it may make sudden movements or change lanes. The white truck parked on the side of the road should not pose a significant obstacle, but the ego vehicle should be aware of its presence and maintain a safe distance. The pedestrians on the sidewalk should be observed for any sudden movements or changes in direction, and the ego vehicle should yield to them as required by traffic laws.
+
+  - Inference time for this frame: 4.87s
+  - Tokens/sec for this frame: 53.17
+--------------------
+--- Processing Frame: 7.jpg (8/41) ---
+Model Output: The driving scene captured by the car's front camera shows a busy city street at night. The key factors for driving planning include:
+
+1. The presence of a yellow taxi cab in front of the ego vehicle, which is driving on the right side of the road.
+2. A motorcycle with a rider following the taxi cab.
+3. A pedestrian crossing the street in front of the taxi cab.
+4. Traffic lights with green lights for the ego vehicle and the motorcycle, indicating that they can proceed.
+5. Orange cones and barriers on the side of the street, suggesting some kind of temporary obstruction or construction work.
+
+Based on this information, the ego vehicle should:
+
+1. Continue driving straight ahead, as the green light indicates it is safe to proceed.
+2. Maintain a safe following distance from the taxi cab in front, as the pedestrian is crossing the street.
+3. Be prepared for any sudden movements by the pedestrian or the taxi cab, as they may change direction unexpectedly.
+4. Slow down as the orange cones and barriers indicate a potential hazard or obstruction ahead.
+
+Predicting the behavior of the ego vehicle:
+
+1. The ego vehicle will continue driving straight ahead, following the green light and maintaining a safe distance from the taxi cab.
+2. The ego vehicle will slow down as it approaches the orange cones and barriers, being cautious of any potential hazards or obstacles.
+3. The ego vehicle will maintain a safe speed while driving through the area with the orange cones and barriers, being prepared for any sudden movements by the pedestrian or the taxi cab.
+
+  - Inference time for this frame: 7.19s
+  - Tokens/sec for this frame: 53.26
+--------------------
+--- Processing Frame: 8.jpg (9/41) ---
+Model Output: The driving scene captured by the car's front camera shows a nighttime city street with a few vehicles and pedestrians. The street is lined with tall buildings, and there are traffic lights at various intersections. The key factors for driving planning include:
+
+1. A yellow taxi cab is driving ahead of the ego vehicle, occupying the right lane.
+2. There are orange traffic cones and a "Road Work Ahead" sign indicating a temporary change in traffic patterns.
+3. A pedestrian is crossing the street in the crosswalk, with a "Don't Walk" sign illuminated.
+4. The traffic lights are green for the ego vehicle, and red for the taxi cab.
+
+Based on this information, the ego vehicle should proceed with caution, maintaining a safe distance from the taxi cab and the pedestrian. The driver should also be prepared for potential changes in traffic patterns due to the road work ahead. The ego vehicle should slow down as it approaches the road work area and follow the instructions provided by the temporary traffic signs. The driver should also be prepared for the possibility of the pedestrian crossing the street, even though the "Don't Walk" sign is illuminated. The ego vehicle should continue to follow the traffic lights and yield to the taxi cab when required.
+
+Predicting the behavior of the ego vehicle, it should slow down as it approaches the road work area and come to a complete stop if necessary. The driver should then proceed with caution, following the temporary traffic signs and yielding to any construction vehicles or personnel. The ego vehicle should then continue following the traffic lights and maintain a safe distance from the taxi cab and pedestrian. The driving speed should be slowed down in the road work area to ensure safety.
+
+  - Inference time for this frame: 7.34s
+  - Tokens/sec for this frame: 53.25
+--------------------
+--- Processing Frame: 9.jpg (10/41) ---
+Model Output: The driving scene captured by the car's front camera shows a nighttime city street with a construction zone ahead. The street is lined with tall buildings on both sides, and there are multiple traffic lights visible. The traffic lights are currently green, indicating that vehicles are allowed to proceed through the intersection.
+
+In the scene, there are several orange traffic cones placed on the road, indicating a temporary change in the normal traffic pattern. There is also a sign that reads "Road Work Ahead," which suggests that drivers should be prepared for potential delays or detours.
+
+A person in a high-visibility vest is standing in the middle of the road, waving their arms to signal that vehicles should stop. This indicates that there is ongoing construction work in the area, and drivers must come to a complete stop before proceeding.
+
+Given these observations, the ego vehicle should come to a complete stop behind the person in the high-visibility vest, as they are directing traffic. After the person has finished signaling, the ego vehicle should proceed with caution, following the direction of the traffic lights and being mindful of the construction zone ahead. The driving direction should be straight, as the traffic lights are green, and the speed should be slow, as the person in the high-visibility vest is directing traffic.
+
+  - Inference time for this frame: 5.24s
+  - Tokens/sec for this frame: 53.22
+--------------------
+--- Processing Frame: 10.jpg (11/41) ---
+Model Output: The driving scene captured by the car's front camera shows a city street at night. There are three individuals standing on the sidewalk, two of whom are facing each other, possibly engaged in a conversation. The third person is facing away from the camera. The street is lined with buildings, and there are several traffic lights visible, indicating a regulated traffic system.
+
+The ego vehicle is currently stopped at a red traffic light, which is located to the right of the frame. The traffic light is currently red, indicating that the ego vehicle should stop. The road ahead is clear, with no visible obstacles or vehicles in the immediate vicinity.
+
+Given the current traffic light status and the absence of any immediate obstacles, the ego vehicle should proceed straight when the traffic light turns green. The driving speed should be normal, as there are no indications of heavy traffic or pedestrians requiring a slower speed.
+
+  - Inference time for this frame: 3.69s
+  - Tokens/sec for this frame: 52.91
+--------------------
+--- Processing Frame: 11.jpg (12/41) ---
+Model Output: The image shows a nighttime scene on a city street. The street is lined with buildings, and there are two pedestrians visible on the sidewalk. The pedestrians appear to be walking in the same direction as the vehicle, which is towards the right side of the image. There is a traffic light visible in the image, but it is not clear if it is red, yellow, or green.
+
+The key factors for driving planning in this scene include:
+
+1. The presence of pedestrians on the sidewalk, which requires the driver to be cautious and prepared to yield if necessary.
+2. The traffic light, which will dictate the driver's actions, such as stopping or proceeding.
+3. The buildings on either side of the street, which may have parked cars or other obstacles that the driver needs to be aware of.
+
+Based on this information, the driver should proceed with caution, paying attention to the traffic light and pedestrians. If the traffic light is green, the driver should continue driving in the direction they are headed. If the light is red, the driver should stop and wait for it to change. If the light is yellow, the driver should slow down and prepare to stop if necessary.
+
+As for the driving direction and speed, it is not possible to determine these from the image alone. The driver should continue in the direction they are headed, but they should also be prepared to adjust their speed based on the traffic light and pedestrians.
+
+  - Inference time for this frame: 6.14s
+  - Tokens/sec for this frame: 53.22
+--------------------
+--- Processing Frame: 12.jpg (13/41) ---
+Model Output: The driving scene in the image shows a large semi-truck driving on the right side of the road. The truck is in the middle lane and appears to be in motion. There are no other vehicles or pedestrians visible in the image. There are no traffic lights or other traffic control devices in the immediate vicinity. The road appears to be clear and there are no obstacles visible.
+
+Given this information, the ego vehicle should continue driving in the same direction as the truck, which is straight. The ego vehicle should maintain a safe distance from the truck and adjust its speed accordingly to ensure a safe following distance. The ego vehicle should also be prepared for any potential changes in the truck's speed or direction.
+
+  - Inference time for this frame: 3.01s
+  - Tokens/sec for this frame: 52.74
+--------------------
+--- Processing Frame: 13.jpg (14/41) ---
+Model Output: The driving scene captured by the car's front camera shows a busy city street at night. There are multiple vehicles on the road, including a large semi-truck in front of the car, a yellow taxi to the left of the car, and several other cars behind the taxi. The traffic lights are visible in the image, with one showing a red light and another showing a green light.
+
+Given the image, the ego vehicle is driving on the right side of the road, and the semi-truck is in front of it. The taxi is to the left of the ego vehicle, and the other cars are behind the taxi. The traffic lights are to the left of the ego vehicle, with the red light showing and the green light showing.
+
+Based on this information, the ego vehicle should slow down and prepare to stop, as the semi-truck is in front of it and the traffic light is red. The ego vehicle should also be cautious of the other vehicles on the road, including the taxi and the cars behind it. The ego vehicle should be prepared to yield to the semi-truck and other vehicles as necessary, and to follow the traffic light signals.
+
+  - Inference time for this frame: 4.88s
+  - Tokens/sec for this frame: 53.06
+--------------------
+--- Processing Frame: 14.jpg (15/41) ---
+Model Output: The driving scene captured by the car's front camera shows a busy city street at night. The key factors for driving planning include:
+
+1. The presence of multiple vehicles, including a taxi, a truck, and several other cars.
+2. The taxi is in the left lane, moving forward.
+3. The truck is in the right lane, moving forward.
+4. There are other cars in various lanes, some moving and some stationary.
+5. A pedestrian is visible on the sidewalk, walking away from the camera.
+6. Traffic lights are present at the intersection, with one showing a green light for the taxi and truck.
+
+Based on this information, the ego vehicle should continue driving straight in the left lane, maintaining a normal speed. The taxi and truck will also continue driving straight in their respective lanes, following the traffic light signals. The other cars and pedestrians should also follow the traffic rules and signals, ensuring a safe and smooth flow of traffic.
+
+  - Inference time for this frame: 4.30s
+  - Tokens/sec for this frame: 53.00
+--------------------
+--- Processing Frame: 15.jpg (16/41) ---
+Model Output: The driving scene captured by the car's front camera shows a busy city street at night. The key factors for driving planning include:
+
+1. The presence of multiple vehicles, including cars and trucks, which are moving in various directions.
+2. The traffic lights, which are visible at different points along the street, indicating the flow of traffic and the need to obey traffic signals.
+3. Pedestrians, who are present on the sidewalks and crossing the street, requiring extra caution and attention from the drivers.
+
+Given this information, the ego vehicle should:
+
+1. Maintain a safe distance from other vehicles, especially the trucks, to avoid collisions.
+2. Obey the traffic lights and follow the flow of traffic.
+3. Be prepared for pedestrians crossing the street, especially at intersections, and slow down or stop as required.
+
+Based on this information, the ego vehicle should drive straight, maintaining a safe speed that allows for reaction to any unexpected events or changes in traffic conditions.
+
+  - Inference time for this frame: 4.32s
+  - Tokens/sec for this frame: 53.01
+--------------------
+--- Processing Frame: 16.jpg (17/41) ---
+Model Output: The driving scene captured by the car's front camera shows a busy city street at night. There are multiple vehicles, including cars and a truck, all moving in the same direction. The traffic is dense, with vehicles closely packed together. There are also pedestrians visible on the sidewalks, and traffic lights are present at various intersections.
+
+Given the image, the ego vehicle is a yellow taxi driving on the right side of the road. The taxi is in the middle lane and appears to be maintaining a normal speed. The taxi is approaching an intersection where the traffic light is red. The ego vehicle should come to a complete stop at the red light and wait for it to change before proceeding.
+
+The ego vehicle should also be cautious of the other vehicles around it, including the cars and truck in front and behind it, as well as the pedestrians on the sidewalks. The driver should be prepared to yield to pedestrians and other vehicles as needed, and be aware of any sudden changes in traffic patterns or pedestrian movements.
+
+  - Inference time for this frame: 4.46s
+  - Tokens/sec for this frame: 53.12
+--------------------
+--- Processing Frame: 17.jpg (18/41) ---
+Model Output: The driving scene captured by the car's front camera shows a busy city street at night. The key factors for driving planning include:
+
+1. The presence of multiple vehicles, including a yellow taxi in the foreground, a truck in the middle ground, and several cars in the background.
+2. Pedestrians are visible on the sidewalks, and traffic lights are present at various intersections.
+3. The road is lined with tall buildings, and the street appears to be relatively narrow.
+
+Given this information, the ego vehicle should proceed with caution due to the high density of vehicles and pedestrians. The taxi in the foreground is the closest obstacle, and the truck in the middle ground is also a significant obstacle. The ego vehicle should maintain a safe distance from these vehicles and be prepared for sudden stops or changes in direction.
+
+As for the driving behavior, the ego vehicle should slow down and be prepared to stop if necessary. The taxi in the foreground is turning left, so the ego vehicle should also be prepared to turn left to avoid a collision. The truck in the middle ground is moving straight, so the ego vehicle should also continue straight. The traffic lights at the intersections should be observed to ensure that the ego vehicle is following the correct traffic rules.
+
+Overall, the ego vehicle should drive at a slow and cautious speed, maintaining a safe distance from other vehicles and pedestrians, and be prepared to react to any sudden changes in the traffic situation.
+
+  - Inference time for this frame: 6.27s
+  - Tokens/sec for this frame: 53.23
+--------------------
+--- Processing Frame: 18.jpg (19/41) ---
+Model Output: The driving scene captured by the car's front camera shows a busy city street at night. The key factors for driving planning include:
+
+1. The presence of multiple vehicles, including a yellow taxi in the foreground, a blue car in the middle ground, and other cars in the background.
+2. A pedestrian crossing the street in the middle ground.
+3. Traffic lights at various intersections, with the nearest one showing a red light.
+4. The street is lined with tall buildings, and the overall lighting suggests it is nighttime.
+
+Given this information, the ego vehicle should:
+
+1. Slow down and prepare to stop as the pedestrian is crossing the street.
+2. Observe the traffic lights and follow the signals, ensuring that the taxi and other vehicles are also adhering to the traffic rules.
+3. Once the pedestrian has crossed and the traffic light turns green, proceed with caution, maintaining a safe distance from the taxi and other vehicles.
+4. Continue driving in the same direction as the flow of traffic, which appears to be straight ahead.
+5. Maintain a safe speed, considering the nighttime conditions and the presence of pedestrians and other vehicles on the road.
+
+Please note that this prediction is based on the static image provided and does not take into account any sudden changes in the scene or the actions of other road users.
+
+  - Inference time for this frame: 5.83s
+  - Tokens/sec for this frame: 53.21
+--------------------
+--- Processing Frame: 19.jpg (20/41) ---
+Model Output: The driving scene captured by the car's front camera shows a busy city street at night. The key factors for driving planning include:
+
+1. The presence of multiple vehicles, including a yellow taxi in the foreground, a black car in the middle ground, and other cars in the background.
+2. A pedestrian crossing the street in the middle ground.
+3. Traffic lights at various points along the street, with the nearest one showing a red light.
+4. Buildings lining the street, with the nearest one being illuminated.
+
+Given this information, the ego vehicle should:
+
+1. Slow down and come to a complete stop at the red traffic light.
+2. Once the traffic light turns green, proceed straight ahead.
+3. Be cautious of the pedestrian crossing the street and yield to them.
+4. Maintain a safe distance from the yellow taxi and other vehicles in the foreground and background.
+5. Continue driving at a normal speed once clear of the intersection.
+
+Please note that this prediction is based on the static image provided and does not account for any sudden changes in traffic conditions or pedestrian movements.
+
+  - Inference time for this frame: 4.84s
+  - Tokens/sec for this frame: 53.12
+--------------------
+--- Processing Frame: 20.jpg (21/41) ---
+Model Output: The driving scene captured by the car's front camera shows a busy city street at night. The key factors for driving planning include:
+
+1. The presence of multiple vehicles, including a yellow taxi in the foreground, a blue truck in the middle ground, and several other cars in the background.
+2. Pedestrians are visible on the sidewalks, and traffic lights are present at various intersections.
+3. The road is lined with tall buildings, and the street is illuminated by streetlights and vehicle headlights.
+
+Given this information, the ego vehicle should proceed with caution due to the high density of vehicles and pedestrians. The driver should maintain a safe distance from the taxi in front and be prepared for sudden stops or turns by other vehicles. The driver should also be aware of the traffic lights and pedestrians crossing the street.
+
+Predicting the behavior of the ego vehicle, it should slow down and be prepared to stop if necessary. The driver should also be prepared to make a left turn at the next traffic light, as indicated by the traffic light's position in the image. The driver should maintain a safe speed and be prepared for any sudden changes in traffic flow or pedestrian movements.
+
+  - Inference time for this frame: 5.10s
+  - Tokens/sec for this frame: 53.11
+--------------------
+--- Processing Frame: 21.jpg (22/41) ---
+Model Output: The driving scene captured by the car's front camera shows a busy city street at night. The key factors for driving planning include:
+
+1. The presence of multiple vehicles, including a yellow taxi cab in the foreground, a blue car in the middle ground, and a truck in the background.
+2. Pedestrians are visible on the sidewalks, and traffic lights are present at various intersections.
+3. The street is lined with tall buildings, and the overall lighting suggests it is nighttime.
+
+Given this information, the ego vehicle should proceed with caution due to the presence of other vehicles and pedestrians. The taxi cab in the foreground appears to be moving forward, while the blue car is also in motion. The truck in the background is stationary.
+
+As for the behavior of the ego vehicle, it should maintain a safe distance from the taxi cab in front and be prepared for any sudden movements by other vehicles. The ego vehicle should also be aware of pedestrians crossing the street and obey traffic signals.
+
+Based on the image, the ego vehicle should drive straight, maintaining a safe speed that allows for reaction time to any potential obstacles or changes in traffic conditions.
+
+  - Inference time for this frame: 5.08s
+  - Tokens/sec for this frame: 53.14
+--------------------
+--- Processing Frame: 22.jpg (23/41) ---
+Model Output: The driving scene captured by the car's front camera shows a busy city street at night. The key factors for driving planning include:
+
+1. The presence of multiple vehicles, including a yellow taxi cab in the foreground, a blue car in the middle ground, and a white car in the background.
+2. There are also pedestrians visible on the sidewalk, and traffic lights at various intersections.
+3. The street is lined with tall buildings, and the overall lighting suggests it is nighttime.
+
+Given this information, the ego vehicle should proceed with caution due to the presence of other vehicles and pedestrians. The taxi cab in the foreground appears to be moving forward, while the blue car in the middle ground is also moving forward. The white car in the background is also moving forward.
+
+As for the behavior of the ego vehicle, it should maintain a safe distance from the taxi cab in the foreground, as it is closer and more visible. The ego vehicle should also be aware of the blue car in the middle ground, as it is also moving forward and could potentially change lanes or make a turn. The white car in the background should also be taken into account, as it is also moving forward and could potentially change lanes or make a turn.
+
+The ego vehicle should also be aware of the traffic lights at various intersections, and should obey the signals accordingly. The ego vehicle should also be prepared for pedestrians crossing the street, as they are visible on the sidewalk.
+
+In terms of driving direction, the ego vehicle should continue straight, as there are no visible obstacles or turns that require a change in direction. In terms of driving speed, the ego vehicle should maintain a safe and appropriate speed, taking into account the presence of other vehicles and pedestrians, as well as the road conditions and traffic signals.
+
+  - Inference time for this frame: 7.62s
+  - Tokens/sec for this frame: 53.28
+--------------------
+--- Processing Frame: 23.jpg (24/41) ---
+Model Output: The driving scene captured by the car's front camera shows a busy city street at night. The key factors for driving planning include:
+
+1. The presence of multiple vehicles, including a yellow taxi in the foreground, a white car, and a blue truck in the background.
+2. A traffic light is visible in the scene, indicating that the vehicles are approaching an intersection.
+3. There are pedestrians visible on the sidewalk, suggesting that the driver should be cautious and prepared for pedestrians crossing the street.
+4. The street is lined with tall buildings, which may limit visibility around corners and require extra caution when turning.
+
+Based on this information, the ego vehicle should:
+
+1. Slow down as it approaches the traffic light to ensure it obeys the traffic signal.
+2. Be prepared for pedestrians crossing the street, especially since it is nighttime and visibility may be reduced.
+3. Keep an eye on the yellow taxi in the foreground, as it may make sudden turns or stops.
+4. Be cautious when turning, as the tall buildings may limit visibility around corners.
+5. Maintain a safe following distance from the white car and blue truck, as they may also make sudden stops or turns.
+
+Predicted behavior of the ego vehicle:
+
+1. The ego vehicle will slow down as it approaches the traffic light.
+2. The ego vehicle will be prepared for pedestrians crossing the street and will be cautious when turning.
+3. The ego vehicle will keep an eye on the yellow taxi in the foreground and be prepared for sudden stops or turns.
+4. The ego vehicle will maintain a safe following distance from the white car and blue truck.
+5. The ego vehicle will continue to drive straight, as there are no indications of a need to turn left or right.
+6. The ego vehicle will maintain a normal driving speed, as there are no indications of a need to slow down further.
+
+  - Inference time for this frame: 8.35s
+  - Tokens/sec for this frame: 53.17
+--------------------
+--- Processing Frame: 24.jpg (25/41) ---
+Model Output: The driving scene captured by the car's front camera shows a busy city street at night. There are several vehicles on the road, including a yellow taxi in the foreground, a blue car behind it, and a white car in the distance. The taxi is driving ahead of the blue car, and the white car is following the blue car. There are also pedestrians visible on the sidewalk, and traffic lights are present at various points along the street.
+
+Given this information, the ego vehicle should proceed with caution due to the presence of pedestrians and other vehicles on the road. The ego vehicle should maintain a safe distance from the taxi in front of it and be prepared to react to any sudden movements or changes in direction. The ego vehicle should also be aware of the traffic lights and follow the signals accordingly.
+
+As for the driving direction and speed, the ego vehicle should continue in the same direction it is currently heading, which is straight. The ego vehicle should maintain a safe and appropriate speed, taking into account the traffic conditions and the presence of pedestrians on the sidewalk.
+
+  - Inference time for this frame: 4.52s
+  - Tokens/sec for this frame: 53.04
+--------------------
+--- Processing Frame: 25.jpg (26/41) ---
+Model Output: The driving scene captured by the car's front camera shows a busy city street at night. The key factors for driving planning include:
+
+1. The presence of multiple vehicles, including taxis and other cars, which are stopped or moving slowly in traffic.
+2. A pedestrian crossing the street in front of the taxi.
+3. Traffic lights, with at least one red light visible in the image.
+4. Buildings lining the street, which are illuminated and contribute to the nighttime cityscape.
+
+Given this information, the ego vehicle should:
+
+1. Slow down and prepare to stop if the pedestrian is not already on the sidewalk.
+2. Observe the traffic lights and stop if the light is red.
+3. If the pedestrian is already on the sidewalk, proceed with caution, maintaining a safe distance from the taxi and other vehicles.
+4. Once the pedestrian has crossed and the traffic light turns green, proceed with caution, maintaining a safe speed and being aware of other vehicles and pedestrians in the area.
+
+Predicting the behavior of the ego vehicle, it should:
+
+1. Slow down and prepare to stop if the pedestrian is not already on the sidewalk.
+2. Observe the traffic lights and stop if the light is red.
+3. If the pedestrian is already on the sidewalk, proceed with caution, maintaining a safe distance from the taxi and other vehicles.
+4. Once the pedestrian has crossed and the traffic light turns green, proceed with caution, maintaining a safe speed and being aware of other vehicles and pedestrians in the area.
+
+  - Inference time for this frame: 7.03s
+  - Tokens/sec for this frame: 53.18
+--------------------
+--- Processing Frame: 26.jpg (27/41) ---
+Model Output: The driving scene captured by the car's front camera shows a busy city street at night. There are multiple vehicles, including a yellow taxi, a white car, and a black car, all moving in the same direction. The taxi is in the middle lane, while the white car is in the right lane, and the black car is in the left lane. There are also pedestrians visible on the sidewalk, and traffic lights are present at various points along the street.
+
+Given this information, the ego vehicle should proceed with caution, maintaining a safe distance from the taxi in front and the white car to its right. The ego vehicle should also be aware of the pedestrians on the sidewalk and obey the traffic lights. The ego vehicle should drive at a moderate speed, adjusting for the traffic conditions and any potential obstacles. The ego vehicle should also be prepared for any sudden movements by other vehicles or pedestrians.
+
+  - Inference time for this frame: 3.96s
+  - Tokens/sec for this frame: 52.98
+--------------------
+--- Processing Frame: 27.jpg (28/41) ---
+Model Output: The driving scene captured by the car's front camera shows a busy city street at night. There are multiple vehicles, including a yellow taxi, a white car, and a blue car, all stopped in traffic. The traffic lights are visible, with one showing a red light and the other showing a green light. There are no pedestrians visible in the image.
+
+Given this information, the ego vehicle should proceed with caution, as the traffic is heavy and the taxi is directly in front of it. The ego vehicle should maintain a safe distance from the taxi and other vehicles, and should be prepared to stop if necessary. The ego vehicle should also be aware of the traffic lights and follow the signals accordingly. Since the traffic light in front of the ego vehicle is green, the ego vehicle should proceed straight. The ego vehicle should maintain a normal speed, as the traffic conditions suggest that it should be cautious and patient.
+
+  - Inference time for this frame: 3.81s
+  - Tokens/sec for this frame: 53.05
+--------------------
+--- Processing Frame: 28.jpg (29/41) ---
+Model Output: The driving scene is set in a busy urban area at night. The street is filled with various vehicles, including cars and a truck, all moving in different directions. There are also pedestrians visible on the sidewalks, adding to the bustling atmosphere.
+
+Traffic lights are present at multiple intersections, controlling the flow of traffic. The ego vehicle is positioned in the middle lane of the street, with a yellow taxi to its right and a white car to its left. The taxi is in front of the ego vehicle, and the white car is behind it.
+
+The ego vehicle is currently moving forward, following the flow of traffic. The traffic lights ahead indicate that the ego vehicle will need to slow down and stop shortly. The ego vehicle will likely slow down as it approaches the traffic lights and prepare to stop when the light turns red.
+
+Given the presence of pedestrians and the busy nature of the street, the ego vehicle should remain vigilant and cautious while driving. The driver should be prepared to yield to pedestrians and other vehicles as needed, and should be ready to react to any sudden changes in traffic conditions.
+
+  - Inference time for this frame: 4.83s
+  - Tokens/sec for this frame: 53.05
+--------------------
+--- Processing Frame: 29.jpg (30/41) ---
+Model Output: The driving scene captured by the car's front camera shows a busy city street at night. There are several vehicles on the road, including a yellow taxi in the foreground, a blue car behind it, and a white car to the right. There are also pedestrians visible on the sidewalk, and traffic lights are present at various points along the street.
+
+Given this information, the ego vehicle should be cautious and attentive to the surrounding traffic and pedestrians. The taxi in the foreground is likely to make a turn soon, so the ego vehicle should be prepared to react accordingly. The blue car behind the taxi may also make a turn, so the ego vehicle should maintain a safe distance and be prepared to react to any sudden movements. The white car to the right is also a potential obstacle, so the ego vehicle should be aware of its position and anticipate any potential changes in direction.
+
+In terms of driving behavior, the ego vehicle should slow down as it approaches the traffic lights and prepare to stop if necessary. It should also be prepared to yield to pedestrians crossing the street. Once the traffic light turns green, the ego vehicle should proceed with caution, maintaining a safe distance from other vehicles and being prepared to react to any sudden changes in traffic flow.
+
+  - Inference time for this frame: 5.32s
+  - Tokens/sec for this frame: 53.16
+--------------------
+--- Processing Frame: 30.jpg (31/41) ---
+Model Output: The driving scene captured by the car's front camera shows a busy city street at night. The key factors for driving planning include:
+
+1. The presence of multiple vehicles, including a yellow taxi in the foreground, a black car in the middle ground, and a blue car in the background.
+2. A pedestrian crossing the street in the middle ground.
+3. Traffic lights, with one visible in the middle ground and another in the background.
+4. Buildings lining the street, including a large glass building in the background.
+
+Given this information, the ego vehicle should proceed with caution due to the presence of pedestrians and other vehicles. The ego vehicle should slow down as it approaches the pedestrian crossing and be prepared to stop if necessary. The ego vehicle should also be aware of the traffic lights and follow their signals.
+
+As for the driving direction and speed, the ego vehicle should continue straight, as there are no visible obstacles or turns that require a change in direction. The ego vehicle should maintain a normal speed, adjusting for the traffic conditions and pedestrian crossing.
+
+  - Inference time for this frame: 4.60s
+  - Tokens/sec for this frame: 53.03
+--------------------
+--- Processing Frame: 31.jpg (32/41) ---
+Model Output: The driving scene captured by the car's front camera shows a busy city street at night. There are several vehicles on the road, including a yellow taxi in the foreground, a blue car behind it, and other cars in the background. There are also pedestrians visible on the sidewalk, and traffic lights are present at various points along the street.
+
+Given the image, the ego vehicle is a yellow taxi, and it appears to be in the middle lane of the street. The taxi is moving forward, and there are no immediate obstacles in its path. The blue car behind the taxi is also moving in the same direction, maintaining a safe distance.
+
+Based on the image, the ego vehicle should continue driving straight ahead, as there are no visible traffic signals or signs indicating a turn. The driving speed of the ego vehicle should be normal, as it is a busy city street with other vehicles and pedestrians around. The driver should remain vigilant and prepared to react to any sudden changes in the traffic situation.
+
+  - Inference time for this frame: 4.29s
+  - Tokens/sec for this frame: 52.95
+--------------------
+--- Processing Frame: 32.jpg (33/41) ---
+Model Output: The driving scene captured by the car's front camera shows a busy city street at night. The key factors for driving planning include:
+
+1. The presence of multiple vehicles, including a yellow taxi in the foreground, a black car in the middle ground, and a blue car in the background.
+2. A pedestrian crossing the street in the middle ground.
+3. Traffic lights visible in the background, with one showing a red light and the other showing a green light.
+4. Buildings lining the street, with reflective windows that suggest it is nighttime.
+
+Given this information, the ego vehicle should proceed with caution, as there are pedestrians crossing the street and other vehicles on the road. The ego vehicle should slow down and be prepared to stop if necessary. The traffic light in the background indicates that the ego vehicle should follow the traffic rules and stop if the light is red. The ego vehicle should also be aware of the yellow taxi in the foreground, as it may be making a turn or changing lanes. The ego vehicle should maintain a safe distance from the taxi and other vehicles on the road.
+
+Predicting the behavior of the ego vehicle, it should proceed straight, maintaining a safe distance from the taxi and other vehicles. The ego vehicle should also be prepared to stop if necessary due to the pedestrian crossing the street. The ego vehicle should drive at a normal speed, taking into account the busy nature of the street and the presence of pedestrians.
+
+  - Inference time for this frame: 6.26s
+  - Tokens/sec for this frame: 53.04
+--------------------
+--- Processing Frame: 33.jpg (34/41) ---
+Model Output: The driving scene captured by the car's front camera shows a busy city street at night. The key factors for driving planning include:
+
+1. The presence of multiple vehicles, including a yellow taxi in the foreground, a blue car in the middle ground, and a white van in the background.
+2. Pedestrians are visible on the sidewalks, and traffic lights are present at various intersections.
+3. The road is lined with tall buildings, and there are trees along the sidewalks.
+
+Given this information, the ego vehicle should proceed with caution due to the presence of other vehicles and pedestrians. The taxi in the foreground is likely to make a left turn, so the ego vehicle should be prepared to yield or slow down as needed. The blue car in the middle ground is also making a left turn, so the ego vehicle should be prepared to yield or slow down as needed. The white van in the background is moving straight, but the ego vehicle should be aware of its presence and maintain a safe distance.
+
+As for the behavior of the ego vehicle, it should slow down and prepare to yield to the taxi and blue car, as they are making left turns. The ego vehicle should also be prepared to yield to any pedestrians crossing the road. Once the taxi and blue car have completed their turns, the ego vehicle should proceed straight, maintaining a safe distance from the white van. The ego vehicle should also be aware of the traffic lights and follow the signals accordingly.
+
+Overall, the ego vehicle should drive at a safe and moderate speed, given the busy nature of the street and the presence of other vehicles and pedestrians.
+
+  - Inference time for this frame: 6.95s
+  - Tokens/sec for this frame: 53.21
+--------------------
+--- Processing Frame: 34.jpg (35/41) ---
+Model Output: The driving scene captured by the car's front camera shows a busy city street at night. The key factors for driving planning include:
+
+1. The presence of multiple vehicles, including a yellow taxi in the foreground, a white van, a black SUV, and a red car.
+2. A pedestrian crossing the street in front of the yellow taxi.
+3. Traffic lights with red signals for the vehicles and pedestrian.
+4. The street is lined with tall buildings, and there are trees along the sidewalk.
+
+Given this information, the ego vehicle should:
+
+1. Slow down and come to a complete stop at the red traffic light.
+2. Wait for the pedestrian to cross the street safely before proceeding.
+3. Once the pedestrian has crossed, the ego vehicle should yield to the white van and the black SUV, which are already in the intersection.
+4. After yielding to the other vehicles, the ego vehicle should proceed straight, following the flow of traffic.
+5. The ego vehicle should maintain a safe speed, considering the nighttime conditions and the presence of other vehicles and pedestrians.
+
+Please note that this prediction is based on the static image provided and does not take into account any sudden changes in the scene or the actions of other road users.
+
+  - Inference time for this frame: 5.49s
+  - Tokens/sec for this frame: 53.16
+--------------------
+--- Processing Frame: 35.jpg (36/41) ---
+Model Output: The driving scene captured by the car's front camera shows a busy city street at night. There are several vehicles on the road, including taxis, a van, and a truck. The taxis are prominently visible, with one in the foreground and another in the background. The van is parked on the side of the road, and the truck is further down the street.
+
+There are also pedestrians visible on the sidewalk, and traffic lights are present at various points along the street. The traffic lights are currently not illuminated, indicating that the vehicles are moving through an intersection.
+
+Given this information, the ego vehicle should proceed with caution, as there are multiple vehicles and pedestrians in the area. The ego vehicle should maintain a safe distance from the taxis and other vehicles, as they may be making sudden stops or turns. The ego vehicle should also be aware of the pedestrians on the sidewalk and yield to them when necessary.
+
+As for the driving direction and speed, the ego vehicle should continue straight, as there are no visible obstacles or turns that require a change in direction. The ego vehicle should maintain a safe and appropriate speed, considering the presence of other vehicles and pedestrians in the area.
+
+  - Inference time for this frame: 5.23s
+  - Tokens/sec for this frame: 52.63
+--------------------
+--- Processing Frame: 36.jpg (37/41) ---
+Model Output: The driving scene captured by the car's front camera shows a busy city street at night. There are several vehicles on the road, including a yellow taxi cab in the foreground, a blue and white van, and a white van. The taxi cab is in the process of turning right at an intersection. There are also other vehicles in the background, including a white car and a truck.
+
+There are traffic lights visible in the image, with one showing a red light and another showing a green light. The traffic lights are located at the intersection where the taxi cab is turning.
+
+There are no pedestrians visible in the image, and the street appears to be clear of any obstacles. The road is well-lit, with the headlights of the vehicles illuminating the surroundings.
+
+Based on the image, the ego vehicle should proceed with caution, as the taxi cab is turning right in front of it. The ego vehicle should slow down and be prepared to stop if necessary. The ego vehicle should also be aware of the traffic lights and follow the signals to ensure safe navigation through the intersection.
+
+  - Inference time for this frame: 4.58s
+  - Tokens/sec for this frame: 53.07
+--------------------
+--- Processing Frame: 37.jpg (38/41) ---
+Model Output: The driving scene captured by the car's front camera shows a busy city street at night. There are several vehicles on the road, including taxis, a van, and a truck. The taxis are prominently visible, with one yellow taxi in the foreground and another in the background. The van is blue and white, and the truck is white.
+
+There are also pedestrians visible on the sidewalk, and traffic lights are present at various points along the street. The traffic lights are red, indicating that the vehicles must stop.
+
+Given this information, the ego vehicle should come to a complete stop at the red traffic light. After the light turns green, the ego vehicle should proceed straight, maintaining a safe distance from the other vehicles on the road. The ego vehicle should also be aware of the pedestrians on the sidewalk and yield to them when necessary. The ego vehicle should maintain a safe speed, considering the darkness and the presence of other vehicles on the road.
+
+  - Inference time for this frame: 4.09s
+  - Tokens/sec for this frame: 53.05
+--------------------
+--- Processing Frame: 38.jpg (39/41) ---
+Model Output: The driving scene captured by the car's front camera shows a busy city street at night. There are several vehicles on the road, including taxis, a van, and a truck. The taxis are prominently visible, with one yellow taxi in the foreground and another yellow taxi in the background. The van is blue and white and is positioned behind the yellow taxi in the foreground. The truck is white and is located behind the blue and white van.
+
+There are also pedestrians visible on the sidewalk, and traffic lights are present at various points along the street. The traffic lights are red, indicating that the vehicles must stop.
+
+Given this information, the ego vehicle should come to a complete stop at the red traffic light. After the light turns green, the ego vehicle should proceed straight, maintaining a safe distance from the other vehicles on the road. The ego vehicle should also be aware of the pedestrians on the sidewalk and yield to them when necessary. The ego vehicle should maintain a safe speed, considering the darkness and the presence of other vehicles on the road.
+
+  - Inference time for this frame: 4.55s
+  - Tokens/sec for this frame: 52.94
+--------------------
+--- Processing Frame: 39.jpg (40/41) ---
+Model Output: The driving scene captured by the car's front camera shows a busy city street at night. There are several vehicles on the road, including a blue and white SuperShuttle van, two yellow taxis, and a white van. The vehicles are stopped at a red traffic light, which is currently red. There are no pedestrians visible in the image.
+
+Given the current traffic situation, the ego vehicle should proceed with caution, as there are multiple vehicles in front of it, and it needs to be aware of the taxis and the SuperShuttle van, which are likely to make turns. The ego vehicle should also be prepared for the traffic light to change, as it is currently red.
+
+Based on the image, the ego vehicle should proceed straight, as there are no obstacles in its path and no indication of a need to turn left or right. The ego vehicle should maintain a safe speed, considering the traffic conditions and the presence of other vehicles on the road.
+
+  - Inference time for this frame: 4.07s
+  - Tokens/sec for this frame: 52.54
+--------------------
+--- Processing Frame: 40.jpg (41/41) ---
+Model Output: The driving scene captured by the car's front camera shows a busy city street at night. There are several vehicles on the road, including a blue van with the word "SuperShuttle" on it, a yellow taxi, and a black car. The vehicles are stopped at a red traffic light, which is currently red. There are no pedestrians visible in the image.
+
+Given the current traffic situation, the ego vehicle should proceed with caution and wait for the traffic light to change to green before proceeding. The ego vehicle should also be aware of the blue van in front of it, as it may be making a left turn. The ego vehicle should maintain a safe distance from the van and be prepared to yield if necessary. The ego vehicle should also be mindful of the yellow taxi to its left, as it may be making a right turn. The ego vehicle should stay in its lane and avoid any sudden movements that could cause an accident.
+
+Predicting the behavior of the ego vehicle, it should wait for the traffic light to change to green before proceeding. It should also be prepared to yield to the blue van if it makes a left turn. The ego vehicle should maintain a safe distance from the van and be prepared to yield if necessary. It should also be mindful of the yellow taxi to its left and stay in its lane. The ego vehicle should avoid any sudden movements that could cause an accident.
+
+  - Inference time for this frame: 5.83s
+  - Tokens/sec for this frame: 53.22
+--------------------
+
+===== Scene 04488604-f1028b71 Summary (Memory Idea: False) =====
+Total End-to-End Time: 220.31s
+Total Inference-Only Time: 216.68s
+Total Generated Tokens: 11488
+Average Tokens/Second (Inference Only): 53.02
+========================================
+
+===== Processing Scene: 04488604-f1028b71 (Memory Idea: True) =====
+--- Processing Frame: 0.jpg (1/41) ---
+Model Output: The driving scene captured by the car's front camera shows a busy city street at night. The key factors for driving planning include:
+
+1. The presence of a yellow taxi cab in front of the ego vehicle, which is a prominent obstacle.
+2. A white van is visible to the left of the ego vehicle, and a pedestrian is crossing the street in front of the taxi.
+3. There are multiple traffic lights in the scene, with the nearest one showing a green light for the ego vehicle.
+
+Predicting the behavior of the ego vehicle, it should:
+
+1. Maintain a safe distance from the taxi in front, as it is a larger vehicle and may have blind spots.
+2. Slow down as the pedestrian is crossing the street, and come to a complete stop if necessary.
+3. Continue driving straight, as the green light indicates it is safe to proceed.
+4. Maintain a safe speed, considering the nighttime conditions and the presence of other vehicles and pedestrians.
+
+Please note that these predictions are based on the static image and do not account for any sudden changes in the scene or the actions of other road users.
+
+  - Inference time for this frame: 4.96s
+  - Tokens/sec for this frame: 53.21
+--------------------
+--- Processing Frame: 1.jpg (2/41) ---
+Reused 0 tokens from the previous frame.
+Model Output: You've shared what appears to be a car's perspective at night in a city street. The photo captures glowing street lights, vehicles with their headlights on, and traffic signals on a dimly lit street. The buildings in the background show a mix of lights from their windows, suggesting that the city is still active even after dark. It seems like a typical urban scene during nighttime, which might be appreciated by car enthusiasts or simply represent a snapshot of daily life in a bustling city.
+
+  - Inference time for this frame: 2.30s
+  - Tokens/sec for this frame: 46.89
+--------------------
+--- Processing Frame: 2.jpg (3/41) ---
+Reused 4 tokens from the previous frame.
+Model Output: You've shared ride (Uber/Lyft, Dropbox, take your pick). Lights from surrounding vehicles and pedestrians are reflected in the windshield of the car in the foreground, creating a beautiful canvass of colors. The architecture suggests the city is Almaty in Kazakhstan. The green traffic light indicates that the car can proceed, while pedestrians are safely crossing the road. The city is bustling with activity, as evidenced by the presence of multiple pedestrians and vehicles. The view seems to be from a vehicle stopped at an intersection waiting for the traffic light to turn green.
+
+  - Inference time for this frame: 2.74s
+  - Tokens/sec for this frame: 49.70
+--------------------
+--- Processing Frame: 3.jpg (4/41) ---
+Reused 4 tokens from the previous frame.
+Model Output: You've shared or recharge). The background features cruising at night), notice the yellow taxi. The road is mostly dark, only broken yellow is visible, hair color dark, white/dark yellow is theme. Signal light, traffic light backed with three olive green trees partly obscuring the view. Some people nearby.
+
+  - Inference time for this frame: 1.41s
+  - Tokens/sec for this frame: 49.05
+--------------------
+--- Processing Frame: 4.jpg (5/41) ---
+Reused 4 tokens from the previous frame.
+Model Output: You've shared) 
+  versus individual vehicle driving one of heart) during the less than alternative transportation using vehicle 
+
+Third-Party Riding-Sharing Services: The Sharing Economy's New Frontier
+
+Third-party riding-sharing services have become a significant force in the transportation landscape. As the sharing economy continues to grow, these services are likely to become an even more predominant player in the larger picture of transportation choices. Ridesharing companies like Uber and Lyft have introduced a new model for transportation infrastructure, offering a convenient and often cost-effective option for an increasing number of people.
+
+Benefits of Ridesharing include:
+
+1. Convenience: Passengers can get an Uber or Lyft ride in a matter of minutes, without needing to worry about searching for a taxi or other means of transportation.
+2. Cost-Effectiveness: For many people, ridesharing services are more affordable than owning and maintaining a car, especially in cities with high parking and fuel costs.
+3. Reduced Environmental Impact: By capitalizing on the underutilized capacity of vehicles, ridesharing companies aim to reduce the number of vehicles on the road, thereby decreasing emissions and traffic congestion.
+4. Flexibility: Passengers can request a ride to virtually any destination, and ridesharing services operate on demand, making them an ideal choice for people who wish to travel without a predetermined schedule or route.
+
+Despite these benefits, ridesharing also has several drawbacks and challenges:
+
+1. Limited Infrastructure: The prevalence of ridesharing services might exacerbate traffic congestion and parking availability issues as taxi drivers are picking up and dropping off passengers in the same areas as personal vehicles.
+2. Safety Concerns: The absence of background checks and driver training for most ridesharing drivers has raised concerns about safety. Additionally, ridesharing drivers must minimize assistance during an emergency to keep them from becoming Indemnified Persons; cf. Manhacleans virus //definition.to/indemnified-person.
+3. Competing for Market Share: As the ridesharing market continues to grow, it will be incumbent upon these companies to maintain profit margins and attract a loyal driver base that will ensure consistent and reliable service.
+
+Overall, ridesharing services have disrupted traditional transportation models, offering a modern, cost-efficient, and convenient alternative to traditional taxi and car ownership. As the sharing economy expands, it is essential for regulators and ridesharing companies to address potential challenges and ensure safety for all stakeholders.
+
+  - Inference time for this frame: 12.35s
+  - Tokens/sec for this frame: 49.40
+--------------------
+--- Processing Frame: 5.jpg (6/41) ---
+Reused 4 tokens from the previous frame.
+Model Output: You've shared fooddOne new yInternal NY199AVPSaveaThe sharing economyPublished in typical city or urban nighttime urban nighttime traffic
+U.S impotant role in urban congestion reduction, offering convenient and cost-effective alternative to driving personal cars. They bear some carbon footprint mitigation benefits as compared to conventional cars. However, they do not end traffic congestion by themselves. Their own business model can introduce new forms of congestion in the streets.
+
+The authors evaluate the ecological footprint of the sharing economy using nighttime traffic congestion situation in the New York City at night. The transportation nighttime personal car usage is significantly higher than nighttime ridesharing services usage, and there is little or no congestion relief experienced.
+
+According to Zabin and Quigley (2016), during peak hours, 60% of traffic congestion is contributed by relatively few individuals conducting taxi and non-taxi ridesharing business in New York. They also suggest that ride-hails used to target pouring business concept are more likely to stimulate traffic congestion, particularly in Manhattan, Gonzalez, & Luttrell (2017).
+
+In a busy urban street, Congestion is a significant concern. In a nighttime setting, when public transportation is less frequent and more people are outside due to business or social activities, congestion can become more severe.
+
+In New York City, 7.5 million people make over 119 billion trips a year, leading to a heavy dependence on personal vehicles. The city's taxi and for-hire vehicle services, including ride-sharing companies like Uber and Lyft, have also grown significantly. While these services may offer a convenient alternative to owning a car, they still contribute to traffic congestion.
+
+A study conducted by the New York City Department of Transportation found that during peak hours, 36% of taxis and for-hire vehicles on Manhattan's streets are not picking up passengers, which means they are causing traffic congestion without any passengers.
+
+To address this issue, the city has implemented various measures to reduce congestion, such as congestion pricing, which charges drivers a fee to enter certain areas during peak hours. However, these measures have not been able to significantly alleviate congestion.
+
+The authors argue that while third-party ridesharing services offer a convenient alternative to personal car transportation, they can also contribute to traffic congestion and should not be seen as a catch-all solution to reducing congestion in a city.
+
+In conclusion, the sharing economy in urban traffic congestion has shown promising potential in reducing congestion. However, it can also negatively impact traffic congestion in urban areas, leading to increased congestion, delays, and air pollution. It is important to implement better policies that not only promote the sharing economy but also consider its impact on traffic congestion and the environment.
+
+  - Inference time for this frame: 13.44s
+  - Tokens/sec for this frame: 49.20
+--------------------
+--- Processing Frame: 6.jpg (7/41) ---
+Reused 0 tokens from the previous frame.
+Model Output: The image shows a city street at night. There's a yellow taxi cab driving in the foreground, and it appears to be moving out of a bus stop area, indicated by the bus stop sign and cones. Pedestrians are visible on the sidewalk, with some looking towards the taxi, suggesting they might be either waiting for a bus or waiting to cross the street. The traffic light is showing a green light for the vehicles, with a pedestrian crossing sign indicating the time for pedestrians is not yet. The building in the background is illuminated, and the streetlights are on, providing a sense of a busy urban environment. The image captures a typical night-time scene in a city.
+
+  - Inference time for this frame: 3.20s
+  - Tokens/sec for this frame: 47.84
+--------------------
+--- Processing Frame: 7.jpg (8/41) ---
+Reused 153 tokens from the previous frame.
+Model Output: The image shows a city street at night. There's a yellow taxi cab driving in the foreground, and it appears to be moving out of a bus stop area, indicated by the bus stop sign and cones. Pedestrians are visible on the sidewalk, with some looking towards the taxi, suggesting they might be either waiting for a bus or waiting to cross the street. The traffic light is showing a green light for the vehicles, with a pedestrian crossing sign indicating the time for pedestrians is not yet. The building in the background is illuminated, and the streetlights are on, providing a sense of a busy urban environment. The image captures a typical night-time scene in a city.
+
+  - Inference time for this frame: 0.11s
+  - Tokens/sec for this frame: 1345.83
+--------------------
+--- Processing Frame: 8.jpg (9/41) ---
+Reused 153 tokens from the previous frame.
+Model Output: The image shows a city street at night. There's a yellow taxi cab driving in the foreground, and it appears to be moving out of a bus stop area, indicated by the bus stop sign and cones. Pedestrians are visible on the sidewalk, with some looking towards the taxi, suggesting they might be either waiting for a bus or waiting to cross the street. The traffic light is showing a green light for the vehicles, with a pedestrian crossing sign indicating the time for pedestrians is not yet. The building in the background is illuminated, and the streetlights are on, providing a sense of a busy urban environment. The image captures a typical night-time scene in a city.
+
+  - Inference time for this frame: 0.11s
+  - Tokens/sec for this frame: 1351.20
+--------------------
+--- Processing Frame: 9.jpg (10/41) ---
+Reused 13 tokens from the previous frame.
+Model Output: The image shows a city street at night. There's a no smiling sarcasm. There are two orange cones. The sidewalk has been blocked off is set up around the lower part of the vehicle. Behind the taxi, there's visible infrastructure work being done with a 'detour' sign for traffic reconfiguration owing to the construction. Other pedestrians are present on the sidewalk. Additionally, a caution light is visible on one side of the street.
+
+  - Inference time for this frame: 1.93s
+  - Tokens/sec for this frame: 53.97
+--------------------
+--- Processing Frame: 10.jpg (11/41) ---
+Reused 15 tokens from the previous frame.
+Model Output: The image shows a city street at night. There's a no smiley. The lights are visible amidstm posture. This urban streetscape is at night, illuminated by warm. A few people are waiting at the corner where a traffic light shows a go signal. A numberside looking to the left at another pedestrian, possibly smiling, suggests a friendly exchange. The coy artificiality of the smile is transparent. The traffic pattern, devoid of garbage, suggests this is a planned, communal urban environment. Streetlights twinkling along a lower level of the cityscape below, maybe a retail mall or record store, named Con, imply a midscale cultural venue that has closed for the evening.
+
+  - Inference time for this frame: 2.91s
+  - Tokens/sec for this frame: 53.22
+--------------------
+--- Processing Frame: 11.jpg (12/41) ---
+Reused 15 tokens from the previous frame.
+Model Output: The image shows a city street at night. There's a no smiley. The lighting you make a window in a nice storefront that looking like Brooks Brothers the window's reflection.
+
+  - Inference time for this frame: 0.65s
+  - Tokens/sec for this frame: 63.51
+--------------------
+--- Processing Frame: 12.jpg (13/41) ---
+Reused 13 tokens from the previous frame.
+Model Output: The image shows a city street at night. There's a layer. Heo. The light is a Kanadetric colored red flare. #demonictruckmoon, or are we really just reflective.pipe dreams.
+
+  - Inference time for this frame: 0.87s
+  - Tokens/sec for this frame: 58.38
+--------------------
+--- Processing Frame: 13.jpg (14/41) ---
+Reused 14 tokens from the previous frame.
+Model Output: The image shows a city street at night. There's a layer of night (Uten by the traffic light). This scene looks like the driver's had the patience to be wearing a football helmet. There are bright lights shining, which could be from a television ad or neon colors on nearby buildings. Traffic seems light at this time and everyone appears to be in day-to-day activities, including pedestrians walking on the sidewalks.
+
+  - Inference time for this frame: 1.81s
+  - Tokens/sec for this frame: 54.84
+--------------------
+--- Processing Frame: 14.jpg (15/41) ---
+Reused 17 tokens from the previous frame.
+Model Output: The image shows a city street at night. There's a layer of night (Tailglow). This &gt; traffic signals are on red, simulacra suggesting daytime conditions regardless of time when one is present. Possible for cameramanJoseph Stalin in Raid on the Winter Palace give us Jason Bourne re run an older new bolt). Multiple types of emergency vehicles with distinct colors present another layer of complexity > taxi driver might be advised not to act precipitately in this situation.)"Construction (or "Mess w/ black vertical reflective marking from temp lanes over same area") is disruptive but &gt advantage of lane regulating. "Truck is in its place in intensive traffic, even less aggressive than taxi (which would often cut through blockages without blinker)". But caution must be observed here also."> Cars with bicycle rack $ cars w/ no visible license plateUxbridge Road,(not really U) going left, what signifies it-- gradients not for airplanes--yet, being in the London Guide".This is all the time f#m fidelity (like GPRS). Night conditions... night lighting, truck & cars & fleets, everyone driving but very few in the streets coalitionists (hard to grade) RAIDING THE PAALACE
+
+  - Inference time for this frame: 5.66s
+  - Tokens/sec for this frame: 52.08
+--------------------
+--- Processing Frame: 15.jpg (16/41) ---
+Reused 17 tokens from the previous frame.
+Model Output: The image shows a city street at night. There's a layer of night (Tailgate flexboard))) togaidia Truck
+
+  - Inference time for this frame: 0.35s
+  - Tokens/sec for this frame: 80.65
+--------------------
+--- Processing Frame: 16.jpg (17/41) ---
+Reused 9 tokens from the previous frame.
+Model Output: The image shows a city street at night.
+
+  - Inference time for this frame: 0.10s
+  - Tokens/sec for this frame: 88.18
+--------------------
+--- Processing Frame: 17.jpg (18/41) ---
+Reused 9 tokens from the previous frame.
+Model Output: The image shows a city street at night.
+
+  - Inference time for this frame: 0.08s
+  - Tokens/sec for this frame: 115.74
+--------------------
+--- Processing Frame: 18.jpg (19/41) ---
+Reused 9 tokens from the previous frame.
+Model Output: The image shows a city street at night.
+
+  - Inference time for this frame: 0.08s
+  - Tokens/sec for this frame: 116.00
+--------------------
+--- Processing Frame: 19.jpg (20/41) ---
+Reused 9 tokens from the previous frame.
+Model Output: The image shows a city street at night.
+
+  - Inference time for this frame: 0.08s
+  - Tokens/sec for this frame: 115.88
+--------------------
+--- Processing Frame: 20.jpg (21/41) ---
+Reused 9 tokens from the previous frame.
+Model Output: The image shows a city street at night.
+
+  - Inference time for this frame: 0.08s
+  - Tokens/sec for this frame: 115.69
+--------------------
+--- Processing Frame: 21.jpg (22/41) ---
+Reused 9 tokens from the previous frame.
+Model Output: The image shows a city street at night.
+
+  - Inference time for this frame: 0.08s
+  - Tokens/sec for this frame: 116.18
+--------------------
+--- Processing Frame: 22.jpg (23/41) ---
+Reused 9 tokens from the previous frame.
+Model Output: The image shows a city street at night.
+
+  - Inference time for this frame: 0.08s
+  - Tokens/sec for this frame: 115.89
+--------------------
+--- Processing Frame: 23.jpg (24/41) ---
+Reused 9 tokens from the previous frame.
+Model Output: The image shows a city street at night.
+
+  - Inference time for this frame: 0.08s
+  - Tokens/sec for this frame: 116.14
+--------------------
+--- Processing Frame: 24.jpg (25/41) ---
+Reused 9 tokens from the previous frame.
+Model Output: The image shows a city street at night.
+
+  - Inference time for this frame: 0.08s
+  - Tokens/sec for this frame: 115.95
+--------------------
+--- Processing Frame: 25.jpg (26/41) ---
+Reused 9 tokens from the previous frame.
+Model Output: The image shows a city street at night.
+
+  - Inference time for this frame: 0.08s
+  - Tokens/sec for this frame: 115.93
+--------------------
+--- Processing Frame: 26.jpg (27/41) ---
+Reused 9 tokens from the previous frame.
+Model Output: The image shows a city street at night.
+
+  - Inference time for this frame: 0.08s
+  - Tokens/sec for this frame: 115.90
+--------------------
+--- Processing Frame: 27.jpg (28/41) ---
+Reused 9 tokens from the previous frame.
+Model Output: The image shows a city street at night.
+
+  - Inference time for this frame: 0.08s
+  - Tokens/sec for this frame: 116.09
+--------------------
+--- Processing Frame: 28.jpg (29/41) ---
+Reused 9 tokens from the previous frame.
+Model Output: The image shows a city street at night.
+
+  - Inference time for this frame: 0.08s
+  - Tokens/sec for this frame: 116.01
+--------------------
+--- Processing Frame: 29.jpg (30/41) ---
+Reused 9 tokens from the previous frame.
+Model Output: The image shows a city street at night.
+
+  - Inference time for this frame: 0.08s
+  - Tokens/sec for this frame: 116.04
+--------------------
+--- Processing Frame: 30.jpg (31/41) ---
+Reused 9 tokens from the previous frame.
+Model Output: The image shows a city street at night.
+
+  - Inference time for this frame: 0.08s
+  - Tokens/sec for this frame: 115.97
+--------------------
+--- Processing Frame: 31.jpg (32/41) ---
+Reused 9 tokens from the previous frame.
+Model Output: The image shows a city street at night.
+
+  - Inference time for this frame: 0.08s
+  - Tokens/sec for this frame: 115.91
+--------------------
+--- Processing Frame: 32.jpg (33/41) ---
+Reused 9 tokens from the previous frame.
+Model Output: The image shows a city street at night.
+
+  - Inference time for this frame: 0.08s
+  - Tokens/sec for this frame: 115.69
+--------------------
+--- Processing Frame: 33.jpg (34/41) ---
+Reused 9 tokens from the previous frame.
+Model Output: The image shows a city street at night.
+
+  - Inference time for this frame: 0.08s
+  - Tokens/sec for this frame: 116.05
+--------------------
+--- Processing Frame: 34.jpg (35/41) ---
+Reused 9 tokens from the previous frame.
+Model Output: The image shows a city street at night.
+
+  - Inference time for this frame: 0.08s
+  - Tokens/sec for this frame: 115.97
+--------------------
+--- Processing Frame: 35.jpg (36/41) ---
+Reused 9 tokens from the previous frame.
+Model Output: The image shows a city street at night.
+
+  - Inference time for this frame: 0.08s
+  - Tokens/sec for this frame: 115.93
+--------------------
+--- Processing Frame: 36.jpg (37/41) ---
+Reused 9 tokens from the previous frame.
+Model Output: The image shows a city street at night.
+
+  - Inference time for this frame: 0.08s
+  - Tokens/sec for this frame: 115.90
+--------------------
+--- Processing Frame: 37.jpg (38/41) ---
+Reused 9 tokens from the previous frame.
+Model Output: The image shows a city street at night.
+
+  - Inference time for this frame: 0.08s
+  - Tokens/sec for this frame: 115.66
+--------------------
+--- Processing Frame: 38.jpg (39/41) ---
+Reused 9 tokens from the previous frame.
+Model Output: The image shows a city street at night.
+
+  - Inference time for this frame: 0.08s
+  - Tokens/sec for this frame: 115.33
+--------------------
+--- Processing Frame: 39.jpg (40/41) ---
+Reused 9 tokens from the previous frame.
+Model Output: The image shows a city street at night.
+
+  - Inference time for this frame: 0.08s
+  - Tokens/sec for this frame: 114.85
+--------------------
+--- Processing Frame: 40.jpg (41/41) ---
+Reused 9 tokens from the previous frame.
+Model Output: The image shows a city street at night.
+
+  - Inference time for this frame: 0.08s
+  - Tokens/sec for this frame: 115.12
+--------------------
+
+===== Scene 04488604-f1028b71 Summary (Memory Idea: True) =====
+Total End-to-End Time: 58.00s
+Total Inference-Only Time: 56.76s
+Total Generated Tokens: 3305
+Average Tokens/Second (Inference Only): 58.23
+========================================
+
+Reached the limit of 1 scenes. Stopping.
+
+========================= FINAL SUMMARY =========================
+
+----- Statistics for 'use_memory_idea = False' -----
+Processed 1 scenes.
+Average End-to-End Time per Scene: 220.31s
+Average Inference-Only Time per Scene: 216.68s
+Average Tokens/Second (Inference Only, across all scenes): 53.02
+
+----- Statistics for 'use_memory_idea = True' -----
+Processed 1 scenes.
+Average End-to-End Time per Scene: 58.00s
+Average Inference-Only Time per Scene: 56.76s
+Average Tokens/Second (Inference Only, across all scenes): 58.23
+
+===================================================================
