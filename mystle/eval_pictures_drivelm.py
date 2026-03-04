@@ -123,7 +123,7 @@ def run_inference_for_sequence(
 
         # 关键修改：构建带有摄像头方位信息的 prompt
         image_prompt_parts = [f"- {name}: {DEFAULT_IMAGE_TOKEN}" for name in camera_names]
-        image_section = "The following images are provided from different camera angles:\n" + "\n".join(image_prompt_parts)
+        image_section = "The following images are provided from six camera angles:\n" + "\n".join(image_prompt_parts)
         
         prompt = f"{image_section}\n\n{args.initial_prompt}"
 
@@ -139,6 +139,8 @@ def run_inference_for_sequence(
         conv.append_message(conv.roles[0], prompt)
         conv.append_message(conv.roles[1], None)
         prompt_for_model = conv.get_prompt()
+
+        # print(f"Prompt for model:\n{prompt_for_model}\n")
 
         # 3. 模型推理
         input_ids = (
@@ -207,11 +209,12 @@ def run_inference_for_sequence(
 def main():
     # --- 用户需要配置的路径 ---
     # 你的JSON标注文件路径
-    json_file_path = "/root/fsas/dataset/OpenDriveLab/DriveLM/v1_1_val_nus_q_only.json" 
+    # json_file_path = "/root/fsas/dataset/OpenDriveLab/DriveLM/v1_1_val_nus_q_only.json" 
+    json_file_path = "/root/fsas/dataset/OpenDriveLab/DriveLM/v1_1_train_nus.json"
     # 你的数据根目录，用于拼接JSON中的相对图片路径
     # 例如，如果图片路径是 "../nuscenes/samples/..."，而JSON文件在 ".../DriveLM/annotations/"
     # 那么 data_root_path 应该是 ".../DriveLM/"
-    data_root_path = "/root/fsas/dataset/OpenDriveLab/DriveLM/val_data" # 请修改为你的 nuscenes 数据集所在的根目录
+    data_root_path = "/root/fsas/dataset/OpenDriveLab/DriveLM/nuscenes/samples" # 请修改为你的 nuscenes 数据集所在的根目录
     model_path = "/root/fsas/models/LLaVA/llava-v1.6-vicuna-7b"
     model_name = get_model_name_from_path(model_path)
 
@@ -250,7 +253,28 @@ def main():
         "top_p": None,
         "num_beams": 1,
         "max_new_tokens": 512,
-        "initial_prompt": "Suppose you are driving, and I'm providing you with six images captured by the car's front, front-left, front-right, back, back-left and back-right camera. First, generate a description of the driving scene which includes the key factors for driving planning, including the presence of obstacles and the positions and movements of vehicles and pedestrians and traffic lights. After description, please predict the behavior of ego vehicle, including exactly the driving direction(straight, turn left or turn right) and driving speed(slow, fast or normal)."
+        # "initial_prompt": "Suppose you are driving, and I'm providing you with six images captured by the car's front, front-left, front-right, back, back-left and back-right camera. First, generate a description of the driving scene which includes the key factors for driving planning, including the presence of obstacles and the positions and movements of vehicles and pedestrians and traffic lights. After description, please predict the behavior of ego vehicle, including exactly the driving direction(straight, turn left or turn right) and driving speed(slow, fast or normal)."
+"initial_prompt": """You are an autonomous driving assistant. I'm providing you with 6 images captured simultaneously by the car's cameras (front, front-left, front-right, back, back-left, back-right).
+
+Your task is to synthesize all 6 views into a SINGLE holistic understanding of the environment, and predict the ego vehicle's behavior. 
+
+Strict Rules for JSON Output:
+1. Output EXACTLY ONE JSON object. DO NOT output multiple JSONs.
+2. The JSON MUST contain EXACTLY these three keys: "description", "direction", and "speed". DO NOT invent any other keys.
+3. "description" value: A string under 40 words summarizing the overall scene.
+4. "direction" value: MUST be exactly one of: ["straight", "turn left", "turn right"].
+5. "speed" value: MUST be exactly one of: ["slow", "normal", "fast"].
+6. Output ONLY valid JSON. Do not include markdown formatting like ```json or any conversational text.
+
+Example Output:
+{
+    "description": "Clear road ahead. Traffic light is green. A pedestrian is waiting on the right sidewalk.",
+    "direction": "straight",
+    "speed": "normal"
+}
+
+Now, process all 6 images together and generate the single JSON:
+"""
     })()
 
     # 3. 加载JSON文件并对每个序列进行推理
@@ -267,7 +291,7 @@ def main():
     # 遍历JSON中的每个场景
 
     scene_count = 0
-    scenes_to_test = 10000
+    scenes_to_test = 3
 
     total_stats = {
         False: {"scenes": 0, "total_time": 0.0, "total_inference_time": 0.0, "total_tokens": 0},

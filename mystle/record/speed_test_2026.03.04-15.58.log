@@ -1,0 +1,788 @@
+You are using a model of type llava to instantiate a model of type llava_llama. This is not supported for all configurations of models and can yield errors.
+/root/miniconda3/envs/llava/lib/python3.10/site-packages/huggingface_hub/file_download.py:949: FutureWarning: `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
+  warnings.warn(
+/root/miniconda3/envs/llava/lib/python3.10/site-packages/torch/_utils.py:831: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  return self.fget.__get__(instance, owner)()
+Flash Attention 2 is available. Setting it as default for Llama.
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███▎      | 1/3 [00:01<00:03,  1.72s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:03<00:01,  1.76s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:05<00:00,  1.70s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:05<00:00,  1.71s/it]
+Loading existing threshold table from threshold_table.json
+===== Processing Scene: f0f120e4d4b0441da90ec53b16ee169d (Memory Idea: False) =====
+--- Processing Key Frame: 4a0798f849ca477ab18009c3a20b7df2 ---
+Model Output: appears to be a commercial building lobby with a glass facade, possibly an apartment complex or office building."
+{: "straight", "turn left", "turn right", "slow", "normal", "fast" }
+
+  - Inference time for this frame: 1.92s
+  - Tokens/sec for this frame: 25.57
+--------------------
+--- Processing Key Frame: d9075c2a5f864a2b8abf41e703f4cf1c ---
+Model Output: {
+"description": "Street appears wet. Grass and building sides are covered in rain. It is daytime. Car's camera panels show front, front-left, front-right, back, back-left, back-right.",
+"direction": "straight",
+"speed": "normal"
+}
+
+  - Inference time for this frame: 2.12s
+  - Tokens/sec for this frame: 33.43
+--------------------
+--- Processing Key Frame: dfb8d8959b9944d69dcec6d05e419f04 ---
+Model Output: ```arduino
+{
+    "description": "Rainy wet road with glistening surfaces. The front of the vehicle is approaching a railroad crossing. Signal lights are present for traffic control. The rain appears set to continue.",
+    "direction": "straight",
+    "speed": "slow"
+}
+```
+
+  - Inference time for this frame: 2.17s
+  - Tokens/sec for this frame: 33.61
+--------------------
+--- Processing Key Frame: ffd1bdf020d145759224c629b501d2b2 ---
+Model Output: {}
+
+1: {}
+
+2: {}
+
+3: {}
+
+4: {}
+
+5: {}
+
+6: {}
+
+{
+"description": "Traffic signals are red. A pedestrian is waiting. Road looks clear ahead.",
+"direction": "straight",
+"speed": "slow"
+}
+
+  - Inference time for this frame: 2.19s
+  - Tokens/sec for this frame: 33.76
+--------------------
+
+===== Scene f0f120e4d4b0441da90ec53b16ee169d Summary (Memory Idea: False) =====
+Total End-to-End Time: 9.16s
+Total Inference-Only Time: 8.40s
+Total Generated Tokens: 267
+Average Tokens/Second (Inference Only): 31.77
+========================================
+
+===== Processing Scene: f0f120e4d4b0441da90ec53b16ee169d (Memory Idea: True) =====
+--- Processing Key Frame: 4a0798f849ca477ab18009c3a20b7df2 ---
+Model Output: ```json
+{
+    "description": "Rainy day on a city street. Ego vehicle is on the road, approaching an intersection. The traffic light is green, there is one car visible in front of the ego vehicle, and the intersection is lit up. There is a highway sign indicating a hard left turn ahead on the left side of the road.",
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 2.75s
+  - Tokens/sec for this frame: 35.66
+--------------------
+--- Processing Key Frame: d9075c2a5f864a2b8abf41e703f4cf1c ---
+PPL Check: Reusing 65 tokens out of 98.
+Model Output: ```json
+{
+    "description": "Rainy day on a city street. Ego vehicle is on the road, approaching an intersection. The traffic light is green, there is one car visible in front of the ego vehicle, and the intersection is lit up. There is a highway sign indicating a required turn.",
+    "direction": "turn right",
+    "speed": "slow"
+}
+```
+
+  - Inference time for this frame: 1.04s
+  - Tokens/sec for this frame: 85.71
+--------------------
+--- Processing Key Frame: dfb8d8959b9944d69dcec6d05e419f04 ---
+PPL Check: Reusing 68 tokens out of 89.
+Model Output: ```json
+{
+    "description": "Rainy day on a city street. Ego vehicle is on the road, approaching an intersection. The traffic light is green, there is one car visible in front of the ego vehicle, and the intersection is lit up. There is a highway sign indicating a required turn.",
+    "direction": "straight",
+    "speed": "slow"
+}
+```
+
+  - Inference time for this frame: 0.97s
+  - Tokens/sec for this frame: 92.05
+--------------------
+--- Processing Key Frame: ffd1bdf020d145759224c629b501d2b2 ---
+PPL Check: Reusing 68 tokens out of 89.
+Model Output: ```json
+{
+    "description": "Rainy day on a city street. Ego vehicle is on the road, approaching an intersection. The traffic light is green, there is one car visible in front of the ego vehicle, and the intersection is lit up. There is a highway sign indicating a required turn.",
+    "direction": "turn right",
+    "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 0.97s
+  - Tokens/sec for this frame: 92.18
+--------------------
+
+===== Scene f0f120e4d4b0441da90ec53b16ee169d Summary (Memory Idea: True) =====
+Total End-to-End Time: 6.46s
+Total Inference-Only Time: 5.72s
+Total Generated Tokens: 365
+Average Tokens/Second (Inference Only): 63.82
+========================================
+
+===== Processing Scene: 54cdaaae372d421fa4734d66f51a8c48 (Memory Idea: False) =====
+--- Processing Key Frame: 0dd14c14cea14dc1b0c0c9b0c9c7c4c3 ---
+Model Output: {
+    "description": "The road is clear with some potted trees on the sidewalks. There are no visible pedestrians or bicyclists. The traffic lights are not clearly visible but it is good to assume that there isn't any traffic light that can obstruct the runwaydisp線路units=miles]",
+    "direction": "straight",
+    "speed": "normal"
+}
+
+  - Inference time for this frame: 2.68s
+  - Tokens/sec for this frame: 35.43
+--------------------
+--- Processing Key Frame: 1b45a97a0e5e49fe9cd345dd4bd729c3 ---
+Model Output: - CAM\_FRONT: A car has stopped at an intersection and is about to make a right turn.
+- CAM\_FRONT\_LEFT: A white car is approaching the intersection from the side and will be turning right.
+- CAM\_FRONT\_RIGHT: There is an orange con-
+
+  - Inference time for this frame: 2.10s
+  - Tokens/sec for this frame: 33.38
+--------------------
+--- Processing Key Frame: 542eaf1fc9b34895a9e55fab57cb4cf4 ---
+Model Output: {"description": "Mix of vehicles moving through an intersection, traffic lights in check. No pedestrians or extreme hazardous conditions identifiable."}
+
+  - Inference time for this frame: 1.26s
+  - Tokens/sec for this frame: 27.04
+--------------------
+--- Processing Key Frame: 7abe79e5d3d745bcb237a4b7e03d1577 ---
+Model Output: {
+"description": "At signalized intersection in daylight. Clear view of cross streets. Two vehicles stopped at their green traffic lights. Pedestrians waiting on the sidewalks, one of them is using a crossing device. Vehicle in front (truck) has slowed due to congestion.",
+"direction": "turn left",
+"speed": "normal"
+}
+
+  - Inference time for this frame: 2.49s
+  - Tokens/sec for this frame: 34.87
+--------------------
+--- Processing Key Frame: d5e16062410f4e329d31a881b28e5c1c ---
+Model Output: ```json
+{
+    "description": "Green van making a right turn at an intersection. Ego vehicle on the right lane of a three-lane road. Pedestrian signal is on 'walk'. A white building with glass doors in the distance.",
+    "direction": "turn right",
+    "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 2.24s
+  - Tokens/sec for this frame: 33.98
+--------------------
+
+===== Scene 54cdaaae372d421fa4734d66f51a8c48 Summary (Memory Idea: False) =====
+Total End-to-End Time: 11.71s
+Total Inference-Only Time: 10.77s
+Total Generated Tokens: 362
+Average Tokens/Second (Inference Only): 33.62
+========================================
+
+===== Processing Scene: 54cdaaae372d421fa4734d66f51a8c48 (Memory Idea: True) =====
+--- Processing Key Frame: 0dd14c14cea14dc1b0c0c9b0c9c7c4c3 ---
+Model Output: "id": "00001",
+"description": "Clear intersection with green traffic light. Pathway appears to be clear. Ego vehicle should proceed straight off ramp and be aware of pedestrians nearby.",
+"direction": "straight",
+"speed": "normal"
+}
+
+  - Inference time for this frame: 1.98s
+  - Tokens/sec for this frame: 32.83
+--------------------
+--- Processing Key Frame: 1b45a97a0e5e49fe9cd345dd4bd729c3 ---
+PPL Check: Reusing 0 tokens out of 65.
+Model Output: superagent.\n
+Behavior: Maintain current trajectory and speed for all narrativelav directories.\n
+returns/\n
+chemistryofbrocooli.\n
+functioningnose.\n
+
+```json
+{
+    "description": "No pedestrians emerge due to overcast weather. Clear road ahead with no oncoming traffic. The traffic light is currently not illuminating, indicating it is not in use at this time.",
+    "direction": "straight",
+    "speed": "slow"
+}
+```
+
+  - Inference time for this frame: 3.25s
+  - Tokens/sec for this frame: 36.62
+--------------------
+--- Processing Key Frame: 542eaf1fc9b34895a9e55fab57cb4cf4 ---
+PPL Check: Reusing 98 tokens out of 119.
+Model Output: superagent.\n
+Behavior: Maintain current trajectory and speed for all narrativelav directories.\n
+returns/\n
+chemistryofbrocooli.\n
+functioningnose.\n
+
+```json
+{
+    "description": "No pedestrians emerge due to overcast weather. Clear road ahead with no oncoming traffic. The traffic light is currently not illuminating, indicating it is not in use at this time.",
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 0.97s
+  - Tokens/sec for this frame: 122.26
+--------------------
+--- Processing Key Frame: 7abe79e5d3d745bcb237a4b7e03d1577 ---
+PPL Check: Reusing 98 tokens out of 119.
+Model Output: superagent.\n
+Behavior: Maintain current trajectory and speed for all narrativelav directories.\n
+returns/\n
+chemistryofbrocooli.\n
+functioningnose.\n
+
+```json
+{
+    "description": "No pedestrians emerge due to overcast weather. Clear road ahead with no oncoming traffic. The traffic light is currently not illuminating, indicating it is not in use at this time.",
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 0.97s
+  - Tokens/sec for this frame: 122.42
+--------------------
+--- Processing Key Frame: d5e16062410f4e329d31a881b28e5c1c ---
+PPL Check: Reusing 98 tokens out of 119.
+Model Output: superagent.\n
+Behavior: Maintain current trajectory and speed for all narrativelav directories.\n
+returns/\n
+chemistryofbrocooli.\n
+functioningnose.\n
+
+```json
+{
+    "description": "No pedestrians emerge due to overcast weather. Clear road ahead with no oncoming traffic. The traffic light is currently not illuminating, indicating it is not in use at this time.",
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 0.97s
+  - Tokens/sec for this frame: 122.36
+--------------------
+
+===== Scene 54cdaaae372d421fa4734d66f51a8c48 Summary (Memory Idea: True) =====
+Total End-to-End Time: 9.09s
+Total Inference-Only Time: 8.15s
+Total Generated Tokens: 541
+Average Tokens/Second (Inference Only): 66.40
+========================================
+
+===== Processing Scene: 1977a1c98a6c4eb79fbc2a6dc0da9b0f (Memory Idea: False) =====
+--- Processing Key Frame: 0a208b6bd70a45c9b77b4acff048b2e4 ---
+Model Output: Clear day. Road is dry. Pedestrians on both sides. Easy to see. No following traffic. Vehicle ready to brake. Easy to turn. &lt;/details
+
+  - Inference time for this frame: 1.44s
+  - Tokens/sec for this frame: 29.10
+--------------------
+--- Processing Key Frame: 12ce09b5190048678bcd70e83943907f ---
+Model Output: "description": "Traffic at intersection. Crosswalk turn signal is active. Back of white box truck on road. Cities visible in the background. A man is standing in the street waiting to cross. Pedestrian on sidewalk is at end of crosswalk.",
+"direction": "turn left",
+"speed": "normal"
+
+  - Inference time for this frame: 2.14s
+  - Tokens/sec for this frame: 33.60
+--------------------
+--- Processing Key Frame: 7903e67446c64958b0a660f10bdadf19 ---
+Model Output: "description": "Clear intersection ahead. Pedestrian crossing the street. Personal belongings scattered across the road. The ego vehicle can proceed with caution.",
+"direction": "straight",
+"speed": "normal"
+
+  - Inference time for this frame: 1.63s
+  - Tokens/sec for this frame: 30.66
+--------------------
+--- Processing Key Frame: 947c1b70cff6486b87903d9665064ad8 ---
+Model Output: ~!social_origination_source
+
+  - Inference time for this frame: 0.65s
+  - Tokens/sec for this frame: 12.26
+--------------------
+--- Processing Key Frame: a59f97b9ba4b451e92487285f27ffb52 ---
+Model Output: ```json
+{
+    "direction": "straight",
+    "speed": "fast"
+}
+```
+
+  - Inference time for this frame: 1.07s
+  - Tokens/sec for this frame: 24.27
+--------------------
+--- Processing Key Frame: b6bf5a2bcb094969ace1023f8fe0b9e2 ---
+Model Output: {"description": "Truck and bus traffic on city street with group of people waiting to cross at intersection. Pedestrian sits at corner. Sidewalk is brick. Ego vehicle needs to stop soon on right.", "direction": "stop right", "speed": "slow"}
+
+  - Inference time for this frame: 1.84s
+  - Tokens/sec for this frame: 32.03
+--------------------
+--- Processing Key Frame: bd8a5e326b804b069d497d29dbf19c2b ---
+Model Output: "description": "Multiple lanes of city traffic, different modes of transportation (cars, bicycles, pedestrians) share the road. Traffic light provides guidance. Slight incline down the road, a few pedestrians waiting on the right sidewalk.",
+"direction": "straight",
+"speed": "normal"
+
+  - Inference time for this frame: 2.26s
+  - Tokens/sec for this frame: 34.03
+--------------------
+--- Processing Key Frame: fc4a9c4a635348468d38b9e4452b3b0f ---
+Model Output: {"description": "Six-way intersection with cars, trucks, pedestrians, and traffic lights. The ego vehicle has a clear path ahead and is approaching a green traffic light on a busy urban street. Safe and smooth traffic flow while observing all traffic rules.",
+"direction": "straight",
+"speed": "normal"}
+
+  - Inference time for this frame: 2.22s
+  - Tokens/sec for this frame: 33.85
+--------------------
+
+===== Scene 1977a1c98a6c4eb79fbc2a6dc0da9b0f Summary (Memory Idea: False) =====
+Total End-to-End Time: 14.76s
+Total Inference-Only Time: 13.26s
+Total Generated Tokens: 409
+Average Tokens/Second (Inference Only): 30.84
+========================================
+
+===== Processing Scene: 1977a1c98a6c4eb79fbc2a6dc0da9b0f (Memory Idea: True) =====
+--- Processing Key Frame: 0a208b6bd70a45c9b77b4acff048b2e4 ---
+Model Output: (Imports necessary for AI performance)
+
+def predict_behavior(images):
+
+# Ego vehicle's position is mid-lane.
+#
+```
+    ego_position = (images['back_left'], images['back_right'])
+
+    # The number of pedestrians is 0.
+    num_pedestrians = 0
+    for image in images:
+        for frame in image.frames():
+            if frame.categories().index(image_and_text.CATEGORY_PEDESTRIAN) >= 0:
+                num_pedestrians += 1
+
+    # The pedestrians are on the sidewalk.
+    pedestrian_sidewalk_height_difference = 0.0
+    for image in images:
+        for frame in image.frames():
+            if frame.categories().index(image_and_text.CATEGORY_PEDESTRIAN) >= 0:
+                pedestrian_sidewalk_height_difference += image_height_to_depth_converter(frame) - frame. pedestrian_height * 2
+
+    # The vehicle is approaching the crosswalk.
+    heading_change = 0.
+    # The vehicle will turn right at the crosswalk.
+    lane_change = 1
+    speed = "normal"
+    engine_idiot = 1
+    engine_idiot_beware = 0
+    # Calculate the local pedestrian presence
+    # entry_pedestrian_presence = 0
+    # Update other factors here as well
+    
+    return {
+        "description": "Car approaching crosswalk with pedestrians avoiding crossing one-way intersection downtown high-rise brickin for pedestrian crossing intersection downtown tall buildings stand at the crosswalk downtown intersection corner"
+        # safeway intersection away intersection downtown intersection downtown intersection downtown high-rise apartment towers brick tall skinny cloudy sky scraper tall brick commercial high faded clouds fench word east this the building on the wall across the intersection"
+
+  - Inference time for this frame: 12.33s
+  - Tokens/sec for this frame: 39.00
+--------------------
+--- Processing Key Frame: 12ce09b5190048678bcd70e83943907f ---
+PPL Check: Reusing 293 tokens out of 481.
+Model Output: (Imports necessary for AI performance)
+
+def predict_behavior(images):
+
+# Ego vehicle's position is mid-lane.
+#
+```
+    ego_position = (images['back_left'], images['back_right'])
+
+    # The number of pedestrians is 0.
+    num_pedestrians = 0
+    for image in images:
+        for frame in image.frames():
+            if frame.categories().index(image_and_text.CATEGORY_PEDESTRIAN) >= 0:
+                num_pedestrians += 1
+
+    # The pedestrians are on the sidewalk.
+    pedestrian_sidewalk_height_difference = 0.0
+    for image in images:
+        for frame in image.frames():
+            if frame.categories().index(image_and_text.CATEGORY_PEDESTRIAN) >= 0:
+                pedestrian_sidewalk_height_difference += image_height_to_depth_converter(frame) - frame. pedestrian_height * 2
+
+    # The vehicle is approaching the crosswalk.
+    heading_change = 0.
+    # The vehicle will turn right at the crosswalk.
+    direction = "turn right"
+    # The vehicle will slow down.
+    speed = "slow"
+
+    # -- Add other details about red structure here to predict any behavior.
+
+    return {"description": "Predicting vehicle will turn right and decrease speed, and if necessary, mark vehicles driving too close, keep an eye out for walk signals with median ... blend other vehicles from the direction=data['front\_left']= self.pick_up. This will trigger ...>>>
+    return thermal imaging device.height='wide\ happiness plus for building wall...>> vehicle
+
+  - Inference time for this frame: 3.61s
+  - Tokens/sec for this frame: 116.36
+--------------------
+--- Processing Key Frame: 7903e67446c64958b0a660f10bdadf19 ---
+PPL Check: Reusing 418 tokens out of 420.
+Model Output: (Imports necessary for AI performance)
+
+def predict_behavior(images):
+
+# Ego vehicle's position is mid-lane.
+#
+```
+    ego_position = (images['back_left'], images['back_right'])
+
+    # The number of pedestrians is 0.
+    num_pedestrians = 0
+    for image in images:
+        for frame in image.frames():
+            if frame.categories().index(image_and_text.CATEGORY_PEDESTRIAN) >= 0:
+                num_pedestrians += 1
+
+    # The pedestrians are on the sidewalk.
+    pedestrian_sidewalk_height_difference = 0.0
+    for image in images:
+        for frame in image.frames():
+            if frame.categories().index(image_and_text.CATEGORY_PEDESTRIAN) >= 0:
+                pedestrian_sidewalk_height_difference += image_height_to_depth_converter(frame) - frame. pedestrian_height * 2
+
+    # The vehicle is approaching the crosswalk.
+    heading_change = 0.
+    # The vehicle will turn right at the crosswalk.
+    direction = "turn right"
+    # The vehicle will slow down.
+    speed = "slow"
+
+    # -- Add other details about red structure here to predict any behavior.
+
+    return {"description": "Predicting vehicle will turn right and decrease speed, and if necessary, mark vehicles driving too close, keep an eye out for walk signals with median ... blend other vehicles from the direction=data['front\_left']= self.pick_up. This will trigger ...>>>
+    return thermal imaging device.height='wide\ happiness plus for building wall...
+
+if walking sign.
+
+TrafficSign.buildingan interesting location=self.e straigh'high loving lightscalar
+```
+
+
+# ...prediction
+```
+
+The van vehicles, bikers, windoware marking street signs includegeb (6 images.devices, saluting them with trees and houses vehicles crossing them of traffic light are green turn signals buildings,biking bill environmentalist green height=max height object.couple of machine's attention to reader's attention to the vehicle turns left turns left, cars / green another
+
+  - Inference time for this frame: 3.63s
+  - Tokens/sec for this frame: 148.66
+--------------------
+--- Processing Key Frame: 947c1b70cff6486b87903d9665064ad8 ---
+PPL Check: Reusing 516 tokens out of 540.
+Model Output: (Imports necessary for AI performance)
+
+def predict_behavior(images):
+
+# Ego vehicle's position is mid-lane.
+#
+```
+    ego_position = (images['back_left'], images['back_right'])
+
+    # The number of pedestrians is 0.
+    num_pedestrians = 0
+    for image in images:
+        for frame in image.frames():
+            if frame.categories().index(image_and_text.CATEGORY_PEDESTRIAN) >= 0:
+                num_pedestrians += 1
+
+    # The pedestrians are on the sidewalk.
+    pedestrian_sidewalk_height_difference = 0.0
+    for image in images:
+        for frame in image.frames():
+            if frame.categories().index(image_and_text.CATEGORY_PEDESTRIAN) >= 0:
+                pedestrian_sidewalk_height_difference += image_height_to_depth_converter(frame) - frame. pedestrian_height * 2
+
+    # The vehicle is approaching the crosswalk.
+    heading_change = 0.
+    # The vehicle will turn right at the crosswalk.
+    direction = "turn right"
+    # The vehicle will slow down.
+    speed = "slow"
+
+    # -- Add other details about red structure here to predict any behavior.
+
+    return {"description": "Predicting vehicle will turn right and decrease speed, and if necessary, mark vehicles driving too close, keep an eye out for walk signals with median ... blend other vehicles from the direction=data['front\_left']= self.pick_up. This will trigger ...>>>
+    return thermal imaging device.height='wide\ happiness plus for building wall...
+
+if walking sign.
+
+TrafficSign.buildingan interesting location=self.e straigh'high loving lightscalar
+```
+
+
+# ...prediction
+```
+
+The van vehicles, bikers, windoware marking street signs includegeb (6 images.devices, saluting them with trees and houses vehicles crossing them of traffic light are green turn signals buildings,biking bill environmentalist green height=max height object.
+
+  - Inference time for this frame: 0.57s
+  - Tokens/sec for this frame: 909.10
+--------------------
+--- Processing Key Frame: a59f97b9ba4b451e92487285f27ffb52 ---
+PPL Check: Reusing 516 tokens out of 516.
+Model Output: (Imports necessary for AI performance)
+
+def predict_behavior(images):
+
+# Ego vehicle's position is mid-lane.
+#
+```
+    ego_position = (images['back_left'], images['back_right'])
+
+    # The number of pedestrians is 0.
+    num_pedestrians = 0
+    for image in images:
+        for frame in image.frames():
+            if frame.categories().index(image_and_text.CATEGORY_PEDESTRIAN) >= 0:
+                num_pedestrians += 1
+
+    # The pedestrians are on the sidewalk.
+    pedestrian_sidewalk_height_difference = 0.0
+    for image in images:
+        for frame in image.frames():
+            if frame.categories().index(image_and_text.CATEGORY_PEDESTRIAN) >= 0:
+                pedestrian_sidewalk_height_difference += image_height_to_depth_converter(frame) - frame. pedestrian_height * 2
+
+    # The vehicle is approaching the crosswalk.
+    heading_change = 0.
+    # The vehicle will turn right at the crosswalk.
+    direction = "turn right"
+    # The vehicle will slow down.
+    speed = "slow"
+
+    # -- Add other details about red structure here to predict any behavior.
+
+    return {"description": "Predicting vehicle will turn right and decrease speed, and if necessary, mark vehicles driving too close, keep an eye out for walk signals with median ... blend other vehicles from the direction=data['front\_left']= self.pick_up. This will trigger ...>>>
+    return thermal imaging device.height='wide\ happiness plus for building wall...
+
+if walking sign.
+
+TrafficSign.buildingan interesting location=self.e straigh'high loving lightscalar
+```
+
+
+# ...prediction
+```
+
+The van vehicles, bikers, windoware marking street signs includegeb (6 images.devices, saluting them with trees and houses vehicles crossing them of traffic light are green turn signals buildings,biking bill environmentalist green height=max height object. maximum ambient and cars and watch, car onstreet of a car driving...
+
+  - Inference time for this frame: 0.93s
+  - Tokens/sec for this frame: 570.40
+--------------------
+--- Processing Key Frame: b6bf5a2bcb094969ace1023f8fe0b9e2 ---
+PPL Check: Reusing 531 tokens out of 531.
+Model Output: (Imports necessary for AI performance)
+
+def predict_behavior(images):
+
+# Ego vehicle's position is mid-lane.
+#
+```
+    ego_position = (images['back_left'], images['back_right'])
+
+    # The number of pedestrians is 0.
+    num_pedestrians = 0
+    for image in images:
+        for frame in image.frames():
+            if frame.categories().index(image_and_text.CATEGORY_PEDESTRIAN) >= 0:
+                num_pedestrians += 1
+
+    # The pedestrians are on the sidewalk.
+    pedestrian_sidewalk_height_difference = 0.0
+    for image in images:
+        for frame in image.frames():
+            if frame.categories().index(image_and_text.CATEGORY_PEDESTRIAN) >= 0:
+                pedestrian_sidewalk_height_difference += image_height_to_depth_converter(frame) - frame. pedestrian_height * 2
+
+    # The vehicle is approaching the crosswalk.
+    heading_change = 0.
+    # The vehicle will turn right at the crosswalk.
+    direction = "turn right"
+    # The vehicle will slow down.
+    speed = "slow"
+
+    # -- Add other details about red structure here to predict any behavior.
+
+    return {"description": "Predicting vehicle will turn right and decrease speed, and if necessary, mark vehicles driving too close, keep an eye out for walk signals with median ... blend other vehicles from the direction=data['front\_left']= self.pick_up. This will trigger ...>>>
+    return thermal imaging device.height='wide\ happiness plus for building wall...
+
+if walking sign.
+
+TrafficSign.buildingan interesting location=self.e straigh'high loving lightscalar
+```
+
+
+# ...prediction
+```
+
+The van vehicles, bikers, windoware marking street signs includegeb (6 images.devices, saluting them with trees and houses vehicles crossing them of traffic light are green turn signals buildings,biking bill environmentalist green height=max height object. maximum ambient and cars and watch, car onstreet of a car driving...
+
+  - Inference time for this frame: 0.57s
+  - Tokens/sec for this frame: 935.62
+--------------------
+--- Processing Key Frame: bd8a5e326b804b069d497d29dbf19c2b ---
+PPL Check: Reusing 531 tokens out of 531.
+Model Output: (Imports necessary for AI performance)
+
+def predict_behavior(images):
+
+# Ego vehicle's position is mid-lane.
+#
+```
+    ego_position = (images['back_left'], images['back_right'])
+
+    # The number of pedestrians is 0.
+    num_pedestrians = 0
+    for image in images:
+        for frame in image.frames():
+            if frame.categories().index(image_and_text.CATEGORY_PEDESTRIAN) >= 0:
+                num_pedestrians += 1
+
+    # The pedestrians are on the sidewalk.
+    pedestrian_sidewalk_height_difference = 0.0
+    for image in images:
+        for frame in image.frames():
+            if frame.categories().index(image_and_text.CATEGORY_PEDESTRIAN) >= 0:
+                pedestrian_sidewalk_height_difference += image_height_to_depth_converter(frame) - frame. pedestrian_height * 2
+
+    # The vehicle is approaching the crosswalk.
+    heading_change = 0.
+    # The vehicle will turn right at the crosswalk.
+    direction = "turn right"
+    # The vehicle will slow down.
+    speed = "slow"
+
+    # -- Add other details about red structure here to predict any behavior.
+
+    return {"description": "Predicting vehicle will turn right and decrease speed, and if necessary, mark vehicles driving too close, keep an eye out for walk signals with median ... blend other vehicles from the direction=data['front\_left']= self.pick_up. This will trigger ...>>>
+    return thermal imaging device.height='wide\ happiness plus for building wall...
+
+if walking sign.
+
+TrafficSign.buildingan interesting location=self.e straigh'high loving lightscalar
+```
+
+
+# ...prediction
+```
+
+The van vehicles, bikers, windoware marking street signs includegeb (6 images.devices, saluting them with trees and houses vehicles crossing them of traffic light are green turn signals buildings,biking bill environmentalist green height=max height object. maximum ambient and cars and watch, car onstreet of a car driving...as an ambient object tracking.environmental object detection.
+cars. traffic signals.
+```
+
+```
+predicted goals. Green zebra traffic light rain.at maximum\_left side of cheating height restricted parking eyes with a white buildings, brick wall for walking with traffic signal, traffic light
+preparo on street lights set an empty
+\ street...
+
+span housing with traffic light white and traffic signals are centered you are moving streetlight traffic stopped street:
+height on a building. Hollywood lights city arrest. traffic light traffic is turning these normal traffic:green street lights;atten street corner.
+traffic light tall building is walking, traffic light. Overlooking signs signs.
+th for apartment traffic light source software, street light traffic by a construction, and transportation tower city street.
+
+  - Inference time for this frame: 5.01s
+  - Tokens/sec for this frame: 139.65
+--------------------
+--- Processing Key Frame: fc4a9c4a635348468d38b9e4452b3b0f ---
+PPL Check: Reusing 700 tokens out of 700.
+Model Output: (Imports necessary for AI performance)
+
+def predict_behavior(images):
+
+# Ego vehicle's position is mid-lane.
+#
+```
+    ego_position = (images['back_left'], images['back_right'])
+
+    # The number of pedestrians is 0.
+    num_pedestrians = 0
+    for image in images:
+        for frame in image.frames():
+            if frame.categories().index(image_and_text.CATEGORY_PEDESTRIAN) >= 0:
+                num_pedestrians += 1
+
+    # The pedestrians are on the sidewalk.
+    pedestrian_sidewalk_height_difference = 0.0
+    for image in images:
+        for frame in image.frames():
+            if frame.categories().index(image_and_text.CATEGORY_PEDESTRIAN) >= 0:
+                pedestrian_sidewalk_height_difference += image_height_to_depth_converter(frame) - frame. pedestrian_height * 2
+
+    # The vehicle is approaching the crosswalk.
+    heading_change = 0.
+    # The vehicle will turn right at the crosswalk.
+    direction = "turn right"
+    # The vehicle will slow down.
+    speed = "slow"
+
+    # -- Add other details about red structure here to predict any behavior.
+
+    return {"description": "Predicting vehicle will turn right and decrease speed, and if necessary, mark vehicles driving too close, keep an eye out for walk signals with median ... blend other vehicles from the direction=data['front\_left']= self.pick_up. This will trigger ...>>>
+    return thermal imaging device.height='wide\ happiness plus for building wall...
+
+if walking sign.
+
+TrafficSign.buildingan interesting location=self.e straigh'high loving lightscalar
+```
+
+
+# ...prediction
+```
+
+The van vehicles, bikers, windoware marking street signs includegeb (6 images.devices, saluting them with trees and houses vehicles crossing them of traffic light are green turn signals buildings,biking bill environmentalist green height=max height object. maximum ambient and cars and watch, car onstreet of a car driving...as an ambient object tracking.environmental object detection.
+cars. traffic signals.
+```
+
+```
+predicted goals. Green zebra traffic light rain.at maximum\_left side of cheating height restricted parking eyes with a white buildings, brick wall for walking with traffic signal, traffic light
+preparo on street lights set an empty
+\ street...
+
+span housing with traffic light white and traffic signals are centered you are moving streetlight traffic stopped street:
+height on a building. Hollywood lights city arrest. traffic light traffic is turning these normal traffic:green street lights;atten street corner.
+traffic light tall building is walking, traffic light. Overlooking signs signs.
+th for apartment traffic light source software, street light traffic by a construction, and transportation tower city street.
+
+  - Inference time for this frame: 0.60s
+  - Tokens/sec for this frame: 1160.26
+--------------------
+
+===== Scene 1977a1c98a6c4eb79fbc2a6dc0da9b0f Summary (Memory Idea: True) =====
+Total End-to-End Time: 28.84s
+Total Inference-Only Time: 27.26s
+Total Generated Tokens: 4419
+Average Tokens/Second (Inference Only): 162.12
+========================================
+
+Reached the limit of 3 scenes. Stopping.
+
+========================= FINAL SUMMARY =========================
+
+----- Statistics for 'use_memory_idea = False' -----
+Processed 3 scenes.
+Average End-to-End Time per Scene: 11.88s
+Average Inference-Only Time per Scene: 10.81s
+Average Tokens/Second (Inference Only, across all scenes): 32.00
+
+----- Statistics for 'use_memory_idea = True' -----
+Processed 3 scenes.
+Average End-to-End Time per Scene: 14.80s
+Average Inference-Only Time per Scene: 13.71s
+Average Tokens/Second (Inference Only, across all scenes): 129.48
+
+===================================================================

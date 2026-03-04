@@ -1,0 +1,631 @@
+You are using a model of type llava to instantiate a model of type llava_llama. This is not supported for all configurations of models and can yield errors.
+/root/miniconda3/envs/llava/lib/python3.10/site-packages/huggingface_hub/file_download.py:949: FutureWarning: `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
+  warnings.warn(
+/root/miniconda3/envs/llava/lib/python3.10/site-packages/torch/_utils.py:831: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  return self.fget.__get__(instance, owner)()
+Flash Attention 2 is available. Setting it as default for Llama.
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███▎      | 1/3 [00:01<00:03,  1.69s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:03<00:01,  1.68s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:04<00:00,  1.58s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:04<00:00,  1.60s/it]
+Loading existing threshold table from threshold_table.json
+===== Processing Scene: f0f120e4d4b0441da90ec53b16ee169d (Memory Idea: False) =====
+--- Processing Key Frame: 4a0798f849ca477ab18009c3a20b7df2 ---
+Model Output: window,
+
+{
+"description": "Wet, grey road. Green traffic light. A single car in motion. Buildings in distance on both sides of the road.",
+"direction": "straight",
+"speed": "normal"
+}
+
+  - Inference time for this frame: 2.02s
+  - Tokens/sec for this frame: 26.76
+--------------------
+--- Processing Key Frame: d9075c2a5f864a2b8abf41e703f4cf1c ---
+Model Output: {"description": "Overcast day, rain falling. No traffic, faded green street signs, sidewalks gloppy. Lights off industrial-style buildings. First car is turn right.", "direction": "right", "speed": "slow"}
+
+  - Inference time for this frame: 1.67s
+  - Tokens/sec for this frame: 31.05
+--------------------
+--- Processing Key Frame: dfb8d8959b9944d69dcec6d05e419f04 ---
+Model Output: "description": "The road is wet from recent rain, reflecting streetlights and traffic lights, indicating recent precipitation. The surrounding buildings appear industrial. A traffic light is visible, indicating the ego vehicle is in a mixed traffic zone that includes commercial and private vehicule traffic. Parking regulations in force may require additional attention. Ego is following traffic rules. 'direction' is 'stop'. Based on current conditions, the choice to stop could be due to slippery road conditions, rain-related visibility issues, or assessment of general observed traffic corflicts."
+"speed": "zero"
+}
+
+  - Inference time for this frame: 3.53s
+  - Tokens/sec for this frame: 37.09
+--------------------
+--- Processing Key Frame: ffd1bdf020d145759224c629b501d2b2 ---
+Model Output: {
+"distance": "normal",
+"velocity": "zero",
+"direction": "straight",
+"traffic_light": "green"
+},
+
+{
+"distance": "normal",
+"velocity": "zero",
+"direction": "straight",
+"traffic_light": "green"
+},
+
+{
+"distance": "normal",
+"velocity": "normal",
+"direction": "straight",
+"traffic_light": "green"
+},
+
+{
+"distance": "normal",
+"velocity": "normal",
+"direction": "straight",
+"traffic_light": "green"
+},
+
+{
+"distance": "normal",
+"velocity": "zero",
+"direction": "straight",
+"traffic_light": "green"
+},
+
+{
+"distance": "normal",
+"velocity": "zero",
+"direction": "straight",
+"traffic_light": "green"
+},
+
+{
+"description": "Traffic light is red. Rainy, wet conditions. Road appears clear.",
+"direction": "stop",
+"speed": "zero"
+}
+
+  - Inference time for this frame: 6.71s
+  - Tokens/sec for this frame: 39.62
+--------------------
+
+===== Scene f0f120e4d4b0441da90ec53b16ee169d Summary (Memory Idea: False) =====
+Total End-to-End Time: 14.73s
+Total Inference-Only Time: 13.94s
+Total Generated Tokens: 503
+Average Tokens/Second (Inference Only): 36.08
+========================================
+
+===== Processing Scene: f0f120e4d4b0441da90ec53b16ee169d (Memory Idea: True) =====
+--- Processing Key Frame: 4a0798f849ca477ab18009c3a20b7df2 ---
+Model Output: {
+"description": "Wet road under overcast skies. Two cars approaching from opposite directions. Traffic lights show green at both ends. Road is rain-soaked. Wide-angle."
+,
+"direction": "straight"
+,
+
+  - Inference time for this frame: 1.77s
+  - Tokens/sec for this frame: 31.62
+--------------------
+--- Processing Key Frame: d9075c2a5f864a2b8abf41e703f4cf1c ---
+PPL Check: Reusing 44 tokens out of 56.
+Model Output: {
+"description": "Wet road under overcast skies. Two cars approaching from opposite directions. Traffic lights show green at both ends. Road is rain-soaked. Wide-angle."
+,"direction": "straight",
+"speed": "zero"
+}
+
+  - Inference time for this frame: 0.87s
+  - Tokens/sec for this frame: 69.88
+--------------------
+--- Processing Key Frame: dfb8d8959b9944d69dcec6d05e419f04 ---
+PPL Check: Reusing 44 tokens out of 61.
+Model Output: {
+"description": "Wet road under overcast skies. Two cars approaching from opposite directions. Traffic lights show green at both ends. Road is rain-soaked. Wide-angle.".
+"direction": "straight",
+"speed": "zero"
+}
+
+  - Inference time for this frame: 0.89s
+  - Tokens/sec for this frame: 69.36
+--------------------
+--- Processing Key Frame: ffd1bdf020d145759224c629b501d2b2 ---
+PPL Check: Reusing 45 tokens out of 62.
+Model Output: {
+"description": "Wet road under overcast skies. Two cars approaching from opposite directions. Traffic lights show green at both ends. Road is rain-soaked. Wide-angle.".
+"rule_break": "modified_weather",
+"rule_break_details": ".",
+"direction": "turn right",
+"speed": "slow"
+}
+
+  - Inference time for this frame: 1.41s
+  - Tokens/sec for this frame: 60.36
+--------------------
+
+===== Scene f0f120e4d4b0441da90ec53b16ee169d Summary (Memory Idea: True) =====
+Total End-to-End Time: 5.69s
+Total Inference-Only Time: 4.95s
+Total Generated Tokens: 264
+Average Tokens/Second (Inference Only): 53.38
+========================================
+
+===== Processing Scene: 54cdaaae372d421fa4734d66f51a8c48 (Memory Idea: False) =====
+--- Processing Key Frame: 0dd14c14cea14dc1b0c0c9b0c9c7c4c3 ---
+Model Output: {
+"description": "Crossroads in suburban area. Three buildings in distance on corners. One car turning left from straight. Other vehicles slightly redistri but green light for left turn.",
+"direction": "turn right",
+"speed": "normc"
+}
+
+  - Inference time for this frame: 1.89s
+  - Tokens/sec for this frame: 32.33
+--------------------
+--- Processing Key Frame: 1b45a97a0e5e49fe9cd345dd4bd729c3 ---
+Model Output: "description": "A car is turning right into a brightly lit intersection. The speed limit is 30 km/h, and a grey van is visible in the background, behind the turning car. The traffic light is clear for vehicles from the left lane.",
+"direction": "turn right",
+"speed": "normal"
+}
+
+  - Inference time for this frame: 2.17s
+  - Tokens/sec for this frame: 33.64
+--------------------
+--- Processing Key Frame: 542eaf1fc9b34895a9e55fab57cb4cf4 ---
+Model Output: {
+"description": "At intersection with traffic lights. The traffic light is green. Vehicles waiting to turn, including trucks. There are various signs on the intersection indicating directions for traffic flow management.",
+"direction": "slow",
+"speed": "slow"
+}
+
+  - Inference time for this frame: 1.89s
+  - Tokens/sec for this frame: 32.34
+--------------------
+--- Processing Key Frame: 7abe79e5d3d745bcb237a4b7e03d1577 ---
+Model Output: {
+"description": "Autonomous car at an intersection. Red traffic light indicates a stop is required. Pedestrians are visible on the sidewalks. No turn options provided by traffic light. A honking noise indicates other traffic behind the car's position. ",
+"direction": "stop",
+"speed": "zero"
+}
+
+  - Inference time for this frame: 2.19s
+  - Tokens/sec for this frame: 33.77
+--------------------
+--- Processing Key Frame: d5e16062410f4e329d31a881b28e5c1c ---
+Model Output: Autonomous Driving Assistant. Checking images from the front, front-left, front-right, back, back-left, and back-right camera systems.
+"description": "City street intersection. There's a green light and pedestrians are seen.",
+"direction": "turn right",
+"speed": "normal"
+
+  - Inference time for this frame: 2.21s
+  - Tokens/sec for this frame: 33.89
+--------------------
+
+===== Scene 54cdaaae372d421fa4734d66f51a8c48 Summary (Memory Idea: False) =====
+Total End-to-End Time: 11.31s
+Total Inference-Only Time: 10.35s
+Total Generated Tokens: 344
+Average Tokens/Second (Inference Only): 33.25
+========================================
+
+===== Processing Scene: 54cdaaae372d421fa4734d66f51a8c48 (Memory Idea: True) =====
+--- Processing Key Frame: 0dd14c14cea14dc1b0c0c9b0c9c7c4c3 ---
+Model Output: joy: T-junction ahead. Vehicles waiting on the right side. Safety cone in median. Drive with caution.
+
+  - Inference time for this frame: 1.14s
+  - Tokens/sec for this frame: 25.43
+--------------------
+--- Processing Key Frame: 1b45a97a0e5e49fe9cd345dd4bd729c3 ---
+PPL Check: Reusing 0 tokens out of 29.
+Model Output: ~:date:~:time:~
+
+  - Inference time for this frame: 0.68s
+  - Tokens/sec for this frame: 13.28
+--------------------
+--- Processing Key Frame: 542eaf1fc9b34895a9e55fab57cb4cf4 ---
+PPL Check: Reusing 0 tokens out of 9.
+Model Output: Prediction Object: {
+"description": "Car about to turn right onto a wide empty road in a commercial area.",
+"direction": "turn right",
+"speed": "normal"
+}
+
+  - Inference time for this frame: 1.44s
+  - Tokens/sec for this frame: 29.07
+--------------------
+--- Processing Key Frame: 7abe79e5d3d745bcb237a4b7e03d1577 ---
+PPL Check: Reusing 25 tokens out of 42.
+Model Output: Prediction Object: {
+"description": "Car about to turn right onto a wide empty road in a commercial area.",
+"direction": "limited",
+"speed": "normal"
+};
+
+  - Inference time for this frame: 0.84s
+  - Tokens/sec for this frame: 48.54
+--------------------
+--- Processing Key Frame: d5e16062410f4e329d31a881b28e5c1c ---
+PPL Check: Reusing 25 tokens out of 41.
+Model Output: Prediction Object: {
+"description": "Car about to turn right onto a wide empty road in a commercial area.",
+"direction": "turn right",
+"speed": "zero"
+}
+
+  - Inference time for this frame: 0.87s
+  - Tokens/sec for this frame: 48.38
+--------------------
+
+===== Scene 54cdaaae372d421fa4734d66f51a8c48 Summary (Memory Idea: True) =====
+Total End-to-End Time: 5.90s
+Total Inference-Only Time: 4.98s
+Total Generated Tokens: 163
+Average Tokens/Second (Inference Only): 32.76
+========================================
+
+===== Processing Scene: 1977a1c98a6c4eb79fbc2a6dc0da9b0f (Memory Idea: False) =====
+--- Processing Key Frame: 0a208b6bd70a45c9b77b4acff048b2e4 ---
+Model Output: {
+  "description": "City intersection. Drivers stopped at a traffic signal. Made-to-order food truck to the left. Pedestrians crossing the street. Man in a cap riding a bicycle following the crosswalk sign.",
+  "direction": "straight",
+  "speed": "normal"
+}
+
+  - Inference time for this frame: 2.22s
+  - Tokens/sec for this frame: 33.83
+--------------------
+--- Processing Key Frame: 12ce09b5190048678bcd70e83943907f ---
+Model Output: {
+"description": "Traffic in the intersection. Vehicles in front and behind moving straight. 'T-intersection' on the right sidewalk with a couple walking.",
+"direction": "turn right",
+"speed": "normal"
+}
+
+  - Inference time for this frame: 1.77s
+  - Tokens/sec for this frame: 31.60
+--------------------
+--- Processing Key Frame: 7903e67446c64958b0a660f10bdadf19 ---
+Model Output: "description": "Cross-city traffic. Yes turns lane. No obstacles or pedestrians ahead. CEP Ignore",
+"direction": "turn right",
+"speed": "normal"
+}
+
+  - Inference time for this frame: 1.58s
+  - Tokens/sec for this frame: 30.29
+--------------------
+--- Processing Key Frame: 947c1b70cff6486b87903d9665064ad8 ---
+Model Output: {
+"description": "City street with ongoing traffic. Pedestrian near corner. Safety bars attached to pole on sidewalk. Car in front is turning right.",
+"direction": "turn right",
+"speed": "normal"
+}
+
+  - Inference time for this frame: 1.72s
+  - Tokens/sec for this frame: 31.33
+--------------------
+--- Processing Key Frame: a59f97b9ba4b451e92487285f27ffb52 ---
+Model Output: {
+"description": "Heavy traffic with multiple pedestrians crossing in front of the vehicle. Pedestrians are wearing dark clothing and some have backpacks. Traffic light is red. The windshields of vehicles in front of the ego vehicle are visible in the front and right-front-left cameras. Stop the car or slow down if necessary for safety.",
+"direction": "stop",
+"speed": "zero"
+}
+
+  - Inference time for this frame: 2.82s
+  - Tokens/sec for this frame: 35.79
+--------------------
+--- Processing Key Frame: b6bf5a2bcb094969ace1023f8fe0b9e2 ---
+Model Output: script:
+data = {
+"description": "Mixed traffic, road clear. People crossing the street, road dry and sunny. Vehicle is stopped at a crosswalk.",
+"direction": "stop",
+"speed": "zero"
+}
+
+Please note that this response is based on the提供的六张照片的概括，它们没有与开车辅助驾驶带来的所有信息。它只基于视觉信息了解当前环境。
+
+  - Inference time for this frame: 3.71s
+  - Tokens/sec for this frame: 37.42
+--------------------
+--- Processing Key Frame: bd8a5e326b804b069d497d29dbf19c2b ---
+Model Output: {
+"description": "Vehicles stopped at traffic light on brick street. Pedestrians on sidewalk. One vehicle has trash in back window. No stop sign."
+}
+
+  - Inference time for this frame: 1.40s
+  - Tokens/sec for this frame: 28.62
+--------------------
+--- Processing Key Frame: fc4a9c4a635348468d38b9e4452b3b0f ---
+Model Output: {
+"description": "Crosswalk traffic stopped. Pedestrian on crosswalk. The ego vehicle will stop. Direction: stop",
+"direction": "stop",
+"speed": "zero"
+}
+
+  - Inference time for this frame: 1.58s
+  - Tokens/sec for this frame: 30.30
+--------------------
+
+===== Scene 1977a1c98a6c4eb79fbc2a6dc0da9b0f Summary (Memory Idea: False) =====
+Total End-to-End Time: 18.36s
+Total Inference-Only Time: 16.82s
+Total Generated Tokens: 561
+Average Tokens/Second (Inference Only): 33.36
+========================================
+
+===== Processing Scene: 1977a1c98a6c4eb79fbc2a6dc0da9b0f (Memory Idea: True) =====
+--- Processing Key Frame: 0a208b6bd70a45c9b77b4acff048b2e4 ---
+Model Output: "description": "Colt Kits are on top of the car. The traffic light indicates movement. Several pedestrians with backpacks are waiting on the right sidewalk.",
+"direction": "turn right",
+"speed": "zero"
+}
+
+  - Inference time for this frame: 1.77s
+  - Tokens/sec for this frame: 31.61
+--------------------
+--- Processing Key Frame: 12ce09b5190048678bcd70e83943907f ---
+PPL Check: Reusing 39 tokens out of 56.
+Model Output: "description": "Colt Kits are on top of the car. The traffic light indicates movement. Several pedestrians with backpacks are waiting on the right sidewalk.",
+"direction": "straight",
+"speed": "normal"
+
+  - Inference time for this frame: 0.82s
+  - Tokens/sec for this frame: 65.56
+--------------------
+--- Processing Key Frame: 7903e67446c64958b0a660f10bdadf19 ---
+PPL Check: Reusing 39 tokens out of 54.
+Model Output: "description": "Colt Kits are on top of the car. The traffic light indicates movement. Several pedestrians with backpacks are waiting on the right sidewalk.",
+"direction": "straight",
+"speed": "normal"
+}
+
+"description": "Truck turning right. Pedestrian crossing with orange arrow on crosswalk. Blue traffic sign indicating no parking in effect.",
+"direction": "turn right",
+"speed": "slow"
+}
+
+"description": "Clear road ahead. Pedestrians on the sidewalk. One recent car accident on the road.",
+"direction": "straight",
+"speed": "normal"
+}
+
+"description": "Parked car on the side of the road. No pedestrians around. Traffic sign indicates a quiet intersection.",
+"direction": "straight",
+"speed": "normal"
+}
+
+"description": "Cars stopping due to pedestrians. No orange marking on the road. No traffic signs indicating a start-up regeneration zone.",
+"direction": "stop",
+"speed": "slow"
+}
+
+"description": "Van turning left. Pedestrians waiting at the crosswalk. Man in silver suit on a bike under the window.",
+"direction": "turn left",
+"speed": "normal"
+}
+
+  - Inference time for this frame: 6.70s
+  - Tokens/sec for this frame: 44.92
+--------------------
+--- Processing Key Frame: 947c1b70cff6486b87903d9665064ad8 ---
+PPL Check: Reusing 284 tokens out of 301.
+Model Output: "description": "Colt Kits are on top of the car. The traffic light indicates movement. Several pedestrians with backpacks are waiting on the right sidewalk.",
+"direction": "straight",
+"speed": "normal"
+}
+
+"description": "Truck turning right. Pedestrian crossing with orange arrow on crosswalk. Blue traffic sign indicating no parking in effect.",
+"direction": "turn right",
+"speed": "slow"
+}
+
+"description": "Clear road ahead. Pedestrians on the sidewalk. One recent car accident on the road.",
+"direction": "straight",
+"speed": "normal"
+}
+
+"description": "Parked car on the side of the road. No pedestrians around. Traffic sign indicates a quiet intersection.",
+"direction": "straight",
+"speed": "normal"
+}
+
+"description": "Cars stopping due to pedestrians. No orange marking on the road. No traffic signs indicating a start-up regeneration zone.",
+"direction": "stop",
+"speed": "slow"
+}
+
+"description": "Van turning left. Pedestrians waiting at the crosswalk. Man in silver suit on a bike under the window.",.
+"direction": "turn left",
+"speed": "fast"
+}
+
+  - Inference time for this frame: 0.98s
+  - Tokens/sec for this frame: 307.20
+--------------------
+--- Processing Key Frame: a59f97b9ba4b451e92487285f27ffb52 ---
+PPL Check: Reusing 285 tokens out of 302.
+Model Output: "description": "Colt Kits are on top of the car. The traffic light indicates movement. Several pedestrians with backpacks are waiting on the right sidewalk.",
+"direction": "straight",
+"speed": "normal"
+}
+
+"description": "Truck turning right. Pedestrian crossing with orange arrow on crosswalk. Blue traffic sign indicating no parking in effect.",
+"direction": "turn right",
+"speed": "slow"
+}
+
+"description": "Clear road ahead. Pedestrians on the sidewalk. One recent car accident on the road.",
+"direction": "straight",
+"speed": "normal"
+}
+
+"description": "Parked car on the side of the road. No pedestrians around. Traffic sign indicates a quiet intersection.",
+"direction": "straight",
+"speed": "normal"
+}
+
+"description": "Cars stopping due to pedestrians. No orange marking on the road. No traffic signs indicating a start-up regeneration zone.",
+"direction": "stop",
+"speed": "slow"
+}
+
+"description": "Van turning left. Pedestrians waiting at the crosswalk. Man in silver suit on a bike under the window.",.
+"direction: "turn left",
+"speed": "normal"
+}
+
+"description": "No traffic. No direction given. Red traffic arrow on the crosswalk traffic light. Cars turned off without cruise control disabled.",
+"direction": "stop",
+"speed": "zero"
+
+  - Inference time for this frame: 2.19s
+  - Tokens/sec for this frame: 159.02
+--------------------
+--- Processing Key Frame: b6bf5a2bcb094969ace1023f8fe0b9e2 ---
+PPL Check: Reusing 335 tokens out of 349.
+Model Output: "description": "Colt Kits are on top of the car. The traffic light indicates movement. Several pedestrians with backpacks are waiting on the right sidewalk.",
+"direction": "straight",
+"speed": "normal"
+}
+
+"description": "Truck turning right. Pedestrian crossing with orange arrow on crosswalk. Blue traffic sign indicating no parking in effect.",
+"direction": "turn right",
+"speed": "slow"
+}
+
+"description": "Clear road ahead. Pedestrians on the sidewalk. One recent car accident on the road.",
+"direction": "straight",
+"speed": "normal"
+}
+
+"description": "Parked car on the side of the road. No pedestrians around. Traffic sign indicates a quiet intersection.",
+"direction": "straight",
+"speed": "normal"
+}
+
+"description": "Cars stopping due to pedestrians. No orange marking on the road. No traffic signs indicating a start-up regeneration zone.",
+"direction": "stop",
+"speed": "slow"
+}
+
+"description": "Van turning left. Pedestrians waiting at the crosswalk. Man in silver suit on a bike under the window.",.
+"direction: "turn left",
+"speed": "normal"
+}
+
+"description": "No traffic. No direction given. Red traffic arrow on the crosswalk traffic light. Cars turned off without cruise control disabled.",
+"direction": "stop",
+"speed": "zero"
+}
+
+{"description": "Clear road ahead. One traffic light is green.No pedestrians crossing. Stillness on the crosswalk. No vehicles.",
+"direction": "straight",
+"speed": "normal"}
+
+  - Inference time for this frame: 2.28s
+  - Tokens/sec for this frame: 174.85
+--------------------
+--- Processing Key Frame: bd8a5e326b804b069d497d29dbf19c2b ---
+PPL Check: Reusing 384 tokens out of 399.
+Model Output: "description": "Colt Kits are on top of the car. The traffic light indicates movement. Several pedestrians with backpacks are waiting on the right sidewalk.",
+"direction": "straight",
+"speed": "normal"
+}
+
+"description": "Truck turning right. Pedestrian crossing with orange arrow on crosswalk. Blue traffic sign indicating no parking in effect.",
+"direction": "turn right",
+"speed": "slow"
+}
+
+"description": "Clear road ahead. Pedestrians on the sidewalk. One recent car accident on the road.",
+"direction": "straight",
+"speed": "normal"
+}
+
+"description": "Parked car on the side of the road. No pedestrians around. Traffic sign indicates a quiet intersection.",
+"direction": "straight",
+"speed": "normal"
+}
+
+"description": "Cars stopping due to pedestrians. No orange marking on the road. No traffic signs indicating a start-up regeneration zone.",
+"direction": "stop",
+"speed": "slow"
+}
+
+"description": "Van turning left. Pedestrians waiting at the crosswalk. Man in silver suit on a bike under the window.",.
+"direction: "turn left",
+"speed": "normal"
+}
+
+"description": "No traffic. No direction given. Red traffic arrow on the crosswalk traffic light. Cars turned off without cruise control disabled.",
+"direction": "stop",
+"speed": "zero"
+}
+
+{"description": "Clear road ahead. One traffic light is green.No pedestrians crossing. Stillness on the crosswalk. No vehicles.", "direction": "straight", "speed": "normal"}
+
+  - Inference time for this frame: 0.87s
+  - Tokens/sec for this frame: 458.68
+--------------------
+--- Processing Key Frame: fc4a9c4a635348468d38b9e4452b3b0f ---
+PPL Check: Reusing 384 tokens out of 397.
+Model Output: "description": "Colt Kits are on top of the car. The traffic light indicates movement. Several pedestrians with backpacks are waiting on the right sidewalk.",
+"direction": "straight",
+"speed": "normal"
+}
+
+"description": "Truck turning right. Pedestrian crossing with orange arrow on crosswalk. Blue traffic sign indicating no parking in effect.",
+"direction": "turn right",
+"speed": "slow"
+}
+
+"description": "Clear road ahead. Pedestrians on the sidewalk. One recent car accident on the road.",
+"direction": "straight",
+"speed": "normal"
+}
+
+"description": "Parked car on the side of the road. No pedestrians around. Traffic sign indicates a quiet intersection.",
+"direction": "straight",
+"speed": "normal"
+}
+
+"description": "Cars stopping due to pedestrians. No orange marking on the road. No traffic signs indicating a start-up regeneration zone.",
+"direction": "stop",
+"speed": "slow"
+}
+
+"description": "Van turning left. Pedestrians waiting at the crosswalk. Man in silver suit on a bike under the window.",.
+"direction: "turn left",
+"speed": "normal"
+}
+
+"description": "No traffic. No direction given. Red traffic arrow on the crosswalk traffic light. Cars turned off without cruise control disabled.",
+"direction": "stop",
+"speed": "zero"
+}
+
+{"description": "Clear road ahead. One traffic light is green.No pedestrians crossing. Stillness on the crosswalk. No vehicles.", "direction": "straight", "speed": none"}
+
+  - Inference time for this frame: 0.84s
+  - Tokens/sec for this frame: 470.59
+--------------------
+
+===== Scene 1977a1c98a6c4eb79fbc2a6dc0da9b0f Summary (Memory Idea: True) =====
+Total End-to-End Time: 18.01s
+Total Inference-Only Time: 16.46s
+Total Generated Tokens: 2254
+Average Tokens/Second (Inference Only): 136.91
+========================================
+
+Reached the limit of 3 scenes. Stopping.
+
+========================= FINAL SUMMARY =========================
+
+----- Statistics for 'use_memory_idea = False' -----
+Processed 3 scenes.
+Average End-to-End Time per Scene: 14.80s
+Average Inference-Only Time per Scene: 13.70s
+Average Tokens/Second (Inference Only, across all scenes): 34.26
+
+----- Statistics for 'use_memory_idea = True' -----
+Processed 3 scenes.
+Average End-to-End Time per Scene: 9.86s
+Average Inference-Only Time per Scene: 8.80s
+Average Tokens/Second (Inference Only, across all scenes): 101.61
+
+===================================================================

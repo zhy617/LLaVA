@@ -2387,7 +2387,16 @@ class LlavaLlamaForCausalLM(LlamaForCausalLM, LlavaMetaForCausalLM):
             current_kv_len = inputs_embeds.size(1)
             
             # 起始 token
-            input_ids_for_gen = torch.tensor([[input_last_token]]).cuda()
+            # input_ids_for_gen = torch.tensor([[input_last_token]]).cuda()
+
+            # 【修复】直接从 prefill 的最后一个 token 的 logits 中采样出第一个新词！
+            first_token_logits = prefill_output.logits[:, -1, :]
+            probabilities = torch.softmax(first_token_logits, dim=-1)
+            # 建议加上 top_p 或 temperature 处理以增加稳定性
+            first_token_index = torch.multinomial(probabilities, num_samples=1).item()
+            
+            input_ids_for_gen = torch.tensor([[first_token_index]]).cuda()
+            current_sequences[0].append(first_token_index)
 
 
         # --- 4. Generation Loop (Decode) ---
@@ -2419,7 +2428,7 @@ class LlavaLlamaForCausalLM(LlamaForCausalLM, LlavaMetaForCausalLM):
             # 为了简化逻辑，我们统一再跑一次 decode step (即便是重复一点计算)，或者直接利用 prefill 的 logits (更优但复杂)。
             # 为了代码稳健性，这里采用 "传入最后一个 token，KV包含该token" 的方式进行一步生成。
             
-            my_position_ids = torch.tensor([[current_kv_len - 1]], device=input_ids_for_gen.device)
+            my_position_ids = torch.tensor([[current_kv_len]], device=input_ids_for_gen.device)
             # 注意：HuggingFace 标准逻辑，如果 past_key_values 长度为 N，
             # 传入 input_ids (长度1)，则 input_ids 实际上是第 N 个 token (index N-1)。
             # 我们希望它预测第 N+1 个 token。

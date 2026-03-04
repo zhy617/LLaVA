@@ -1,0 +1,474 @@
+You are using a model of type llava to instantiate a model of type llava_llama. This is not supported for all configurations of models and can yield errors.
+/root/miniconda3/envs/llava/lib/python3.10/site-packages/huggingface_hub/file_download.py:949: FutureWarning: `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
+  warnings.warn(
+/root/miniconda3/envs/llava/lib/python3.10/site-packages/torch/_utils.py:831: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  return self.fget.__get__(instance, owner)()
+Flash Attention 2 is available. Setting it as default for Llama.
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███▎      | 1/3 [00:01<00:03,  1.73s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:03<00:01,  1.94s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:05<00:00,  1.79s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:05<00:00,  1.81s/it]
+Loading existing threshold table from threshold_table.json
+===== Processing Scene: f0f120e4d4b0441da90ec53b16ee169d (Memory Idea: False) =====
+--- Processing Key Frame: 4a0798f849ca477ab18009c3a20b7df2 ---
+Model Output: "
+"
+- "
+- "
+```json
+{
+  "description": "Overcast weather. Ego vehicle stops at the red traffic light.",
+  "direction": "stop",
+  "speed": "stop"
+}
+```
+
+  - Inference time for this frame: 2.16s
+  - Tokens/sec for this frame: 25.50
+--------------------
+--- Processing Key Frame: d9075c2a5f864a2b8abf41e703f4cf1c ---
+Model Output: {
+"environment\_descriptor": "Clear and rainy day. Wet road surface. Ego vehicle is traveling straight on an intersect with a red light. Other traffic lights are unseen. No pedestrians nearby.",
+"traffic\_lenses": {
+"front": "Traffic light green, but red light",
+"front-left": "No traffic light",
+"front-right": "No traffic light",
+"back": "No traffic lights",
+"back-left": "No traffic light",
+"back-right": "No traffic light"
+},
+"prediction": "forward"
+}
+
+  - Inference time for this frame: 3.74s
+  - Tokens/sec for this frame: 37.17
+--------------------
+--- Processing Key Frame: dfb8d8959b9944d69dcec6d05e419f04 ---
+Model Output: blob::https://theabbie.github.io/files/share.jpg:1074416344::1
+
+```json
+{
+  "description": "Raining lightly, revealing a mostly deserted area with industrial structures. Traffic lights are almost undetectable though road is otherwise dry and clear of harsh elements other than wetness.",
+  "direction": "straight",
+  "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 2.90s
+  - Tokens/sec for this frame: 35.81
+--------------------
+--- Processing Key Frame: ffd1bdf020d145759224c629b501d2b2 ---
+Model Output: ```json
+{
+    "description": "The rain has caused a slippery road. Lights are glowing in the fog to warn drivers. There is a time lapse effect with the street lights showing multiple states.",
+    "direction": "straight",
+    "speed": "slow"
+}
+```
+
+  - Inference time for this frame: 2.11s
+  - Tokens/sec for this frame: 33.19
+--------------------
+
+===== Scene f0f120e4d4b0441da90ec53b16ee169d Summary (Memory Idea: False) =====
+Total End-to-End Time: 11.76s
+Total Inference-Only Time: 10.91s
+Total Generated Tokens: 368
+Average Tokens/Second (Inference Only): 33.73
+========================================
+
+===== Processing Scene: f0f120e4d4b0441da90ec53b16ee169d (Memory Idea: True) =====
+--- Processing Key Frame: 4a0798f849ca477ab18009c3a20b7df2 ---
+Model Output: ```json
+{
+    "description": "Narrow street extending straight with two crossroads. One intersection has a green traffic light. Rain is falling, reflecting traffic lights and the city lights in the wet pavement.",
+    "direction": "turn left",
+    "speed": "normal"
+}
+
+```
+
+  - Inference time for this frame: 2.11s
+  - Tokens/sec for this frame: 33.23
+--------------------
+--- Processing Key Frame: d9075c2a5f864a2b8abf41e703f4cf1c ---
+PPL Check: Reusing 48 tokens out of 70.
+Model Output: ```json
+{
+    "description": "Narrow street extending straight with two crossroads. One intersection has a green traffic light. Rain is falling, reflecting traffic lights and the city lights in the wet pavement.",
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 0.97s
+  - Tokens/sec for this frame: 71.08
+--------------------
+--- Processing Key Frame: dfb8d8959b9944d69dcec6d05e419f04 ---
+PPL Check: Reusing 48 tokens out of 69.
+Model Output: ```json
+{
+    "description": "Narrow street extending straight with two crossroads. One intersection has a green traffic light. Rain is falling, reflecting traffic lights and the city lights in the wet pavement.",
+    "direction": "straight",
+    "speed": "slow"
+}
+```
+
+  - Inference time for this frame: 0.97s
+  - Tokens/sec for this frame: 71.28
+--------------------
+--- Processing Key Frame: ffd1bdf020d145759224c629b501d2b2 ---
+PPL Check: Reusing 48 tokens out of 69.
+Model Output: ```json
+{
+    "description": "Narrow street extending straight with two crossroads. One intersection has a green traffic light. Rain is falling, reflecting traffic lights and the city lights in the wet pavement.",
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 0.97s
+  - Tokens/sec for this frame: 71.26
+--------------------
+
+===== Scene f0f120e4d4b0441da90ec53b16ee169d Summary (Memory Idea: True) =====
+Total End-to-End Time: 5.76s
+Total Inference-Only Time: 5.01s
+Total Generated Tokens: 277
+Average Tokens/Second (Inference Only): 55.25
+========================================
+
+===== Processing Scene: 54cdaaae372d421fa4734d66f51a8c48 (Memory Idea: False) =====
+--- Processing Key Frame: 0dd14c14cea14dc1b0c0c9b0c9c7c4c3 ---
+Model Output: {
+"description": "Six-camera view of an intersection with traffic, pedestrians, and multiple traffic signals. All traffic appears calm with no immediate hazards. Vehicles are suspended or stationary, suggesting a standard traffic flow pause.",
+"direction": "straight",
+"speed": "normal"
+}
+
+  - Inference time for this frame: 2.18s
+  - Tokens/sec for this frame: 33.49
+--------------------
+--- Processing Key Frame: 1b45a97a0e5e49fe9cd345dd4bd729c3 ---
+Model Output: "description": "Traffic light in the back left corner showing red. An orange traffic cone leaning on the right side. An electric car on the left turning left. A van on the right heading straight and a white car behind it turning slightly to the right.",
+"direction": "turn right",
+"speed": "fast"
+}
+
+  - Inference time for this frame: 2.16s
+  - Tokens/sec for this frame: 33.41
+--------------------
+--- Processing Key Frame: 542eaf1fc9b34895a9e55fab57cb4cf4 ---
+Model Output: "Clear road ahead. Traffic light is green. A pedestrian is waiting on the far right sidewalk."
+
+Please note that due to the format constraints I'm unable to provide a complete description of the overall scene or prediction, which would exceed the allowed 40 words. However, it's worth noting that the image suggests a green traffic light and pedestrian on the sidewalk which would indicate the car should proceed straight and at a normal speed. Thus, in this situation, the ego vehicle should indeed do neither of these, as it's actively driving and safety should be prioritized.
+
+  - Inference time for this frame: 3.52s
+  - Tokens/sec for this frame: 36.92
+--------------------
+--- Processing Key Frame: 7abe79e5d3d745bcb237a4b7e03d1577 ---
+Model Output: ```json
+{
+    "description": "Road with clear visibility ahead. Traffic light is green. Vehicular activity includes traffic in different directions suggesting a multi-lane road. People and vehicle movement on sidewalks monitored by traffic signals. Road marked with white lane markings. Vehicles are of various types and colors. Central portion and building structure appear under construction or renovation.",
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 2.96s
+  - Tokens/sec for this frame: 35.84
+--------------------
+--- Processing Key Frame: d5e16062410f4e329d31a881b28e5c1c ---
+Model Output: {
+"description": "A city intersection with green traffic light. Two vehicles are moving, one turning right and another car driving straight. The traffic light is green for all directions. Vehicles appear to be following traffic rules. No pedestrians are visible in the view."
+,"speed": "normal"
+}
+
+  - Inference time for this frame: 2.06s
+  - Tokens/sec for this frame: 32.96
+--------------------
+
+===== Scene 54cdaaae372d421fa4734d66f51a8c48 Summary (Memory Idea: False) =====
+Total End-to-End Time: 13.83s
+Total Inference-Only Time: 12.88s
+Total Generated Tokens: 449
+Average Tokens/Second (Inference Only): 34.87
+========================================
+
+===== Processing Scene: 54cdaaae372d421fa4734d66f51a8c48 (Memory Idea: True) =====
+--- Processing Key Frame: 0dd14c14cea14dc1b0c0c9b0c9c7c4c3 ---
+Model Output: "description": "Traffic is light, with vehicles adhering to their signals. Vehicles are mostly stationary at intersections due to traffic control. Blue sky for a clear day with no immediate threats like heavy traffic or pedestrians needing assistance."
+"direction": "straight"
+"speed": "normal"
+
+  - Inference time for this frame: 2.16s
+  - Tokens/sec for this frame: 33.39
+--------------------
+--- Processing Key Frame: 1b45a97a0e5e49fe9cd345dd4bd729c3 ---
+PPL Check: Reusing 57 tokens out of 72.
+Model Output: "description": "Traffic is light, with vehicles adhering to their signals. Vehicles are mostly stationary at intersections due to traffic control. Blue sky for a clear day with no immediate threats like heavy traffic or pedestrians needing assistance."
+"direction": "straight"
+"speed": "normal"
+}
+
+  - Inference time for this frame: 0.88s
+  - Tokens/sec for this frame: 84.40
+--------------------
+--- Processing Key Frame: 542eaf1fc9b34895a9e55fab57cb4cf4 ---
+PPL Check: Reusing 57 tokens out of 74.
+Model Output: "description": "Traffic is light, with vehicles adhering to their signals. Vehicles are mostly stationary at intersections due to traffic control. Blue sky for a clear day with no immediate threats like heavy traffic or pedestrians needing assistance."direction": "straight""speed": "normal"
+
+  - Inference time for this frame: 0.74s
+  - Tokens/sec for this frame: 92.40
+--------------------
+--- Processing Key Frame: 7abe79e5d3d745bcb237a4b7e03d1577 ---
+PPL Check: Reusing 57 tokens out of 68.
+Model Output: "description": "Traffic is light, with vehicles adhering to their signals. Vehicles are mostly stationary at intersections due to traffic control. Blue sky for a clear day with no immediate threats like heavy traffic or pedestrians needing assistance."direction": "straight"."speed": "normal"
+
+  - Inference time for this frame: 0.76s
+  - Tokens/sec for this frame: 90.89
+--------------------
+--- Processing Key Frame: d5e16062410f4e329d31a881b28e5c1c ---
+PPL Check: Reusing 57 tokens out of 69.
+Model Output: "description": "Traffic is light, with vehicles adhering to their signals. Vehicles are mostly stationary at intersections due to traffic control. Blue sky for a clear day with no immediate threats like heavy traffic or pedestrians needing assistance."
+"direction": "straight"
+"speed": "normal"
+
+  - Inference time for this frame: 0.83s
+  - Tokens/sec for this frame: 86.81
+--------------------
+
+===== Scene 54cdaaae372d421fa4734d66f51a8c48 Summary (Memory Idea: True) =====
+Total End-to-End Time: 6.29s
+Total Inference-Only Time: 5.36s
+Total Generated Tokens: 355
+Average Tokens/Second (Inference Only): 66.26
+========================================
+
+===== Processing Scene: 1977a1c98a6c4eb79fbc2a6dc0da9b0f (Memory Idea: False) =====
+--- Processing Key Frame: 0a208b6bd70a45c9b77b4acff048b2e4 ---
+Model Output: ```json
+{
+  "description": "Heavy city street with vehicles at an intersection. Pedestrians crossing the intersection with different paces. Surrounded by brick high-rise buildings. The ego vehicle needs to be prepared for potential traffic and pedestrian crossings.",
+  "direction": "straight",
+  "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 2.42s
+  - Tokens/sec for this frame: 34.35
+--------------------
+--- Processing Key Frame: 12ce09b5190048678bcd70e83943907f ---
+Model Output: `{
+  "description": "A scene in a large urban area with busy streets. An 18-wheeler is parked on a side street, two vans are visible, a couple of pedestrians are on the corner. The main road's traffic flows with moderate speed. A car prepared for towing a bus is in front of the camera's perspective.",
+  "direction": "turn right",
+  "speed": "normal"
+}`
+
+  - Inference time for this frame: 2.89s
+  - Tokens/sec for this frame: 35.69
+--------------------
+--- Processing Key Frame: 7903e67446c64958b0a660f10bdadf19 ---
+Model Output: See all content in one place: <https://1.newsextra.com/y/>We found 5
+
+  - Inference time for this frame: 1.05s
+  - Tokens/sec for this frame: 23.71
+--------------------
+--- Processing Key Frame: 947c1b70cff6486b87903d9665064ad8 ---
+Model Output: Ego Vehicle is a white sedan with the driver on the left side of the steering wheel. The rear view mirror on the right side of the vehicle shows a yellow truck in the side mirror. There are pedestrians crossing the street at a crosswalk. Matte black front grill on the sedan.
+```json
+{
+  "description": "Daytime city street scene with a mix of pedestrian and vehicular traffic." ,
+  "direction": "straight",
+  "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 3.22s
+  - Tokens/sec for this frame: 36.38
+--------------------
+--- Processing Key Frame: a59f97b9ba4b451e92487285f27ffb52 ---
+Model Output: ```javascript
+{
+    "description": "Numerous pedestrians crossing the street during a narrow time gap in stoplights. The scene is busy with vehicles in various directions, including traffic flowing smoothly.",
+    "direction": "turn right",
+    "speed": "slow"
+}
+```
+
+  - Inference time for this frame: 2.09s
+  - Tokens/sec for this frame: 33.07
+--------------------
+--- Processing Key Frame: b6bf5a2bcb094969ace1023f8fe0b9e2 ---
+Model Output: "
+{"description": "Multiple pedestrians crossing stree
+
+  - Inference time for this frame: 0.84s
+  - Tokens/sec for this frame: 18.94
+--------------------
+--- Processing Key Frame: bd8a5e326b804b069d497d29dbf19c2b ---
+Model Output: data:image/jpeg;base64,/9j4AAQ SkZJZQHJJRAVka_u7a9KjZp18A0clJeMwBoTJaDrtfZ4QgeaA3nJ7//w144mi...
+\end{ multicopy }
+
+language = EMOJI_LANGUAGE, text = "autonomous driving, cityscape, pedestrians, traffic, trucks, bicycles, traffic light, crosswalk, urban environment, safety, navigation, 5G intelligent transport system, personal emergency response system, smart traffic signal, sensor technology, how to avoid accidents, motorist assistance system, driver distraction, stranded vehicle assistance, communication service adapter, personal fitness equipment, makeshift guardrail, parking sensor, variable speed limit, vehicle positioning system, personal wi-fi hotspot device, garbage truck, commercial waste collection, disabled person assistance vehicle, public transportation", rating = 5, responds_to = DM.
+
+  - Inference time for this frame: 6.23s
+  - Tokens/sec for this frame: 38.34
+--------------------
+--- Processing Key Frame: fc4a9c4a635348468d38b9e4452b3b0f ---
+Model Output: ```json
+{
+  "description": "A busy city street with pedestrians crossing and vehicles driving. Vehicles are stopped at a crosswalk. The sun is shining and the traffic light is red.",
+  "direction": "straight",
+  "speed": "slow"
+}
+```
+
+  - Inference time for this frame: 2.09s
+  - Tokens/sec for this frame: 33.06
+--------------------
+
+===== Scene 1977a1c98a6c4eb79fbc2a6dc0da9b0f Summary (Memory Idea: False) =====
+Total End-to-End Time: 22.36s
+Total Inference-Only Time: 20.83s
+Total Generated Tokens: 721
+Average Tokens/Second (Inference Only): 34.62
+========================================
+
+===== Processing Scene: 1977a1c98a6c4eb79fbc2a6dc0da9b0f (Memory Idea: True) =====
+--- Processing Key Frame: 0a208b6bd70a45c9b77b4acff048b2e4 ---
+Model Output: ```javascript
+{
+  "description": "City street as seen from the car's perspective. Cars, bikes, and pedestrians populate the scene. The road curves to the left ahead, and traffic light cues suggest go.",
+  "direction": "straight",
+  "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 2.23s
+  - Tokens/sec for this frame: 33.67
+--------------------
+--- Processing Key Frame: 12ce09b5190048678bcd70e83943907f ---
+PPL Check: Reusing 54 tokens out of 75.
+Model Output: ```javascript
+{
+  "description": "City street as seen from the car's perspective. Cars, bikes, and pedestrians populate the scene. The road curves to the left ahead, and traffic light cues suggest go.",
+  "direction": "straight",
+  "speed": "normal"
+}
+
+```
+
+  - Inference time for this frame: 1.05s
+  - Tokens/sec for this frame: 72.06
+--------------------
+--- Processing Key Frame: 7903e67446c64958b0a660f10bdadf19 ---
+PPL Check: Reusing 54 tokens out of 76.
+Model Output: ```javascript
+{
+  "description": "City street as seen from the car's perspective. Cars, bikes, and pedestrians populate the scene. The road curves to the left ahead, and traffic light cues suggest go.",
+  "direction": "straight",
+  "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 0.97s
+  - Tokens/sec for this frame: 77.23
+--------------------
+--- Processing Key Frame: 947c1b70cff6486b87903d9665064ad8 ---
+PPL Check: Reusing 54 tokens out of 75.
+Model Output: ```javascript
+{
+  "description": "City street as seen from the car's perspective. Cars, bikes, and pedestrians populate the scene. The road curves to the left ahead, and traffic light cues suggest go.",
+  "direction": "straight",
+  "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 0.97s
+  - Tokens/sec for this frame: 77.20
+--------------------
+--- Processing Key Frame: a59f97b9ba4b451e92487285f27ffb52 ---
+PPL Check: Reusing 54 tokens out of 75.
+Model Output: ```javascript
+{
+  "description": "City street as seen from the car's perspective. Cars, bikes, and pedestrians populate the scene. The road curves to the left ahead, and traffic light cues suggest go.",
+  "direction": "turn left",
+  "speed": "fast"
+}
+
+```
+
+  - Inference time for this frame: 1.00s
+  - Tokens/sec for this frame: 76.37
+--------------------
+--- Processing Key Frame: b6bf5a2bcb094969ace1023f8fe0b9e2 ---
+PPL Check: Reusing 54 tokens out of 76.
+Model Output: ```javascript
+{
+  "description": "City street as seen from the car's perspective. Cars, bikes, and pedestrians populate the scene. The road curves to the left ahead, and traffic light cues suggest go.",
+  "direction": "turn left",
+  "speed": "normal"
+}
+
+```
+
+This JSON output combines the information from all six camera views obtained by the car's onboard cameras to describe a cohesive scene of a busy city street where the car needs to turn left at an intersection while maintaining a normal speed.
+
+  - Inference time for this frame: 2.25s
+  - Tokens/sec for this frame: 57.40
+--------------------
+--- Processing Key Frame: bd8a5e326b804b069d497d29dbf19c2b ---
+PPL Check: Reusing 129 tokens out of 129.
+Model Output: ```javascript
+{
+  "description": "City street as seen from the car's perspective. Cars, bikes, and pedestrians populate the scene. The road curves to the left ahead, and traffic light cues suggest go.",
+  "direction": "turn left",
+  "speed": "normal"
+}
+
+```
+
+This JSON output combines the information from all six camera views obtained by the car's onboard cameras to describe a cohesive scene of a busy city street where the car needs to turn left at an intersection while maintaining a normal speed.
+
+  - Inference time for this frame: 0.49s
+  - Tokens/sec for this frame: 265.82
+--------------------
+--- Processing Key Frame: fc4a9c4a635348468d38b9e4452b3b0f ---
+PPL Check: Reusing 129 tokens out of 129.
+Model Output: ```javascript
+{
+  "description": "City street as seen from the car's perspective. Cars, bikes, and pedestrians populate the scene. The road curves to the left ahead, and traffic light cues suggest go.",
+  "direction": "turn left",
+  "speed": "normal"
+}
+
+```
+
+This JSON output combines the information from all six camera views obtained by the car's onboard cameras to describe a cohesive scene of a busy city street where the car needs to turn left at an intersection while maintaining a normal speed.
+
+  - Inference time for this frame: 0.49s
+  - Tokens/sec for this frame: 265.95
+--------------------
+
+===== Scene 1977a1c98a6c4eb79fbc2a6dc0da9b0f Summary (Memory Idea: True) =====
+Total End-to-End Time: 10.96s
+Total Inference-Only Time: 9.44s
+Total Generated Tokens: 764
+Average Tokens/Second (Inference Only): 80.95
+========================================
+
+Reached the limit of 3 scenes. Stopping.
+
+========================= FINAL SUMMARY =========================
+
+----- Statistics for 'use_memory_idea = False' -----
+Processed 3 scenes.
+Average End-to-End Time per Scene: 15.98s
+Average Inference-Only Time per Scene: 14.87s
+Average Tokens/Second (Inference Only, across all scenes): 34.48
+
+----- Statistics for 'use_memory_idea = True' -----
+Processed 3 scenes.
+Average End-to-End Time per Scene: 7.67s
+Average Inference-Only Time per Scene: 6.60s
+Average Tokens/Second (Inference Only, across all scenes): 70.47
+
+===================================================================
