@@ -1,0 +1,259 @@
+You are using a model of type llava to instantiate a model of type llava_llama. This is not supported for all configurations of models and can yield errors.
+/root/miniconda3/envs/llava/lib/python3.10/site-packages/huggingface_hub/file_download.py:949: FutureWarning: `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
+  warnings.warn(
+/root/miniconda3/envs/llava/lib/python3.10/site-packages/torch/_utils.py:831: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  return self.fget.__get__(instance, owner)()
+Flash Attention 2 is available. Setting it as default for Llama.
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███▎      | 1/3 [00:01<00:03,  1.60s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:03<00:01,  1.64s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:04<00:00,  1.58s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:04<00:00,  1.59s/it]
+Loading existing threshold table from threshold_table.json
+===== Processing Scene: f0f120e4d4b0441da90ec53b16ee169d (Memory Idea: False) =====
+--- Processing Key Frame: 4a0798f849ca477ab18009c3a20b7df2 ---
+  - Ground Truth: direction='straight', speed='fast'
+Model Output: ```json
+{
+    "description": "Wet road at night. Traffic lights are green. Rain-soaked traffic and traffic signs can be seen at various distances. A solitary vehicle is approaching.",
+    "direction": "straight",
+    "speed": "slow"
+}
+```
+
+  - Inference time for this frame: 2.30s
+  - Tokens/sec for this frame: 28.73
+--------------------
+--- Processing Key Frame: d9075c2a5f864a2b8abf41e703f4cf1c ---
+  - Ground Truth: direction='straight', speed='slow'
+Model Output: ```json
+{
+    "description": "Moist road with rainy conditions. Traffic light at an intersection. Cars are on the road with bright headlights heading towards us.",
+    "direction": "straight",
+    "speed": "slow"
+}
+```
+
+  - Inference time for this frame: 1.89s
+  - Tokens/sec for this frame: 32.34
+--------------------
+--- Processing Key Frame: dfb8d8959b9944d69dcec6d05e419f04 ---
+  - Ground Truth: direction='straight', speed='fast'
+Model Output: ```json
+{
+    "description": "The street appears wet likely due to recent rain, signifying the need for slow speeds. A few buildings can be seen in the background; a sign for appointments is visible on the left side. The sky looks overcast with a potential for light rain continuing.",
+    "direction": "straight",
+    "speed": "slow"
+}
+```
+
+  - Inference time for this frame: 2.47s
+  - Tokens/sec for this frame: 34.76
+--------------------
+--- Processing Key Frame: ffd1bdf020d145759224c629b501d2b2 ---
+  - Ground Truth: direction='straight', speed='slow'
+Model Output: ```json
+{
+    "description": "Overcast with intermittent rain. The intersection appears quiet, with a limited number of vehicles. The traffic signals are green and the road appears wet.",
+    "direction": "straight",
+    "speed": "slow"
+}
+```
+
+  - Inference time for this frame: 1.91s
+  - Tokens/sec for this frame: 32.52
+--------------------
+
+===== Scene f0f120e4d4b0441da90ec53b16ee169d Summary (Memory Idea: False) =====
+Total End-to-End Time: 9.33s
+Total Inference-Only Time: 8.56s
+Total Generated Tokens: 275
+Average Tokens/Second (Inference Only): 32.11
+========================================
+
+===== Processing Scene: f0f120e4d4b0441da90ec53b16ee169d (Memory Idea: True) =====
+--- Processing Key Frame: 4a0798f849ca477ab18009c3a20b7df2 ---
+  - Ground Truth: direction='straight', speed='fast'
+Model Output: ```json
+{
+  "description": "Rainy day. Wet road. Lights are red/green traffic signals. Cars are moving through the intersection, and their lights are reflecting on the wet surface.",
+  "direction": "straight",
+  "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 2.05s
+  - Tokens/sec for this frame: 33.13
+--------------------
+--- Processing Key Frame: d9075c2a5f864a2b8abf41e703f4cf1c ---
+  - Ground Truth: direction='straight', speed='slow'
+PPL Check: Reusing 19 tokens out of 68.
+Model Output: ```json
+{
+  "description": "Rainy day. Wet road. It appears to be a construction zone ahead. Road markings are prominently featured. Various vehicles present including delivery trucks.",
+  "direction": "turn left",
+  "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 1.64s
+  - Tokens/sec for this frame: 41.57
+--------------------
+--- Processing Key Frame: dfb8d8959b9944d69dcec6d05e419f04 ---
+  - Ground Truth: direction='straight', speed='fast'
+PPL Check: Reusing 19 tokens out of 68.
+Warning: Could not decode JSON from model output for dfb8d8959b9944d69dcec6d05e419f04. Output was:
+```json
+{
+  "description": "Rainy day. Wet road. Conflicting signals: Traffic light shows straight ahead, while left turn signal on vehicle dashboard counters it."
+  "direction": "straight"
+  "speed": "normal"
+}
+```
+
+Model Output: ```json
+{
+  "description": "Rainy day. Wet road. Conflicting signals: Traffic light shows straight ahead, while left turn signal on vehicle dashboard counters it."
+  "direction": "straight"
+  "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 1.54s
+  - Tokens/sec for this frame: 41.54
+--------------------
+--- Processing Key Frame: ffd1bdf020d145759224c629b501d2b2 ---
+  - Ground Truth: direction='straight', speed='slow'
+PPL Check: Reusing 19 tokens out of 64.
+Model Output: ```json
+{
+  "description": "Rainy day. Wet road. Ego vehicle stopped at an intersection due to traffic light. Amidst simple surroundings, a few vehicles and buildings.",
+  "direction": "turn left",
+  "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 1.59s
+  - Tokens/sec for this frame: 41.60
+--------------------
+
+===== Scene f0f120e4d4b0441da90ec53b16ee169d Summary (Memory Idea: True) =====
+Total End-to-End Time: 7.57s
+Total Inference-Only Time: 6.82s
+Total Generated Tokens: 266
+Average Tokens/Second (Inference Only): 39.03
+========================================
+
+===== Processing Scene: 54cdaaae372d421fa4734d66f51a8c48 (Memory Idea: False) =====
+--- Processing Key Frame: 0dd14c14cea14dc1b0c0c9b0c9c7c4c3 ---
+  - Ground Truth: direction='straight', speed='normal'
+Model Output: ```json
+{
+    "description": "Intersection on a slightly steep hill with a large office building on the right side and trees in front of it. Traffic is rolling through the intersection, and there's a green light above the intersection directing right-turn-only traffic.",
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 2.38s
+  - Tokens/sec for this frame: 34.43
+--------------------
+--- Processing Key Frame: 1b45a97a0e5e49fe9cd345dd4bd729c3 ---
+Warning: Could not parse speed from answer string: 'The ego vehicle is going straight. The ego vehicle is not moving.'
+Skipping 1b45a97a0e5e49fe9cd345dd4bd729c3, could not parse ground truth: 'The ego vehicle is going straight. The ego vehicle is not moving.'
+--- Processing Key Frame: 542eaf1fc9b34895a9e55fab57cb4cf4 ---
+  - Ground Truth: direction='straight', speed='slow'
+Model Output: ```json
+{
+  "description": "City street intersection with pedestrian crosswalk and multiple vehicles, some moving and others waiting, controlled by traffic lights.",
+  "direction": "turn right",
+  "speed": "fast"
+}
+```
+
+  - Inference time for this frame: 1.74s
+  - Tokens/sec for this frame: 31.56
+--------------------
+--- Processing Key Frame: 7abe79e5d3d745bcb237a4b7e03d1577 ---
+Warning: Could not parse speed from answer string: 'The ego vehicle is going straight. The ego vehicle is not moving.'
+Skipping 7abe79e5d3d745bcb237a4b7e03d1577, could not parse ground truth: 'The ego vehicle is going straight. The ego vehicle is not moving.'
+--- Processing Key Frame: d5e16062410f4e329d31a881b28e5c1c ---
+Warning: Could not parse speed from answer string: 'The ego vehicle is going straight. The ego vehicle is not moving.'
+Skipping d5e16062410f4e329d31a881b28e5c1c, could not parse ground truth: 'The ego vehicle is going straight. The ego vehicle is not moving.'
+
+===== Scene 54cdaaae372d421fa4734d66f51a8c48 Summary (Memory Idea: False) =====
+Total End-to-End Time: 4.51s
+Total Inference-Only Time: 4.12s
+Total Generated Tokens: 137
+Average Tokens/Second (Inference Only): 33.21
+========================================
+
+===== Processing Scene: 54cdaaae372d421fa4734d66f51a8c48 (Memory Idea: True) =====
+--- Processing Key Frame: 0dd14c14cea14dc1b0c0c9b0c9c7c4c3 ---
+  - Ground Truth: direction='straight', speed='normal'
+Model Output: ```json
+{
+  "description": "Emergency vehicles approaching with headlights on and their sirens active. Multiple angle cars at an intersection. Grass is green.",
+  "direction": "turn left",
+  "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 1.84s
+  - Tokens/sec for this frame: 32.07
+--------------------
+--- Processing Key Frame: 1b45a97a0e5e49fe9cd345dd4bd729c3 ---
+Warning: Could not parse speed from answer string: 'The ego vehicle is going straight. The ego vehicle is not moving.'
+Skipping 1b45a97a0e5e49fe9cd345dd4bd729c3, could not parse ground truth: 'The ego vehicle is going straight. The ego vehicle is not moving.'
+--- Processing Key Frame: 542eaf1fc9b34895a9e55fab57cb4cf4 ---
+  - Ground Truth: direction='straight', speed='slow'
+PPL Check: Reusing 9 tokens out of 59.
+Warning: Could not decode JSON from model output for 542eaf1fc9b34895a9e55fab57cb4cf4. Output was:
+```json
+{
+  "description": Traffic intersection with multiple lanes and turning vehicles. A wall is being constructed to the right. Speed limits are reduced. The light is green and waving vehicles are moving straight and right. A pedestrian crosses near the empty crosswalk.",
+  "direction":": Straight",
+  "speed":": Very slow to slow"
+}
+```
+
+Model Output: ```json
+{
+  "description": Traffic intersection with multiple lanes and turning vehicles. A wall is being constructed to the right. Speed limits are reduced. The light is green and waving vehicles are moving straight and right. A pedestrian crosses near the empty crosswalk.",
+  "direction":": Straight",
+  "speed":": Very slow to slow"
+}
+```
+
+  - Inference time for this frame: 2.25s
+  - Tokens/sec for this frame: 37.40
+--------------------
+--- Processing Key Frame: 7abe79e5d3d745bcb237a4b7e03d1577 ---
+Warning: Could not parse speed from answer string: 'The ego vehicle is going straight. The ego vehicle is not moving.'
+Skipping 7abe79e5d3d745bcb237a4b7e03d1577, could not parse ground truth: 'The ego vehicle is going straight. The ego vehicle is not moving.'
+--- Processing Key Frame: d5e16062410f4e329d31a881b28e5c1c ---
+Warning: Could not parse speed from answer string: 'The ego vehicle is going straight. The ego vehicle is not moving.'
+Skipping d5e16062410f4e329d31a881b28e5c1c, could not parse ground truth: 'The ego vehicle is going straight. The ego vehicle is not moving.'
+
+===== Scene 54cdaaae372d421fa4734d66f51a8c48 Summary (Memory Idea: True) =====
+Total End-to-End Time: 4.48s
+Total Inference-Only Time: 4.09s
+Total Generated Tokens: 143
+Average Tokens/Second (Inference Only): 35.00
+========================================
+
+Reached the limit of 2 scenes. Stopping.
+
+========================= FINAL SUMMARY =========================
+
+----- Statistics for 'use_memory_idea = False' -----
+Processed 2 scenes.
+Average End-to-End Time per Scene: 6.92s
+Average Inference-Only Time per Scene: 6.34s
+Average Frames per Scene: 0.00
+Average Tokens/Second (Inference Only, across all scenes): 32.47
+
+----- Statistics for 'use_memory_idea = True' -----
+Processed 2 scenes.
+Average End-to-End Time per Scene: 6.03s
+Average Inference-Only Time per Scene: 5.45s
+Average Frames per Scene: 0.00
+Average Tokens/Second (Inference Only, across all scenes): 37.52
+
+===================================================================

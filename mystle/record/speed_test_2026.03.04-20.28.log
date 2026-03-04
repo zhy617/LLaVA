@@ -1,0 +1,2138 @@
+You are using a model of type llava to instantiate a model of type llava_llama. This is not supported for all configurations of models and can yield errors.
+/root/miniconda3/envs/llava/lib/python3.10/site-packages/huggingface_hub/file_download.py:949: FutureWarning: `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
+  warnings.warn(
+/root/miniconda3/envs/llava/lib/python3.10/site-packages/torch/_utils.py:831: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  return self.fget.__get__(instance, owner)()
+Flash Attention 2 is available. Setting it as default for Llama.
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███▎      | 1/3 [00:01<00:03,  1.66s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:03<00:01,  1.70s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:04<00:00,  1.62s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:04<00:00,  1.64s/it]
+Loading existing threshold table from threshold_table.json
+===== Processing Scene: f0f120e4d4b0441da90ec53b16ee169d (Memory Idea: False) =====
+--- Processing Key Frame: 4a0798f849ca477ab18009c3a20b7df2 ---
+  - Ground Truth: direction='straight', speed='fast'
+Model Output: ```json
+{
+    "description": "The scene captures a rainy urban drive. Traffic lights are seen in the foreground and background. Buildings line the road, and the sky is overcast. The right lane seems relatively open while the left lane has a couple of cars. The ego vehicle will continue straight ahead, maintaining a normal speed.",
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 3.08s
+  - Tokens/sec for this frame: 32.19
+--------------------
+--- Processing Key Frame: d9075c2a5f864a2b8abf41e703f4cf1c ---
+  - Ground Truth: direction='straight', speed='slow'
+Model Output: ```json
+{
+    "description": "Overcast day, sightly wet road. A left turn at a green traffic light is anticipated.",
+    "direction": "turn left",
+    "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 1.67s
+  - Tokens/sec for this frame: 31.12
+--------------------
+--- Processing Key Frame: dfb8d8959b9944d69dcec6d05e419f04 ---
+  - Ground Truth: direction='straight', speed='fast'
+Model Output: ```json
+{
+    "description": "Rainy road at night. Signal lights are on. The ego vehicle appears to be a black SUV and is currently stationary.",
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 1.89s
+  - Tokens/sec for this frame: 32.35
+--------------------
+--- Processing Key Frame: ffd1bdf020d145759224c629b501d2b2 ---
+  - Ground Truth: direction='straight', speed='slow'
+Model Output: ```json
+{
+    "description": "Traffic lights display a green signal in the foreground, and a red signal in the background. Thick rain reduces visibility. Road looks wet and slippery. PMV Cadillac with folded roof.",
+    "direction": "straight",
+    "speed": "slow"
+}
+```
+Please note that this JSON object output is provided as a service, but it's important to handle JSON responses correctly according to the rules provided. You can use this image as a starting point to manually structure the data into a JSON format that meets the rules.
+
+  - Inference time for this frame: 3.47s
+  - Tokens/sec for this frame: 36.86
+--------------------
+
+===== Scene f0f120e4d4b0441da90ec53b16ee169d Summary (Memory Idea: False) =====
+Total End-to-End Time: 10.87s
+Total Inference-Only Time: 10.11s
+Total Generated Tokens: 340
+Average Tokens/Second (Inference Only): 33.65
+========================================
+
+Scene Accuracy (4 frames):
+  - Direction: 75.00%
+  - Speed:     25.00%
+  - Both:      25.00%
+===== Processing Scene: f0f120e4d4b0441da90ec53b16ee169d (Memory Idea: True) =====
+--- Processing Key Frame: 4a0798f849ca477ab18009c3a20b7df2 ---
+  - Ground Truth: direction='straight', speed='fast'
+Model Output: ```json
+{
+    "description": "Rainy day during daytime. Well-maintained city road with multiple vehicles on the road. Traffic lights, buildings, and industrial loads are visible on the sides.",
+    "direction": "straight",
+    "speed": "fast"
+}
+```
+
+  - Inference time for this frame: 2.05s
+  - Tokens/sec for this frame: 33.14
+--------------------
+--- Processing Key Frame: d9075c2a5f864a2b8abf41e703f4cf1c ---
+  - Ground Truth: direction='straight', speed='slow'
+PPL Check: Reusing 14 tokens out of 68.
+Model Output: ```json
+{
+    "description": "Rainy daytime. Wet road with lights on at intersections. Traffic consists of a car stopped at a red light leading and a mail truck going to a mailbox, along with other vehicles stopped at lights. The rest of the road is clear with no obstacles noticeable.",
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 2.32s
+  - Tokens/sec for this frame: 39.66
+--------------------
+--- Processing Key Frame: dfb8d8959b9944d69dcec6d05e419f04 ---
+  - Ground Truth: direction='straight', speed='fast'
+PPL Check: Reusing 14 tokens out of 92.
+Model Output: ```json
+{
+    "description": "Rainy daytime. Road is wet. Buildings in the daylight. Traffic lights. Overcast sky. Indistinct view ahead.",
+    "direction": "straight",
+    "speed": "slow"
+}
+```
+
+  - Inference time for this frame: 1.61s
+  - Tokens/sec for this frame: 38.48
+--------------------
+--- Processing Key Frame: ffd1bdf020d145759224c629b501d2b2 ---
+  - Ground Truth: direction='straight', speed='slow'
+PPL Check: Reusing 14 tokens out of 62.
+Model Output: ```json
+{
+    "description": "Rainy day where city streets appear wet. Stoplights guide vehicles. Pedestrians cross streets under overcast skies.",
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 1.54s
+  - Tokens/sec for this frame: 38.32
+--------------------
+
+===== Scene f0f120e4d4b0441da90ec53b16ee169d Summary (Memory Idea: True) =====
+Total End-to-End Time: 8.28s
+Total Inference-Only Time: 7.52s
+Total Generated Tokens: 281
+Average Tokens/Second (Inference Only): 37.36
+========================================
+
+Scene Accuracy (4 frames):
+  - Direction: 100.00%
+  - Speed:     25.00%
+  - Both:      25.00%
+===== Processing Scene: 54cdaaae372d421fa4734d66f51a8c48 (Memory Idea: False) =====
+--- Processing Key Frame: 0dd14c14cea14dc1b0c0c9b0c9c7c4c3 ---
+  - Ground Truth: direction='straight', speed='normal'
+Model Output: ```json
+{
+  "description": "Six camera perspectives combine to show a busy city intersection. Multiple lanes, traffic signals, and large buildings fill the background, while pedestrian and bicycle lanes are clearly marked on the road. The right turn lane is partially blocked by construction equipment. The ego vehicle is equipped with smart mirrors and sensors for navigation.",
+  "direction": "straight",
+  "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 2.93s
+  - Tokens/sec for this frame: 35.87
+--------------------
+--- Processing Key Frame: 1b45a97a0e5e49fe9cd345dd4bd729c3 ---
+  - Ground Truth: direction='straight', speed='slow'
+Model Output: ```json
+{
+  "description": "Multiple lanes in both directions. Traffic appears to be normal. Road leads to a junction with a building on the right.",
+  "direction": "straight",
+  "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 1.84s
+  - Tokens/sec for this frame: 32.11
+--------------------
+--- Processing Key Frame: 542eaf1fc9b34895a9e55fab57cb4cf4 ---
+  - Ground Truth: direction='straight', speed='slow'
+Model Output: ```json
+{
+  "description": "A busy city intersection with vehicles turning left and two pedestrians observed at the far right. Traffic lights in all directions. The time appears to be either dusk or early morning due to the low light conditions.",
+  "direction": "straight",
+  "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 2.24s
+  - Tokens/sec for this frame: 33.94
+--------------------
+--- Processing Key Frame: 7abe79e5d3d745bcb237a4b7e03d1577 ---
+  - Ground Truth: direction='straight', speed='slow'
+Warning: Could not parse direction from answer string: 'normal'
+Model Output: ```json
+{
+    "description": "Six-sided intersection, surrounded by low buildings and modest greenery. Ample space for vehicles to maneuver. Green road seems quiet, and there's a vehicle coming straight and two looking to turn.",
+    "direction": "normal",
+    "speed": "fast"
+}
+```
+
+  - Inference time for this frame: 2.26s
+  - Tokens/sec for this frame: 34.02
+--------------------
+--- Processing Key Frame: d5e16062410f4e329d31a881b28e5c1c ---
+  - Ground Truth: direction='straight', speed='slow'
+Model Output: ```json
+{
+    "description": "A green truck is in motion, turning right along the main street. Other traffic includes a white car in front of the truck.",
+    "direction": "turn right",
+    "speed": "fast"
+}
+```
+
+  - Inference time for this frame: 1.84s
+  - Tokens/sec for this frame: 32.08
+--------------------
+
+===== Scene 54cdaaae372d421fa4734d66f51a8c48 Summary (Memory Idea: False) =====
+Total End-to-End Time: 12.05s
+Total Inference-Only Time: 11.11s
+Total Generated Tokens: 376
+Average Tokens/Second (Inference Only): 33.85
+========================================
+
+Scene Accuracy (5 frames):
+  - Direction: 60.00%
+  - Speed:     20.00%
+  - Both:      20.00%
+===== Processing Scene: 54cdaaae372d421fa4734d66f51a8c48 (Memory Idea: True) =====
+--- Processing Key Frame: 0dd14c14cea14dc1b0c0c9b0c9c7c4c3 ---
+  - Ground Truth: direction='straight', speed='normal'
+Warning: Could not parse direction from answer string: 'normal'
+Model Output: ```json
+{
+  "description": "An urban street scene with vehicles on the road and pedestrians on the sidewalks. The traffic appears to be moving in accordance with the traffic lights, with traffic signals visible in different directional views. There are no immediate signs of hazardous conditions that would require the vehicle to change direction or speed.",
+  "direction": "normal",
+  "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 2.71s
+  - Tokens/sec for this frame: 35.38
+--------------------
+--- Processing Key Frame: 1b45a97a0e5e49fe9cd345dd4bd729c3 ---
+  - Ground Truth: direction='straight', speed='slow'
+PPL Check: Reusing 27 tokens out of 96.
+Model Output: ```json
+{
+  "description": "An urban street scene with vehicles on the road and pedestrians on the sidewalk. A white car is approaching a traffic light at intersection and has sufficient space to proceed straight or turn left without stopping.",
+  "direction": "straight",
+  "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 1.57s
+  - Tokens/sec for this frame: 46.55
+--------------------
+--- Processing Key Frame: 542eaf1fc9b34895a9e55fab57cb4cf4 ---
+  - Ground Truth: direction='straight', speed='slow'
+PPL Check: Reusing 9 tokens out of 73.
+Warning: Could not decode JSON from model output for 542eaf1fc9b34895a9e55fab57cb4cf4. Output was:
+```json
+{
+  "description": Car crossing a building entrance. Rear cam view looking straight ahead. Other cars visible in rear windows. A sign says Mediapolis. Trunk is empty. Adjacent related traffic signals convey info not relevant here.",
+  "direction": "straight",
+  "speed": "normal"
+}
+```
+
+Model Output: ```json
+{
+  "description": Car crossing a building entrance. Rear cam view looking straight ahead. Other cars visible in rear windows. A sign says Mediapolis. Trunk is empty. Adjacent related traffic signals convey info not relevant here.",
+  "direction": "straight",
+  "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 2.04s
+  - Tokens/sec for this frame: 36.85
+--------------------
+--- Processing Key Frame: 7abe79e5d3d745bcb237a4b7e03d1577 ---
+  - Ground Truth: direction='straight', speed='slow'
+PPL Check: Reusing 9 tokens out of 75.
+Warning: Could not decode JSON from model output for 7abe79e5d3d745bcb237a4b7e03d1577. Output was:
+```json
+{
+  "description": This is a clear coastal road with lush greenery. Lights are visible in the far distance, and the road appears empty with no immediate traffic to overtake.",
+  "direction": "straight",
+  "speed": "normal"
+}
+```
+
+Please note that while I provide a high-level synthesis based on the images, an autonomous vehicle's decision-making process would need to consider many more factors, including the specific nature of each object within the scene, its relative position to other objects, and more. It's important to remember that autonomous driving is still a complex problem with ongoing research and development.
+
+Model Output: ```json
+{
+  "description": This is a clear coastal road with lush greenery. Lights are visible in the far distance, and the road appears empty with no immediate traffic to overtake.",
+  "direction": "straight",
+  "speed": "normal"
+}
+```
+
+Please note that while I provide a high-level synthesis based on the images, an autonomous vehicle's decision-making process would need to consider many more factors, including the specific nature of each object within the scene, its relative position to other objects, and more. It's important to remember that autonomous driving is still a complex problem with ongoing research and development.
+
+  - Inference time for this frame: 3.72s
+  - Tokens/sec for this frame: 39.00
+--------------------
+--- Processing Key Frame: d5e16062410f4e329d31a881b28e5c1c ---
+  - Ground Truth: direction='straight', speed='slow'
+PPL Check: Reusing 9 tokens out of 145.
+Warning: Could not decode JSON from model output for d5e16062410f4e329d31a881b28e5c1c. Output was:
+```json
+{
+  "description":Highway merging with lane changes, no significant features ahead; vehicle proximity suggests caution - slow down.",
+  "direction":": straight",
+  "speed":": slower lane changes",
+}
+```
+
+Model Output: ```json
+{
+  "description":Highway merging with lane changes, no significant features ahead; vehicle proximity suggests caution - slow down.",
+  "direction":": straight",
+  "speed":": slower lane changes",
+}
+```
+
+  - Inference time for this frame: 1.63s
+  - Tokens/sec for this frame: 34.26
+--------------------
+
+===== Scene 54cdaaae372d421fa4734d66f51a8c48 Summary (Memory Idea: True) =====
+Total End-to-End Time: 12.61s
+Total Inference-Only Time: 11.67s
+Total Generated Tokens: 445
+Average Tokens/Second (Inference Only): 38.13
+========================================
+
+Scene Accuracy (5 frames):
+  - Direction: 20.00%
+  - Speed:     20.00%
+  - Both:      0.00%
+===== Processing Scene: 1977a1c98a6c4eb79fbc2a6dc0da9b0f (Memory Idea: False) =====
+--- Processing Key Frame: 0a208b6bd70a45c9b77b4acff048b2e4 ---
+  - Ground Truth: direction='straight', speed='slow'
+Model Output: ```
+{
+  "description": "Traffic light is red. Vehicles stopped at the intersection. A cyclist in motion crossing the intersection. Pedestrians on the sidewalk.",
+  "direction": "turn left",
+  "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 1.91s
+  - Tokens/sec for this frame: 32.46
+--------------------
+--- Processing Key Frame: 12ce09b5190048678bcd70e83943907f ---
+  - Ground Truth: direction='straight', speed='slow'
+Model Output: ```json
+{
+  "description": "A clear street with vehicles coming from both directions. Benches sit at the sidewalk, but the area appears quiet.",
+  "direction": "straight",
+  "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 1.75s
+  - Tokens/sec for this frame: 31.52
+--------------------
+--- Processing Key Frame: 7903e67446c64958b0a660f10bdadf19 ---
+  - Ground Truth: direction='straight', speed='slow'
+Model Output: {
+    "description": "Clear road ahead. Vehicles are moving in alternating lanes. A large intersection observed with crossroads between buildings on the left side.",
+    "direction": "straight",
+    "speed": "normal"
+}
+
+  - Inference time for this frame: 1.77s
+  - Tokens/sec for this frame: 31.65
+--------------------
+--- Processing Key Frame: 947c1b70cff6486b87903d9665064ad8 ---
+  - Ground Truth: direction='straight', speed='slow'
+Model Output: ```json
+{
+  "description": "Heavy traffic in a city intersection. Vehicles turning at a dedicated pedestrian crosswalk. Several vehicles stopped for people to cross the street. In front of a brick building under a bright sky.",
+  "direction": "straight",
+  "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 2.17s
+  - Tokens/sec for this frame: 33.64
+--------------------
+--- Processing Key Frame: a59f97b9ba4b451e92487285f27ffb52 ---
+  - Ground Truth: direction='straight', speed='slow'
+Model Output: ```json
+{
+    "description": "A busy urban intersection with many pedestrians crossing in all directions. This includes a white truck going right, a yellow car driving in the center, a pedestrian on the pedestrian crossing beyond the car, lots of traffic on the sidewalks, and other vehicles passing around in the background. People are crossing the street and appear to be obeying traffic signals. One of the most defining features of the environment is the clear visibility which presents unique opportunities and challenges for the autonomous vehicle.",
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 3.66s
+  - Tokens/sec for this frame: 37.13
+--------------------
+--- Processing Key Frame: b6bf5a2bcb094969ace1023f8fe0b9e2 ---
+  - Ground Truth: direction='straight', speed='slow'
+Model Output: ```json
+{
+    "description": "Traffic at a city intersection with tall buildings, pedestrians, cyclists, and shoulder-to-shoulder vehicles, including cars and trucks. A public transit bus is traversing next to tall buildings and near tall structures. The street is bustling with urban activity.",
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 2.62s
+  - Tokens/sec for this frame: 35.12
+--------------------
+--- Processing Key Frame: bd8a5e326b804b069d497d29dbf19c2b ---
+  - Ground Truth: direction='straight', speed='slow'
+Model Output: ```json
+{
+    "description": "A mostly clear intersection in front of a five-story building. Pedestrian traffic seems light, with multiple people scattered across the scene, some waiting on the sidewalk and others walking along the road. One driver is seen approaching the intersection from the back camera. Traffic light is visible but not in focus in the front camera and the side cameras.",
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 2.88s
+  - Tokens/sec for this frame: 35.76
+--------------------
+--- Processing Key Frame: fc4a9c4a635348468d38b9e4452b3b0f ---
+  - Ground Truth: direction='straight', speed='slow'
+Model Output: ```json
+{
+    "description": "Moderate city traffic on a sunny day. Vehicles are stopped at a crosswalk, pedestrians are walking, and cyclists are riding. The weather appears to be pleasant and contributions to climate change might be lowered due to the good weather.",
+    "direction": "turn left",
+    "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 2.50s
+  - Tokens/sec for this frame: 34.77
+--------------------
+
+===== Scene 1977a1c98a6c4eb79fbc2a6dc0da9b0f Summary (Memory Idea: False) =====
+Total End-to-End Time: 20.80s
+Total Inference-Only Time: 19.26s
+Total Generated Tokens: 664
+Average Tokens/Second (Inference Only): 34.48
+========================================
+
+Scene Accuracy (8 frames):
+  - Direction: 75.00%
+  - Speed:     0.00%
+  - Both:      0.00%
+===== Processing Scene: 1977a1c98a6c4eb79fbc2a6dc0da9b0f (Memory Idea: True) =====
+--- Processing Key Frame: 0a208b6bd70a45c9b77b4acff048b2e4 ---
+  - Ground Truth: direction='straight', speed='slow'
+Model Output: ```json
+{
+  "description": "Crosswalk signal lit, pedestrian on left waiting, vehicles waiting, two bicycles ahead, trucks turning right with signs and lights on backs, pedestrian on right squinting in sunlight.",
+  "direction": "straight",
+  "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 2.29s
+  - Tokens/sec for this frame: 34.07
+--------------------
+--- Processing Key Frame: 12ce09b5190048678bcd70e83943907f ---
+  - Ground Truth: direction='straight', speed='slow'
+PPL Check: Reusing 9 tokens out of 78.
+Warning: Could not decode JSON from model output for 12ce09b5190048678bcd70e83943907f. Output was:
+```json
+{
+  "description": A city street with vehicles in motion, both moving and stopped. Traffic appears moderate, and there's a parked truck on the side opposite to the vehicles in the front view.",
+  "direction": "straight",
+  "speed": "normal"
+}
+```
+
+Model Output: ```json
+{
+  "description": A city street with vehicles in motion, both moving and stopped. Traffic appears moderate, and there's a parked truck on the side opposite to the vehicles in the front view.",
+  "direction": "straight",
+  "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 1.92s
+  - Tokens/sec for this frame: 36.47
+--------------------
+--- Processing Key Frame: 7903e67446c64958b0a660f10bdadf19 ---
+  - Ground Truth: direction='straight', speed='slow'
+PPL Check: Reusing 9 tokens out of 70.
+Warning: Could not decode JSON from model output for 7903e67446c64958b0a660f10bdadf19. Output was:
+```json
+{
+  "description": Road ahead is relatively clear, with a car sharing lane indicator. Pedestrian designated crossing in front on right.",
+  "direction": "straight",
+  "speed": "normal"
+}
+```
+
+Model Output: ```json
+{
+  "description": Road ahead is relatively clear, with a car sharing lane indicator. Pedestrian designated crossing in front on right.",
+  "direction": "straight",
+  "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 1.54s
+  - Tokens/sec for this frame: 35.07
+--------------------
+--- Processing Key Frame: 947c1b70cff6486b87903d9665064ad8 ---
+  - Ground Truth: direction='straight', speed='slow'
+PPL Check: Reusing 9 tokens out of 54.
+Warning: Could not decode JSON from model output for 947c1b70cff6486b87903d9665064ad8. Output was:
+```json
+{
+  "description": The scene is set in a bustling city, with a car driving down a lane between two tall brick buildings. Pedestrians are navigating crosswalks and a truck is parked in the procession. There is a paper noting the availability of truck parking up the road, flanked by a snazzy advertisement and parked vans.",
+  "direction": "straight",
+  "speed": "normal"
+}
+```
+
+Model Output: ```json
+{
+  "description": The scene is set in a bustling city, with a car driving down a lane between two tall brick buildings. Pedestrians are navigating crosswalks and a truck is parked in the procession. There is a paper noting the availability of truck parking up the road, flanked by a snazzy advertisement and parked vans.",
+  "direction": "straight",
+  "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 2.93s
+  - Tokens/sec for this frame: 38.51
+--------------------
+--- Processing Key Frame: a59f97b9ba4b451e92487285f27ffb52 ---
+  - Ground Truth: direction='straight', speed='slow'
+PPL Check: Reusing 9 tokens out of 113.
+Warning: Could not decode JSON from model output for a59f97b9ba4b451e92487285f27ffb52. Output was:
+```json
+{
+  "description": The street appears to be calm with a mix of pedestrians and moving vehicles, including cars and a truck. A single pedestrian is seen sitting by the sidewalk, possibly resting. The road is lined with parked cars and a traffic signal at the corner is visible. The buildings are typical urban structures, possibly in a downtown area. Everyone seems to be moving according to their individual paths, creating a harmonious urban scene.",
+  "direction":": straight",
+  "speed":": normal"
+}
+```
+
+Model Output: ```json
+{
+  "description": The street appears to be calm with a mix of pedestrians and moving vehicles, including cars and a truck. A single pedestrian is seen sitting by the sidewalk, possibly resting. The road is lined with parked cars and a traffic signal at the corner is visible. The buildings are typical urban structures, possibly in a downtown area. Everyone seems to be moving according to their individual paths, creating a harmonious urban scene.",
+  "direction":": straight",
+  "speed":": normal"
+}
+```
+
+  - Inference time for this frame: 3.22s
+  - Tokens/sec for this frame: 38.77
+--------------------
+--- Processing Key Frame: b6bf5a2bcb094969ace1023f8fe0b9e2 ---
+  - Ground Truth: direction='straight', speed='slow'
+PPL Check: Reusing 9 tokens out of 125.
+Warning: Could not decode JSON from model output for b6bf5a2bcb094969ace1023f8fe0b9e2. Output was:
+```json
+{
+  "description": A woman is crossing the street holding hands with a small child. There are a few cars and a truck visible in the distance. The sidewalk is near brick buildings and there is a person sitting on the sidewalk. The sky is overcast. There is a crosswalk and a stop sign present. The sun appears to be out.",
+  "direction": "straight",
+  "speed": "normal"
+}
+```
+Please note that the JSON output complies with the given rules, but it may contain some redundancy or verbosity to fully describe the scene given the constraints of creating a single summary. Additionally, the output adheres to syntactical correctness but may need to be trimmed or condensed for real-world usage without losing significant information at the cost of the output size.
+
+Model Output: ```json
+{
+  "description": A woman is crossing the street holding hands with a small child. There are a few cars and a truck visible in the distance. The sidewalk is near brick buildings and there is a person sitting on the sidewalk. The sky is overcast. There is a crosswalk and a stop sign present. The sun appears to be out.",
+  "direction": "straight",
+  "speed": "normal"
+}
+```
+Please note that the JSON output complies with the given rules, but it may contain some redundancy or verbosity to fully describe the scene given the constraints of creating a single summary. Additionally, the output adheres to syntactical correctness but may need to be trimmed or condensed for real-world usage without losing significant information at the cost of the output size.
+
+  - Inference time for this frame: 4.58s
+  - Tokens/sec for this frame: 39.06
+--------------------
+--- Processing Key Frame: bd8a5e326b804b069d497d29dbf19c2b ---
+  - Ground Truth: direction='straight', speed='slow'
+PPL Check: Reusing 9 tokens out of 179.
+Warning: Could not decode JSON from model output for bd8a5e326b804b069d497d29dbf19c2b. Output was:
+```json
+{
+  "description": A bustling city street with tall brick buildings. Pedestrians, bicycles, and trucks share the road. Traffic is dense, and the area is well-lit. The ego vehicle is stopped in the crosswalk close to the curb, waiting for a pedestrian to complete crossing.",
+  "direction": "straight",
+  "speed": "slow"
+}
+```
+
+Model Output: ```json
+{
+  "description": A bustling city street with tall brick buildings. Pedestrians, bicycles, and trucks share the road. Traffic is dense, and the area is well-lit. The ego vehicle is stopped in the crosswalk close to the curb, waiting for a pedestrian to complete crossing.",
+  "direction": "straight",
+  "speed": "slow"
+}
+```
+
+  - Inference time for this frame: 2.61s
+  - Tokens/sec for this frame: 37.19
+--------------------
+--- Processing Key Frame: fc4a9c4a635348468d38b9e4452b3b0f ---
+  - Ground Truth: direction='straight', speed='slow'
+PPL Check: Reusing 9 tokens out of 97.
+Warning: Could not decode JSON from model output for fc4a9c4a635348468d38b9e4452b3b0f. Output was:
+```json
+{
+  "description":Six-camera-view-captures-a-bustling-street-in-an-urban-area.   Road-users-include-pedestrians, vehicles-both-moving-and-not, and a stroller. Both the traffic thoughtfully considers itself and others, and traffic laws are likely to be considered.",
+  "direction": "straight",
+  "speed": "normal"
+}
+```
+Please note that I am a language model AI and not a vehicle, so the predictions are based on accepted traffic rules and common road behavior.
+
+Model Output: ```json
+{
+  "description":Six-camera-view-captures-a-bustling-street-in-an-urban-area.   Road-users-include-pedestrians, vehicles-both-moving-and-not, and a stroller. Both the traffic thoughtfully considers itself and others, and traffic laws are likely to be considered.",
+  "direction": "straight",
+  "speed": "normal"
+}
+```
+Please note that I am a language model AI and not a vehicle, so the predictions are based on accepted traffic rules and common road behavior.
+
+  - Inference time for this frame: 3.44s
+  - Tokens/sec for this frame: 38.98
+--------------------
+
+===== Scene 1977a1c98a6c4eb79fbc2a6dc0da9b0f Summary (Memory Idea: True) =====
+Total End-to-End Time: 24.04s
+Total Inference-Only Time: 22.54s
+Total Generated Tokens: 850
+Average Tokens/Second (Inference Only): 37.72
+========================================
+
+Scene Accuracy (8 frames):
+  - Direction: 12.50%
+  - Speed:     0.00%
+  - Both:      0.00%
+===== Processing Scene: ba76f4185aa34ed3bff467ac640da902 (Memory Idea: False) =====
+--- Processing Key Frame: 019813f350c743f1ad27e115e4d3a55c ---
+  - Ground Truth: direction='straight', speed='fast'
+Model Output: ```json
+{
+  "description": "Main road intersection with a half-roundabout. Minimal traffic but some vehicle activity in the background. A red lane indicator is visible on the left lane.",
+  "direction": "straight",
+  "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 1.98s
+  - Tokens/sec for this frame: 32.80
+--------------------
+--- Processing Key Frame: 2fd8f9bd71664143bc0e643a914791be ---
+  - Ground Truth: direction='right', speed='slow'
+Model Output: ```json
+{
+  "description": "A busy intersection with construction barriers and multiple lanes. A pedestrian wait on the corner. Traffic flow in different directions. There is an icon of a person on the sidewalk, likely indicating a crosswalk. Traffic light is visible to the road.",
+  "direction": "straight",
+  "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 2.48s
+  - Tokens/sec for this frame: 34.70
+--------------------
+--- Processing Key Frame: a4ba4660331c461b9d95ea4154fe2053 ---
+  - Ground Truth: direction='straight', speed='fast'
+Model Output: ```json
+{
+  "description": "Six-lane city street. Three laborers on sidewalk. Road clearly visible but traffic light is not visible in this view. Cars turning in multiple directions. A green construction vehicle flanks the scene on sidewalk.",
+  "direction": "straight",
+  "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 2.27s
+  - Tokens/sec for this frame: 33.99
+--------------------
+--- Processing Key Frame: b48b532c3e1943578c4cf9e1a8230541 ---
+  - Ground Truth: direction='right', speed='normal'
+Model Output: ```
+{
+  "description": "Moderately busy city intersection with multiple lanes, pedestrians, and parked cars. Overcast sky.",
+  "direction": "straight",
+  "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 1.75s
+  - Tokens/sec for this frame: 31.51
+--------------------
+--- Processing Key Frame: cfc098728fb64a6d8cc60e0f8b268198 ---
+  - Ground Truth: direction='right', speed='slow'
+Model Output: ```json
+{
+    "description": "City intersection during daytime with vehicles moving in different lanes under a cloudy sky. All directions are clear with no pedestrians visible.",
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 1.89s
+  - Tokens/sec for this frame: 32.32
+--------------------
+--- Processing Key Frame: d0c8108acf3a43ada1a6dd6c221abd18 ---
+  - Ground Truth: direction='straight', speed='fast'
+Model Output: ```json
+{
+  "description": "City road with buildings flanking the sides. Eco-friendly electric cars are on the road. An electric company van is parked ahead. One worker wearing yellow vest is inspecting a transformer box across from an edible garden. Pedestrians are waiting to cross the road.",
+  "direction": "straight",
+  "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 2.64s
+  - Tokens/sec for this frame: 35.17
+--------------------
+
+===== Scene ba76f4185aa34ed3bff467ac640da902 Summary (Memory Idea: False) =====
+Total End-to-End Time: 14.16s
+Total Inference-Only Time: 13.00s
+Total Generated Tokens: 437
+Average Tokens/Second (Inference Only): 33.61
+========================================
+
+Scene Accuracy (6 frames):
+  - Direction: 50.00%
+  - Speed:     16.67%
+  - Both:      0.00%
+===== Processing Scene: ba76f4185aa34ed3bff467ac640da902 (Memory Idea: True) =====
+--- Processing Key Frame: 019813f350c743f1ad27e115e4d3a55c ---
+  - Ground Truth: direction='straight', speed='fast'
+Model Output: ```json
+{
+  "description": "Crowded street with cars, barriers, orange cones, construction activity, and pedestrians. The sky is overcast.",
+  "direction": "turn right",
+  "speed": "slow"
+}
+```
+
+  - Inference time for this frame: 1.86s
+  - Tokens/sec for this frame: 32.19
+--------------------
+--- Processing Key Frame: 2fd8f9bd71664143bc0e643a914791be ---
+  - Ground Truth: direction='right', speed='slow'
+PPL Check: Reusing 10 tokens out of 60.
+Warning: Could not decode JSON from model output for 2fd8f9bd71664143bc0e643a914791be. Output was:
+```json
+{
+  "description": " (no clear description),
+  "direction": "turn left",
+  "speed": "normal"
+}
+```
+
+Model Output: ```json
+{
+  "description": " (no clear description),
+  "direction": "turn left",
+  "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 1.09s
+  - Tokens/sec for this frame: 32.96
+--------------------
+--- Processing Key Frame: a4ba4660331c461b9d95ea4154fe2053 ---
+  - Ground Truth: direction='straight', speed='fast'
+PPL Check: Reusing 0 tokens out of 36.
+Model Output: ```json
+{
+    "description": "Six construction crews visible on both sides of the road, interacting under trees near an entrance to a building complex. A green crane is at work. Pedestrians appear to be safe.",
+    "direction": "straight",
+    "speed": "slow"
+}
+```
+
+  - Inference time for this frame: 2.22s
+  - Tokens/sec for this frame: 33.31
+--------------------
+--- Processing Key Frame: b48b532c3e1943578c4cf9e1a8230541 ---
+  - Ground Truth: direction='right', speed='normal'
+PPL Check: Reusing 0 tokens out of 74.
+Model Output: {
+    "description": "Multiple vehicles, including a truck, driving down a city street between large buildings. Pedestrian crossing sign and traffic lights also visible.",
+    "direction": "straight",
+    "speed": "normal"
+}
+
+  - Inference time for this frame: 1.82s
+  - Tokens/sec for this frame: 31.27
+--------------------
+--- Processing Key Frame: cfc098728fb64a6d8cc60e0f8b268198 ---
+  - Ground Truth: direction='right', speed='slow'
+PPL Check: Reusing 0 tokens out of 57.
+Model Output: ``
+{
+"description": "Multilevel junction ahead. Vehicles at various stages of traffic signal cycle. People and bicyclists. Scattered pedestrian signals. Roadwork awaits ahead.",
+"direction": "turn right",
+"speed": "normal"
+}
+
+  - Inference time for this frame: 2.01s
+  - Tokens/sec for this frame: 32.34
+--------------------
+--- Processing Key Frame: d0c8108acf3a43ada1a6dd6c221abd18 ---
+  - Ground Truth: direction='straight', speed='fast'
+PPL Check: Reusing 0 tokens out of 65.
+Warning: No JSON object found in model output for d0c8108acf3a43ada1a6dd6c221abd18. Output was:
+description: "Robotic car controls traffic flow. Grey brick building and grassy island in center of road. Clear day with minimum cloud coverage."
+direction: "straight"
+speed: "normal"
+
+Model Output: description: "Robotic car controls traffic flow. Grey brick building and grassy island in center of road. Clear day with minimum cloud coverage."
+direction: "straight"
+speed: "normal"
+
+  - Inference time for this frame: 1.49s
+  - Tokens/sec for this frame: 28.80
+--------------------
+
+===== Scene ba76f4185aa34ed3bff467ac640da902 Summary (Memory Idea: True) =====
+Total End-to-End Time: 11.63s
+Total Inference-Only Time: 10.50s
+Total Generated Tokens: 335
+Average Tokens/Second (Inference Only): 31.89
+========================================
+
+Scene Accuracy (6 frames):
+  - Direction: 33.33%
+  - Speed:     16.67%
+  - Both:      0.00%
+===== Processing Scene: e0b14a8e11994763acba690bbcc3f56a (Memory Idea: False) =====
+--- Processing Key Frame: 0e364b7146c848b5a5fd73bbe05e59ed ---
+  - Ground Truth: direction='straight', speed='slow'
+Warning: Could not parse speed from answer string: 'regular'
+Model Output: ```json
+{
+    "description": "Rainy urban scene, building named 'Bldg. Design' in background, multi-story structure with beige walls, large windows and balconies, wet and reflective sidewalks, traffic lights nearby, white pickup truck maneuvers under, cameras roll ahead.",
+    "direction": "turn right",
+    "speed": "regular"
+}
+```
+
+  - Inference time for this frame: 2.62s
+  - Tokens/sec for this frame: 35.09
+--------------------
+--- Processing Key Frame: 7138a5bb5798486d82d170558c4bd90d ---
+  - Ground Truth: direction='straight', speed='slow'
+Model Output: ```json
+{
+  "description": "A car travels down a wet road in front of a large building on an overcast day. The vehicle is moving straight with appropriate caution due to the weather conditions.",
+  "direction": "straight",
+  "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 2.01s
+  - Tokens/sec for this frame: 32.89
+--------------------
+--- Processing Key Frame: 8a009c674c60457da87f9386cbfee63a ---
+  - Ground Truth: direction='right', speed='normal'
+Model Output: {
+  "description": "Easy street crossing without pedestrians or obstacles. The car is expected to proceed straight ahead at a normal speed.",
+  "direction": "straight",
+  "speed": "normal"
+}
+
+  - Inference time for this frame: 1.68s
+  - Tokens/sec for this frame: 31.04
+--------------------
+--- Processing Key Frame: 8a76c43c5a034741844748d3ed9c2fbc ---
+  - Ground Truth: direction='straight', speed='slow'
+Model Output: ```json
+{
+    "description": "Rainy day with a building in the background and cars parked along the street front, including one with license plate 'RDY'. Visibility is limited to the immediate environment.",
+    "direction": "straight",
+    "speed": "slow"
+}
+```
+
+  - Inference time for this frame: 2.08s
+  - Tokens/sec for this frame: 33.23
+--------------------
+
+===== Scene e0b14a8e11994763acba690bbcc3f56a Summary (Memory Idea: False) =====
+Total End-to-End Time: 9.14s
+Total Inference-Only Time: 8.38s
+Total Generated Tokens: 279
+Average Tokens/Second (Inference Only): 33.29
+========================================
+
+Scene Accuracy (4 frames):
+  - Direction: 50.00%
+  - Speed:     50.00%
+  - Both:      25.00%
+===== Processing Scene: e0b14a8e11994763acba690bbcc3f56a (Memory Idea: True) =====
+--- Processing Key Frame: 0e364b7146c848b5a5fd73bbe05e59ed ---
+  - Ground Truth: direction='straight', speed='slow'
+Model Output: ```json
+{
+    "description": "Daylight with rain, vehicles stopped at an intersection due to construction work in the street. Pedestrians wait to cross. Buildings stand in the background.",
+    "direction": "turn left",
+    "speed": "slow"
+}
+```
+
+  - Inference time for this frame: 1.96s
+  - Tokens/sec for this frame: 32.68
+--------------------
+--- Processing Key Frame: 7138a5bb5798486d82d170558c4bd90d ---
+  - Ground Truth: direction='straight', speed='slow'
+PPL Check: Reusing 11 tokens out of 64.
+Model Output: ```json
+{
+    "description": "Day: The scene is set in a rainy city street. The ego vehicle, a white Ryder truck, is moving towards the right, following the directional cues from six cameras that capture the surroundings. The road appears wet, suggesting the ongoing rainfall, and the atmosphere is cloudy.",
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 2.56s
+  - Tokens/sec for this frame: 38.70
+--------------------
+--- Processing Key Frame: 8a009c674c60457da87f9386cbfee63a ---
+  - Ground Truth: direction='right', speed='normal'
+PPL Check: Reusing 11 tokens out of 99.
+Model Output: ```json
+{
+    "description": "DayBuildings white with signage, parking lot, numerous cars, trucks, buses, pedestrians about, asphalt everywhere, bustling urban setting, buildings of varying sizes from podiums to skyscrapers, all appearing to be in motion, some moving, some stationary.",
+    "direction": "straight",
+    "speed": "fast"
+}
+```
+
+  - Inference time for this frame: 2.54s
+  - Tokens/sec for this frame: 38.63
+--------------------
+--- Processing Key Frame: 8a76c43c5a034741844748d3ed9c2fbc ---
+  - Ground Truth: direction='straight', speed='slow'
+PPL Check: Reusing 11 tokens out of 98.
+Model Output: ```json
+{
+    "description": "Day, cloudy. Three-story red brick building with large glass front. Fairly busy intersection with mostly swapped cars in parking of large building & others around. A small truck in front of a large white van moving through left turn. Slowish traffic & rampant rain reflecting in the wet asphalt.",
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 2.58s
+  - Tokens/sec for this frame: 38.70
+--------------------
+
+===== Scene e0b14a8e11994763acba690bbcc3f56a Summary (Memory Idea: True) =====
+Total End-to-End Time: 10.39s
+Total Inference-Only Time: 9.64s
+Total Generated Tokens: 361
+Average Tokens/Second (Inference Only): 37.46
+========================================
+
+Scene Accuracy (4 frames):
+  - Direction: 50.00%
+  - Speed:     25.00%
+  - Both:      0.00%
+===== Processing Scene: 2422d2652f4f42298a389a6e0dfef307 (Memory Idea: False) =====
+--- Processing Key Frame: 3ea38d2fcb3244ce93899fc085bd47ed ---
+  - Ground Truth: direction='straight', speed='slow'
+Model Output: ```json
+{
+    "description": "A multi-lane road with right turns allowed. Traffic flows through an area undergoing construction on each side. Pending all-clear signals.",
+    "direction": "turn right",
+    "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 1.89s
+  - Tokens/sec for this frame: 32.31
+--------------------
+--- Processing Key Frame: 5124bf7488f14f459bc3d8f4b15577a9 ---
+  - Ground Truth: direction='straight', speed='slow'
+Model Output: ```json
+{
+    "description": "Autonomous driving in a zoo area with trees and wildlife, surrounded by virtual perimeter barriers on approach.",
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 1.75s
+  - Tokens/sec for this frame: 31.50
+--------------------
+--- Processing Key Frame: 6f6485a3d7bd4695bc7c7cc21651b4fe ---
+  - Ground Truth: direction='straight', speed='slow'
+Model Output: ```json
+{
+    "description": "A city street with a gray car stopped and two orange construction barriers on the side of the road.",
+    "direction": "straight",
+    "speed": "slow"
+}
+```
+
+  - Inference time for this frame: 1.67s
+  - Tokens/sec for this frame: 31.05
+--------------------
+--- Processing Key Frame: 7e675d1e19b84ccda4393c593a8594ee ---
+  - Ground Truth: direction='straight', speed='slow'
+Warning: No JSON object found in model output for 7e675d1e19b84ccda4393c593a8594ee. Output was:
+Based on the provided images, I see an urban intersection with a concrete median separating public and private roadways. There's a white AE-YE pickup truck visible on the street. In the immediate surroundings, there are structures that might be residential or commercial buildings, but it is challenging to provide specific details on their purpose or functionality from the image alone. Traffic appears to be relatively light at the moment with only the truck in motion. When interpreting the road conditions, it seems like the urban environment can accommodate larger vehicles like this one. The crowns on the buildings and the grey facade suggest they might be residential or apartment buildings. The authorities appear to be managing the area effectively as there are no visible obstructions in the road.
+
+Model Output: Based on the provided images, I see an urban intersection with a concrete median separating public and private roadways. There's a white AE-YE pickup truck visible on the street. In the immediate surroundings, there are structures that might be residential or commercial buildings, but it is challenging to provide specific details on their purpose or functionality from the image alone. Traffic appears to be relatively light at the moment with only the truck in motion. When interpreting the road conditions, it seems like the urban environment can accommodate larger vehicles like this one. The crowns on the buildings and the grey facade suggest they might be residential or apartment buildings. The authorities appear to be managing the area effectively as there are no visible obstructions in the road.
+
+  - Inference time for this frame: 4.33s
+  - Tokens/sec for this frame: 37.86
+--------------------
+--- Processing Key Frame: bac9648d9bfb4258beafbd52eda61344 ---
+  - Ground Truth: direction='straight', speed='slow'
+Model Output: ```json
+{
+  "description": "Moderate traffic on a multi-lane road with barrier and cone cones on the right side. A building looms behind the scene.",
+  "direction": "straight",
+  "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 1.89s
+  - Tokens/sec for this frame: 32.32
+--------------------
+--- Processing Key Frame: d0c6d9ac1f5649d596d81177b36752a7 ---
+  - Ground Truth: direction='straight', speed='slow'
+Model Output: ```json
+{
+    "description": "A busy urban street scene, with heavy traffic and construction activities. Vehicles and pedestrians navigate the city landscape.",
+    "direction": "turn left",
+    "speed": "slow"
+}
+```
+
+  - Inference time for this frame: 1.79s
+  - Tokens/sec for this frame: 31.79
+--------------------
+--- Processing Key Frame: e2c5111b0a23476aac916814dd908ea1 ---
+  - Ground Truth: direction='straight', speed='slow'
+Model Output: ```json
+{
+  "description": "A car is turning right on a city street while traffic lights indicate green signals ahead. A pedestrian waits on the sidewalk.",
+  "direction": "turn right",
+  "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 1.84s
+  - Tokens/sec for this frame: 32.06
+--------------------
+--- Processing Key Frame: f765c2cac300448abca6cf1496140331 ---
+  - Ground Truth: direction='straight', speed='slow'
+Model Output: ```json
+{
+  "description": "Vehicles driving down city street. Traffic in all directions. Small reflective barriers on the front two lanes. No visible action required by the ego vehicle.",
+  "direction": "straight",
+  "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 2.03s
+  - Tokens/sec for this frame: 33.00
+--------------------
+
+===== Scene 2422d2652f4f42298a389a6e0dfef307 Summary (Memory Idea: False) =====
+Total End-to-End Time: 18.72s
+Total Inference-Only Time: 17.19s
+Total Generated Tokens: 576
+Average Tokens/Second (Inference Only): 33.51
+========================================
+
+Scene Accuracy (8 frames):
+  - Direction: 50.00%
+  - Speed:     25.00%
+  - Both:      12.50%
+===== Processing Scene: 2422d2652f4f42298a389a6e0dfef307 (Memory Idea: True) =====
+--- Processing Key Frame: 3ea38d2fcb3244ce93899fc085bd47ed ---
+  - Ground Truth: direction='straight', speed='slow'
+Warning: No JSON object found in model output for 3ea38d2fcb3244ce93899fc085bd47ed. Output was:
+As an autonomous driving assistant, I need the extracted features from the front and related camera views to generate a single holistic description of the environment and predict the ego vehicle's behavior. However, based on the rules you've provided, it looks like I'd still need to synthesize the information from multiple camera views and that does not fit within your strict criteria.
+
+Your example provided a specific description germane to the view of the car's front camera, whereas the task provided asks for a holistic understanding of the environment. Therefore, I'm unable to generate valid JSON outputs based on your requirements.
+
+Model Output: As an autonomous driving assistant, I need the extracted features from the front and related camera views to generate a single holistic description of the environment and predict the ego vehicle's behavior. However, based on the rules you've provided, it looks like I'd still need to synthesize the information from multiple camera views and that does not fit within your strict criteria.
+
+Your example provided a specific description germane to the view of the car's front camera, whereas the task provided asks for a holistic understanding of the environment. Therefore, I'm unable to generate valid JSON outputs based on your requirements.
+
+  - Inference time for this frame: 3.50s
+  - Tokens/sec for this frame: 36.87
+--------------------
+--- Processing Key Frame: 5124bf7488f14f459bc3d8f4b15577a9 ---
+  - Ground Truth: direction='straight', speed='slow'
+PPL Check: Reusing 0 tokens out of 129.
+Model Output: {
+"description": "A city street with traffic. A car with license plate number following in traffic. There are parked cars on the sides and a pedestrian on the left sidewalk. The direction is towards the left and the speed is normal.",
+"direction": "straight",
+"speed": "normal"
+}
+
+  - Inference time for this frame: 2.16s
+  - Tokens/sec for this frame: 32.92
+--------------------
+--- Processing Key Frame: 6f6485a3d7bd4695bc7c7cc21651b4fe ---
+  - Ground Truth: direction='straight', speed='slow'
+PPL Check: Reusing 0 tokens out of 71.
+Warning: Could not decode JSON from model output for 6f6485a3d7bd4695bc7c7cc21651b4fe. Output was:
+full attention:
+
+Based on the given input and the images you've provided, here's an attempt at generating the single JSON object:
+
+```json
+{
+    "description": "A grey sedan in moderate traffic, navigating a complex road intersection with multiple lanes and white lane dividers.”,
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+
+Please note that this is a simplified representation which relies on a single sentence to describe the entire scene, as my capabilities are limited to text analysis and understanding from a single image...let alone interpreting multiple images simultaneously. Additionally, the road layout, traffic conditions, and vehicle movement must be inferred based on a limited scope of the image's visual content, which is insufficient to accurately predict the vehicle's behavior, especially if there's movement of other cars, and road vehicles, and pedestrians, stoplights, intersection lights, red, green, orange, road construction, heavy traffic, or other obstacles, especially if there's no clear signage, no other vehicles are blocked.
+
+Model Output: full attention:
+
+Based on the given input and the images you've provided, here's an attempt at generating the single JSON object:
+
+```json
+{
+    "description": "A grey sedan in moderate traffic, navigating a complex road intersection with multiple lanes and white lane dividers.”,
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+
+Please note that this is a simplified representation which relies on a single sentence to describe the entire scene, as my capabilities are limited to text analysis and understanding from a single image...let alone interpreting multiple images simultaneously. Additionally, the road layout, traffic conditions, and vehicle movement must be inferred based on a limited scope of the image's visual content, which is insufficient to accurately predict the vehicle's behavior, especially if there's movement of other cars, and road vehicles, and pedestrians, stoplights, intersection lights, red, green, orange, road construction, heavy traffic, or other obstacles, especially if there's no clear signage, no other vehicles are blocked.
+
+  - Inference time for this frame: 6.30s
+  - Tokens/sec for this frame: 38.07
+--------------------
+--- Processing Key Frame: 7e675d1e19b84ccda4393c593a8594ee ---
+  - Ground Truth: direction='straight', speed='slow'
+PPL Check: Reusing 0 tokens out of 240.
+Model Output: {"description":"Moderate traffic on a sunny day. Turning to the left at the intersection.","direction":"turn left","speed":"normal"}
+
+  - Inference time for this frame: 1.29s
+  - Tokens/sec for this frame: 24.87
+--------------------
+--- Processing Key Frame: bac9648d9bfb4258beafbd52eda61344 ---
+  - Ground Truth: direction='straight', speed='slow'
+PPL Check: Reusing 0 tokens out of 32.
+Warning: No JSON object found in model output for bac9648d9bfb4258beafbd52eda61344. Output was:
+"description": "An urban street in a city center with a clear sight of a building facade. Traffic is light, and there are street signs and markings visible. No pedestrians are in the close vicinity of the car."
+"direction": "straight"
+"speed": "normal"
+
+Model Output: "description": "An urban street in a city center with a clear sight of a building facade. Traffic is light, and there are street signs and markings visible. No pedestrians are in the close vicinity of the car."
+"direction": "straight"
+"speed": "normal"
+
+  - Inference time for this frame: 2.06s
+  - Tokens/sec for this frame: 32.58
+--------------------
+--- Processing Key Frame: d0c6d9ac1f5649d596d81177b36752a7 ---
+  - Ground Truth: direction='straight', speed='slow'
+PPL Check: Reusing 0 tokens out of 67.
+Model Output: {
+"description": "Lane markings not completely visible, but it's apparent that the lanes are curving to the right. A car in front is turning right.",
+"direction": "turn right",
+"speed": "normal"
+}
+
+  - Inference time for this frame: 1.80s
+  - Tokens/sec for this frame: 31.13
+--------------------
+--- Processing Key Frame: e2c5111b0a23476aac916814dd908ea1 ---
+  - Ground Truth: direction='straight', speed='slow'
+PPL Check: Reusing 0 tokens out of 56.
+Warning: No JSON object found in model output for e2c5111b0a23476aac916814dd908ea1. Output was:
+INTERNAL_SERVER_ERROR
+
+Model Output: INTERNAL_SERVER_ERROR
+
+  - Inference time for this frame: 0.67s
+  - Tokens/sec for this frame: 11.96
+--------------------
+--- Processing Key Frame: f765c2cac300448abca6cf1496140331 ---
+  - Ground Truth: direction='straight', speed='slow'
+PPL Check: Reusing 0 tokens out of 8.
+Model Output: raw
+{
+  "description": "Multiple lanes intersecting a busy roadway with pedestrians and vehicles. Traffic lights and construction barriers signaling a potential hazard or detour. Vehicles seem to be adhering to the rules at this time, likely at a complete stop.",
+  "direction": "straight",
+  "speed": "normal"
+}
+:end
+================================================================================
+
+Please note that I am an AI description generator and this example provides you with a single interpretation. The actual behavior of vehicles will be determined by the diverse patterns and actions of individual drivers, traffic rules and signal timings, and even the presence of additional context or events not captured in the given images.
+
+  - Inference time for this frame: 4.21s
+  - Tokens/sec for this frame: 37.51
+--------------------
+
+===== Scene 2422d2652f4f42298a389a6e0dfef307 Summary (Memory Idea: True) =====
+Total End-to-End Time: 23.50s
+Total Inference-Only Time: 21.98s
+Total Generated Tokens: 761
+Average Tokens/Second (Inference Only): 34.62
+========================================
+
+Scene Accuracy (8 frames):
+  - Direction: 25.00%
+  - Speed:     0.00%
+  - Both:      0.00%
+===== Processing Scene: df8dfada99a04a81bd1b102eeb84e9bc (Memory Idea: False) =====
+--- Processing Key Frame: 0545b9cffcb441769be5f769fad6986d ---
+  - Ground Truth: direction='straight', speed='fast'
+Model Output: ```json
+{
+    "description": "Urban intersection in a city. Turning caution is advised due to nearby construction. Ego vehicle should cautiously navigate the intersection while observing oncoming traffic, pedestrians, and any applicable construction zones.",
+    "direction": "turn right",
+    "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 2.31s
+  - Tokens/sec for this frame: 34.15
+--------------------
+--- Processing Key Frame: 1f1309a70c89443fbf02b5bb96359d52 ---
+  - Ground Truth: direction='right', speed='fast'
+Model Output: ```json
+{
+    "description": "The image captures a large construction site next to a residential area. Cars are moving around the site, and two pedestrians are visible on the sidewalk. The sky is clear, and the lighting indicates it's early evening.",
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 2.41s
+  - Tokens/sec for this frame: 34.47
+--------------------
+--- Processing Key Frame: 3a171478d2d448ba9f8fc44c7df60a5a ---
+  - Ground Truth: direction='right', speed='normal'
+Model Output: ```json
+{
+  "description": "City intersection under construction. Orange construction barriers surround the intersection, with a half-dome roof and various buildings in the background. White car waiting to turn.",
+  "direction": "turn right",
+  "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 1.98s
+  - Tokens/sec for this frame: 32.79
+--------------------
+--- Processing Key Frame: 5d76d048762e4f12bd814d456e5776b0 ---
+  - Ground Truth: direction='right', speed='slow'
+Model Output: ```json
+{
+  "description": "Clear daytime sky. Vacant building under construction. Vehicles travel in various directions. Curved road markings indicate lane ending or turn permissions.",
+  "direction": "straight",
+  "speed": "fast"
+}
+```
+
+  - Inference time for this frame: 1.96s
+  - Tokens/sec for this frame: 32.69
+--------------------
+--- Processing Key Frame: af1b60ce78fd4c6a9cd3259070ab9c52 ---
+  - Ground Truth: direction='right', speed='normal'
+Model Output: ```json
+{
+  "description": "Traffic both ways. Vehicles stopped at a crosswalk on the right side. A construction site obstructing the normal driving lane. Temporary signs are visible on top of the blockades, but their content is not clear.",
+  "direction": "turn right",
+  "speed": "slow"
+}
+```
+
+  - Inference time for this frame: 2.36s
+  - Tokens/sec for this frame: 34.29
+--------------------
+--- Processing Key Frame: e3f986e5d53f416492bdf255e82bff52 ---
+  - Ground Truth: direction='right', speed='normal'
+Model Output: ```json
+{
+  "description": "Traffic on a tarred road, clear of traffic cones and barriers. Sidewalk is wet, indicating recent rain or a nearby water recent",
+  "direction": "straight",
+  "speed": "slow"
+}
+```
+
+  - Inference time for this frame: 1.91s
+  - Tokens/sec for this frame: 32.44
+--------------------
+
+===== Scene df8dfada99a04a81bd1b102eeb84e9bc Summary (Memory Idea: False) =====
+Total End-to-End Time: 14.08s
+Total Inference-Only Time: 12.93s
+Total Generated Tokens: 434
+Average Tokens/Second (Inference Only): 33.55
+========================================
+
+Scene Accuracy (6 frames):
+  - Direction: 33.33%
+  - Speed:     16.67%
+  - Both:      16.67%
+===== Processing Scene: df8dfada99a04a81bd1b102eeb84e9bc (Memory Idea: True) =====
+--- Processing Key Frame: 0545b9cffcb441769be5f769fad6986d ---
+  - Ground Truth: direction='straight', speed='fast'
+Model Output: ```json
+{
+    "description": "White car navigating through city intersection. Road appears clear. Store fronts present on corners. Traffic light status not visible.",
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 1.79s
+  - Tokens/sec for this frame: 31.78
+--------------------
+--- Processing Key Frame: 1f1309a70c89443fbf02b5bb96359d52 ---
+  - Ground Truth: direction='right', speed='fast'
+PPL Check: Reusing 9 tokens out of 57.
+Warning: Could not decode JSON from model output for 1f1309a70c89443fbf02b5bb96359d52. Output was:
+```json
+{
+    "description": The view and sunlight in this image provide a clear day. Multiple structures suggest construction or a renovation project in the background, including one with a white roof and mesh fencing near the road. Additionally, two vehicles, one white and one black, are visible on the street with one parked and the other driving.",
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+
+Model Output: ```json
+{
+    "description": The view and sunlight in this image provide a clear day. Multiple structures suggest construction or a renovation project in the background, including one with a white roof and mesh fencing near the road. Additionally, two vehicles, one white and one black, are visible on the street with one parked and the other driving.",
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 2.51s
+  - Tokens/sec for this frame: 37.85
+--------------------
+--- Processing Key Frame: 3a171478d2d448ba9f8fc44c7df60a5a ---
+  - Ground Truth: direction='right', speed='normal'
+PPL Check: Reusing 9 tokens out of 95.
+Warning: Could not decode JSON from model output for 3a171478d2d448ba9f8fc44c7df60a5a. Output was:
+```json
+{
+    "description":Traffic using a marked road. The lane configuration includes a left turn only lane. A construction sign is visible in the foreground indicating lane closure in effect.",
+    "direction": "straight",
+    "speed": "truck speed"
+}
+```
+
+Model Output: ```json
+{
+    "description":Traffic using a marked road. The lane configuration includes a left turn only lane. A construction sign is visible in the foreground indicating lane closure in effect.",
+    "direction": "straight",
+    "speed": "truck speed"
+}
+```
+
+  - Inference time for this frame: 1.85s
+  - Tokens/sec for this frame: 36.21
+--------------------
+--- Processing Key Frame: 5d76d048762e4f12bd814d456e5776b0 ---
+  - Ground Truth: direction='right', speed='slow'
+PPL Check: Reusing 9 tokens out of 67.
+Warning: Could not decode JSON from model output for 5d76d048762e4f12bd814d456e5776b0. Output was:
+```json
+{
+    "description": A large parking lot in front of a large building. Vehicles are parked on both sides and there are no people visible on the visible area of the lot.",
+    "direction": "straight",
+    "speed": "slow"
+}
+```
+
+Model Output: ```json
+{
+    "description": A large parking lot in front of a large building. Vehicles are parked on both sides and there are no people visible on the visible area of the lot.",
+    "direction": "straight",
+    "speed": "slow"
+}
+```
+
+  - Inference time for this frame: 1.80s
+  - Tokens/sec for this frame: 36.12
+--------------------
+--- Processing Key Frame: af1b60ce78fd4c6a9cd3259070ab9c52 ---
+  - Ground Truth: direction='right', speed='normal'
+PPL Check: Reusing 9 tokens out of 65.
+Warning: Could not decode JSON from model output for af1b60ce78fd4c6a9cd3259070ab9c52. Output was:
+```json
+{
+    "description": Clear road ahead with a car parked on the side. Electric lines and trees can be seen in the background. Sunlight glistening on the buildings. A traffic light is visible to the right.",
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+
+Model Output: ```json
+{
+    "description": Clear road ahead with a car parked on the side. Electric lines and trees can be seen in the background. Sunlight glistening on the buildings. A traffic light is visible to the right.",
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 1.94s
+  - Tokens/sec for this frame: 36.57
+--------------------
+--- Processing Key Frame: e3f986e5d53f416492bdf255e82bff52 ---
+  - Ground Truth: direction='right', speed='normal'
+PPL Check: Reusing 9 tokens out of 71.
+Warning: Could not decode JSON from model output for e3f986e5d53f416492bdf255e82bff52. Output was:
+```json
+{
+    "description": A car is entering a parking lot near a pedestrian bridge. There are some pedestrians moving around the area, and the vehicles and pedestrians need to be cautious. A boat tours business can be seen near the water.,",
+    "direction": "turn left",
+    "speed": "normal"
+}
+```
+
+Model Output: ```json
+{
+    "description": A car is entering a parking lot near a pedestrian bridge. There are some pedestrians moving around the area, and the vehicles and pedestrians need to be cautious. A boat tours business can be seen near the water.,",
+    "direction": "turn left",
+    "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 2.27s
+  - Tokens/sec for this frame: 37.37
+--------------------
+
+===== Scene df8dfada99a04a81bd1b102eeb84e9bc Summary (Memory Idea: True) =====
+Total End-to-End Time: 13.28s
+Total Inference-Only Time: 12.17s
+Total Generated Tokens: 440
+Average Tokens/Second (Inference Only): 36.15
+========================================
+
+Scene Accuracy (6 frames):
+  - Direction: 16.67%
+  - Speed:     0.00%
+  - Both:      0.00%
+===== Processing Scene: 76c632788f8c4516bef1c4297f2002f6 (Memory Idea: False) =====
+--- Processing Key Frame: 16fc3cc5a0b747f593b20d8b30947b1b ---
+  - Ground Truth: direction='right', speed='fast'
+Model Output: ```json
+{
+  "description": "Six-sided road in a mixed urban and suburban environment with different road surfaces, an intersection indicated by unique signage, cars in several directions, and buildings in the background.",
+  "direction": "straight",
+  "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 2.08s
+  - Tokens/sec for this frame: 33.23
+--------------------
+--- Processing Key Frame: 182b5e160c6f44e096380a9f9f8c41f4 ---
+  - Ground Truth: direction='straight', speed='fast'
+Model Output: ```json
+{
+    "description": "An urban intersection with a crosswalk, divided by median bollards. The traffic lights are green, and there are vehicles approaching different directions. The right sidewalk is clear with one pedestrian.",
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 2.15s
+  - Tokens/sec for this frame: 33.53
+--------------------
+--- Processing Key Frame: 30e9bf9ff66b41e08b1c59e345a1014f ---
+  - Ground Truth: direction='straight', speed='normal'
+Model Output: ```json
+{
+    "description": "The ego vehicle is at an intersection with a single lane road. A car is approaching from the right side driving straight. The name badge indicates 'Room 50'. There's a tree growing on the sidewalk.",
+    "direction": "straight",
+    "speed": "slow"
+}
+```
+
+  - Inference time for this frame: 2.36s
+  - Tokens/sec for this frame: 34.30
+--------------------
+--- Processing Key Frame: 3dab7043733e463c9c1c909a31f279f3 ---
+  - Ground Truth: direction='straight', speed='fast'
+Model Output: {
+  "description": "Empty street ahead. No obstacles to immediate attention.",
+  "direction": "straight",
+  "speed": "normal"
+}
+
+  - Inference time for this frame: 1.34s
+  - Tokens/sec for this frame: 28.26
+--------------------
+--- Processing Key Frame: 60e3bedfbb7a47058e859c66cc81a58a ---
+  - Ground Truth: direction='straight', speed='normal'
+Warning: Could not decode JSON from model output for 60e3bedfbb7a47058e859c66cc81a58a. Output was:
+```json
+{
+  "description": "City intersection during daytime. Vehicles on road, buildings in distance, construction area on side. One car turning left. Painted lines separated lanes. Lights hanging above."
+  "direction": "turn left"
+  "speed": "slow"
+}
+```
+
+Model Output: ```json
+{
+  "description": "City intersection during daytime. Vehicles on road, buildings in distance, construction area on side. One car turning left. Painted lines separated lanes. Lights hanging above."
+  "direction": "turn left"
+  "speed": "slow"
+}
+```
+
+  - Inference time for this frame: 2.12s
+  - Tokens/sec for this frame: 33.42
+--------------------
+--- Processing Key Frame: e50b488783c649dd9e9cfc5f98ff46fc ---
+  - Ground Truth: direction='left', speed='normal'
+Model Output: ```json
+{
+    "description": "Autonomous driving assistant view of a cleared road before a turn under blue sky.",
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 1.58s
+  - Tokens/sec for this frame: 30.38
+--------------------
+
+===== Scene 76c632788f8c4516bef1c4297f2002f6 Summary (Memory Idea: False) =====
+Total End-to-End Time: 12.78s
+Total Inference-Only Time: 11.63s
+Total Generated Tokens: 379
+Average Tokens/Second (Inference Only): 32.58
+========================================
+
+Scene Accuracy (6 frames):
+  - Direction: 50.00%
+  - Speed:     16.67%
+  - Both:      0.00%
+===== Processing Scene: 76c632788f8c4516bef1c4297f2002f6 (Memory Idea: True) =====
+--- Processing Key Frame: 16fc3cc5a0b747f593b20d8b30947b1b ---
+  - Ground Truth: direction='right', speed='fast'
+Model Output: ```json
+{
+    "description": "Evening scene with a clear road ahead of an approaching vehicle. Street lights, a pedestrian, and construction equipment are visible.",
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 1.84s
+  - Tokens/sec for this frame: 32.05
+--------------------
+--- Processing Key Frame: 182b5e160c6f44e096380a9f9f8c41f4 ---
+  - Ground Truth: direction='straight', speed='fast'
+PPL Check: Reusing 11 tokens out of 59.
+Model Output: ```json
+{
+    "description": "E is driving on the street. There are orange barriers on the front-right, back-right, and rear. The left lane is separated by a construction area. Another car is approaching from the right side, there is a tram on the sidewalk to the right, and a truck loaded with materials is also visible on the side of the road to the left.",
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 2.77s
+  - Tokens/sec for this frame: 38.98
+--------------------
+--- Processing Key Frame: 30e9bf9ff66b41e08b1c59e345a1014f ---
+  - Ground Truth: direction='straight', speed='normal'
+PPL Check: Reusing 9 tokens out of 108.
+Warning: Could not decode JSON from model output for 30e9bf9ff66b41e08b1c59e345a1014f. Output was:
+```json
+{
+    "description": Approaching an intersection with traffic signals and a large building in background.",
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+
+Model Output: ```json
+{
+    "description": Approaching an intersection with traffic signals and a large building in background.",
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 1.31s
+  - Tokens/sec for this frame: 33.63
+--------------------
+--- Processing Key Frame: 3dab7043733e463c9c1c909a31f279f3 ---
+  - Ground Truth: direction='straight', speed='fast'
+PPL Check: Reusing 9 tokens out of 44.
+Warning: Could not decode JSON from model output for 3dab7043733e463c9c1c909a31f279f3. Output was:
+```json
+{
+    "description": 6 images depict a semi-urban street scene on what appears to be a sunny day. A compact car is driving on an empty road, following a curve in the road. The surroundings include parked cars, buildings, and a pedestrian on the sidewalk. The trees and greenery suggest a mixed-use residential area, with a fence and potentially a larger public space in the distance.",
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+
+Model Output: ```json
+{
+    "description": 6 images depict a semi-urban street scene on what appears to be a sunny day. A compact car is driving on an empty road, following a curve in the road. The surroundings include parked cars, buildings, and a pedestrian on the sidewalk. The trees and greenery suggest a mixed-use residential area, with a fence and potentially a larger public space in the distance.",
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 3.03s
+  - Tokens/sec for this frame: 38.61
+--------------------
+--- Processing Key Frame: 60e3bedfbb7a47058e859c66cc81a58a ---
+  - Ground Truth: direction='straight', speed='normal'
+PPL Check: Reusing 9 tokens out of 117.
+Warning: Could not decode JSON from model output for 60e3bedfbb7a47058e859c66cc81a58a. Output was:
+```json
+{
+    "description":Incoming direction: straight. Traffic light is not visible. No pedestrians in image.",
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+
+Model Output: ```json
+{
+    "description":Incoming direction: straight. Traffic light is not visible. No pedestrians in image.",
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 1.47s
+  - Tokens/sec for this frame: 34.62
+--------------------
+--- Processing Key Frame: e50b488783c649dd9e9cfc5f98ff46fc ---
+  - Ground Truth: direction='left', speed='normal'
+PPL Check: Reusing 9 tokens out of 51.
+Warning: Could not decode JSON from model output for e50b488783c649dd9e9cfc5f98ff46fc. Output was:
+```json
+{
+    "description":A person waiting on sidewalk under shade; car in back turning left onto road; clear road ahead.",
+    "direction": "left",
+    "speed": "normal"
+}
+```
+
+Model Output: ```json
+{
+    "description":A person waiting on sidewalk under shade; car in back turning left onto road; clear road ahead.",
+    "direction": "left",
+    "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 1.47s
+  - Tokens/sec for this frame: 34.73
+--------------------
+
+===== Scene 76c632788f8c4516bef1c4297f2002f6 Summary (Memory Idea: True) =====
+Total End-to-End Time: 13.02s
+Total Inference-Only Time: 11.89s
+Total Generated Tokens: 430
+Average Tokens/Second (Inference Only): 36.16
+========================================
+
+Scene Accuracy (6 frames):
+  - Direction: 16.67%
+  - Speed:     0.00%
+  - Both:      0.00%
+===== Processing Scene: 1891b66d9f58463399aa242f3b521232 (Memory Idea: False) =====
+--- Processing Key Frame: 1662ec71669e497db3b0e7c2fa48356f ---
+  - Ground Truth: direction='straight', speed='normal'
+Model Output: ```json
+{
+  "description": "Freeway entrance in a large urban area. A car is seen on the road, and there are pedestrian crossings on the street corner. The sun's rays are scattered in a pattern on the concrete, suggesting it is either dawn or dusk. A large building stands nearby, and a few cars and trucks are passing through a gated construction site on the right side of the street.",
+  "direction": "straight",
+  "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 3.19s
+  - Tokens/sec for this frame: 36.36
+--------------------
+--- Processing Key Frame: 755b761322a0441b85eee9e4fe49385d ---
+  - Ground Truth: direction='straight', speed='slow'
+Model Output: ```json
+{
+    "description": "City intersection. Green traffic light. Multiple cars stopped or moving. Pedestrians visible. Vehicles parked alongside the streets.",
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 1.84s
+  - Tokens/sec for this frame: 32.04
+--------------------
+--- Processing Key Frame: 828b240f290744099afff1fc94a4167f ---
+  - Ground Truth: direction='straight', speed='slow'
+Model Output: ```json
+{
+  "description": "City intersection with traffic lights. Large building on the corner. A toyota camry is turning right past traffic lights in all directions.",
+  "direction": "turn right",
+  "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 1.86s
+  - Tokens/sec for this frame: 32.20
+--------------------
+--- Processing Key Frame: 90db859e924945e0a147a5403878e526 ---
+  - Ground Truth: direction='straight', speed='slow'
+Model Output: ```json
+{
+  "description": "Empty intersection on a city street. Traffic lights aligned to stop traffic. Five to six story buildings with visible windows.",
+  "direction": "straight",
+  "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 1.77s
+  - Tokens/sec for this frame: 31.65
+--------------------
+--- Processing Key Frame: c1c99af601984bd9a08ea9c65e0bc1f4 ---
+  - Ground Truth: direction='straight', speed='slow'
+Model Output: ```json
+{
+    "description": "Multi-lane city street with moderate traffic. Pedestrians on sidewalks. Blue sky with scattered clouds.",
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+
+Please note that as an AI, I don't have access to real-time sensors or the ability to drive, so my interpretation is based solely on the static image provided and the ability to identify traffic lights and barriers.
+
+  - Inference time for this frame: 2.98s
+  - Tokens/sec for this frame: 35.95
+--------------------
+--- Processing Key Frame: ce63dd8c7f6a45f9bdee5b7305388314 ---
+  - Ground Truth: direction='straight', speed='slow'
+Model Output: Certainly, I can process and synthesize the information from the six images provided. Here is the JSON output, based on the analysis of the cameras' views:
+
+```json
+{
+  "description": "A multilane road adjacent to a tall building. Cars are in motion, and a pedestrian is crossing in the foreground. The scene appears to be calm and orderly.",
+  "direction": "straight",
+  "speed": "normal"
+}
+```
+
+This JSON output includes a description based on the scenes captured by the three main vantage points, a direction indicating the moving direction of the vehicle, and a speed that could infer the current speed of the vehicle based on typical road conditions indicated in this scene.
+
+  - Inference time for this frame: 4.26s
+  - Tokens/sec for this frame: 37.80
+--------------------
+--- Processing Key Frame: eff4ca737a73408d80274afda5b9019b ---
+  - Ground Truth: direction='straight', speed='slow'
+Model Output: ```perl
+{
+    "description": "Traffic-filled intersection at a stoplight with multiple vehicles and pedestrians.  A clear sky in the background.",
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 1.79s
+  - Tokens/sec for this frame: 31.78
+--------------------
+
+===== Scene 1891b66d9f58463399aa242f3b521232 Summary (Memory Idea: False) =====
+Total End-to-End Time: 19.01s
+Total Inference-Only Time: 17.69s
+Total Generated Tokens: 616
+Average Tokens/Second (Inference Only): 34.81
+========================================
+
+Scene Accuracy (7 frames):
+  - Direction: 85.71%
+  - Speed:     14.29%
+  - Both:      14.29%
+===== Processing Scene: 1891b66d9f58463399aa242f3b521232 (Memory Idea: True) =====
+--- Processing Key Frame: 1662ec71669e497db3b0e7c2fa48356f ---
+  - Ground Truth: direction='straight', speed='normal'
+Model Output: ```json
+{
+  "description": "Multi-lane city street with vehicle traffic in daylight. Building facades on both sides. Empty parking meters and fencing on the sidewalk.",
+  "direction": "straight",
+  "speed": "normal"
+}
+```
+Note: The rules provided indicate that any traffic cones or barriers should not be taken into account in this JSON output, as they are visual elements rather than indicators of direction and speed.
+
+  - Inference time for this frame: 2.88s
+  - Tokens/sec for this frame: 35.74
+--------------------
+--- Processing Key Frame: 755b761322a0441b85eee9e4fe49385d ---
+  - Ground Truth: direction='straight', speed='slow'
+PPL Check: Reusing 9 tokens out of 103.
+Warning: Could not decode JSON from model output for 755b761322a0441b85eee9e4fe49385d. Output was:
+```json
+{
+  "description": A large container truck navigating through an intersection surrounded by glass buildings. The traffic light is green. There are a few cars behind, and a person on the sidewalk. The surroundings seem safe for the truck's maneuvering. Other cars are situated a little further, moving in their respective lanes.",
+  "direction": "turn right",
+  "speed": "normal"
+}
+```
+
+Model Output: ```json
+{
+  "description": A large container truck navigating through an intersection surrounded by glass buildings. The traffic light is green. There are a few cars behind, and a person on the sidewalk. The surroundings seem safe for the truck's maneuvering. Other cars are situated a little further, moving in their respective lanes.",
+  "direction": "turn right",
+  "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 2.58s
+  - Tokens/sec for this frame: 37.92
+--------------------
+--- Processing Key Frame: 828b240f290744099afff1fc94a4167f ---
+  - Ground Truth: direction='straight', speed='slow'
+PPL Check: Reusing 9 tokens out of 98.
+Warning: Could not decode JSON from model output for 828b240f290744099afff1fc94a4167f. Output was:
+```json
+{
+  "description":Crossing an intersection on a clear sunny day. All lights are green, pedestrians are safely on the sidewalk.",
+  "direction": "straight",
+  "speed": "normal"
+}
+```
+
+Model Output: ```json
+{
+  "description":Crossing an intersection on a clear sunny day. All lights are green, pedestrians are safely on the sidewalk.",
+  "direction": "straight",
+  "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 1.64s
+  - Tokens/sec for this frame: 35.42
+--------------------
+--- Processing Key Frame: 90db859e924945e0a147a5403878e526 ---
+  - Ground Truth: direction='straight', speed='slow'
+PPL Check: Reusing 9 tokens out of 58.
+Warning: Could not decode JSON from model output for 90db859e924945e0a147a5403878e526. Output was:
+```json
+{
+  "description": The vehicle appears to be at an intersection in an urban area. In the foreground, there is a pedestrian walking on a sidewalk, and in the background, a large multi-story building is visible. Two cars are coming in from the sides, along with another car and a truck in the rear. The scene has a mix of vehicles and architectural features, suggesting a bustling city environment.",
+  "direction":": The traffic light is green, and the pedestrian is waiting at the curb. This suggests that the car should proceed forward.",
+  "speed":": Normal speed is appropriate based on the conditions observed in the image."
+}
+```
+
+Model Output: ```json
+{
+  "description": The vehicle appears to be at an intersection in an urban area. In the foreground, there is a pedestrian walking on a sidewalk, and in the background, a large multi-story building is visible. Two cars are coming in from the sides, along with another car and a truck in the rear. The scene has a mix of vehicles and architectural features, suggesting a bustling city environment.",
+  "direction":": The traffic light is green, and the pedestrian is waiting at the curb. This suggests that the car should proceed forward.",
+  "speed":": Normal speed is appropriate based on the conditions observed in the image."
+}
+```
+
+  - Inference time for this frame: 3.81s
+  - Tokens/sec for this frame: 39.32
+--------------------
+--- Processing Key Frame: c1c99af601984bd9a08ea9c65e0bc1f4 ---
+  - Ground Truth: direction='straight', speed='slow'
+PPL Check: Reusing 9 tokens out of 150.
+Warning: Could not decode JSON from model output for c1c99af601984bd9a08ea9c65e0bc1f4. Output was:
+```json
+{
+  "description": As seen by the rear camera of a car, we are getting ready to turn right into an intersection with an array of lights and buildings that suggest a busy downtown city area, including some overcast skies potentially reducing visibility. Traffic is light with minimal red light intersections. Document.cookie).json()",
+  "direction":": straight",
+  "speed":": normal"
+}
+```
+
+Model Output: ```json
+{
+  "description": As seen by the rear camera of a car, we are getting ready to turn right into an intersection with an array of lights and buildings that suggest a busy downtown city area, including some overcast skies potentially reducing visibility. Traffic is light with minimal red light intersections. Document.cookie).json()",
+  "direction":": straight",
+  "speed":": normal"
+}
+```
+
+  - Inference time for this frame: 2.54s
+  - Tokens/sec for this frame: 37.07
+--------------------
+--- Processing Key Frame: ce63dd8c7f6a45f9bdee5b7305388314 ---
+  - Ground Truth: direction='straight', speed='slow'
+PPL Check: Reusing 9 tokens out of 94.
+Warning: Could not decode JSON from model output for ce63dd8c7f6a45f9bdee5b7305388314. Output was:
+```json
+{
+  "description": The scene captures an emptiest intersection in town on a cloudy afternoon. There are taxis and commuters, amidst a silent city backdrop. Traffic lights are green, suggesting a slow pace at these junctions..",
+  "direction":": straight",
+  "speed":": normal"}
+```
+
+Model Output: ```json
+{
+  "description": The scene captures an emptiest intersection in town on a cloudy afternoon. There are taxis and commuters, amidst a silent city backdrop. Traffic lights are green, suggesting a slow pace at these junctions..",
+  "direction":": straight",
+  "speed":": normal"}
+```
+
+  - Inference time for this frame: 2.09s
+  - Tokens/sec for this frame: 36.91
+--------------------
+--- Processing Key Frame: eff4ca737a73408d80274afda5b9019b ---
+  - Ground Truth: direction='straight', speed='slow'
+PPL Check: Reusing 9 tokens out of 77.
+Warning: Could not decode JSON from model output for eff4ca737a73408d80274afda5b9019b. Output was:
+```json
+{
+  "description": A clear road ahead, the traffic light is green, and pedestrians are waiting at crosswalks on both sides.",
+  "direction": "straight",
+  "speed": "normal"
+}
+```
+
+Model Output: ```json
+{
+  "description": A clear road ahead, the traffic light is green, and pedestrians are waiting at crosswalks on both sides.",
+  "direction": "straight",
+  "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 1.59s
+  - Tokens/sec for this frame: 35.25
+--------------------
+
+===== Scene 1891b66d9f58463399aa242f3b521232 Summary (Memory Idea: True) =====
+Total End-to-End Time: 18.44s
+Total Inference-Only Time: 17.13s
+Total Generated Tokens: 636
+Average Tokens/Second (Inference Only): 37.13
+========================================
+
+Scene Accuracy (7 frames):
+  - Direction: 14.29%
+  - Speed:     14.29%
+  - Both:      14.29%
+===== Processing Scene: fe4fdd7a28754baeac7074ad78f55a52 (Memory Idea: False) =====
+--- Processing Key Frame: 115468e3e0964c17af494b41bda6d0f4 ---
+  - Ground Truth: direction='straight', speed='fast'
+Model Output: Compiling all the views into a single holistic understanding of the environment is a complex task, as the images are taken from six different points of view on the vehicle and convey a rich tapestry of information. The task you have asked me to perform directly compares to the complexity of human perception and cognition when interpreting environment.
+
+However, as an AI assistant, I will attempt to summarize the content of the six images in a single JSON output that describes a typical urban driving scenario. This will provide a highly simplified representation of the environment and the vehicle's anticipated behavior.
+
+```json
+{
+  "description": "Dark street at night. Lights of vehicles ahead, and some pedestrians on the right sidewalk. Other vehicles are parked and in traffic on the right side of the street. Oil sheen chimes in the distance in front.",
+  "direction": "straight",
+  "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 5.38s
+  - Tokens/sec for this frame: 38.65
+--------------------
+--- Processing Key Frame: 8f4d3fb0381d4125950c0120a6982db4 ---
+  - Ground Truth: direction='right', speed='fast'
+Model Output: Here is the JSON output based on the provided rules and the merged information from the 6 camera views:
+
+```json
+{
+  "description": "The car is on a dark, curved street at night. The street appears to be mostly empty, with one visible car in front of the ego car entering the scene from the drivers' perspective. The car is moving straightly with no immediate turn options required.",
+  "direction": "straight",
+  "speed": "normal"
+}
+```
+
+Please note that the actual contents of the provided images may provide additional information to clarify or reinforce the description, but based on the single statement provided, the output above meets the criteria for the JSON output you specified.
+
+  - Inference time for this frame: 4.07s
+  - Tokens/sec for this frame: 37.59
+--------------------
+--- Processing Key Frame: a7924f68e0704c2ebff65044a8ae26b4 ---
+  - Ground Truth: direction='right', speed='slow'
+Model Output: ```json
+{
+  "description": "Nighttime city street with an empty road ahead, visible as a dark shaded area. A few streetlights are on, illuminating the scene. There are trees and buildings in the background.",
+  "direction": "straight",
+  "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 2.17s
+  - Tokens/sec for this frame: 33.62
+--------------------
+--- Processing Key Frame: b4a6de058566455b9079e39908d69bab ---
+  - Ground Truth: direction='straight', speed='fast'
+Model Output: ```json
+{
+    "description": "Nighttime street scene at a slightly slanted angle. The street is illuminated by streetlights, the road surface reflects light dimly, and a single solitary car is visible at a distance, indicating either no upcoming turning or stopped traffic ahead. Otoh, the environment nearby is shrouded in darkness with dimly lit buildings, contributing to a quiet and empty atmosphere.",
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 3.14s
+  - Tokens/sec for this frame: 36.27
+--------------------
+
+===== Scene fe4fdd7a28754baeac7074ad78f55a52 Summary (Memory Idea: False) =====
+Total End-to-End Time: 15.57s
+Total Inference-Only Time: 14.77s
+Total Generated Tokens: 548
+Average Tokens/Second (Inference Only): 37.11
+========================================
+
+Scene Accuracy (4 frames):
+  - Direction: 50.00%
+  - Speed:     0.00%
+  - Both:      0.00%
+===== Processing Scene: fe4fdd7a28754baeac7074ad78f55a52 (Memory Idea: True) =====
+--- Processing Key Frame: 115468e3e0964c17af494b41bda6d0f4 ---
+  - Ground Truth: direction='straight', speed='fast'
+Model Output: ```json
+{   
+    "description": "Nighttime view of a dark road with no visible traffic. Lights from distant houses on the left show far end of the street.",
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+Please note that due to the limitations of describing situations without lighting, I'm unable to fill the "description" field with specific details from the image data. It is only a summary based on the information provided in the rules.
+
+  - Inference time for this frame: 3.00s
+  - Tokens/sec for this frame: 35.99
+--------------------
+--- Processing Key Frame: 8f4d3fb0381d4125950c0120a6982db4 ---
+  - Ground Truth: direction='right', speed='fast'
+PPL Check: Reusing 4 tokens out of 108.
+Warning: Could not decode JSON from model output for 8f4d3fb0381d4125950c0120a6982db4. Output was:
+```json
+{
+  "description": "Night-time city street with buildings, signs, and darkness. A person stands by the street. The car's headlights illuminate the scene, revealing a mostly empty road.",
+  "direction": "straight",
+  "speed": "normal"
+}}
+```
+
+Model Output: ```json
+{
+  "description": "Night-time city street with buildings, signs, and darkness. A person stands by the street. The car's headlights illuminate the scene, revealing a mostly empty road.",
+  "direction": "straight",
+  "speed": "normal"
+}}
+```
+
+  - Inference time for this frame: 2.06s
+  - Tokens/sec for this frame: 34.43
+--------------------
+--- Processing Key Frame: a7924f68e0704c2ebff65044a8ae26b4 ---
+  - Ground Truth: direction='right', speed='slow'
+PPL Check: Reusing 9 tokens out of 71.
+Warning: Could not decode JSON from model output for a7924f68e0704c2ebff65044a8ae26b4. Output was:
+```json
+{
+  "description":Eddy K to Lomita MLK; Kathleen expected",
+  "direction": "straight",
+  "speed": "normal"
+}
+```
+
+Model Output: ```json
+{
+  "description":Eddy K to Lomita MLK; Kathleen expected",
+  "direction": "straight",
+  "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 1.35s
+  - Tokens/sec for this frame: 34.02
+--------------------
+--- Processing Key Frame: b4a6de058566455b9079e39908d69bab ---
+  - Ground Truth: direction='straight', speed='fast'
+PPL Check: Reusing 0 tokens out of 46.
+Model Output: {
+"description": "Nighttime city street with parked cars and illuminated streetlights. Two pedestrians visible on sidewalk. One car on road ahead, signs on median.",
+"direction": "straight",
+"speed": "normal"
+}
+
+  - Inference time for this frame: 1.94s
+  - Tokens/sec for this frame: 31.98
+--------------------
+
+===== Scene fe4fdd7a28754baeac7074ad78f55a52 Summary (Memory Idea: True) =====
+Total End-to-End Time: 9.13s
+Total Inference-Only Time: 8.35s
+Total Generated Tokens: 287
+Average Tokens/Second (Inference Only): 34.36
+========================================
+
+Scene Accuracy (4 frames):
+  - Direction: 50.00%
+  - Speed:     0.00%
+  - Both:      0.00%
+Reached the limit of 10 scenes. Stopping.
+
+========================= FINAL SUMMARY =========================
+
+----- Statistics for 'use_memory_idea = False' -----
+Processed 10 scenes.
+Average End-to-End Time per Scene: 14.72s
+Average Inference-Only Time per Scene: 13.61s
+Average Frames per Scene: 5.80
+Average Tokens/Second (Inference Only, across all scenes): 34.17
+Overall Accuracy across all scenes:
+  - Direction: 58.62%
+  - Speed:     17.24%
+  - Both:      10.34%
+
+----- Statistics for 'use_memory_idea = True' -----
+Processed 10 scenes.
+Average End-to-End Time per Scene: 14.43s
+Average Inference-Only Time per Scene: 13.34s
+Average Frames per Scene: 5.80
+Average Tokens/Second (Inference Only, across all scenes): 36.18
+Overall Accuracy across all scenes:
+  - Direction: 29.31%
+  - Speed:     8.62%
+  - Both:      3.45%
+
+===================================================================

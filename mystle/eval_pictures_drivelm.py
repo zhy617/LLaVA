@@ -1,6 +1,7 @@
 import os
 import json
 import time
+import re
 
 os.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'
 
@@ -19,7 +20,7 @@ from llava.model.builder import load_pretrained_model
 from llava.mm_utils import get_model_name_from_path, tokenizer_image_token, process_images
 from llava.constants import IMAGE_TOKEN_INDEX, DEFAULT_IMAGE_TOKEN
 from llava.conversation import conv_templates
-from typing import Dict, List
+from typing import Dict, List, Tuple
 
 import warnings
 import torch
@@ -27,6 +28,46 @@ from PIL import Image
 
 
 warnings.filterwarnings("ignore", message=".*copying from a non-meta parameter.*")
+
+def parse_ground_truth(answer_string: str, parse_speed: bool = True, parse_direction: bool = True) -> str:
+    """从 'The ego vehicle is going straight. The ego vehicle is driving fast.' 这样的字符串中解析出 direction 和 speed"""
+    direction_map = {
+        "straight": ["straight"],
+        "left": ["left"],
+        "right": ["right"]
+    }
+
+    speed_map = {
+        "slow": ["slow", "not moving", "stopped"],
+        "normal": ["normal", "moderate"],
+        "fast": ["fast"],
+    }
+    
+    gt_direction = "unknown"
+    gt_speed = "unknown"
+
+    for key, val in direction_map.items():
+        for variant in val:
+            if variant in answer_string:
+                gt_direction = key
+                break
+    
+    for key, val in speed_map.items():
+        for variant in val:
+            if variant in answer_string:
+                gt_speed = key
+                break
+    
+    if gt_direction == "unknown" and parse_direction:
+        print(f"Warning: Could not parse direction from answer string: '{answer_string}'")
+    if gt_speed == "unknown" and parse_speed:
+        print(f"Warning: Could not parse speed from answer string: '{answer_string}'")
+            
+    if parse_direction:
+        return gt_direction
+    else:
+        return gt_speed
+
 
 def run_inference_for_sequence(
     args, 
@@ -55,6 +96,11 @@ def run_inference_for_sequence(
     last_output = None
 
     # 3. 根据是否使用idea，决定conv对象的位置
+
+    total_frames = 0
+    correct_direction = 0
+    correct_speed = 0
+    correct_both = 0
     
     for i, frame_id in enumerate(key_frame_ids):
         print(f"--- Processing Key Frame: {frame_id} ---")
@@ -69,6 +115,23 @@ def run_inference_for_sequence(
         frame_info: Dict[str, Dict] = key_frames_data[frame_id]
         assert frame_info is not None, f"Frame info for {frame_id} is None"
         image_paths_dict= frame_info.get("image_paths")
+
+        # add ground truth answer to prompt for better generation
+        try:
+            qa_info = frame_info.get("QA", {})
+            if not qa_info or "behavior" not in qa_info or not qa_info["behavior"]:
+                print(f"Skipping {frame_id}, ground truth 'behavior' not found.")
+                continue
+            gt_answer_str = qa_info["behavior"][0]["A"]
+            gt_direction = parse_ground_truth(gt_answer_str, parse_speed=False, parse_direction=True)
+            gt_speed = parse_ground_truth(gt_answer_str, parse_speed=True, parse_direction=False)
+            if gt_direction == "unknown" or gt_speed == "unknown":
+                print(f"Skipping {frame_id}, could not parse ground truth: '{gt_answer_str}'")
+                continue
+        except (KeyError, IndexError) as e:
+            print(f"Skipping {frame_id}, error accessing ground truth: {e}")
+            continue
+        print(f"  - Ground Truth: direction='{gt_direction}', speed='{gt_speed}'")
 
         if not image_paths_dict:
             print(f"Skipping {frame_id}, 'image_paths' not found.")
@@ -185,6 +248,32 @@ def run_inference_for_sequence(
         
         # 4. 更新对话历史
         conv.messages[-1][-1] = outputs
+
+        # accuracy evaluation
+        total_frames += 1
+        is_dir_correct = False
+        is_speed_correct = False
+        try:
+            json_match = re.search(r"\{.*\}", outputs, re.DOTALL)
+            if json_match:
+                pred_json = json.loads(json_match.group())  
+                pred_direction_str = pred_json.get("direction", "unknown")
+                pred_speed_str = pred_json.get("speed", "unknown")
+                pred_direction = parse_ground_truth(pred_direction_str, parse_speed=False, parse_direction=True)
+                pred_speed = parse_ground_truth(pred_speed_str, parse_speed=True, parse_direction=False)
+
+                is_dir_correct = (pred_direction == gt_direction)
+                is_speed_correct = (pred_speed == gt_speed)
+                if is_dir_correct and is_speed_correct:
+                    correct_both += 1
+                if is_dir_correct:
+                    correct_direction += 1
+                if is_speed_correct:
+                    correct_speed += 1
+            else:
+                print(f"Warning: No JSON object found in model output for {frame_id}. Output was:\n{outputs}\n")
+        except json.JSONDecodeError:
+            print(f"Warning: Could not decode JSON from model output for {frame_id}. Output was:\n{outputs}\n")
         
         print(f"Model Output: {outputs}\n")
 
@@ -203,7 +292,24 @@ def run_inference_for_sequence(
         print(f"Average Tokens/Second (Inference Only): {avg_tokens_per_sec:.2f}")
     print("=" * 40 + "\n")
 
-    return total_scene_time, total_inference_time, total_generated_tokens
+    # accuracy
+    if total_frames > 0:
+        print(f"Scene Accuracy ({total_frames} frames):")
+        print(f"  - Direction: {correct_direction / total_frames:.2%}")
+        print(f"  - Speed:     {correct_speed / total_frames:.2%}")
+        print(f"  - Both:      {correct_both / total_frames:.2%}")
+
+    stats = {
+        "total_frames": total_frames,
+        "correct_direction": correct_direction,
+        "correct_speed": correct_speed,
+        "correct_both": correct_both,
+        "total_time": total_scene_time,
+        "total_inference_time": total_inference_time,
+        "total_tokens": total_generated_tokens
+    }
+
+    return stats
 
 
 def main():
@@ -298,11 +404,29 @@ Now, process all 6 images together and generate the single JSON:
     # 遍历JSON中的每个场景
 
     scene_count = 0
-    scenes_to_test = 2
+    scenes_to_test = 10
 
     total_stats = {
-        False: {"scenes": 0, "total_time": 0.0, "total_inference_time": 0.0, "total_tokens": 0},
-        True: {"scenes": 0, "total_time": 0.0, "total_inference_time": 0.0, "total_tokens": 0},
+        False: {
+            "scenes": 0, 
+            "total_time": 0.0, 
+            "total_inference_time": 0.0, 
+            "total_tokens": 0,
+            "total_frames": 0,
+            "correct_direction": 0,
+            "correct_speed": 0,
+            "correct_both": 0
+        },
+        True: {
+            "scenes": 0, 
+            "total_time": 0.0, 
+            "total_inference_time": 0.0, 
+            "total_tokens": 0,
+            "total_frames": 0,
+            "correct_direction": 0,
+            "correct_speed": 0,
+            "correct_both": 0
+        }
     }
 
     for scene_id, scene_data in all_data.items():
@@ -319,21 +443,31 @@ Now, process all 6 images together and generate the single JSON:
         # --- 模式一：不使用师兄的idea (逐帧独立推理) ---
         if hasattr(model, 'is_first_frame'):
             model.is_first_frame = True # 确保从干净的状态开始
-        scene_time, inference_time, generated_tokens = run_inference_for_sequence(args, tokenizer, model, image_processor, context_len, scene_id, key_frames, data_root_path, use_memory_idea=False)
+        stats = run_inference_for_sequence(args, tokenizer, model, image_processor, context_len, scene_id, key_frames, data_root_path, use_memory_idea=False)
         total_stats[False]["scenes"] += 1
-        total_stats[False]["total_time"] += scene_time
-        total_stats[False]["total_inference_time"] += inference_time
-        total_stats[False]["total_tokens"] += generated_tokens
+        total_stats[False]["total_time"] += stats["total_time"]
+        total_stats[False]["total_inference_time"] += stats["total_inference_time"]
+        total_stats[False]["total_tokens"] += stats["total_tokens"]
+        total_stats[False]["total_frames"] += stats["total_frames"]
+        total_stats[False]["correct_direction"] += stats["correct_direction"]
+        total_stats[False]["correct_speed"] += stats["correct_speed"]
+        total_stats[False]["correct_both"] += stats["correct_both"]
+
+        
 
         # --- 模式二：使用师兄的idea (连续生成) ---
         if hasattr(model, 'is_first_frame'):
             model.is_first_frame = True # 同样确保从干净的状态开始
-        scene_time, inference_time, generated_tokens = run_inference_for_sequence(args, tokenizer, model, image_processor, context_len, scene_id, key_frames, data_root_path, use_memory_idea=True)
+        stats = run_inference_for_sequence(args, tokenizer, model, image_processor, context_len, scene_id, key_frames, data_root_path, use_memory_idea=True)
         total_stats[True]["scenes"] += 1
-        total_stats[True]["total_time"] += scene_time
-        total_stats[True]["total_inference_time"] += inference_time
-        total_stats[True]["total_tokens"] += generated_tokens
-    
+        total_stats[True]["total_time"] += stats["total_time"]
+        total_stats[True]["total_inference_time"] += stats["total_inference_time"]
+        total_stats[True]["total_tokens"] += stats["total_tokens"]
+        total_stats[True]["total_frames"] += stats["total_frames"]
+        total_stats[True]["correct_direction"] += stats["correct_direction"]
+        total_stats[True]["correct_speed"] += stats["correct_speed"]
+        total_stats[True]["correct_both"] += stats["correct_both"]
+
     print("\n" + "="*25 + " FINAL SUMMARY " + "="*25)
     
     for use_idea, stats in total_stats.items():
@@ -343,7 +477,7 @@ Now, process all 6 images together and generate the single JSON:
 
         avg_time = stats["total_time"] / num_scenes
         avg_inference_time = stats["total_inference_time"] / num_scenes
-        
+        avg_frames = stats["total_frames"] / num_scenes
         if stats["total_inference_time"] > 0:
             avg_tps = stats["total_tokens"] / stats["total_inference_time"]
         else:
@@ -353,7 +487,18 @@ Now, process all 6 images together and generate the single JSON:
         print(f"Processed {num_scenes} scenes.")
         print(f"Average End-to-End Time per Scene: {avg_time:.2f}s")
         print(f"Average Inference-Only Time per Scene: {avg_inference_time:.2f}s")
+        print(f"Average Frames per Scene: {avg_frames:.2f}")
         print(f"Average Tokens/Second (Inference Only, across all scenes): {avg_tps:.2f}")
+
+        total_frames = stats["total_frames"]
+        if total_frames > 0:
+            dir_acc = stats["correct_direction"] / total_frames
+            speed_acc = stats["correct_speed"] / total_frames
+            both_acc = stats["correct_both"] / total_frames
+            print(f"Overall Accuracy across all scenes:")
+            print(f"  - Direction: {dir_acc:.2%}")
+            print(f"  - Speed:     {speed_acc:.2%}")
+            print(f"  - Both:      {both_acc:.2%}")
 
     print("\n" + "="*67)
 

@@ -1,0 +1,326 @@
+You are using a model of type llava to instantiate a model of type llava_llama. This is not supported for all configurations of models and can yield errors.
+/root/miniconda3/envs/llava/lib/python3.10/site-packages/huggingface_hub/file_download.py:949: FutureWarning: `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
+  warnings.warn(
+/root/miniconda3/envs/llava/lib/python3.10/site-packages/torch/_utils.py:831: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  return self.fget.__get__(instance, owner)()
+Flash Attention 2 is available. Setting it as default for Llama.
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███▎      | 1/3 [00:01<00:03,  1.72s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:03<00:01,  1.83s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:05<00:00,  1.69s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:05<00:00,  1.72s/it]
+Loading existing threshold table from threshold_table.json
+===== Processing Scene: f0f120e4d4b0441da90ec53b16ee169d (Memory Idea: False) =====
+--- Processing Key Frame: 4a0798f849ca477ab18009c3a20b7df2 ---
+  - Ground Truth: direction='straight', speed='fast'
+Warning: Could not parse speed from answer string: 'turn right'
+Warning: Could not parse direction from answer string: 'slow'
+Model Output: ```json
+{
+    "description": "Heavy rain has flooded the roadway. Multiple traffic lights and street signage are visible. A car is approaching from the back.",
+    "direction": "turn right",
+    "speed": "slow"
+}
+```
+
+  - Inference time for this frame: 2.25s
+  - Tokens/sec for this frame: 26.19
+--------------------
+--- Processing Key Frame: d9075c2a5f864a2b8abf41e703f4cf1c ---
+  - Ground Truth: direction='straight', speed='slow'
+Warning: Could not parse speed from answer string: 'straight'
+Warning: Could not parse direction from answer string: 'slow'
+Model Output: ```json
+{
+  "description": "City road in rain, wet reflective street. Chevrolet Tahoe driving down a road with a low hood in the rain.",
+  "direction": "straight",
+  "speed": "slow"
+}
+```
+
+  - Inference time for this frame: 1.88s
+  - Tokens/sec for this frame: 32.40
+--------------------
+--- Processing Key Frame: dfb8d8959b9944d69dcec6d05e419f04 ---
+  - Ground Truth: direction='straight', speed='fast'
+Warning: Could not parse speed from answer string: 'straight'
+Warning: Could not parse direction from answer string: 'normal'
+Model Output: I can help you process the images and predict the ego vehicle's behavior. However, I need to note that as an AI language model, my output will be a description, direction, speed as requested, but the generated JSON will be a human-readable representation of this information, and it will not exactly respect the JSON format constraints. Here's the synthesized data:
+
+```python
+{
+  "description": "Wet road due to recent rain. Traffic light is green. A car is passing by on the left side.",
+  "direction": "straight",
+  "speed": "normal"
+}
+```
+
+This JSON-like representation contains the three key-value pairs, and the structure conforms to JSON in terms of the available data. If you want a more formal JSON output, you would need to normalize these descriptions and adhere to the JSON standard to ensure all-strings are exactly 40 characters or less. Also, consider using `rapid7.com/get/bild/get.jpg` to convert the URL to the appropriate format if that URL begins to keep it JSON output.
+
+  - Inference time for this frame: 6.46s
+  - Tokens/sec for this frame: 37.47
+--------------------
+--- Processing Key Frame: ffd1bdf020d145759224c629b501d2b2 ---
+  - Ground Truth: direction='straight', speed='slow'
+Warning: Could not parse direction from answer string: 'unknown'
+Warning: Could not parse speed from answer string: 'unknown'
+Warning: Could not parse direction from answer string: 'unknown'
+Warning: Could not parse speed from answer string: 'unknown'
+Model Output: ```json
+{
+  "description": "Wet road from rain showers. Crossing a train intersection with traffic lights. A single car ahead on the right side of the street. A glimpse of a gated parking lot."
+}
+```
+
+  - Inference time for this frame: 1.74s
+  - Tokens/sec for this frame: 31.56
+--------------------
+
+===== Scene f0f120e4d4b0441da90ec53b16ee169d Summary (Memory Idea: False) =====
+Total End-to-End Time: 13.14s
+Total Inference-Only Time: 12.34s
+Total Generated Tokens: 417
+Average Tokens/Second (Inference Only): 33.80
+========================================
+
+===== Processing Scene: f0f120e4d4b0441da90ec53b16ee169d (Memory Idea: True) =====
+--- Processing Key Frame: 4a0798f849ca477ab18009c3a20b7df2 ---
+  - Ground Truth: direction='straight', speed='fast'
+Warning: Could not parse speed from answer string: 'straight'
+Warning: Could not parse direction from answer string: 'fast'
+Model Output: ```json
+{
+    "description": "Dense weather conditions with rain. Several exposed traffic lights are illuminated on the wet road.",
+    "direction": "straight",
+    "speed": "fast"
+}
+```
+
+  - Inference time for this frame: 1.65s
+  - Tokens/sec for this frame: 30.95
+--------------------
+--- Processing Key Frame: d9075c2a5f864a2b8abf41e703f4cf1c ---
+  - Ground Truth: direction='straight', speed='slow'
+PPL Check: Reusing 10 tokens out of 51.
+Warning: Could not decode JSON from model output for d9075c2a5f864a2b8abf41e703f4cf1c. Output was:
+```json
+{
+    "description": "
+}
+```
+Note: The description field is not provided in the examples, so it would remain blank, which is not an actual description of the environment.
+
+Model Output: ```json
+{
+    "description": "
+}
+```
+Note: The description field is not provided in the examples, so it would remain blank, which is not an actual description of the environment.
+
+  - Inference time for this frame: 1.26s
+  - Tokens/sec for this frame: 34.24
+--------------------
+--- Processing Key Frame: dfb8d8959b9944d69dcec6d05e419f04 ---
+  - Ground Truth: direction='straight', speed='fast'
+PPL Check: Reusing 10 tokens out of 43.
+Warning: Could not decode JSON from model output for dfb8d8959b9944d69dcec6d05e419f04. Output was:
+```json
+{
+    "description": "
+}
+```
+
+It seems that one of the previous responses was accidentally sent twice, emptying out the JSONs. Apologies for this inconvenience.
+
+Here is the single valid JSON output with the missing case and the rule adherence:
+
+```json
+{
+    "description": "An overcast day at a busy commercial intersection. Traffic lights are present at multiple locations, and the road appears to be wet because of rain. Traffic conditions may vary because of its complexity.",
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+
+Please note that I'm only capable of providing a static output here, but if you'd like a JavaScript function to generate the JSON object in real-time, please check out the following approach using a simple example:
+
+```js
+// Generate the single-image-captured-at-once mapboxinfo-ref this is a terrible way to make it less bad true? ? No rain is present at multiple locations, well below is tentative bad image
+```
+
+Certainly, it is important to mention that bear possible
+Please update the code
+
+Model Output: ```json
+{
+    "description": "
+}
+```
+
+It seems that one of the previous responses was accidentally sent twice, emptying out the JSONs. Apologies for this inconvenience.
+
+Here is the single valid JSON output with the missing case and the rule adherence:
+
+```json
+{
+    "description": "An overcast day at a busy commercial intersection. Traffic lights are present at multiple locations, and the road appears to be wet because of rain. Traffic conditions may vary because of its complexity.",
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+
+Please note that I'm only capable of providing a static output here, but if you'd like a JavaScript function to generate the JSON object in real-time, please check out the following approach using a simple example:
+
+```js
+// Generate the single-image-captured-at-once mapboxinfo-ref this is a terrible way to make it less bad true? ? No rain is present at multiple locations, well below is tentative bad image
+```
+
+Certainly, it is important to mention that bear possible
+Please update the code
+
+  - Inference time for this frame: 6.40s
+  - Tokens/sec for this frame: 40.30
+--------------------
+--- Processing Key Frame: ffd1bdf020d145759224c629b501d2b2 ---
+  - Ground Truth: direction='straight', speed='slow'
+PPL Check: Reusing 10 tokens out of 258.
+Warning: Could not parse speed from answer string: 'straight'
+Warning: Could not parse direction from answer string: 'normal'
+Model Output: ```json
+{
+    "description": "Perfectly clear road with several approaching traffic lights.  Vehicles in the distance and crosswalk signals.",
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 1.57s
+  - Tokens/sec for this frame: 34.40
+--------------------
+
+===== Scene f0f120e4d4b0441da90ec53b16ee169d Summary (Memory Idea: True) =====
+Total End-to-End Time: 11.63s
+Total Inference-Only Time: 10.88s
+Total Generated Tokens: 406
+Average Tokens/Second (Inference Only): 37.33
+========================================
+
+===== Processing Scene: 54cdaaae372d421fa4734d66f51a8c48 (Memory Idea: False) =====
+--- Processing Key Frame: 0dd14c14cea14dc1b0c0c9b0c9c7c4c3 ---
+  - Ground Truth: direction='straight', speed='normal'
+Warning: Could not parse speed from answer string: 'straight'
+Warning: Could not parse direction from answer string: 'normal'
+Model Output: ```json
+{
+  "description": "A clear day with good visibility. Cars ahead and slightly to the right. Road appears clean and well-maintained.",
+  "direction": "straight",
+  "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 1.79s
+  - Tokens/sec for this frame: 31.84
+--------------------
+--- Processing Key Frame: 1b45a97a0e5e49fe9cd345dd4bd729c3 ---
+Warning: Could not parse speed from answer string: 'The ego vehicle is going straight. The ego vehicle is not moving.'
+Skipping 1b45a97a0e5e49fe9cd345dd4bd729c3, could not parse ground truth: 'The ego vehicle is going straight. The ego vehicle is not moving.'
+--- Processing Key Frame: 542eaf1fc9b34895a9e55fab57cb4cf4 ---
+  - Ground Truth: direction='straight', speed='slow'
+Warning: Could not parse speed from answer string: 'straight'
+Warning: Could not parse direction from answer string: 'normal'
+Model Output: ```json
+{
+    "description": "A view in an urban intersection. Vehicles stop, turning onto an one-way street. Road signs are present. Road markings, diagrams, and information on infrastructure can be seen on the right. Buildings and green spaces in various directions. The light in front of the vehicles is visible, but the pedestrians are not yet in view.",
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 2.95s
+  - Tokens/sec for this frame: 35.94
+--------------------
+--- Processing Key Frame: 7abe79e5d3d745bcb237a4b7e03d1577 ---
+Warning: Could not parse speed from answer string: 'The ego vehicle is going straight. The ego vehicle is not moving.'
+Skipping 7abe79e5d3d745bcb237a4b7e03d1577, could not parse ground truth: 'The ego vehicle is going straight. The ego vehicle is not moving.'
+--- Processing Key Frame: d5e16062410f4e329d31a881b28e5c1c ---
+Warning: Could not parse speed from answer string: 'The ego vehicle is going straight. The ego vehicle is not moving.'
+Skipping d5e16062410f4e329d31a881b28e5c1c, could not parse ground truth: 'The ego vehicle is going straight. The ego vehicle is not moving.'
+
+===== Scene 54cdaaae372d421fa4734d66f51a8c48 Summary (Memory Idea: False) =====
+Total End-to-End Time: 5.14s
+Total Inference-Only Time: 4.74s
+Total Generated Tokens: 163
+Average Tokens/Second (Inference Only): 34.39
+========================================
+
+===== Processing Scene: 54cdaaae372d421fa4734d66f51a8c48 (Memory Idea: True) =====
+--- Processing Key Frame: 0dd14c14cea14dc1b0c0c9b0c9c7c4c3 ---
+  - Ground Truth: direction='straight', speed='normal'
+Warning: Could not parse speed from answer string: 'straight'
+Warning: Could not parse direction from answer string: 'normal'
+Model Output: ```json
+{
+    "description": "Incoming signal light is green and visible. A pedestrian waiting on the right sidewalk. The road is clear with no visible oncoming traffic.",
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 1.91s
+  - Tokens/sec for this frame: 32.49
+--------------------
+--- Processing Key Frame: 1b45a97a0e5e49fe9cd345dd4bd729c3 ---
+Warning: Could not parse speed from answer string: 'The ego vehicle is going straight. The ego vehicle is not moving.'
+Skipping 1b45a97a0e5e49fe9cd345dd4bd729c3, could not parse ground truth: 'The ego vehicle is going straight. The ego vehicle is not moving.'
+--- Processing Key Frame: 542eaf1fc9b34895a9e55fab57cb4cf4 ---
+  - Ground Truth: direction='straight', speed='slow'
+PPL Check: Reusing 9 tokens out of 62.
+Warning: Could not decode JSON from model output for 542eaf1fc9b34895a9e55fab57cb4cf4. Output was:
+```json
+{
+    "description": Clear side streets and crosswalk in intersection ahead.",
+    "direction":": straight",
+    "speed":": normal"
+}
+```
+
+Model Output: ```json
+{
+    "description": Clear side streets and crosswalk in intersection ahead.",
+    "direction":": straight",
+    "speed":": normal"
+}
+```
+
+  - Inference time for this frame: 1.18s
+  - Tokens/sec for this frame: 32.92
+--------------------
+--- Processing Key Frame: 7abe79e5d3d745bcb237a4b7e03d1577 ---
+Warning: Could not parse speed from answer string: 'The ego vehicle is going straight. The ego vehicle is not moving.'
+Skipping 7abe79e5d3d745bcb237a4b7e03d1577, could not parse ground truth: 'The ego vehicle is going straight. The ego vehicle is not moving.'
+--- Processing Key Frame: d5e16062410f4e329d31a881b28e5c1c ---
+Warning: Could not parse speed from answer string: 'The ego vehicle is going straight. The ego vehicle is not moving.'
+Skipping d5e16062410f4e329d31a881b28e5c1c, could not parse ground truth: 'The ego vehicle is going straight. The ego vehicle is not moving.'
+
+===== Scene 54cdaaae372d421fa4734d66f51a8c48 Summary (Memory Idea: True) =====
+Total End-to-End Time: 3.46s
+Total Inference-Only Time: 3.09s
+Total Generated Tokens: 101
+Average Tokens/Second (Inference Only): 32.65
+========================================
+
+Reached the limit of 2 scenes. Stopping.
+
+========================= FINAL SUMMARY =========================
+
+----- Statistics for 'use_memory_idea = False' -----
+Processed 2 scenes.
+Average End-to-End Time per Scene: 9.14s
+Average Inference-Only Time per Scene: 8.54s
+Average Frames per Scene: 0.00
+Average Tokens/Second (Inference Only, across all scenes): 33.96
+
+----- Statistics for 'use_memory_idea = True' -----
+Processed 2 scenes.
+Average End-to-End Time per Scene: 7.55s
+Average Inference-Only Time per Scene: 6.98s
+Average Frames per Scene: 0.00
+Average Tokens/Second (Inference Only, across all scenes): 36.30
+
+===================================================================

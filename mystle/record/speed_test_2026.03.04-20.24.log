@@ -1,0 +1,376 @@
+You are using a model of type llava to instantiate a model of type llava_llama. This is not supported for all configurations of models and can yield errors.
+/root/miniconda3/envs/llava/lib/python3.10/site-packages/huggingface_hub/file_download.py:949: FutureWarning: `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
+  warnings.warn(
+/root/miniconda3/envs/llava/lib/python3.10/site-packages/torch/_utils.py:831: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  return self.fget.__get__(instance, owner)()
+Flash Attention 2 is available. Setting it as default for Llama.
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███▎      | 1/3 [00:01<00:03,  1.73s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:03<00:01,  1.76s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:05<00:00,  1.66s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:05<00:00,  1.68s/it]
+Loading existing threshold table from threshold_table.json
+===== Processing Scene: f0f120e4d4b0441da90ec53b16ee169d (Memory Idea: False) =====
+--- Processing Key Frame: 4a0798f849ca477ab18009c3a20b7df2 ---
+  - Ground Truth: direction='straight', speed='fast'
+Model Output: ```json
+{
+    "description": "Rainy city street on a dark, reflective surface. Traffic light counting down for a still left turn signal. 50 mph speed limit. Bend ahead in curve.",
+    "direction": "turn left",
+    "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 2.45s
+  - Tokens/sec for this frame: 28.53
+--------------------
+--- Processing Key Frame: d9075c2a5f864a2b8abf41e703f4cf1c ---
+  - Ground Truth: direction='straight', speed='slow'
+Model Output: ```json
+{
+    "description": "Slightly wet, rainy roadway in an urban area. Traffic light is red due to the rain, and traffic appears to be going the opposite direction. A pedestrian is not visible.",
+    "direction": "turn left",
+    "speed": "slow"
+}
+```
+
+  - Inference time for this frame: 2.17s
+  - Tokens/sec for this frame: 33.65
+--------------------
+--- Processing Key Frame: dfb8d8959b9944d69dcec6d05e419f04 ---
+  - Ground Truth: direction='straight', speed='fast'
+Model Output: ```json
+{
+    "description": "Clear nighttime environment. Rain appears to have stopped. One vehicle in the frame, which appears to be moving straight ahead. No other traffic is visible.",
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 1.91s
+  - Tokens/sec for this frame: 32.41
+--------------------
+--- Processing Key Frame: ffd1bdf020d145759224c629b501d2b2 ---
+  - Ground Truth: direction='straight', speed='slow'
+Model Output: ```json
+{
+    "description": "Rainy, dark road ahead with wet and reflective surface. Traffic light is green. Brightly lit street signage on sidewalks. Large buildings and establishments along street.",
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 2.13s
+  - Tokens/sec for this frame: 33.39
+--------------------
+
+===== Scene f0f120e4d4b0441da90ec53b16ee169d Summary (Memory Idea: False) =====
+Total End-to-End Time: 9.45s
+Total Inference-Only Time: 8.66s
+Total Generated Tokens: 276
+Average Tokens/Second (Inference Only): 31.86
+========================================
+
+Scene Accuracy (4 frames):
+  - Direction: 50.00%
+  - Speed:     25.00%
+  - Both:      0.00%
+===== Processing Scene: f0f120e4d4b0441da90ec53b16ee169d (Memory Idea: True) =====
+--- Processing Key Frame: 4a0798f849ca477ab18009c3a20b7df2 ---
+  - Ground Truth: direction='straight', speed='fast'
+Model Output: ```user
+{
+    "description": "Intersection on a rainy day with traffic lights and multiple lanes. Cars are moving forward and to the left.",
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 1.78s
+  - Tokens/sec for this frame: 31.53
+--------------------
+--- Processing Key Frame: d9075c2a5f864a2b8abf41e703f4cf1c ---
+  - Ground Truth: direction='straight', speed='slow'
+PPL Check: Reusing 1 tokens out of 56.
+Model Output: ```
+{
+    "description": "Rainy city street. Road is wet with reflections. Vehicles have their lights on. Ligh rail signals ahead. Traffic lights indicate clear passage. Buildings line both sides of road. Cityscape in background. Streetlights active.",
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 2.42s
+  - Tokens/sec for this frame: 34.31
+--------------------
+--- Processing Key Frame: dfb8d8959b9944d69dcec6d05e419f04 ---
+  - Ground Truth: direction='straight', speed='fast'
+PPL Check: Reusing 8 tokens out of 83.
+Warning: Could not decode JSON from model output for dfb8d8959b9944d69dcec6d05e419f04. Output was:
+```
+{
+    "description": The street appears to be wet, possibly from recent rain. The sky is overcast. The environment suggests it is an industrial or commercial area with flat terrain. A building can be seen in the distance.",
+    "direction":": straight",
+    "speed":": normal"
+}
+```
+
+Model Output: ```
+{
+    "description": The street appears to be wet, possibly from recent rain. The sky is overcast. The environment suggests it is an industrial or commercial area with flat terrain. A building can be seen in the distance.",
+    "direction":": straight",
+    "speed":": normal"
+}
+```
+
+  - Inference time for this frame: 1.92s
+  - Tokens/sec for this frame: 35.91
+--------------------
+--- Processing Key Frame: ffd1bdf020d145759224c629b501d2b2 ---
+  - Ground Truth: direction='straight', speed='slow'
+PPL Check: Reusing 8 tokens out of 69.
+Warning: Could not decode JSON from model output for ffd1bdf020d145759224c629b501d2b2. Output was:
+```
+{
+    "description": Wet street at night with glowing traffic lights. Traffic is stopping at the red light at the intersection.",
+    "direction":": straight",
+    "speed":": normal"
+}
+```
+
+Model Output: ```
+{
+    "description": Wet street at night with glowing traffic lights. Traffic is stopping at the red light at the intersection.",
+    "direction":": straight",
+    "speed":": normal"
+}
+```
+
+  - Inference time for this frame: 1.52s
+  - Tokens/sec for this frame: 34.28
+--------------------
+
+===== Scene f0f120e4d4b0441da90ec53b16ee169d Summary (Memory Idea: True) =====
+Total End-to-End Time: 8.39s
+Total Inference-Only Time: 7.63s
+Total Generated Tokens: 260
+Average Tokens/Second (Inference Only): 34.06
+========================================
+
+Scene Accuracy (4 frames):
+  - Direction: 50.00%
+  - Speed:     0.00%
+  - Both:      0.00%
+===== Processing Scene: 54cdaaae372d421fa4734d66f51a8c48 (Memory Idea: False) =====
+--- Processing Key Frame: 0dd14c14cea14dc1b0c0c9b0c9c7c4c3 ---
+  - Ground Truth: direction='straight', speed='normal'
+Model Output: ```json
+{
+    "description": "Clear road ahead. Traffic lights are green. No pedestrians visible on the sidewalks.",
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 1.70s
+  - Tokens/sec for this frame: 31.21
+--------------------
+--- Processing Key Frame: 1b45a97a0e5e49fe9cd345dd4bd729c3 ---
+  - Ground Truth: direction='straight', speed='slow'
+Model Output: ```json
+{
+  "description": "Traffic light is green and yellow, with a car turning right. Front-left traffic light is green. Median has a balloon on display in front.",
+  "direction": "turn right",
+  "speed": "fast"
+}
+```
+
+  - Inference time for this frame: 1.98s
+  - Tokens/sec for this frame: 32.80
+--------------------
+--- Processing Key Frame: 542eaf1fc9b34895a9e55fab57cb4cf4 ---
+  - Ground Truth: direction='straight', speed='slow'
+Model Output: ```json
+{
+  "description": "A moderately busy intersection with cars myriad angles awaiting traffic runoff, overall asphalt road conditions are good, no ongoing construction detours, skies cloudy.",
+  "direction": "straight",
+  "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 2.10s
+  - Tokens/sec for this frame: 33.33
+--------------------
+--- Processing Key Frame: 7abe79e5d3d745bcb237a4b7e03d1577 ---
+  - Ground Truth: direction='straight', speed='slow'
+Model Output: ```json
+{
+    "description": "The scene depicts a solitary car paused at a dimly lit, desolate intersection with a green traffic light on a cloudy, overcast day. The road appears to be cleared with parked vehicles on the left side of the road. There are no visible pedestrians or situated traffic signals, signifying the lack of imminent oncoming traffic. Nevertheless, the car's surroundings include multiple barriers, although their presence is unclear due to the low-light conditions.",
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 3.62s
+  - Tokens/sec for this frame: 37.03
+--------------------
+--- Processing Key Frame: d5e16062410f4e329d31a881b28e5c1c ---
+  - Ground Truth: direction='straight', speed='slow'
+Model Output: ```json
+{
+    "description": "A busy street corner at level crossing. Traffic moving in all directions. Pedestrians on sidewalks and traffic lights controlling the flow.",
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 1.91s
+  - Tokens/sec for this frame: 32.43
+--------------------
+
+===== Scene 54cdaaae372d421fa4734d66f51a8c48 Summary (Memory Idea: False) =====
+Total End-to-End Time: 12.29s
+Total Inference-Only Time: 11.31s
+Total Generated Tokens: 384
+Average Tokens/Second (Inference Only): 33.95
+========================================
+
+Scene Accuracy (5 frames):
+  - Direction: 80.00%
+  - Speed:     20.00%
+  - Both:      20.00%
+===== Processing Scene: 54cdaaae372d421fa4734d66f51a8c48 (Memory Idea: True) =====
+--- Processing Key Frame: 0dd14c14cea14dc1b0c0c9b0c9c7c4c3 ---
+  - Ground Truth: direction='straight', speed='normal'
+Model Output: ```json
+{
+    "description": "Clear sky. Cars stopped at a red traffic light. Trees along the street curb side. The environment appears quiet and suburban.",
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 1.87s
+  - Tokens/sec for this frame: 32.13
+--------------------
+--- Processing Key Frame: 1b45a97a0e5e49fe9cd345dd4bd729c3 ---
+  - Ground Truth: direction='straight', speed='slow'
+PPL Check: Reusing 11 tokens out of 60.
+Warning: Could not parse direction from answer string: 'street'
+Model Output: ```json
+{
+    "description": "Clear clear road ahead. Traffic light is green. A pedestrian is waiting on the right sidewalk.",
+    "direction": "street",
+    "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 1.47s
+  - Tokens/sec for this frame: 36.03
+--------------------
+--- Processing Key Frame: 542eaf1fc9b34895a9e55fab57cb4cf4 ---
+  - Ground Truth: direction='straight', speed='slow'
+PPL Check: Reusing 9 tokens out of 53.
+Warning: Could not decode JSON from model output for 542eaf1fc9b34895a9e55fab57cb4cf4. Output was:
+```json
+{
+    "description": Vehicles are stopped at a red traffic light. The sky above is cloudy, and there are trees in the background, with a building in the distance. It's a standard scene of city traffic during the day.",
+    "direction": "yellow",
+    "speed": "normal"
+}
+```
+Please note that the provided JSON appears to be incomplete, missing the "turn right" direction key. The actual JSON would likewise be incomplete and contain only the description and speed keys without direction.
+
+Model Output: ```json
+{
+    "description": Vehicles are stopped at a red traffic light. The sky above is cloudy, and there are trees in the background, with a building in the distance. It's a standard scene of city traffic during the day.",
+    "direction": "yellow",
+    "speed": "normal"
+}
+```
+Please note that the provided JSON appears to be incomplete, missing the "turn right" direction key. The actual JSON would likewise be incomplete and contain only the description and speed keys without direction.
+
+  - Inference time for this frame: 2.99s
+  - Tokens/sec for this frame: 38.52
+--------------------
+--- Processing Key Frame: 7abe79e5d3d745bcb237a4b7e03d1577 ---
+  - Ground Truth: direction='straight', speed='slow'
+PPL Check: Reusing 9 tokens out of 115.
+Warning: Could not decode JSON from model output for 7abe79e5d3d745bcb237a4b7e03d1577. Output was:
+```json
+{
+    "description": A yellow traffic light indicating a stop condition for vehicles turns red, with traffic in front of a newly constructed building complex, and an awning above the front access area. The green truck occupies the right lane as the vehicles listen to the changing signals.",
+    "direction": "turn left",
+    "speed": "slow"
+}
+```
+
+Model Output: ```json
+{
+    "description": A yellow traffic light indicating a stop condition for vehicles turns red, with traffic in front of a newly constructed building complex, and an awning above the front access area. The green truck occupies the right lane as the vehicles listen to the changing signals.",
+    "direction": "turn left",
+    "speed": "slow"
+}
+```
+
+  - Inference time for this frame: 2.23s
+  - Tokens/sec for this frame: 37.23
+--------------------
+--- Processing Key Frame: d5e16062410f4e329d31a881b28e5c1c ---
+  - Ground Truth: direction='straight', speed='slow'
+PPL Check: Reusing 9 tokens out of 83.
+Warning: Could not decode JSON from model output for d5e16062410f4e329d31a881b28e5c1c. Output was:
+```json
+{
+    "description": Vehicles driving and stopped at traffic lights on a city street, with a multi-lane intersection.",
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+
+Model Output: ```json
+{
+    "description": Vehicles driving and stopped at traffic lights on a city street, with a multi-lane intersection.",
+    "direction": "straight",
+    "speed": "normal"
+}
+```
+
+  - Inference time for this frame: 1.47s
+  - Tokens/sec for this frame: 34.65
+--------------------
+
+===== Scene 54cdaaae372d421fa4734d66f51a8c48 Summary (Memory Idea: True) =====
+Total End-to-End Time: 10.98s
+Total Inference-Only Time: 10.03s
+Total Generated Tokens: 362
+Average Tokens/Second (Inference Only): 36.11
+========================================
+
+Scene Accuracy (5 frames):
+  - Direction: 20.00%
+  - Speed:     20.00%
+  - Both:      20.00%
+Reached the limit of 2 scenes. Stopping.
+
+========================= FINAL SUMMARY =========================
+
+----- Statistics for 'use_memory_idea = False' -----
+Processed 2 scenes.
+Average End-to-End Time per Scene: 10.87s
+Average Inference-Only Time per Scene: 9.99s
+Average Frames per Scene: 4.50
+Average Tokens/Second (Inference Only, across all scenes): 33.04
+Overall Accuracy across all scenes:
+  - Direction: 66.67%
+  - Speed:     22.22%
+  - Both:      11.11%
+
+----- Statistics for 'use_memory_idea = True' -----
+Processed 2 scenes.
+Average End-to-End Time per Scene: 9.69s
+Average Inference-Only Time per Scene: 8.83s
+Average Frames per Scene: 4.50
+Average Tokens/Second (Inference Only, across all scenes): 35.22
+Overall Accuracy across all scenes:
+  - Direction: 33.33%
+  - Speed:     11.11%
+  - Both:      11.11%
+
+===================================================================
