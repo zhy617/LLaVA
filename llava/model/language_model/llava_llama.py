@@ -2457,8 +2457,8 @@ class LlavaLlamaForCausalLM(LlamaForCausalLM, LlavaMetaForCausalLM):
             token_index = torch.multinomial(probabilities, num_samples=1).item()
             
             # 更新阈值表 (保留原有逻辑)
-            if split_id is not None and token_index != split_id: # 假设 split_id 不参与计算? 或者 logic 需要调整
-                self.threshold = min(self.threshold, probabilities[0, token_index] / self.threshold_table[token_index])
+            # if split_id is not None and token_index != split_id: # 假设 split_id 不参与计算? 或者 logic 需要调整
+            #     self.threshold = min(self.threshold, probabilities[0, token_index] / self.threshold_table[token_index])
 
             if token_index == eos_token_id:
                 break

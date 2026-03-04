@@ -266,11 +266,18 @@ Strict Rules for JSON Output:
 5. "speed" value: MUST be exactly one of: ["slow", "normal", "fast"].
 6. Output ONLY valid JSON. Do not include markdown formatting like ```json or any conversational text.
 
-Example Output:
+Example 1:
 {
     "description": "Clear road ahead. Traffic light is green. A pedestrian is waiting on the right sidewalk.",
     "direction": "straight",
     "speed": "normal"
+}
+
+Example 2:
+{
+    "description": "Three moving cars behind. Many barriers and two traffic cones in front, with additional barriers on the front-right, back-right, and rear.",
+    "direction": "turn right",
+    "speed": "fast"
 }
 
 Now, process all 6 images together and generate the single JSON:
@@ -291,7 +298,7 @@ Now, process all 6 images together and generate the single JSON:
     # 遍历JSON中的每个场景
 
     scene_count = 0
-    scenes_to_test = 3
+    scenes_to_test = 2
 
     total_stats = {
         False: {"scenes": 0, "total_time": 0.0, "total_inference_time": 0.0, "total_tokens": 0},
