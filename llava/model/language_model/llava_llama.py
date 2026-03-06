@@ -2344,33 +2344,55 @@ class LlavaLlamaForCausalLM(LlamaForCausalLM, LlavaMetaForCausalLM):
                 v_cut = v[:, :, :valid_total_len, :]
                 past_key_values.append((k_cut, v_cut))
             
-            # E. 设置 Decode 的起始状态
-            # 如果 cut_offset < memory_len，说明中间断了，我们需要从断点开始生成
-            # 如果 cut_offset == memory_len，说明完全复用，从 memory 结尾开始生成
+            # --- E. 设置 Decode 的起始状态 (修复版) ---
             
-            if cut_offset < len(drive_memory):
-                # 必须提供一个 input_ids 给 generate loop 启动
-                # 如果 cut_offset > 0，取 memory 中最后一个有效 token
-                # 如果 cut_offset == 0，取 prefix 的最后一个 token (input_last_token)
-                
-                if cut_offset > 0:
-                    start_token = drive_memory[cut_offset - 1] # 最后一个被复用的 token
-                    current_sequences[0].extend(drive_memory[:cut_offset])
-                else:
-                    start_token = input_last_token
-                    # sequence 为空
-                
-                input_ids_for_gen = torch.tensor([[start_token]]).cuda()
-            else:
-                # 完全复用
-                start_token = drive_memory[-1]
-                current_sequences[0].extend(drive_memory)
-                input_ids_for_gen = torch.tensor([[start_token]]).cuda()
+            # 无论 cut_offset 是多少，我们都已经有了长度为 valid_total_len 的正确 KV Cache。
+            # 负责预测下一个词的 Logit，就在 prefill_output.logits 的 valid_total_len - 1 的位置！
             
-            # 更新已生成长度 (仅包含 memory 部分，generate loop 会用到)
-            # 注意：generate loop 里的 position_ids 需要正确设置
-            # 我们当前的 KV Cache 长度是 valid_total_len
+            last_valid_logits = prefill_output.logits[:, valid_total_len - 1, :]
+            
+            # 采样下一个新词 (建议这里按你的需求加上 temperature/top_p)
+            probabilities = torch.softmax(last_valid_logits, dim=-1)
+            next_token_index = torch.multinomial(probabilities, num_samples=1).item()
+            
+            # 更新已生成的序列
+            current_sequences[0].extend(drive_memory[:cut_offset])
+            current_sequences[0].append(next_token_index)
+            
+            # 准备下一步 Decode 的输入 (喂入新词，这样它才会追加新词的 KV)
+            input_ids_for_gen = torch.tensor([[next_token_index]]).cuda()
+            
+            # 更新当前的 KV 长度
             current_kv_len = valid_total_len
+
+
+            # # E. 设置 Decode 的起始状态
+            # # 如果 cut_offset < memory_len，说明中间断了，我们需要从断点开始生成
+            # # 如果 cut_offset == memory_len，说明完全复用，从 memory 结尾开始生成
+            
+            # if cut_offset < len(drive_memory):
+            #     # 必须提供一个 input_ids 给 generate loop 启动
+            #     # 如果 cut_offset > 0，取 memory 中最后一个有效 token
+            #     # 如果 cut_offset == 0，取 prefix 的最后一个 token (input_last_token)
+                
+            #     if cut_offset > 0:
+            #         start_token = drive_memory[cut_offset - 1] # 最后一个被复用的 token
+            #         current_sequences[0].extend(drive_memory[:cut_offset])
+            #     else:
+            #         start_token = input_last_token
+            #         # sequence 为空
+                
+            #     input_ids_for_gen = torch.tensor([[start_token]]).cuda()
+            # else:
+            #     # 完全复用
+            #     start_token = drive_memory[-1]
+            #     current_sequences[0].extend(drive_memory)
+            #     input_ids_for_gen = torch.tensor([[start_token]]).cuda()
+            
+            # # 更新已生成长度 (仅包含 memory 部分，generate loop 会用到)
+            # # 注意：generate loop 里的 position_ids 需要正确设置
+            # # 我们当前的 KV Cache 长度是 valid_total_len
+            # current_kv_len = valid_total_len
 
         else:
             # 第一帧 或 无记忆，标准流程

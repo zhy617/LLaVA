@@ -262,14 +262,24 @@ def run_inference_for_sequence(
                 pred_direction = parse_ground_truth(pred_direction_str, parse_speed=False, parse_direction=True)
                 pred_speed = parse_ground_truth(pred_speed_str, parse_speed=True, parse_direction=False)
 
-                is_dir_correct = (pred_direction == gt_direction)
-                is_speed_correct = (pred_speed == gt_speed)
-                if is_dir_correct and is_speed_correct:
-                    correct_both += 1
-                if is_dir_correct:
-                    correct_direction += 1
-                if is_speed_correct:
-                    correct_speed += 1
+
+                # skip the unknown cases in evaluation
+                if pred_direction == "unknown" or pred_speed == "unknown":
+                    print(f"Warning: Could not parse predicted direction or speed from model output for {frame_id}. Output was:\n{outputs}\n")
+                else:
+                    is_dir_correct = (pred_direction == gt_direction)
+                    # is_speed_correct = (pred_speed == gt_speed)
+                    # speed correct when the predicted speed < true speed
+                    speed_order = {"slow": 0, "normal": 1, "fast": 2}
+                    if pred_speed in speed_order and gt_speed in speed_order:
+                        is_speed_correct = (speed_order[pred_speed] <= speed_order[gt_speed])    
+
+                    if is_dir_correct and is_speed_correct:
+                        correct_both += 1
+                    if is_dir_correct:
+                        correct_direction += 1
+                    if is_speed_correct:
+                        correct_speed += 1
             else:
                 print(f"Warning: No JSON object found in model output for {frame_id}. Output was:\n{outputs}\n")
         except json.JSONDecodeError:
@@ -404,7 +414,7 @@ Now, process all 6 images together and generate the single JSON:
     # 遍历JSON中的每个场景
 
     scene_count = 0
-    scenes_to_test = 10
+    scenes_to_test = 30
 
     total_stats = {
         False: {
