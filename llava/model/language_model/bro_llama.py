@@ -2191,21 +2191,24 @@ class LlavaLlamaForCausalLM(LlamaForCausalLM, LlavaMetaForCausalLM):
         tokenizer: Optional[object] = None,
         **kwargs,
     ) -> Union[GenerateOutput, torch.LongTensor]:
+        
+        # --- 1. 参数提取与初始化 ---
         position_ids = kwargs.pop("position_ids", None)
         attention_mask = kwargs.pop("attention_mask", None)
-        temperature = kwargs.pop("temperature", None)
+        # temperature = kwargs.pop("temperature", None) # 暂时不用
         if "inputs_embeds" in kwargs:
             raise NotImplementedError("`inputs_embeds` is not supported")
 
-        input_last_token = inputs[0][-1].item()
+        input_last_token = inputs[0][-1].item() # 原始输入的最后一个 token (通常是 start token 或 instruction 结尾)
 
+        # --- 2. 准备 Prefix Embeddings (Image + Instruction) ---
         if images is not None:
             (
                 inputs,
                 position_ids,
                 attention_mask,
                 _,
-                inputs_embeds,
+                inputs_embeds, # 这里包含了 Image + User Instruction
                 _
             ) = self.prepare_inputs_labels_for_multimodal(
                 inputs,
@@ -2218,312 +2221,301 @@ class LlavaLlamaForCausalLM(LlamaForCausalLM, LlavaMetaForCausalLM):
             )
         else:
             inputs_embeds = self.get_model().embed_tokens(inputs)
+
+        # 记录 Prefix (Image + Instruction) 的长度
+        prefix_len = inputs_embeds.size(1)
+        self.input_ids_length = prefix_len 
         
         current_sequences = [[]]
-        generated_length = 0
         
-        if self.is_first_frame == False:
-
-            image_len = inputs_embeds.size(1)
-            self.input_ids_length = image_len
-            # handle prefill stage. 1. get image's KV cache; 2. test ppl and select memory
-            # inputs_embeds = torch.cat((inputs_embeds, self.token_embeds_memory[:, :len(self.text_memory[0]), :]), dim=1)
-            memory_inputs_embeds = torch.cat((inputs_embeds, self.token_embeds_memory[:, :len(self.text_memory[0]), :]), dim=1)
+        # --- 3. 核心逻辑: Memory Reuse (Verify-and-Cut) ---
+        past_key_values = None
+        input_ids_for_gen = None # 下一步生成的输入 token
+        
+        # 如果不是第一帧，且有记忆可复用
+        if self.is_first_frame == False and len(self.text_memory[0]) > 0:
             
+            # A. 拼接完整输入: [Prefix] + [Old Memory]
+            # 注意: self.token_embeds_memory 存储的是上一帧生成的 token embeddings
+            memory_len = len(self.text_memory[0])
+            memory_embeds = self.token_embeds_memory[:, :memory_len, :]
+            
+            # 拼接
+            full_inputs_embeds = torch.cat((inputs_embeds, memory_embeds), dim=1)
+            
+            # B. 一次性 Forward (Prefill + Verify)
+            # 这次计算会基于 *当前新图* 生成正确的 KV Cache
             prefill_output = super().forward(
                 input_ids=None,
-                attention_mask=attention_mask,
-                position_ids=position_ids,
-                inputs_embeds=memory_inputs_embeds,
-                output_attentions=True,
-                return_dict=True
+                attention_mask=attention_mask, # 注意：如果 mask 需要动态扩展，请在这里处理，通常 causal mask 自动处理即可
+                position_ids=position_ids,     # 同上，自动递增
+                inputs_embeds=full_inputs_embeds,
+                output_attentions=False,
+                return_dict=True,
+                use_cache=True 
             )
 
-            for i in range(len(self.model.layers)):
-                self.current_past_key_values[i][0][:, :, :self.input_ids_length, :].copy_(prefill_output.past_key_values[i][0][:, :, :self.input_ids_length, :])
-                self.current_past_key_values[i][1][:, :, :self.input_ids_length, :].copy_(prefill_output.past_key_values[i][1][:, :, :self.input_ids_length, :])
-
-            # decode with memory
-
-            drive_memory = self.text_memory[0]
-            if tokenizer is None:
-                raise ValueError("Tokenizer must be provided to use decode-based splitting.")
-            split_position = [index for index, token_id in enumerate(drive_memory) if '.' in tokenizer.decode([token_id])]
-            split_position.insert(0, -1)
-            # print("Split positions:", split_position)
-
-            # calculate ppl of every sub prompt
-            log_probs = torch.nn.functional.log_softmax(prefill_output.logits[0, self.input_ids_length-1:self.input_ids_length+len(self.text_memory[0])-1, :], dim=-1)
-            target_log_probs = log_probs.gather(dim=-1, index=torch.tensor(self.text_memory[0]).cuda().unsqueeze(-1)).squeeze(-1)
-
-            # all use probability to decide memory useful or not
+            # C. PPL 检查与截断 (Verify Logic)
+            
+            # 取出属于 Memory 部分的 logits (错位预测: input[i] 预测 input[i+1])
+            # logits 对应位置: [prefix_len-1 : prefix_len + memory_len - 1]
+            # 比如 prefix 长度 100，memory 长度 50。
+            # inputs 下标 0..99 是 prefix, 100..149 是 memory
+            # logits[99] 预测 memory[0], logits[148] 预测 memory[49]
+            
+            relevant_logits = prefill_output.logits[0, prefix_len - 1 : prefix_len + memory_len - 1, :]
+            log_probs = torch.nn.functional.log_softmax(relevant_logits, dim=-1)
+            
+            # 取出 memory 实际 token 对应的概率
+            # self.text_memory[0] 是 [token_id_0, token_id_1, ...]
+            target_ids = torch.tensor(self.text_memory[0]).cuda().unsqueeze(-1)
+            target_log_probs = log_probs.gather(dim=-1, index=target_ids).squeeze(-1)
             current_probs = torch.exp(target_log_probs)
 
-            # handle all memory first
-            all_memory_useful = True
-
+            # --- 分句检查 PPL ---
+            if tokenizer is None:
+                raise ValueError("Tokenizer must be provided.")
+            
+            drive_memory = self.text_memory[0]
+            # 找到句子结束符的位置 (例如 '.')
+            split_position = [index for index, token_id in enumerate(drive_memory) if '.' in tokenizer.decode([token_id])]
+            split_position.insert(0, -1)
+            
+            cut_offset = 0 # 最终保留到 memory 的第几个 token
+            valid_memory_found = False
+            
             consecutive_wrong = 0
             refresh = False
-
-            # for j in range(len(split_position)-1):
+            
+            # 遍历每一句话
             for j in range(len(split_position)-1):
-
-                # if exists low ppl, then the sentence is wrong
-                # print(target_log_probs[split_position[j]+1:split_position[j+1]+1].tolist())
-                # ppl_list = target_log_probs[split_position[j]+1:split_position[j+1]+1].tolist()
-
-                # test length
-                # print("segment start:", split_position[j]+1, " end:", split_position[j+1]+1, " len:", split_position[j+1]-split_position[j])
-                # print("inputs_embeds size:", inputs_embeds.size(1))
-
-                ppl_list = current_probs[split_position[j]+1:split_position[j+1]+1].tolist()
-                # print(ppl_list)
+                start_idx = split_position[j] + 1
+                end_idx = split_position[j+1] + 1 # 包含句号
                 
-                # if torch.sum(target_log_probs[split_position[j]+1: split_position[j+1]+1] < -2).item() < 0.2 * (split_position[j+1] - split_position[j]):
+                segment_probs = current_probs[start_idx : end_idx].tolist()
+                segment_ids = drive_memory[start_idx : end_idx]
                 
-                memory_useful = True
+                segment_useful = True
+                wrong_token_local_idx = -1 # 段内第几个 token 错了
                 
-                for i in range(len(ppl_list)):
-                    if ppl_list[i] < self.threshold*self.threshold_table[self.text_memory[0][split_position[j] + 1 + i]]:
-                        memory_useful = False
-                        all_memory_useful = False
-                        consecutive_wrong = consecutive_wrong + 1
+                for i in range(len(segment_probs)):
+                    # 阈值判断
+                    if segment_probs[i] < self.threshold * self.threshold_table[segment_ids[i]]:
+                        segment_useful = False
+                        wrong_token_local_idx = i
+                        consecutive_wrong += 1
                         if consecutive_wrong > 1:
                             refresh = True
+                        break # 这个句子废了
                     else:
-                        consecutive_wrong = 0
-                
-                if refresh == True:
-                    break
+                        consecutive_wrong = 0 # 重置连续错误计数
 
-                if memory_useful == False:
-                    for i in range(len(ppl_list)):
-                        if ppl_list[i] < self.threshold*self.threshold_table[self.text_memory[0][split_position[j] + 1 + i]]:
-                            wrong_id = i
-                            break
+                if refresh:
+                    break # 后面都不要了
 
-                    # extend mem to wrong token
-                    # print("generated_length:", generated_length)
-                    if wrong_id != 0:
-                        current_sequences[0].extend(self.text_memory[0][split_position[j] + 1 : split_position[j] + wrong_id + 1])
-                    generated_length = len(current_sequences[0])
-                    # print("generated_length after extend:", generated_length)
-                    
-                    for i in range(len(self.model.layers)):
-                        self.current_past_key_values[i][0][:, :, self.input_ids_length + generated_length + split_position[j] - split_position[j+1] : self.input_ids_length + generated_length, :].copy_(self.key_values_memory[i][0][:, :, split_position[j] + 1: split_position[j+1] + 1, :])
-                        self.current_past_key_values[i][1][:, :, self.input_ids_length + generated_length + split_position[j] - split_position[j+1] : self.input_ids_length + generated_length, :].copy_(self.key_values_memory[i][1][:, :, split_position[j] + 1: split_position[j+1] + 1, :])
-
-                    # if wrong_id > 0:
-                    # print("j, split_position[j], wrong_id:", j, split_position[j], wrong_id)
-                    if wrong_id != 0:
-                        text_encode = self.token_embeds_memory[:, split_position[j] + 1 : split_position[j] + wrong_id + 1, :]
-                        # print("fuck text_encode size:", text_encode.size(1))
-                        inputs_embeds = torch.cat((inputs_embeds, text_encode), dim=1)
-
-                    break
-
-                if memory_useful == True:
-                    # extend mem to output_ids
-                    # print("generated_length:", generated_length)
-                    current_sequences[0].extend(self.text_memory[0][split_position[j] + 1 : split_position[j+1] + 1])
-                    generated_length = len(current_sequences[0])
-                    # print("generated_length after extend:", generated_length)
-                    
-                    for i in range(len(self.model.layers)):
-                        self.current_past_key_values[i][0][:, :, self.input_ids_length + generated_length + split_position[j] - split_position[j+1] : self.input_ids_length + generated_length, :].copy_(self.key_values_memory[i][0][:, :, split_position[j] + 1: split_position[j+1] + 1, :])
-                        self.current_past_key_values[i][1][:, :, self.input_ids_length + generated_length + split_position[j] - split_position[j+1] : self.input_ids_length + generated_length, :].copy_(self.key_values_memory[i][1][:, :, split_position[j] + 1: split_position[j+1] + 1, :])
-
-                    text_encode = self.token_embeds_memory[:, split_position[j] + 1 : split_position[j+1] + 1, :]
-                    # print("j, split_position[j+1]:", j, split_position[j+1])
-                    # print("text_encode size:", text_encode.size(1))
-                    inputs_embeds = torch.cat((inputs_embeds, text_encode), dim=1)
-            
-            print(f"Reused {len(current_sequences[0])} tokens from the previous frame.")
-
-            if all_memory_useful == False:
-                # generate until end
-                
-                # make sure current_sequences is not empty
-                # assert len(current_sequences[0]) > 0, "Current sequences is empty when continue generation."
-
-                if refresh == True:
-                    total_length = image_len - 1 # fix bug here
-                    # print("Total length reset to image_len - 1:", total_length)
-                    current_input_ids_length = total_length
-                    if len(current_sequences[0]) > 0:
-                        inputs = torch.tensor([[current_sequences[0][-1]]]).cuda()
-                    else:
-                        inputs = torch.tensor([[input_last_token]]).cuda()
-                    current_sequences = [[]]
-                    generated_length = 0
-                    
+                if not segment_useful:
+                    # 这个句子坏了，保留到坏掉的前一个词
+                    # 注意：原代码逻辑似乎是保留 wrong token 还是不保留？
+                    # 建议：如果错了，就截断在这里。
+                    # 这里沿用你原来的逻辑：如果是局部错误，可能保留一点点？
+                    # 简化逻辑：当前句子坏了，直接断在这里，作为续写的起点。
+                    cut_offset = start_idx + wrong_token_local_idx
+                    valid_memory_found = True # 至少有一部分(或0)被确认处理了
+                    break 
                 else:
-                    total_length = inputs_embeds.size(1) - 1
-                    current_input_ids_length = total_length
-                    if len(current_sequences[0]) > 0:
-                        inputs = torch.tensor([[current_sequences[0][-1]]]).cuda()
-                    else:
-                        inputs = torch.tensor([[input_last_token]]).cuda()
-                    # generated_length -= 1
+                    # 句子完全可用，累加长度
+                    cut_offset = end_idx
+                    valid_memory_found = True
 
-                first_gen = True
+            print(f"PPL Check: Reusing {cut_offset} tokens out of {len(drive_memory)}.")
+
+            # D. 切割 KV Cache (The Cut)
+            # valid_len = prefix + memory_reused
+            valid_total_len = prefix_len + cut_offset
+            
+            # 对 prefill_output.past_key_values 进行切片
+            # 结构: Tuple(Tuple(K, V)) for each layer
+            # K, V shape: [batch, num_heads, seq_len, head_dim]
+            
+            past_key_values = []
+            for layer_idx in range(len(prefill_output.past_key_values)):
+                k, v = prefill_output.past_key_values[layer_idx]
+                k_cut = k[:, :, :valid_total_len, :]
+                v_cut = v[:, :, :valid_total_len, :]
+                past_key_values.append((k_cut, v_cut))
+            
+            # --- E. 设置 Decode 的起始状态 (修复版) ---
+            
+            # 无论 cut_offset 是多少，我们都已经有了长度为 valid_total_len 的正确 KV Cache。
+            # 负责预测下一个词的 Logit，就在 prefill_output.logits 的 valid_total_len - 1 的位置！
+            
+            last_valid_logits = prefill_output.logits[:, valid_total_len - 1, :]
+            
+            # 采样下一个新词 (建议这里按你的需求加上 temperature/top_p)
+            probabilities = torch.softmax(last_valid_logits, dim=-1)
+            next_token_index = torch.multinomial(probabilities, num_samples=1).item()
+            
+            # 更新已生成的序列
+            current_sequences[0].extend(drive_memory[:cut_offset])
+            current_sequences[0].append(next_token_index)
+            
+            # 准备下一步 Decode 的输入 (喂入新词，这样它才会追加新词的 KV)
+            input_ids_for_gen = torch.tensor([[next_token_index]]).cuda()
+            
+            # 更新当前的 KV 长度
+            current_kv_len = valid_total_len
+
+
+            # # E. 设置 Decode 的起始状态
+            # # 如果 cut_offset < memory_len，说明中间断了，我们需要从断点开始生成
+            # # 如果 cut_offset == memory_len，说明完全复用，从 memory 结尾开始生成
+            
+            # if cut_offset < len(drive_memory):
+            #     # 必须提供一个 input_ids 给 generate loop 启动
+            #     # 如果 cut_offset > 0，取 memory 中最后一个有效 token
+            #     # 如果 cut_offset == 0，取 prefix 的最后一个 token (input_last_token)
                 
-                # print("refresh:", refresh)
-                # print("input_embeds size:", inputs_embeds.size(1))
-                # print("total_length:", total_length)
-                # print("current_input_ids_length:", current_input_ids_length)
-                # print("img_len:", image_len)
-                while True:
-                    # fix position_ids bug
-                    my_position_ids = torch.tensor([[total_length]], device = inputs.device)   
-                    # print("Decoding position id:", my_position_ids.item()) 
-                    
-                    decode_output = super().forward(
-                        input_ids=inputs,
-                        attention_mask=attention_mask,
-                        position_ids=my_position_ids,
-                        inputs_embeds=None,
-                        past_key_values=[[tensor[:, :, :total_length, :] for tensor in layer] for layer in self.current_past_key_values],
-                        return_dict=True
-                    )
-
-                    # we don't use tempreture here, to avoid high ppl
-                    scaled_logits = decode_output.logits 
-                    # scaled_logits = decode_output.logits / temperature
-
-                    # we don't want to stop too early
-                    if total_length - current_input_ids_length < 5 :
-                        scaled_logits[0][-1][eos_token_id] = -10
-
-                    probabilities = torch.softmax(scaled_logits[:, -1, :], dim=-1)
-                    token_index = torch.multinomial(probabilities, num_samples=1).item()
-
-                    # if tokenizer:
-                    #     # 使用 end='' 和 flush=True 可以在同一行连续打印，实时观察
-                    #     print(tokenizer.decode([token_index]), end=' ', flush=True)
-                        
-
-                    if refresh == True:
-                        # update
-                        self.threshold = min(self.threshold, probabilities[0, token_index] / self.threshold_table[token_index])
-
-                    # print(token_index)
-
-                    if token_index == eos_token_id:
-                        break
-                    
-                    current_sequences[0].append(token_index)
-                    
-                    for i in range(len(self.model.layers)):
-                        # self.current_past_key_values[i][0][:, :, self.input_ids_length + generated_length : self.input_ids_length + generated_length + 1, :].copy_(decode_output.past_key_values[i][0][:, :, total_length : total_length + 1, :])
-                        # self.current_past_key_values[i][1][:, :, self.input_ids_length + generated_length : self.input_ids_length + generated_length + 1, :].copy_(decode_output.past_key_values[i][1][:, :, total_length : total_length + 1, :])
-                        self.current_past_key_values[i][0][:, :, total_length : total_length + 1, :].copy_(decode_output.past_key_values[i][0][:, :, total_length : total_length + 1, :])
-                        self.current_past_key_values[i][1][:, :, total_length : total_length + 1, :].copy_(decode_output.past_key_values[i][1][:, :, total_length : total_length + 1, :])
-                    generated_length += 1
-                    total_length += 1
-                    
-                    inputs = torch.tensor([[token_index]]).cuda()
-
-                # inputs_embeds = torch.cat((inputs_embeds, self.model.token_embeds[:, current_input_ids_length : current_input_ids_length + generated_length, :]), dim=1)
-
-
-                # total_length += 1
-                # generated_length += 1
-                # while True:
-                #     # 1. 显式切片：只取前 total_length 个 token 的 embedding
-                #     # 这样能确保模型绝对看不到 total_length 之后的内容
-                #     curr_step_embeds = inputs_embeds[:, :total_length, :]
-
-                #     # 2. 强制全量计算，不传 past_key_values
-                #     decode_output = super().forward(
-                #         input_ids=None,
-                #         attention_mask=None,  # 自动生成 causal mask
-                #         position_ids=None,    # 自动生成 0...N
-                #         inputs_embeds=curr_step_embeds, # <--- 传入切片后的 embed
-                #         past_key_values=None, # <--- 清空 KV，强制重算
-                #         use_cache=False,      
-                #         return_dict=True
-                #     )
-
-                #     # 3. 采样逻辑 (取最后一个 token 的 logits)
-                #     scaled_logits = decode_output.logits
-                    
-                #     # 强制不让它太早结束
-                #     if total_length - current_input_ids_length < 5:
-                #          scaled_logits[0][-1][eos_token_id] = -10
-
-                #     probabilities = torch.softmax(scaled_logits[:, -1, :], dim=-1)
-                #     token_index = torch.multinomial(probabilities, num_samples=1).item()
-
-                #     # (可选) 实时打印
-                #     if tokenizer:
-                #         print(tokenizer.decode([token_index]), end=' ', flush=True)
-
-                #     if refresh == True:
-                #         self.threshold = min(self.threshold, probabilities[0, token_index] / self.threshold_table[token_index])
-
-                #     if token_index == eos_token_id:
-                #         break
-                    
-                #     current_sequences[0].append(token_index)
-                    
-                #     # 4. 准备下一轮的 Embedding
-                #     # 获取新生成的 token 的 embedding
-                #     new_token_tensor = torch.tensor([[token_index]]).to(inputs_embeds.device)
-                #     new_token_embed = self.get_model().embed_tokens(new_token_tensor)
-                    
-                #     # 拼接到主 inputs_embeds 上 (注意：这里 append 之后，inputs_embeds 变长了)
-                #     # 下一轮循环开头的切片会把这个新 token 包含进去
-                #     # inputs_embeds = torch.cat((inputs_embeds, new_token_embed), dim=1)
-                #     inputs_embeds = torch.cat((inputs_embeds[:, :total_length, :], new_token_embed), dim=1)
-                    
-                #     generated_length += 1
-                #     total_length += 1
+            #     if cut_offset > 0:
+            #         start_token = drive_memory[cut_offset - 1] # 最后一个被复用的 token
+            #         current_sequences[0].extend(drive_memory[:cut_offset])
+            #     else:
+            #         start_token = input_last_token
+            #         # sequence 为空
                 
+            #     input_ids_for_gen = torch.tensor([[start_token]]).cuda()
+            # else:
+            #     # 完全复用
+            #     start_token = drive_memory[-1]
+            #     current_sequences[0].extend(drive_memory)
+            #     input_ids_for_gen = torch.tensor([[start_token]]).cuda()
+            
+            # # 更新已生成长度 (仅包含 memory 部分，generate loop 会用到)
+            # # 注意：generate loop 里的 position_ids 需要正确设置
+            # # 我们当前的 KV Cache 长度是 valid_total_len
+            # current_kv_len = valid_total_len
 
         else:
-
-            self.input_ids_length = inputs_embeds.size(1)
-
-            output = super().generate(
-                position_ids=position_ids,
-                attention_mask=attention_mask,
+            # 第一帧 或 无记忆，标准流程
+            # 直接把 inputs_embeds (Prefix) 喂进去做 Prefill
+            prefill_output = super().forward(
+                input_ids=None,
                 inputs_embeds=inputs_embeds,
-                return_dict_in_generate=True,
-                **kwargs
+                attention_mask=attention_mask,
+                position_ids=position_ids,
+                use_cache=True,
+                return_dict=True
             )
-
-            current_sequences[0].extend(output.sequences[0])
-            # print("Generated words:", tokenizer.decode(output.sequences[0]))
-            generated_length = len(current_sequences[0]) # last token don't have kv cache
-
-            for i in range(len(self.model.layers)):
-                self.current_past_key_values[i][0][:, :, self.input_ids_length : self.input_ids_length + generated_length - 2, :].copy_(output.past_key_values[i][0][:, :, self.input_ids_length : self.input_ids_length + generated_length - 2, :])
-                self.current_past_key_values[i][1][:, :, self.input_ids_length : self.input_ids_length + generated_length - 2, :].copy_(output.past_key_values[i][1][:, :, self.input_ids_length : self.input_ids_length + generated_length - 2, :])
-                
-            self.is_first_frame = False
-
-        self.text_memory = current_sequences.copy()
-
-        # flag = False
-        # for token in current_sequences[0]:
-        #     if token == split_id:
-        #         flag = True
-        #         break
-        
-        # current_str = ''
-        # for token in current_sequences[0]:
-        #     current_str += tokenizer.decode([token])
-        #     current_str += ' '
-        # print("Current generated sequence: ", current_str)
-
-        # assert flag == True, "There is no split_id in current generated sequence."
-
-        for i in range(len(self.model.layers)):
-            self.key_values_memory[i][0][:, :, :generated_length - 1, :].copy_(self.current_past_key_values[i][0][:, :, self.input_ids_length : self.input_ids_length + generated_length - 1, :])
-            self.key_values_memory[i][1][:, :, :generated_length - 1, :].copy_(self.current_past_key_values[i][1][:, :, self.input_ids_length : self.input_ids_length + generated_length - 1, :])
+            past_key_values = prefill_output.past_key_values
+            current_kv_len = inputs_embeds.size(1)
             
-        self.token_embeds_memory[:, :generated_length, :].copy_(self.model.token_embeds[:, self.input_ids_length : self.input_ids_length + generated_length, :])
+            # 起始 token
+            # input_ids_for_gen = torch.tensor([[input_last_token]]).cuda()
+
+            # 【修复】直接从 prefill 的最后一个 token 的 logits 中采样出第一个新词！
+            first_token_logits = prefill_output.logits[:, -1, :]
+            probabilities = torch.softmax(first_token_logits, dim=-1)
+            # 建议加上 top_p 或 temperature 处理以增加稳定性
+            first_token_index = torch.multinomial(probabilities, num_samples=1).item()
+            
+            input_ids_for_gen = torch.tensor([[first_token_index]]).cuda()
+            current_sequences[0].append(first_token_index)
+
+
+        # --- 4. Generation Loop (Decode) ---
+        
+        # 此时 past_key_values 已经是干净且正确的 (基于当前 Image)
+        # current_kv_len 是当前 cache 的长度
+        
+        generated_new_tokens = 0
+        
+        while True:
+            # 动态生成 Position IDs
+            # 对于 input_ids_for_gen (长度1)，它的 pos_id 应该是 current_kv_len (如果是全新生成) 
+            # 或者如果 input_ids_for_gen 是 cache 的最后一个词... 等等，HuggingFace 的 generate 逻辑通常是：
+            # 如果传入了 past_key_values，input_ids 应该是 *下一个* 想要预测的词的前置词（即刚刚生成的那个）。
+            # 这里的 input_ids_for_gen 已经包含在 past_key_values 里了吗？
+            
+            # 修正逻辑：
+            # 如果我们做切片复用，Input 应该是 cache 里的最后一个 token 吗？
+            # 不，标准的 causal decoding 是：Input = Last_Token, Past = KV_of_Last_Token_and_before.
+            # Forward 输出 = Next_Token_Logits.
+            
+            # 这里有个 tricky 的点：prefill_output 已经包含了最后一个 token 的 logits 吗？
+            # 是的。如果我们完全复用了 memory，input_ids_for_gen 设为了 memory[-1]，
+            # 此时调用 forward 会再算一次 memory[-1] 吗？
+            # 实际上，如果 use_cache=True，我们传入的 input_ids 应该是 *新* 的 token。
+            # 但第一次进入 loop 时，我们需要拿到基于 memory[-1] 预测 *下一个* token 的 logits。
+            # 这个 logits 其实在 prefill_output.logits 的最后一个位置已经有了！
+            
+            # 为了简化逻辑，我们统一再跑一次 decode step (即便是重复一点计算)，或者直接利用 prefill 的 logits (更优但复杂)。
+            # 为了代码稳健性，这里采用 "传入最后一个 token，KV包含该token" 的方式进行一步生成。
+            
+            my_position_ids = torch.tensor([[current_kv_len]], device=input_ids_for_gen.device)
+            # 注意：HuggingFace 标准逻辑，如果 past_key_values 长度为 N，
+            # 传入 input_ids (长度1)，则 input_ids 实际上是第 N 个 token (index N-1)。
+            # 我们希望它预测第 N+1 个 token。
+            
+            decode_output = super().forward(
+                input_ids=input_ids_for_gen,
+                attention_mask=None, # Causal
+                position_ids=my_position_ids,
+                past_key_values=past_key_values,
+                use_cache=True,
+                return_dict=True
+            )
+            
+            # 更新 KV Cache
+            past_key_values = decode_output.past_key_values
+            
+            # Logits 处理
+            scaled_logits = decode_output.logits
+            
+            # 强制不让它太早结束 (保留原有逻辑)
+            # 注意：这里的长度计算可能需要根据实际需求调整
+            if generated_new_tokens < 5 and (self.is_first_frame or generated_new_tokens > 0): 
+                 scaled_logits[0][-1][eos_token_id] = -10
+
+            probabilities = torch.softmax(scaled_logits[:, -1, :], dim=-1)
+            token_index = torch.multinomial(probabilities, num_samples=1).item()
+            
+            # 更新阈值表 (保留原有逻辑)
+            # if split_id is not None and token_index != split_id: # 假设 split_id 不参与计算? 或者 logic 需要调整
+            #     self.threshold = min(self.threshold, probabilities[0, token_index] / self.threshold_table[token_index])
+
+            if token_index == eos_token_id:
+                break
+            
+            current_sequences[0].append(token_index)
+            input_ids_for_gen = torch.tensor([[token_index]]).cuda()
+            
+            current_kv_len += 1
+            generated_new_tokens += 1
+            
+        
+        # --- 5. 状态保存 (为下一帧做准备) ---
+        
+        # 保存 embeddings 和 text_memory
+        self.text_memory = current_sequences.copy()
+        
+        # 注意：这里需要保存 token_embeds 以便下一帧拼接
+        # 我们不能直接存 KV Cache，因为下一帧图变了 KV 就废了。
+        # 我们存 token embeddings 即可。
+        
+        # 获取新生成部分的 Embeddings
+        # 这一步比较耗时，因为要重新 embed。但比 copy KV 安全。
+        full_seq_tensor = torch.tensor(current_sequences).cuda()
+        # 注意: current_sequences 包含了 memory + new_gen
+        # 我们只需要保存这一帧生成的整个序列对应的 embeddings (不需要 image)
+        
+        # 为了给下一帧用，我们需要 embed 整个生成的文本序列
+        # 注意：这里调用 embed_tokens 会重新计算 embedding
+        all_text_embeds = self.get_model().embed_tokens(full_seq_tensor)
+        
+        # 存入 buffer (这里假设 buffer 够大)
+        seq_len = all_text_embeds.size(1)
+        self.token_embeds_memory[:, :seq_len, :].copy_(all_text_embeds)
+        
+        self.is_first_frame = False
 
         return current_sequences
 

@@ -12,6 +12,10 @@ from llava.conversation import conv_templates
 from llava.mm_utils import get_model_name_from_path, process_images, tokenizer_image_token
 from llava.model.builder import load_pretrained_model
 
+import warnings
+
+warnings.filterwarnings("ignore", message=".*copying from a non-meta parameter.*")
+
 
 CAMERA_ORDER = [
     "CAM_FRONT",

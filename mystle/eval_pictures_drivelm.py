@@ -27,7 +27,7 @@ import torch
 from PIL import Image
 
 
-# warnings.filterwarnings("ignore", message=".*copying from a non-meta parameter.*")
+warnings.filterwarnings("ignore", message=".*copying from a non-meta parameter.*")
 
 def parse_ground_truth(answer_string: str, parse_speed: bool = True, parse_direction: bool = True) -> str:
     """从 'The ego vehicle is going straight. The ego vehicle is driving fast.' 这样的字符串中解析出 direction 和 speed"""
