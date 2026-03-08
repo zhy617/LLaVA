@@ -38,6 +38,22 @@ Output EXACTLY ONE JSON object with exactly these keys: \"description\", \"direc
 Output only valid JSON."""
 
 
+def find_all_linear_names(model: Any) -> List[str]:
+    linear_cls = torch.nn.Linear
+    lora_module_names = set()
+    multimodal_keywords = ["mm_projector", "vision_tower", "vision_resampler"]
+    for name, module in model.named_modules():
+        if any(keyword in name for keyword in multimodal_keywords):
+            continue
+        if isinstance(module, linear_cls):
+            names = name.split(".")
+            lora_module_names.add(names[0] if len(names) == 1 else names[-1])
+
+    if "lm_head" in lora_module_names:
+        lora_module_names.remove("lm_head")
+    return sorted(lora_module_names)
+
+
 def parse_ground_truth(answer_string: str, parse_speed: bool = True, parse_direction: bool = True) -> str:
     answer_string = answer_string.lower()
 
@@ -218,19 +234,87 @@ def load_image_tensor(image_files: List[str], image_processor: Any, model: Any) 
     image_tensor = process_images(images, image_processor, model.config)
     if not isinstance(image_tensor, torch.Tensor):
         image_tensor = torch.stack(image_tensor, dim=0)
-    image_tensor = image_tensor.to(model.device, dtype=torch.float16)
+    image_dtype = getattr(model, "dtype", torch.float16)
+    image_tensor = image_tensor.to(model.device, dtype=image_dtype)
     return image_tensor, image_sizes
 
 
-def save_model(model: Any, tokenizer: Any, output_dir: str) -> None:
+def enable_gradient_checkpointing(model: Any) -> None:
+    model.gradient_checkpointing_enable()
+    if hasattr(model, "enable_input_require_grads"):
+        model.enable_input_require_grads()
+        return
+
+    def make_inputs_require_grad(module: Any, input_value: Any, output_value: Any) -> None:
+        output_value.requires_grad_(True)
+
+    model.get_input_embeddings().register_forward_hook(make_inputs_require_grad)
+
+
+def maybe_enable_lora(model: Any, args: argparse.Namespace) -> Any:
+    peft_import_error: Optional[Exception] = None
+    peft_module: Optional[Any] = None
+    try:
+        import peft as peft_module
+    except Exception as error:
+        peft_import_error = error
+
+    if args.gradient_checkpointing:
+        enable_gradient_checkpointing(model)
+
+    if args.load_4bit or args.load_8bit:
+        if peft_import_error is not None:
+            raise RuntimeError(
+                "当前环境无法导入 peft，无法启用 4bit/8bit LoRA 训练。"
+            ) from peft_import_error
+        assert peft_module is not None
+        model = peft_module.prepare_model_for_kbit_training(
+            model,
+            use_gradient_checkpointing=args.gradient_checkpointing,
+        )
+
+    if not args.lora_enable:
+        return model
+
+    if peft_import_error is not None:
+        raise RuntimeError(
+            "当前环境无法导入 peft，无法启用 LoRA。请检查 peft 与 accelerate 的版本兼容性。"
+        ) from peft_import_error
+    assert peft_module is not None
+
+    target_modules = find_all_linear_names(model)
+    if not target_modules:
+        raise RuntimeError("没有找到可注入 LoRA 的 Linear 层。")
+
+    lora_config = peft_module.LoraConfig(
+        r=args.lora_r,
+        lora_alpha=args.lora_alpha,
+        target_modules=target_modules,
+        lora_dropout=args.lora_dropout,
+        bias=args.lora_bias,
+        task_type="CAUSAL_LM",
+    )
+    model = peft_module.get_peft_model(model, lora_config)
+    model.print_trainable_parameters()
+    return model
+
+
+def save_model(model: Any, tokenizer: Any, output_dir: str, is_lora: bool) -> None:
     os.makedirs(output_dir, exist_ok=True)
+    model.config.save_pretrained(output_dir)
     model.save_pretrained(output_dir)
     tokenizer.save_pretrained(output_dir)
+    if is_lora:
+        torch.save({}, os.path.join(output_dir, "non_lora_trainables.bin"))
 
 
 def train(args: argparse.Namespace) -> None:
     if not torch.cuda.is_available():
         raise RuntimeError("这个最小脚本默认要求 CUDA 环境。")
+    if (args.load_4bit or args.load_8bit) and not args.lora_enable:
+        raise ValueError("4bit/8bit 训练这里仅支持和 LoRA 一起使用。")
+    if args.load_4bit and args.load_8bit:
+        raise ValueError("load_4bit 和 load_8bit 只能二选一。")
 
     set_seed(args.seed)
 
@@ -239,7 +323,11 @@ def train(args: argparse.Namespace) -> None:
         model_path=args.model_path,
         model_base=None,
         model_name=model_name,
+        load_4bit=args.load_4bit,
+        load_8bit=args.load_8bit,
     )
+
+    model = maybe_enable_lora(model, args)
 
     model.train()
     model.config.use_cache = False
@@ -259,7 +347,11 @@ def train(args: argparse.Namespace) -> None:
     if not samples:
         raise RuntimeError("没有加载到可训练样本，请检查 data_path 和 image_root。")
 
-    optimizer = torch.optim.AdamW(model.parameters(), lr=args.learning_rate)
+    trainable_parameters = [parameter for parameter in model.parameters() if parameter.requires_grad]
+    if not trainable_parameters:
+        raise RuntimeError("当前没有可训练参数，请检查 LoRA 配置。")
+
+    optimizer = torch.optim.AdamW(trainable_parameters, lr=args.learning_rate)
     optimizer.zero_grad(set_to_none=True)
 
     global_step = 0
@@ -304,12 +396,12 @@ def train(args: argparse.Namespace) -> None:
             optimizer.step()
             optimizer.zero_grad(set_to_none=True)
 
-        epoch_dir = os.path.join(args.output_dir, f"epoch_{epoch + 1}")
-        save_model(model, tokenizer, epoch_dir)
+        epoch_dir = os.path.join(args.output_dir, "checkpoints", f"epoch_{epoch + 1}") if args.lora_enable else os.path.join(args.output_dir, f"epoch_{epoch + 1}")
+        save_model(model, tokenizer, epoch_dir, is_lora=args.lora_enable)
         print(f"saved: {epoch_dir}")
 
-    final_dir = os.path.join(args.output_dir, "final")
-    save_model(model, tokenizer, final_dir)
+    final_dir = args.output_dir if args.lora_enable else os.path.join(args.output_dir, "final")
+    save_model(model, tokenizer, final_dir, is_lora=args.lora_enable)
     print(f"final model saved to: {final_dir}")
 
 
@@ -331,6 +423,14 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--image-aspect-ratio", type=str, default="square")
     parser.add_argument("--prompt", type=str, default=DEFAULT_PROMPT)
     parser.add_argument("--qa-groups", nargs="+", default=["perception", "behavior"])
+    parser.add_argument("--lora-enable", action="store_true")
+    parser.add_argument("--lora-r", type=int, default=64)
+    parser.add_argument("--lora-alpha", type=int, default=16)
+    parser.add_argument("--lora-dropout", type=float, default=0.05)
+    parser.add_argument("--lora-bias", type=str, default="none", choices=["none", "all", "lora_only"])
+    parser.add_argument("--load-4bit", action="store_true")
+    parser.add_argument("--load-8bit", action="store_true")
+    parser.add_argument("--gradient-checkpointing", action="store_true")
     return parser.parse_args()
 
 
