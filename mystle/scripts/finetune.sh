@@ -21,7 +21,7 @@ fi
     --scene-seed 42 \
     --qa-groups perception behavior \
     --epochs 1 \
-    --max-samples 200 \
+    --max-samples 1 \
     --learning-rate 2e-4 \
     --grad-accum-steps 4 \
     --lora-enable \
