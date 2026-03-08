@@ -76,7 +76,7 @@ def load_pretrained_model(model_path, model_base, model_name, load_8bit=False, l
             non_lora_trainables = {(k[11:] if k.startswith('base_model.') else k): v for k, v in non_lora_trainables.items()}
             if any(k.startswith('model.model.') for k in non_lora_trainables):
                 non_lora_trainables = {(k[6:] if k.startswith('model.') else k): v for k, v in non_lora_trainables.items()}
-            model.load_state_dict(non_lora_trainables, strict=False)
+            model.load_state_dict(non_lora_trainables, strict=False, assign=True)
 
             from peft import PeftModel
             print('Loading LoRA weights...')
@@ -100,7 +100,7 @@ def load_pretrained_model(model_path, model_base, model_name, load_8bit=False, l
 
             mm_projector_weights = torch.load(os.path.join(model_path, 'mm_projector.bin'), map_location='cpu')
             mm_projector_weights = {k: v.to(torch.float16) for k, v in mm_projector_weights.items()}
-            model.load_state_dict(mm_projector_weights, strict=False)
+            model.load_state_dict(mm_projector_weights, strict=False, assign=True)
         else:
             if 'mpt' in model_name.lower():
                 tokenizer = AutoTokenizer.from_pretrained(model_path, use_fast=True)
