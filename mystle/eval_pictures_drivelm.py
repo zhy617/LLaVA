@@ -331,8 +331,11 @@ def main():
     # 例如，如果图片路径是 "../nuscenes/samples/..."，而JSON文件在 ".../DriveLM/annotations/"
     # 那么 data_root_path 应该是 ".../DriveLM/"
     data_root_path = "/root/fsas/dataset/OpenDriveLab/DriveLM/nuscenes/samples" # 请修改为你的 nuscenes 数据集所在的根目录
-    model_path = "/root/fsas/models/LLaVA/llava-v1.6-vicuna-7b"
-    model_name = get_model_name_from_path(model_path)
+    
+    # model_path = "/root/fsas/models/LLaVA/llava-v1.6-vicuna-7b"
+    model_path = "/root/fsas/zhanghongyu/LLaVA/models/drivelm_llava_merged"
+
+    model_name = "llava-v1.6-vicuna-7b" # 这个名字只是用来判断模型类型，实际加载时是通过 model_path 定位的
 
     # 1. 加载模型 (一次性)
     tokenizer, model, image_processor, context_len = load_pretrained_model(
@@ -414,7 +417,7 @@ Now, process all 6 images together and generate the single JSON:
     # 遍历JSON中的每个场景
 
     scene_count = 0
-    scenes_to_test = 30
+    scenes_to_test = 1
 
     total_stats = {
         False: {

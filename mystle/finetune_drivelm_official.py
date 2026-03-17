@@ -7,7 +7,9 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Sequence, Tuple
 
-from llava.constants import DEFAULT_IMAGE_TOKEN
+# Avoid importing llava package at module import time, because llava/__init__.py
+# may depend on model symbols that are not available in all local revisions.
+DEFAULT_IMAGE_TOKEN = "<image>"
 
 CAMERA_ORDER = [
     "CAM_FRONT_LEFT",
@@ -433,8 +435,9 @@ def run_official_qlora_train(args: argparse.Namespace) -> None:
 
     # For merged checkpoints (e.g., LLaVA-1.5/1.6), mm_projector is already included.
     # Keep this arg optional for compatibility with the old two-stage recipe.
-    if args.pretrain_mm_mlp_adapter:
-        cmd.extend(["--pretrain_mm_mlp_adapter", args.pretrain_mm_mlp_adapter])
+    projector_arg = (args.pretrain_mm_mlp_adapter or "").strip()
+    if projector_arg.lower() not in {"", "none", "null", "nil", "na", "n/a"}:
+        cmd.extend(["--pretrain_mm_mlp_adapter", projector_arg])
 
     env = os.environ.copy()
     if args.hf_endpoint:
