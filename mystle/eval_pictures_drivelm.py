@@ -417,7 +417,7 @@ Now, process all 6 images together and generate the single JSON:
     # 遍历JSON中的每个场景
 
     scene_count = 0
-    scenes_to_test = 10
+    scenes_to_test = 30
 
     total_stats = {
         False: {

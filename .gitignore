@@ -11,7 +11,7 @@ dist
 *.jsonl
 
 # my log and json
-!mystle/record/speed_test_*.log
+!mystle/record/*.log
 !threshold_table.json
 
 # Data
