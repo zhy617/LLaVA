@@ -10,7 +10,13 @@ from llava.model.language_model.llava_llama import LlavaConfig, LlavaLlamaForCau
 
 def merge_lora(args):
     tokenizer = AutoTokenizer.from_pretrained(args.model_base, use_fast=False)
-    lora_cfg_pretrained = LlavaConfig.from_pretrained(args.model_path)
+    try:
+        lora_cfg_pretrained = LlavaConfig.from_pretrained(args.model_path)
+        print(f'Loaded config from {args.model_path}')
+    except Exception as e:
+        print(f'Failed to load config from {args.model_path}: {e}')
+        print(f'Falling back to base config from {args.model_base}')
+        lora_cfg_pretrained = LlavaConfig.from_pretrained(args.model_base)
     if hasattr(lora_cfg_pretrained, 'quantization_config'):
         lora_cfg_pretrained.quantization_config = {}
 
@@ -36,8 +42,20 @@ def merge_lora(args):
         )
 
     print('Loading additional LLaVA weights...')
+    # 优先查找 checkpoint 目录下的 non_lora_trainables.bin，其次查找父目录
     non_lora_path = os.path.join(args.model_path, 'non_lora_trainables.bin')
-    non_lora_trainables = torch.load(non_lora_path, map_location='cpu')
+    if not os.path.exists(non_lora_path):
+        # 如果 checkpoint 下没有，尝试从父目录查找
+        parent_dir = os.path.dirname(args.model_path)
+        non_lora_path = os.path.join(parent_dir, 'non_lora_trainables.bin')
+        print(f'non_lora_trainables.bin not found in {args.model_path}, trying {parent_dir}')
+    
+    if not os.path.exists(non_lora_path):
+        print(f'Warning: {non_lora_path} not found, skipping non-lora weights loading')
+        non_lora_trainables = {}
+    else:
+        print(f'Loading non-lora trainables from {non_lora_path}')
+        non_lora_trainables = torch.load(non_lora_path, map_location='cpu')
     non_lora_trainables = {
         (key[11:] if key.startswith('base_model.') else key): value
         for key, value in non_lora_trainables.items()
@@ -47,7 +65,9 @@ def merge_lora(args):
             (key[6:] if key.startswith('model.') else key): value
             for key, value in non_lora_trainables.items()
         }
-    model.load_state_dict(non_lora_trainables, strict=False, assign=True)
+    if non_lora_trainables:
+        model.load_state_dict(non_lora_trainables, strict=False, assign=True)
+        print(f'Loaded {len(non_lora_trainables)} non-lora parameters')
 
     print('Loading LoRA weights...')
     model = PeftModel.from_pretrained(model, args.model_path)
