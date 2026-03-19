@@ -51,7 +51,7 @@ def eval_model(args):
     # Model
     disable_torch_init()
 
-    model_name = get_model_name_from_path(args.model_path)
+    model_name = getattr(args, "model_name", None) or get_model_name_from_path(args.model_path)
     tokenizer, model, image_processor, context_len = load_pretrained_model(
         args.model_path, args.model_base, model_name
     )
@@ -131,6 +131,7 @@ def eval_model(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--model-path", type=str, default="facebook/opt-350m")
+    parser.add_argument("--model-name", type=str, default=None)
     parser.add_argument("--model-base", type=str, default=None)
     parser.add_argument("--image-file", type=str, required=True)
     parser.add_argument("--query", type=str, required=True)

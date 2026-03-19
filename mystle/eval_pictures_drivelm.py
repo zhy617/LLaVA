@@ -333,7 +333,7 @@ def main():
     data_root_path = "/root/fsas/dataset/OpenDriveLab/DriveLM/nuscenes/samples" # 请修改为你的 nuscenes 数据集所在的根目录
     
     # model_path = "/root/fsas/models/LLaVA/llava-v1.6-vicuna-7b"
-    model_path = "/root/fsas/zhanghongyu/LLaVA/models/drivelm_llava_merged"
+    model_path = "/root/fsas/zhanghongyu/LLaVA/models/drivelm_llava_merged/finetune_lora_1k" # 1k 步微调的模型路径
 
     model_name = "llava-v1.6-vicuna-7b" # 这个名字只是用来判断模型类型，实际加载时是通过 model_path 定位的
 

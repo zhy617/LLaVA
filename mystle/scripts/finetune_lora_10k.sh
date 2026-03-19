@@ -1,0 +1,38 @@
+#!/bin/bash
+
+deepspeed llava/train/train_mem.py \
+    --deepspeed ./scripts/zero2.json \
+    --lora_enable True \
+    --bits 4 \
+    --model_name_or_path /root/fsas/models/LLaVA/llava-v1.6-vicuna-7b \
+    --version v1 \
+    --data_path /root/fsas/zhanghongyu/LLaVA/drivelm_llava_work/drivelm_llava_train.json \
+    --image_folder /root/fsas/zhanghongyu/LLaVA/drivelm_llava_work/stitched_images \
+    --vision_tower openai/clip-vit-large-patch14-336 \
+    --mm_projector_type mlp2x_gelu \
+    --mm_vision_select_layer -2 \
+    --mm_use_im_start_end False \
+    --mm_use_im_patch_token False \
+    --image_aspect_ratio anyres \
+    --bf16 True \
+    --output_dir /root/fsas/zhanghongyu/LLaVA/models/checkpoints_drivelm_qlora_10k \
+    --num_train_epochs 1 \
+    --per_device_train_batch_size 4 \
+    --per_device_eval_batch_size 4 \
+    --gradient_accumulation_steps 4 \
+    --evaluation_strategy no \
+    --save_strategy steps \
+    --save_steps 50 \
+    --save_total_limit 3 \
+    --learning_rate 2e-5 \
+    --weight_decay 0.0 \
+    --warmup_ratio 0.03 \
+    --lr_scheduler_type cosine \
+    --logging_steps 10 \
+    --tf32 True \
+    --model_max_length 2048 \
+    --gradient_checkpointing True \
+    --lazy_preprocess True \
+    --dataloader_num_workers 4 \
+    --report_to none \
+    --max_steps 650

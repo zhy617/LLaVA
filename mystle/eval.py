@@ -7,7 +7,7 @@ import warnings
 warnings.filterwarnings("ignore", message=".*copying from a non-meta parameter.*")
 
 # model_path = "/root/fsas/models/LLaVA/llava-v1.6-vicuna-7b"
-model_path = "/root/fsas/zhanghongyu/LLaVA/models/drivelm_llava_merged"
+model_path = "/root/fsas/zhanghongyu/LLaVA/models/drivelm_llava_merged/finetune_lora_1k" # 1k 步微调的模型路径
 
 # prompt = "Suppose you are driving, and I'm providing you with six images captured by the car's front, front-left, front-right, back, back-left and back-right camera. First, generate a description of the driving scene which includes the key factors for driving planning, including the presence of obstacles and the positions and movements of vehicles and pedestrians and traffic lights. After description, please predict the behavior of ego vehicle, including exactly the driving direction(straight, turn left or turn right) and driving speed(slow, fast or normal)."
 
